@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windshield", "Windshield\Windshield.csproj", "{65FD52CF-FC92-4174-813C-060E78C5FAEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65FD52CF-FC92-4174-813C-060E78C5FAEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65FD52CF-FC92-4174-813C-060E78C5FAEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65FD52CF-FC92-4174-813C-060E78C5FAEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65FD52CF-FC92-4174-813C-060E78C5FAEB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal
