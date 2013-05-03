@@ -15,6 +15,9 @@ namespace Windshield.Controllers
             int b = 8;
             int c = a + b;
             System.Console.WriteLine(c);
+            int aa = 3;
+            int bb = 5;
+            System.Console.WriteLine(aa + bb);
 
             return View();
         }
