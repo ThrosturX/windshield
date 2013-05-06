@@ -183,6 +183,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Board.cs" />
+    <Compile Include="Models\GameType.cs" />
+    <Compile Include="Models\IBoardRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
