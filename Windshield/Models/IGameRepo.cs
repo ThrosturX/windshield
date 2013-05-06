@@ -11,7 +11,7 @@ namespace Windshield.Models
 		void DeletGame(GameType type);
 		List<GameType> GetAllGames();
 		List<GameType> GetGamesByType(GameType type);
-		List<UserProfile> GetTopPlayers();
-		List<UserProfile> GetTopPlayersByGame(GameType type);
+		List<User> GetTopPlayers();
+		List<User> GetTopPlayersByGame(GameType type);
 	}
 }

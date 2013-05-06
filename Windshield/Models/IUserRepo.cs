@@ -7,16 +7,16 @@ namespace Windshield.Models
 {
 	public interface IUserRepo
 	{
-		void AddUser(UserProfile user);
-		void DeleteUser(UserProfile user);
-		void AddAdmin(UserProfile user);
-		void RemoveAdmin(UserProfile user);
-		uint GetTimesPlayed(UserProfile user);
-		uint GetTimesPlayedByGame(UserProfile user, GameType game);
-		List<Group> GetGroupsByUser(UserProfile user);
-		List<UserProfile> GetGroupMembers(Group group);
-		List<UserProfile> GetFriends(UserProfile user);
-		List<GameRating> GetGameRatings(UserProfile user);
-		GameRating GetGameRatingByGame(UserProfile user, GameType game);
+		void AddUser(User user);
+		void DeleteUser(User user);
+		void AddAdmin(User user);
+		void RemoveAdmin(User user);
+		uint GetTimesPlayed(User user);
+		uint GetTimesPlayedByGame(User user, GameType game);
+		List<Group> GetGroupsByUser(User user);
+		List<User> GetGroupMembers(Group group);
+		List<User> GetFriends(User user);
+		List<GameRating> GetGameRatings(User user);
+		GameRating GetGameRatingByGame(User user, GameType game);
 	}
 }
