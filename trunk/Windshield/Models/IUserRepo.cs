@@ -9,14 +9,14 @@ namespace Windshield.Models
 	{
 		void AddUser(UserProfile user);
 		void DeleteUser(UserProfile user);
-		List<Group> GetGroupsByUser(UserProfile user);
-		List<UserProfile> GetFriends(UserProfile user);
-		GameRating GetGameRating(UserProfile user, GameType game);
-		List<GameRating> GetGameRatigns(UserProfile user);
-		uint GetTimesPlayed(UserProfile user);
-		uint GetTimesPlayedByGame(UserProfile user, GameType game);
-		List<UserProfile> GetGroupMembers(Group group);
 		void AddAdmin(UserProfile user);
 		void RemoveAdmin(UserProfile user);
+		uint GetTimesPlayed(UserProfile user);
+		uint GetTimesPlayedByGame(UserProfile user, GameType game);
+		List<Group> GetGroupsByUser(UserProfile user);
+		List<UserProfile> GetGroupMembers(Group group);
+		List<UserProfile> GetFriends(UserProfile user);
+		List<GameRating> GetGameRatings(UserProfile user);
+		GameRating GetGameRatingByGame(UserProfile user, GameType game);
 	}
 }
