@@ -184,8 +184,12 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Board.cs" />
+    <Compile Include="Models\GameRating.cs" />
     <Compile Include="Models\GameType.cs" />
+    <Compile Include="Models\Group.cs" />
     <Compile Include="Models\IBoardRepo.cs" />
+    <Compile Include="Models\IGameRepo.cs" />
+    <Compile Include="Models\IUserRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
