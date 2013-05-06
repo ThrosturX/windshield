@@ -14,7 +14,7 @@ namespace Windshield.Models
 		GameRating GetGameRating(UserProfile user, GameType game);
 		List<GameRating> GetGameRatigns(UserProfile user);
 		uint GetTimesPlayed(UserProfile user);
-		uint GetTimesPlayedByGame(UserProfile, GameType game);
+		uint GetTimesPlayedByGame(UserProfile user, GameType game);
 		List<UserProfile> GetGroupMembers(Group group);
 		void AddAdmin(UserProfile user);
 		void RemoveAdmin(UserProfile user);
