@@ -11,8 +11,8 @@ namespace Windshield.Models
 		void DeleteBoard(Board board);
 		IEnumerable<Board> GetBoards();
 		IEnumerable<Board> GetBoards(GameType type);
-		IEnumerable<UserProfile> GetBoardUsers(Board board);
+		IEnumerable<User> GetBoardUsers(Board board);
 		GameType GetGameType(Board board);
-		UserProfile GetBoardOwner(Board board);
+		User GetBoardOwner(Board board);
 	}
 }

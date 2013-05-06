@@ -190,6 +190,7 @@
     <Compile Include="Models\IBoardRepo.cs" />
     <Compile Include="Models\IGameRepo.cs" />
     <Compile Include="Models\IUserRepo.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
