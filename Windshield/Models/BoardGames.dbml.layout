@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 12.875, 8.875" name="BoardGames">
+  <DataContextMoniker Name="/BoardGamesDataContext" />
+  <nestedChildShapes>
+    <classShape Id="33760caa-6a17-450e-bbfe-4665df952fa0" absoluteBounds="6.75, 0.75, 2, 1.7708968098958329">
+      <DataClassMoniker Name="/BoardGamesDataContext/UserRating" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a48e4411-a708-404d-ae09-9bb54de57832" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d914e81c-6a46-47b3-9fb0-4279c53c2cfa" absoluteBounds="6.75, 5.75, 2, 2.9247054036458326">
+      <DataClassMoniker Name="/BoardGamesDataContext/Profile" />
+      <nestedChildShapes>
+        <elementListCompartment Id="76de29aa-953c-443e-8067-362e2a098cbb" absoluteBounds="6.765, 6.21, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3d828cf8-546d-4a6f-9a80-3a444e94a22b" absoluteBounds="6.25, 3.375, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/BoardGamesDataContext/Player" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dc10c7e2-c4b4-4e55-bb58-03db9ef7c73b" absoluteBounds="6.265, 3.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7c880333-0c3e-42c7-a610-35f3c1680458" absoluteBounds="0.75, 6.875, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/BoardGamesDataContext/Group" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c602e4e5-59e9-4ae6-8134-0df02be00c56" absoluteBounds="0.765, 7.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cd3b30d3-19b7-4faa-8646-9949ed25f325" absoluteBounds="3.5, 3.125, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/BoardGamesDataContext/Board" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cbcca744-45c0-4720-bb51-819fb57dc91e" absoluteBounds="3.515, 3.585, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="827613f2-4ee6-4ff9-96ea-d33a33f3061b" absoluteBounds="9.75, 0.75, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/BoardGamesDataContext/Friend" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a82dfdd5-4e0e-4b55-bad3-5767ac3b0809" absoluteBounds="9.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="97ad0a25-9563-4d44-a16e-ed15cf4a0dde" absoluteBounds="3.5, 1, 2, 1.3862939453125">
+      <DataClassMoniker Name="/BoardGamesDataContext/GameRating" />
+      <nestedChildShapes>
+        <elementListCompartment Id="54201b25-f69c-4f6f-a790-e6a989df089d" absoluteBounds="3.515, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="edcaf066-1341-4cd2-90c0-00402587f5b8" absoluteBounds="0.75, 2.125, 2, 1.9631982421874996">
+      <DataClassMoniker Name="/BoardGamesDataContext/Game" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4a098c08-005b-4d4c-bc16-26b8f176adfd" absoluteBounds="0.765, 2.585, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d1f0bcb9-52da-4a50-a1f4-c749befd3981" absoluteBounds="3.5, 7.125, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/BoardGamesDataContext/GroupMember" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1f81da74-0a4c-4ea9-86f5-eb1482436be4" absoluteBounds="3.515, 7.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.5 : 4.16429768880208); (6.25 : 4.16429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BoardGamesDataContext/Board/Board_Player" />
+      <nodes>
+        <classShapeMoniker Id="cd3b30d3-19b7-4faa-8646-9949ed25f325" />
+        <classShapeMoniker Id="3d828cf8-546d-4a6f-9a80-3a444e94a22b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 3.60659912109375); (3.5 : 3.60659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BoardGamesDataContext/Game/Game_Board" />
+      <nodes>
+        <classShapeMoniker Id="edcaf066-1341-4cd2-90c0-00402587f5b8" />
+        <classShapeMoniker Id="cd3b30d3-19b7-4faa-8646-9949ed25f325" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 2.125); (1.75 : 1.5624995); (3.5 : 1.5624995)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BoardGamesDataContext/Game/Game_GameRating" />
+      <nodes>
+        <classShapeMoniker Id="edcaf066-1341-4cd2-90c0-00402587f5b8" />
+        <classShapeMoniker Id="97ad0a25-9563-4d44-a16e-ed15cf4a0dde" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.81814697265625); (3.5 : 7.81814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BoardGamesDataContext/Group/Group_GroupMember" />
+      <nodes>
+        <classShapeMoniker Id="7c880333-0c3e-42c7-a610-35f3c1680458" />
+        <classShapeMoniker Id="d1f0bcb9-52da-4a50-a1f4-c749befd3981" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="9368f1eb-9fa2-4aaf-81db-4a7cdcddbc96" absoluteBounds="10.625, 5, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/BoardGamesDataContext/aspnet_User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="728bc206-bc12-404c-9810-c3396d9cfdcb" absoluteBounds="10.64, 5.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(12.21875 : 5); (12.21875 : 2.35984537760417); (11.6145833333333 : 2.35984537760417 : JumpStart); (11.4479166666667 : 2.35984537760417 : JumpEnd); (11.2708333333333 : 2.35984537760417 : JumpStart); (11.1041666666667 : 2.35984537760417 : JumpEnd); (8.75 : 2.35984537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BoardGamesDataContext/aspnet_User/aspnet_User_UserRating" />
+      <nodes>
+        <classShapeMoniker Id="9368f1eb-9fa2-4aaf-81db-4a7cdcddbc96" />
+        <classShapeMoniker Id="33760caa-6a17-450e-bbfe-4665df952fa0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.9843725 : 5); (11.9843725 : 2.47162359375); (11.6145833333333 : 2.47162359375 : JumpStart); (11.4479166666667 : 2.47162359375 : JumpEnd); (11.2708333333333 : 2.47162359375 : JumpStart); (11.1041666666667 : 2.47162359375 : JumpEnd); (8.75 : 2.47162359375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BoardGamesDataContext/aspnet_User/aspnet_User_UserRating1" />
+      <nodes>
+        <classShapeMoniker Id="9368f1eb-9fa2-4aaf-81db-4a7cdcddbc96" />
+        <classShapeMoniker Id="33760caa-6a17-450e-bbfe-4665df952fa0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.625 : 6.45274983723958); (9.33333333333333 : 6.45274983723958 : JumpStart); (9.16666666666667 : 6.45274983723958 : JumpEnd); (8.75 : 6.45274983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BoardGamesDataContext/aspnet_User/aspnet_User_Profile" />
+      <nodes>
+        <classShapeMoniker Id="9368f1eb-9fa2-4aaf-81db-4a7cdcddbc96" />
+        <classShapeMoniker Id="d914e81c-6a46-47b3-9fb0-4279c53c2cfa" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.625 : 5.34375); (9.08333333333333 : 5.34375 : JumpStart); (8.91666666666667 : 5.34375 : JumpEnd); (6.46875 : 5.34375); (6.46875 : 4.95359537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BoardGamesDataContext/aspnet_User/aspnet_User_Player" />
+      <nodes>
+        <classShapeMoniker Id="9368f1eb-9fa2-4aaf-81db-4a7cdcddbc96" />
+        <classShapeMoniker Id="3d828cf8-546d-4a6f-9a80-3a444e94a22b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.1875 : 5); (11.1875 : 2.1362939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BoardGamesDataContext/aspnet_User/aspnet_User_Friend" />
+      <nodes>
+        <classShapeMoniker Id="9368f1eb-9fa2-4aaf-81db-4a7cdcddbc96" />
+        <classShapeMoniker Id="827613f2-4ee6-4ff9-96ea-d33a33f3061b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.53125 : 5); (11.53125 : 2.1362939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BoardGamesDataContext/aspnet_User/aspnet_User_Friend1" />
+      <nodes>
+        <classShapeMoniker Id="9368f1eb-9fa2-4aaf-81db-4a7cdcddbc96" />
+        <classShapeMoniker Id="827613f2-4ee6-4ff9-96ea-d33a33f3061b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.625 : 5.89824991861979); (9.33333333333333 : 5.89824991861979 : JumpStart); (9.16666666666667 : 5.89824991861979 : JumpEnd); (9 : 5.89824991861979); (9 : 2.7612939453125); (4.5 : 2.7612939453125); (4.5 : 2.3862939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BoardGamesDataContext/aspnet_User/aspnet_User_GameRating" />
+      <nodes>
+        <classShapeMoniker Id="9368f1eb-9fa2-4aaf-81db-4a7cdcddbc96" />
+        <classShapeMoniker Id="97ad0a25-9563-4d44-a16e-ed15cf4a0dde" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.625 : 6.83537675585938); (9.25 : 6.83537675585938); (9.25 : 5.5); (9.08333333333333 : 5.5 : JumpStart); (8.91666666666667 : 5.5 : JumpEnd); (4.5 : 5.5); (4.5 : 7.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BoardGamesDataContext/aspnet_User/aspnet_User_GroupMember" />
+      <nodes>
+        <classShapeMoniker Id="9368f1eb-9fa2-4aaf-81db-4a7cdcddbc96" />
+        <classShapeMoniker Id="d1f0bcb9-52da-4a50-a1f4-c749befd3981" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
