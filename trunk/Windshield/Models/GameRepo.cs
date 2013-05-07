@@ -7,10 +7,10 @@ using Windshield.Models;
 
 namespace Windshield.Models
 {
-	public class GameRepo : IGameRepo
+	/*public class GameRepo : IGameRepo
 	{
-	
-	static Models.DataClasses1DataContext dBase = new Models.DataClasses1DataContext();
+	/*
+	//static Models.DataClasses1DataContext dBase = new Models.DataClasses1DataContext();
 
 		private static GameRepo gRep = null;
 
@@ -22,8 +22,6 @@ namespace Windshield.Models
 			}
 			return gRep;
 		}
-		asdasdsad
-			asdsa
 		public void AddGame(Game type)
 		{ 
 			
@@ -38,5 +36,6 @@ namespace Windshield.Models
 		}
 		//List<User> GetTopPlayers();
 		//List<User> GetTopPlayersByGame(Game type);
-	}
+
+	}*/
 }
