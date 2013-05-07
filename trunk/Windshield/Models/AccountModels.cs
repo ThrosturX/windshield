@@ -8,7 +8,7 @@ using System.Web.Security;
 
 namespace Windshield.Models
 {
-    public class UsersContext : DbContext
+    public class UsersContext : DbContext 
     {
         public UsersContext()
             : base("DefaultConnection")
@@ -17,7 +17,7 @@ namespace Windshield.Models
 
         public DbSet<UserProfile> UserProfiles { get; set; }
     }
-
+	
     [Table("UserProfile")]
     public class UserProfile
     {

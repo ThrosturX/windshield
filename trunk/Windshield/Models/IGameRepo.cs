@@ -7,11 +7,11 @@ namespace Windshield.Models
 {
 	public interface IGameRepo
 	{
-		void AddGame(GameType type);
-		void DeletGame(GameType type);
-		List<GameType> GetAllGames();
-		List<GameType> GetGamesByType(GameType type);
+		void AddGame(Game type);
+		void DeletGame(Game type);
+		List<Game> GetAllGames();
+		List<Game> GetGamesByType(Game type);
 		List<User> GetTopPlayers();
-		List<User> GetTopPlayersByGame(GameType type);
+		List<User> GetTopPlayersByGame(Game type);
 	}
 }
