@@ -50,8 +50,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="MockObjects\MockBoardRepo.cs" />
+    <Compile Include="TicTacToeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Windshield\Windshield.csproj">
+      <Project>{65fd52cf-fc92-4174-813c-060e78c5faeb}</Project>
+      <Name>Windshield</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

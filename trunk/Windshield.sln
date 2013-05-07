@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windshield", "Windshield\Windshield.csproj", "{65FD52CF-FC92-4174-813C-060E78C5FAEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windshield.Test", "Windshield.Test\Windshield.Test.csproj", "{481333D7-5A82-4E5F-BB14-C66D63F94956}"
+	ProjectSection(ProjectDependencies) = postProject
+		{65FD52CF-FC92-4174-813C-060E78C5FAEB} = {65FD52CF-FC92-4174-813C-060E78C5FAEB}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
