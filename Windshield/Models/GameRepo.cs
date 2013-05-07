@@ -22,7 +22,8 @@ namespace Windshield.Models
 			}
 			return gRep;
 		}
-		
+		asdasdsad
+			asdsa
 		public void AddGame(Game type)
 		{ 
 			
