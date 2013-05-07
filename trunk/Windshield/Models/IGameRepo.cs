@@ -9,8 +9,8 @@ namespace Windshield.Models
 	{
 		void AddGame(Game type);
 		void DeletGame(Game type);
-		List<Game> GetAllGames();
-		//List<User> GetTopPlayers();
-		//List<User> GetTopPlayersByGame(Game type);
+		IQueryable<Game> GetAllGames();
+		IQueryable<User> GetTopPlayers();
+		IQueryable<User> GetTopPlayersByGame(Game type);
 	}
 }
