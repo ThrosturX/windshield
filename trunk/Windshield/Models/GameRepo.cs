@@ -9,44 +9,54 @@ namespace Windshield.Models
 {
 	public class GameRepo : IGameRepo
 	{
-	
-		static BoardGamesDataContext dBase = new BoardGamesDataContext();
 
-		private static GameRepo gRep = null;
+		public static BoardGamesDataContext db = new BoardGamesDataContext();
 
-		public static GameRepo getgRep()
+		// making GameRepo a singleton class
+		private static GameRepo instance = null;
+		public static GameRepo Instance
 		{
-			if (gRep == null)
+			get
 			{
-				gRep = new GameRepo();
+				if (instance == null)
+				{
+					instance = new GameRepo();
+				}
+				return instance;
 			}
-			return gRep;
 		}
 
 		//
-		// query methods
+		// insert methods
 
-
-
-
-
-		public void AddGame(Game type)
+		public void AddGame(Game game)
 		{ 
-			
 		}
 
-		public void DeletGame(Game type)
+		//
+		// delete methods
+
+		public void DeleteGame(Game type)
 		{ 
 		
 		}
 
+		//
+		// commit methods
+
+		//
+		// query methods
+
 		public IQueryable<Game> GetAllGames()
 		{
-			return dBase.Games;
+			return db.Games;
 		}
 
 		public IQueryable<User> GetTopPlayers()
 		{
+			var result = from gameRatings in db.GameRatings
+						 orderby gameRatings.rating descending
+						 select gameRatings;
 			return null;
 		}
 
@@ -54,5 +64,6 @@ namespace Windshield.Models
 		{
 			return null;
 		}
+
 	}
 }
