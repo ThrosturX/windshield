@@ -51,6 +51,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="MockObjects\MockBoardRepo.cs" />
+    <Compile Include="MockObjects\MockGameRepo.cs" />
+    <Compile Include="MockObjects\MockUserRepo.cs" />
     <Compile Include="TicTacToeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
