@@ -5,8 +5,8 @@ using System.Web;
 
 namespace Windshield.Models
 {
-	public class User
+	public class User : aspnet_User
 	{
-		// TODO
+		// intentionally blank
 	}
 }
