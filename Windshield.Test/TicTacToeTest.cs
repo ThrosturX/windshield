@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Windshield.Games.TicTacToe;
 
 namespace Windshield.Test
 {
@@ -13,8 +14,9 @@ namespace Windshield.Test
 		}
 
 		[TestMethod]
-		public void TestMethod1()
+		public void AddSymbol()
 		{
+			TicTacToe game = new TicTacToe();
 		}
 	}
 }
