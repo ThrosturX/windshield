@@ -195,7 +195,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BoardGames.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Class1.cs" />
     <Compile Include="Models\IBoardRepo.cs" />
     <Compile Include="Models\IGameRepo.cs" />
     <Compile Include="Models\IUserRepo.cs" />
