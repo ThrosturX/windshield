@@ -16,7 +16,12 @@
         <legend>Registration Form</legend>
         <ol>
 			<li>
-				@Html.LabelFor(m => m.
+				@Html.LabelFor(m => m.FullName)
+				@Html.TextBoxFor(m => m.FullName)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.Email)
+				@Html.TextBoxFor(m => m.Email)
 			</li>
             <li>
                 @Html.LabelFor(m => m.UserName)
@@ -30,8 +35,21 @@
                 @Html.LabelFor(m => m.ConfirmPassword)
                 @Html.PasswordFor(m => m.ConfirmPassword)
             </li>
+			<div id="avatarPhotoUpload">
+				<li>
+					<img src="m.ImageUrl" alt="m.Name" />
+					@Html.LabelFor(m => m.UploadPhoto)
+					@Html.TextBoxFor(m => m.UploadPhoto, new { type = "file"})
+					@Html.ValidationMessageFor(m => m.UploadPhoto)
+				</li>
+			</div>
+			<li>
+				Terms of Agreement
+			</li>
         </ol>
+		<input type="checkbox" value="I accept your Terms of Agreement" />
         <input type="submit" value="Register" />
+		<input type="reset" value="Clear" />
     </fieldset>
 }
 
