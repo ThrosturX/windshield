@@ -12,11 +12,11 @@ namespace Windshield.Models
 		void AddAdmin(User user);
 		void RemoveAdmin(User user);
 		uint GetTimesPlayed(User user);
-		uint GetTimesPlayedByGame(User user, GameType game);
+		uint GetTimesPlayedByGame(User user, Game game);
 		List<Group> GetGroupsByUser(User user);
 		List<User> GetGroupMembers(Group group);
 		List<User> GetFriends(User user);
 		List<GameRating> GetGameRatings(User user);
-		GameRating GetGameRatingByGame(User user, GameType game);
+		GameRating GetGameRatingByGame(User user, Game game);
 	}
 }
