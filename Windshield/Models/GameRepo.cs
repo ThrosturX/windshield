@@ -5,9 +5,8 @@ using System.Web;
 
 namespace Windshield.Models
 {
-	public class GameType
+	public class GameRepo : IGameRepo
 	{
-		
-		// Dummy class, TBR
+
 	}
 }

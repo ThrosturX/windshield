@@ -1,23 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="verk2013_hopur09" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=hrnem.ru.is;Initial Catalog=verk2013_hopur09;Persist Security Info=True;User ID=hopur09_user" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="verk2013_hopur09ConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="User">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="password" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="dateofSignup" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="email" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="userRating" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="User_UserRating" Member="UserRatings" ThisKey="Id" OtherKey="idRater" Type="UserRating" />
-      <Association Name="User_UserRating1" Member="UserRatings1" ThisKey="Id" OtherKey="idUser" Type="UserRating" />
-      <Association Name="User_GroupMember" Member="GroupMembers" ThisKey="Id" OtherKey="idUser" Type="GroupMember" />
-      <Association Name="User_Admin" Member="Admin" ThisKey="Id" OtherKey="idUser" Type="Admin" Cardinality="One" />
-      <Association Name="User_Player" Member="Players" ThisKey="Id" OtherKey="idUser" Type="Player" />
-      <Association Name="User_UserProfile" Member="UserProfile" ThisKey="Id" OtherKey="idUser" Type="UserProfile" Cardinality="One" />
-      <Association Name="User_GameRating" Member="GameRatings" ThisKey="Id" OtherKey="idUser" Type="GameRating" />
-      <Association Name="User_Friend" Member="Friends" ThisKey="Id" OtherKey="idOne" Type="Friend" />
-      <Association Name="User_Friend1" Member="Friends1" ThisKey="Id" OtherKey="idTwo" Type="Friend" />
-    </Type>
-  </Table>
   <Table Name="dbo.UserRatings" Member="UserRatings">
     <Type Name="UserRating">
       <Column Name="idRater" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -25,8 +7,6 @@
       <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="positive" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="review" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Association Name="User_UserRating" Member="User" ThisKey="idRater" OtherKey="Id" Type="User" IsForeignKey="true" />
-      <Association Name="User_UserRating1" Member="User1" ThisKey="idUser" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Groups" Member="Groups">
@@ -45,14 +25,12 @@
       <Column Name="idUser" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="Group_GroupMember" Member="Group" ThisKey="idGroup" OtherKey="Id" Type="Group" IsForeignKey="true" />
-      <Association Name="User_GroupMember" Member="User" ThisKey="idUser" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Admins" Member="Admins">
     <Type Name="Admin">
       <Column Name="idUser" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="User_Admin" Member="User" ThisKey="idUser" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Players" Member="Players">
@@ -61,21 +39,7 @@
       <Column Name="idBoard" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="playerNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="dateJoined" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="User_Player" Member="User" ThisKey="idUser" OtherKey="Id" Type="User" IsForeignKey="true" />
       <Association Name="Board_Player" Member="Board" ThisKey="idBoard" OtherKey="Id" Type="Board" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.UserProfiles" Member="UserProfiles">
-    <Type Name="UserProfile">
-      <Column Name="idUser" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="avatar" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="country" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="occupation" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="settings" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="age" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="gender" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="User_UserProfile" Member="User" ThisKey="idUser" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Boards" Member="Boards">
@@ -109,7 +73,6 @@
       <Column Name="idUser" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="rating" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Game_GameRating" Member="Game" ThisKey="idGame" OtherKey="id" Type="Game" IsForeignKey="true" />
-      <Association Name="User_GameRating" Member="User" ThisKey="idUser" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Friends" Member="Friends">
@@ -117,8 +80,18 @@
       <Column Name="idOne" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="idTwo" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="User_Friend" Member="User" ThisKey="idOne" OtherKey="Id" Type="User" IsForeignKey="true" />
-      <Association Name="User_Friend1" Member="User1" ThisKey="idTwo" OtherKey="Id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Profiles" Member="Profiles">
+    <Type Name="Profile">
+      <Column Name="idUser" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="avatar" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="country" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="occupation" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="settings" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="age" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="gender" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

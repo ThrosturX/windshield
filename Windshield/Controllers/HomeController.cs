@@ -11,14 +11,9 @@ namespace Windshield.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-            int a = 5;
-            int b = 8;
-            int c = a + b;
-            System.Console.WriteLine(c);
-            int aa = 3;
-            int bb = 5;
-            System.Console.WriteLine(aa + bb);
+			
 
+			
             return View();
         }
 
@@ -35,5 +30,7 @@ namespace Windshield.Controllers
 
             return View();
         }
+
+		
     }
 }
