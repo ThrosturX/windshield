@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Windshield.Games.TicTacToe;
+using Windshield.Models;
 
-namespace Windshield.Models
+namespace Windshield.Games.TicTacToe
 {
 	public struct Coord
 	{
