@@ -44,6 +44,20 @@ namespace Windshield.Controllers
             return View();
         }
 
+
+		public ActionResult Stats()
+		{
+			ViewBag.Message = "Your contact page.";
+
+			return View("Stats");
+		}
+
+		public ActionResult MyGames()
+		{
+			ViewBag.Message = "Your contact page.";
+
+			return View("MyGames");
+		}
 		
     }
 }

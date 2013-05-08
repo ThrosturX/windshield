@@ -20,12 +20,20 @@ else
     @Html.Partial("_SetPasswordPartial")
 }
 
-<section id="externalLogins">
+<img src="m.ImageUrl" alt="m.Name" />
+@Html.LabelFor(m => m.UploadPhoto)
+@Html.TextBoxFor(m => m.UploadPhoto, new { type = "file"})
+@Html.ValidationMessageFor(m => m.UploadPhoto)
+
+<h3>Add Description</h3>
+<input type="text" name="Description" />
+
+<!--<section id="externalLogins">
     @Html.Action("RemoveExternalLogins")
 
     <h3>Add an external login</h3>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
+</section>-->
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
