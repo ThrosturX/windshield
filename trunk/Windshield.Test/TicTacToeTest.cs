@@ -72,5 +72,13 @@ namespace Windshield.Test
 				}
 			}
 		}
+
+		//Test method to test GetPlayerBySymbol
+		[TestMethod]
+		public void GetPlayerBySymbol()
+		{
+			Assert.AreEqual(game.GetPlayerBySymbol('X'), game.playerOne);
+			Assert.AreEqual(game.GetPlayerBySymbol('O'), game.playerTwo);
+		}
 	}
 }
