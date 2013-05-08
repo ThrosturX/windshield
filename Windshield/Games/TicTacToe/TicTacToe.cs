@@ -49,11 +49,20 @@ namespace Windshield.Games.TicTacToe
 			playerTwo.user = _playerTwo;
 		}
 
+		/// <summary>
+		/// This function should convert the game's "state" to a string for DB storage. This has not been implemented.
+		/// </summary>
+		/// <param name="saveString"></param>
 		public TicTacToe(string saveString)
 		{
 			throw new NotImplementedException("SaveStrings have not been implemented.");
 		}
 
+		/// <summary>
+		/// Converts a cell number to a coordinate struct.
+		/// </summary>
+		/// <param name="cell"></param>
+		/// <returns></returns>
 		public Coord CellToCoord(int cell)
 		{
 			Coord result = new Coord();
@@ -71,12 +80,23 @@ namespace Windshield.Games.TicTacToe
 
 			return result; 
 		}
-
+		
+		/// <summary>
+		/// Converts a coordinate struct to a cell number.
+		/// </summary>
+		/// <param name="input"></param>
+		/// <returns></returns>
 		public int CoordToCell(Coord input)
 		{
 			return (input.y * 3 + input.x);
 		}
 
+		/// <summary>
+		/// Inserts a symbol into a cell in the game grid.
+		/// </summary>
+		/// <param name="symbol"></param>
+		/// <param name="cell"></param>
+		/// <returns></returns>
 		public bool InsertSymbol(char symbol, int cell)
 		{
 			Coord location = CellToCoord(cell);
@@ -91,6 +111,11 @@ namespace Windshield.Games.TicTacToe
 			return true;
 		}
 
+		/// <summary>
+		/// Returns the Tic Tac Toe Player that uses the specified symbol (X or O).
+		/// </summary>
+		/// <param name="symbol"></param>
+		/// <returns></returns>
 		public TTTPlayer GetPlayerBySymbol(char symbol)
 		{
 			if (playerOne.symbol == symbol)
@@ -105,6 +130,10 @@ namespace Windshield.Games.TicTacToe
 			throw new ArgumentException("No player exists with this symbol"); // this should never happen
 		}
 
+		/// <summary>
+		/// Checks if there is a winner.
+		/// </summary>
+		/// <returns>Tic Tac Toe Player that has won the game.</returns>
 		public TTTPlayer CheckWinner()
 		{
 			char center;
@@ -138,6 +167,9 @@ namespace Windshield.Games.TicTacToe
 			return null;
 		}
 
+		/// <summary>
+		/// Clears the board from all symbols.
+		/// </summary>
 		public void ClearBoard()
 		{
 			for (int i = 0; i < 3; ++i)
@@ -151,6 +183,9 @@ namespace Windshield.Games.TicTacToe
 			freeSquares = 9;
 		}
 
+		/// <summary>
+		/// Gives the game's players initial values for symbols, wins, losses and draws.
+		/// </summary>
 		public void InitializePlayers()
 		{
 			playerOne.symbol = 'X';
@@ -165,6 +200,10 @@ namespace Windshield.Games.TicTacToe
 			playerTwo.draws  =  0 ;
 		}
 
+		/// <summary>
+		/// swaps the player's symbols if they should elect to play a new game and adjusts their scores
+		/// </summary>
+		/// <param name="winner">should be null if there is a draw</param>
 		public void EndGame(TTTPlayer winner)
 		{
 			// swap symbols
@@ -197,6 +236,10 @@ namespace Windshield.Games.TicTacToe
 			}
 		}
 
+		/// <summary>
+		/// Selects a cell to be picked by the AI.
+		/// </summary>
+		/// <returns>A cell number to insert the symbol.</returns>
 		int AISelectCell()
 		{
 			Coord selected = new Coord();
