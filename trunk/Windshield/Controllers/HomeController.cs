@@ -13,7 +13,7 @@ namespace Windshield.Controllers
 
 		public HomeController()
 		{
-			_repository = new GameRepo();
+			_repository = GameRepo.Instance;
 		}
 
 		public HomeController(IGameRepo rep)
