@@ -201,6 +201,7 @@
     <Compile Include="Models\IUserRepo.cs" />
     <Compile Include="Games\TicTacToe\TicTacToe.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
