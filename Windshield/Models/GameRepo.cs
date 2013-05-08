@@ -9,20 +9,14 @@ namespace Windshield.Models
 {
 	public class GameRepo : IGameRepo
 	{
+		
+		public static BoardGamesDataContext db = null;
 
-		public static BoardGamesDataContext db = new BoardGamesDataContext();
-
-		// making GameRepo a singleton class
-		private static GameRepo instance = null;
-		public static GameRepo Instance
+		public GameRepo()
 		{
-			get
+			if (db == null)
 			{
-				if (instance == null)
-				{
-					instance = new GameRepo();
-				}
-				return instance;
+				db = new BoardGamesDataContext();
 			}
 		}
 
