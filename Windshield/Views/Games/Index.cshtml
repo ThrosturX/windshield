@@ -1,0 +1,27 @@
+﻿@model Windshield.Models.Board
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Play</title>
+</head>
+<body>
+	@if(Model != null)
+	 {
+		<div id="game">
+			 @Html.Partial(Model.Game.name);
+		</div>
+	 
+	}
+	else
+	{
+		<h1>Can't render a game without a game!</h1>
+	}
+</body>
+</html>
