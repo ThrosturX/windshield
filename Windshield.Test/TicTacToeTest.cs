@@ -16,7 +16,6 @@ namespace Windshield.Test
 
 			User sally = new User();
 			sally.UserName = "Sally";
-			sally.UserId = 1;
 
 			rep.AddUser(sally);
 		}
