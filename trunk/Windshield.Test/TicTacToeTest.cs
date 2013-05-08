@@ -155,7 +155,14 @@ namespace Windshield.Test
 		[TestMethod]
 		public void InitializePlayers()
 		{
-
+			Assert.AreEqual('X', game.playerOne.symbol);
+			Assert.AreEqual('O', game.playerTwo.symbol);
+			Assert.AreEqual(0, game.playerOne.wins);
+			Assert.AreEqual(0, game.playerOne.losses);
+			Assert.AreEqual(0, game.playerOne.draws);
+			Assert.AreEqual(0, game.playerTwo.wins);
+			Assert.AreEqual(0, game.playerTwo.losses);
+			Assert.AreEqual(0, game.playerTwo.draws);
 		}
 
 		[TestMethod]
@@ -167,7 +174,10 @@ namespace Windshield.Test
 		[TestMethod]
 		public void AISelectCell()
 		{
-
+			for (int i = 0; i < 9; ++i)
+			{
+				Assert.AreEqual(true, game.InsertSymbol('A', game.AISelectCell()));
+			}
 		}
 
 	}

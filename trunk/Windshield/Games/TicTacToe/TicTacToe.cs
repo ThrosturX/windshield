@@ -36,6 +36,9 @@ namespace Windshield.Games.TicTacToe
 		public TTTPlayer playerOne { get; set; }	// The owner is Player One
 		public TTTPlayer playerTwo { get; set; }
 
+		/// <summary>
+		/// Default constructor. Note, instances require players to be instantiated!
+		/// </summary>
 		public TicTacToe()
 		{
 			grid = new char[3, 3];
@@ -43,6 +46,22 @@ namespace Windshield.Games.TicTacToe
 			InitializePlayers();
 		}
 
+		/// <summary>
+		/// Players VS Computer constructor.
+		/// </summary>
+		/// <param name="_playerOne"></param>
+		public TicTacToe(User _playerOne) : this()
+		{
+			playerOne.user = _playerOne;
+			playerTwo.user = new User();
+			playerTwo.user.UserName = "Computer";
+		}
+
+		/// <summary>
+		/// Two player constructor. Human vs Human.
+		/// </summary>
+		/// <param name="_playerOne"></param>
+		/// <param name="_playerTwo"></param>
 		public TicTacToe(User _playerOne, User _playerTwo) : this() 
 		{
 			playerOne.user = _playerOne;
@@ -237,7 +256,7 @@ namespace Windshield.Games.TicTacToe
 		/// Selects a cell to be picked by the AI.
 		/// </summary>
 		/// <returns>A cell number to insert the symbol.</returns>
-		int AISelectCell()
+		public int AISelectCell()
 		{
 			Coord selected = new Coord();
 			Random rnd = new Random();

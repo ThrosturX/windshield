@@ -78,7 +78,6 @@ namespace Windshield.Controllers
 			else
 			{
 				return View("About");
-				User.Identity.Name.
 			}
 		}
     }
