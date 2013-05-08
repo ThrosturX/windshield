@@ -27,7 +27,7 @@ namespace Windshield.Controllers
 			
 
 			
-            return View();
+            return View("Index", repository);
         }
 
         public ActionResult About()
@@ -44,7 +44,7 @@ namespace Windshield.Controllers
             return View();
         }
 
-
+			
 		public ActionResult Stats()
 		{
 			ViewBag.Message = "Your contact page.";
@@ -58,6 +58,15 @@ namespace Windshield.Controllers
 
 			return View("MyGames");
 		}
-		
+
+		public ActionResult GameDescription(Game game)
+		{
+			return View("GameDescription", game);
+		}
+
+		public ActionResult GameLobby(Game game)
+		{
+			return View("GameLobby", game);
+		}
     }
 }
