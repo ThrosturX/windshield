@@ -55,6 +55,7 @@ namespace Windshield.Games.TicTacToe
 			playerOne.user = _playerOne;
 			playerTwo.user = new User();
 			playerTwo.user.UserName = "Computer";
+			playerTwo.isAI = true;
 		}
 
 		/// <summary>
