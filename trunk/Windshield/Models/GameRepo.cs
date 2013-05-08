@@ -30,19 +30,25 @@ namespace Windshield.Models
 		// insert methods
 
 		public void AddGame(Game game)
-		{ 
+		{
+			db.Games.InsertOnSubmit(game);
 		}
 
 		//
 		// delete methods
 
-		public void DeleteGame(Game type)
-		{ 
-		
+		public void DeleteGame(Game game)
+		{
+			db.Games.DeleteOnSubmit(game);
 		}
 
 		//
 		// commit methods
+
+		public void Save()
+		{
+			db.SubmitChanges();
+		}
 
 		//
 		// query methods
@@ -52,17 +58,18 @@ namespace Windshield.Models
 			return db.Games;
 		}
 
-		public IQueryable<User> GetTopPlayers()
+		public IQueryable<GameRating> GetTopRatings()
 		{
-			var result = from gameRatings in db.GameRatings
-						 orderby gameRatings.rating descending
-						 select gameRatings;
-			return null;
+			return from gameRatings in db.GameRatings
+			       orderby gameRatings.rating descending
+			       select gameRatings;
 		}
 
-		public IQueryable<User> GetTopPlayersByGame(Game type)
+		public IQueryable<GameRating> GetTopRatings(Game game)
 		{
-			return null;
+			return from gameRatings in db.GameRatings
+				   where gameRatings.idGame == game.id
+				   select gameRatings;
 		}
 
 	}
