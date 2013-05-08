@@ -55,6 +55,10 @@ namespace Windshield.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+		[Display(Name = "Upload avatar")]
+		[DataType(DataType.Upload)]
+		public string UploadPhoto { get; set; }
     }
 
     public class LoginModel
