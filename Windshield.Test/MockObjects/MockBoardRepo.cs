@@ -10,7 +10,7 @@ namespace Windshield.Test.MockObjects
 
 	internal class MockBoardRepo : IBoardRepo
 	{
-		public List<Board> rep;
+		public List<Board> rep = new List<Board>();
 	
 		public void AddBoard(Board board)
 		{
