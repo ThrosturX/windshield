@@ -7,15 +7,55 @@ namespace Windshield.Models
 {
 	public class UserRepo : IUserRepo
 	{
-		uint GetTimesPlayed(User user)
+
+		public static BoardGamesDataContext db = null;
+
+		public UserRepo()
+		{
+			if (db == null)
+			{
+				db = new BoardGamesDataContext();
+			}
+		}
+
+		public uint GetTimesPlayed(User user)
 		{
 			return 1;
 		}
-		uint GetTimesPlayedByGame(User user, Game game);
-		IQueryable<Group> GetGroupsByUser(User user);
-		IQueryable<User> GetGroupMembers(Group group);
-		IQueryable<User> GetFriends(User user);
-		IQueryable<GameRating> GetGameRatings(User user);
-		GameRating GetGameRatingByGame(User user, Game game);
+
+		public uint GetTimesPlayedByGame(User user, Game game)
+		{
+			return 2;
+		}
+
+		public IQueryable<Group> GetGroupsByUser(User user)
+		{
+			return from groups in db.Groups
+				   select groups;
+		}
+
+		public IQueryable<aspnet_User> GetGroupMembers(Group group)
+		{
+			return from users in db.aspnet_Users
+				   select users;
+		}
+
+		public IQueryable<aspnet_User> GetFriends(User user)
+		{
+			return from users in db.aspnet_Users
+				   select users;
+		}
+
+		public IQueryable<GameRating> GetGameRatings(User user)
+		{
+			return from gameRatings in db.GameRatings
+				   select gameRatings;
+		}
+
+		public GameRating GetGameRatingByGame(User user, Game game)
+		{
+			return (from gameRatings in db.GameRatings
+				   select gameRatings).FirstOrDefault();
+		}
 	}
 }

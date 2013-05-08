@@ -17,8 +17,8 @@ namespace Windshield.Models
 		uint GetTimesPlayed(User user);
 		uint GetTimesPlayedByGame(User user, Game game);
 		IQueryable<Group> GetGroupsByUser(User user);
-		IQueryable<User> GetGroupMembers(Group group);
-		IQueryable<User> GetFriends(User user);
+		IQueryable<aspnet_User> GetGroupMembers(Group group);
+		IQueryable<aspnet_User> GetFriends(User user);
 		IQueryable<GameRating> GetGameRatings(User user);
 		GameRating GetGameRatingByGame(User user, Game game);
 	}
