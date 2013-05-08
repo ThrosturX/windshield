@@ -72,9 +72,14 @@ namespace Windshield.Controllers
 		public ActionResult derp()
 		{
 			if (User.Identity.IsAuthenticated)
+			{
 				return View("Stats");
+			}
 			else
+			{
 				return View("About");
+				User.Identity.Name.
+			}
 		}
     }
 }
