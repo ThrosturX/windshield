@@ -9,10 +9,10 @@ namespace Windshield.Models
 	{
 		void AddBoard(Board board);
 		void DeleteBoard(Board board);
-		IEnumerable<Board> GetBoards();
-		IEnumerable<Board> GetBoards(Game type);
-		IEnumerable<User> GetBoardUsers(Board board);
+		IQueryable<Board> GetBoards();
+		IQueryable<Board> GetBoards(Game game);
+		IQueryable<aspnet_User> GetBoardUsers(Board board);
 		Game GetGameType(Board board);
-		User GetBoardOwner(Board board);
+		aspnet_User GetBoardOwner(Board board);
 	}
 }
