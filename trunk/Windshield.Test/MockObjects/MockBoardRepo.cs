@@ -41,13 +41,6 @@ namespace Windshield.Test.MockObjects
 			return null;
 		}
 
-		public Game GetGameType(Board board)
-		{
-			var result = from n in rep
-						 where n.id == board.id
-						 select n.Game;
-			return result.SingleOrDefault();
-		}
 
 		public aspnet_User GetBoardOwner(Board board)
 		{

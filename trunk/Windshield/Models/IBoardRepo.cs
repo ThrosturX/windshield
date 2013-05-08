@@ -12,7 +12,6 @@ namespace Windshield.Models
 		IQueryable<Board> GetBoards();
 		IQueryable<Board> GetBoards(Game game);
 		IQueryable<aspnet_User> GetBoardUsers(Board board);
-		Game GetGameType(Board board);
 		aspnet_User GetBoardOwner(Board board);
 	}
 }

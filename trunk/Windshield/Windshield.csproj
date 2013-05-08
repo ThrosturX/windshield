@@ -329,6 +329,7 @@
     <Content Include="Views\Home\MyGames.cshtml" />
     <Content Include="Views\Home\GameDescription.cshtml" />
     <Content Include="Views\Home\GameLobby.cshtml" />
+    <Content Include="Views\Home\TicTacToe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
