@@ -35,7 +35,10 @@
                 @Html.LabelFor(m => m.ConfirmPassword)
                 @Html.PasswordFor(m => m.ConfirmPassword)
             </li>
-			<div id="avatarPhotoUpload">
+		
+    </fieldset>
+}
+	<div id="avatarPhotoUpload">
 				<li>
 					<img src="m.ImageUrl" alt="m.Name" />
 					@Html.LabelFor(m => m.UploadPhoto)
@@ -49,9 +52,7 @@
         </ol>
 		<input type="checkbox" value="I accept your Terms of Agreement" />
         <input type="submit" value="Register" />
-		<input type="reset" value="Clear" />
-    </fieldset>
-}
+		<input type="reset" value="Clear" /> 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
