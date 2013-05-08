@@ -3,11 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Windshield.Models;
 
 namespace Windshield.Controllers
 {
     public class HomeController : Controller
     {
+		private IGameRepo _repository = null;
+
+		public HomeController()
+		{
+			_repository = new GameRepo();
+		}
+
+		public HomeController(IGameRepo rep)
+		{
+			_repository = rep;
+		}
+
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
