@@ -11,6 +11,7 @@
 
 <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
 
+<fieldset>
 @if (ViewBag.HasLocalPassword)
 {
     @Html.Partial("_ChangePasswordPartial")
@@ -27,6 +28,9 @@ else
 
 <h3>Add Description</h3>
 <input type="text" name="Description" />
+<input type="submit" name="Submit" />
+
+</fieldset>
 
 <!--<section id="externalLogins">
     @Html.Action("RemoveExternalLogins")
