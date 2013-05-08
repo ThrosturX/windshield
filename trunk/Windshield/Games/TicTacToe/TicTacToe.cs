@@ -50,33 +50,18 @@ namespace Windshield.Games.TicTacToe
 		}
 
 		/// <summary>
-		/// This function should convert the game's "state" to a string for DB storage. This has not been implemented.
-		/// </summary>
-		/// <param name="saveString"></param>
-		public TicTacToe(string saveString)
-		{
-			throw new NotImplementedException("SaveStrings have not been implemented.");
-		}
-
-		/// <summary>
 		/// Converts a cell number to a coordinate struct.
 		/// </summary>
 		/// <param name="cell"></param>
 		/// <returns></returns>
-		public Coord CellToCoord(int cell)
+		static public Coord CellToCoord(int cell)
 		{
 			Coord result = new Coord();
 
 			int temp = cell;
 
-			result.y = cell % 3;
-			result.x = 0;
-
-			while (temp > 0)
-			{
-				result.x++;
-				temp /= 3;
-			}
+			result.x = cell % 3;
+			result.y = cell / 3;
 
 			return result; 
 		}
@@ -86,9 +71,18 @@ namespace Windshield.Games.TicTacToe
 		/// </summary>
 		/// <param name="input"></param>
 		/// <returns></returns>
-		public int CoordToCell(Coord input)
+		static public int CoordToCell(Coord input)
 		{
 			return (input.y * 3 + input.x);
+		}
+
+		/// <summary>
+		/// This function should convert the game's "state" to a string for DB storage. This has not been implemented.
+		/// </summary>
+		/// <param name="saveString"></param>
+		public TicTacToe(string saveString)
+		{
+			throw new NotImplementedException("SaveStrings have not been implemented.");
 		}
 
 		/// <summary>
