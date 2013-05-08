@@ -9,11 +9,14 @@ namespace Windshield.Test
 	[TestClass]
 	public class TicTacToeTest
 	{
+		private MockUserRepo usr;
+		private MockBoardRepo brd;
+
 		[TestInitialize]
 		public void Setup()
 		{
-			MockUserRepo usr = new MockUserRepo();
-			MockBoardRepo brd = new MockBoardRepo();
+			usr = new MockUserRepo();
+			brd = new MockBoardRepo();
 
 			User sally = new User();
 			User jonas = new User();
@@ -30,9 +33,9 @@ namespace Windshield.Test
 		[TestMethod]
 		public void AddSymbol()
 		{
+			Assert.AreEqual(1, 1);
 			
 
-			Assert.AreEqual(1, 1);
 		}
 	}
 }
