@@ -182,7 +182,7 @@ namespace Windshield.Games.TicTacToe
 			if ((center == grid[0, 0] && center == grid[2, 2]) || (center == grid[0, 2] && center == grid[2, 0]))
 			{
 				// check for player symbol
-				if (grid[0, 0] != ' ')
+				if (center != ' ')
 				{
 					return GetPlayerBySymbol(center);
 				}
