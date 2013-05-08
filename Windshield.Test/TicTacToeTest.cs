@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Windshield.Games.TicTacToe;
+using Windshield.Models;
+using Windshield.Test.MockObjects;
 
 namespace Windshield.Test
 {
@@ -10,7 +12,13 @@ namespace Windshield.Test
 		[TestInitialize]
 		public void Setup()
 		{
+			MockUserRepo rep = new MockUserRepo();
 
+			User sally = new User();
+			sally.UserName = "Sally";
+			sally.UserId = 1;
+
+			rep.AddUser(sally);
 		}
 
 		[TestMethod]
