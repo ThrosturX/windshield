@@ -7,27 +7,32 @@ using Windshield.Models;
 
 namespace Windshield.Test.MockObjects
 {
-	// TODO!!
+
 	internal class MockBoardRepo : IBoardRepo
 	{
+		public List<Board> rep;
+	
 		public void AddBoard(Board board)
 		{
-
+			rep.Add(board);
 		}
 
 		public void DeleteBoard(Board board)
 		{
-
+			rep.Remove(board);
 		}
 
 		public IEnumerable<Board> GetBoards()
 		{
-			return null;
+			return rep.AsEnumerable();
 		}
 
 		public IEnumerable<Board> GetBoards(Game type)
 		{
-			return null;
+			var result = from n in rep
+						 where n.Game == type
+						 select n;
+			return result;
 		}
 
 		public IEnumerable<User> GetBoardUsers(Board board)
