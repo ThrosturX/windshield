@@ -68,5 +68,13 @@ namespace Windshield.Controllers
 		{
 			return View("GameLobby", game);
 		}
+
+		public ActionResult derp()
+		{
+			if (User.Identity.IsAuthenticated)
+				return View("Stats");
+			else
+				return View("About");
+		}
     }
 }
