@@ -26,7 +26,13 @@ namespace Windshield.Test.MockObjects
 			return rep.AsQueryable();
 		}
 
-		public IQueryable<User> GetTopPlayers()
+		public IQueryable<GameRating> GetTopRatings()
+		{
+			// dummy
+			return null;
+		}
+
+		public IQueryable<GameRating> GetTopRatings(Game type)
 		{
 			// dummy
 			return null;
