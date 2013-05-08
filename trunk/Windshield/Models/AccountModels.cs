@@ -99,7 +99,7 @@ namespace Windshield.Models
         public string ConfirmPassword { get; set; }
 
 		[Display(Name = "Upload avatar")]
-		[DataType(DataType.ImageUrl)]
+		[DataType(DataType.Upload)]
 		public string UploadPhoto { get; set; }
     }
 

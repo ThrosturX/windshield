@@ -35,24 +35,21 @@
                 @Html.LabelFor(m => m.ConfirmPassword)
                 @Html.PasswordFor(m => m.ConfirmPassword)
             </li>
-		
-    </fieldset>
-}
-	<div id="avatarPhotoUpload">
-				<li>
+			<li>
 					<img src="m.ImageUrl" alt="m.Name" />
 					@Html.LabelFor(m => m.UploadPhoto)
 					@Html.TextBoxFor(m => m.UploadPhoto, new { type = "file"})
 					@Html.ValidationMessageFor(m => m.UploadPhoto)
-				</li>
-			</div>
+			</li>
 			<li>
 				Terms of Agreement
 			</li>
         </ol>
 		<input type="checkbox" value="I accept your Terms of Agreement" />
         <input type="submit" value="Register" />
-		<input type="reset" value="Clear" /> 
+		<input type="reset" value="Clear" />
+    </fieldset>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
