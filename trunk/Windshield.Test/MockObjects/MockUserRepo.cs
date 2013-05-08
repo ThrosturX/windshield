@@ -10,7 +10,7 @@ namespace Windshield.Test.MockObjects
 	internal class MockUserRepo : IUserRepo
 	{
 		public List<User> rep = new List<User>();
-
+		
 		public void AddUser(User user)
 		{
 			rep.Add(user);
@@ -30,7 +30,7 @@ namespace Windshield.Test.MockObjects
 		{
 			// unimplemented
 		}
-
+		
 		public uint GetTimesPlayed(User user)
 		{
 			// dummy
@@ -43,25 +43,25 @@ namespace Windshield.Test.MockObjects
 			return 0;
 		}
 
-		public List<Group> GetGroupsByUser(User user)
+		public IQueryable<Group> GetGroupsByUser(User user)
 		{
 			// dummy
 			return null;
 		}
 
-		public List<User> GetGroupMembers(Group group)
+		public IQueryable<User> GetGroupMembers(Group group)
 		{
 			// dummy
 			return null;
 		}
 
-		public List<User> GetFriends(User user)
+		public IQueryable<User> GetFriends(User user)
 		{
 			// dummy
 			return null;
 		}
 
-		public List<GameRating> GetGameRatings(User user)
+		public IQueryable<GameRating> GetGameRatings(User user)
 		{
 			// dummy
 			return null;
