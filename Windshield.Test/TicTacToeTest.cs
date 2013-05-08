@@ -294,14 +294,14 @@ namespace Windshield.Test
 			game.ClearBoard();
 
 			game.InsertSymbol('X', 0);
-			game.InsertSymbol('X', 1);
-			game.InsertSymbol('O', 2);
-			game.InsertSymbol('O', 3);
-			game.InsertSymbol('X', 4);
+			game.InsertSymbol('O', 1);
+			game.InsertSymbol('X', 2);
+			game.InsertSymbol('X', 3);
+			game.InsertSymbol('O', 4);
 			game.InsertSymbol('O', 5);
 			game.InsertSymbol('O', 6);
 			game.InsertSymbol('X', 7);
-			game.InsertSymbol('O', 8);
+			game.InsertSymbol('X', 8);
 
 			winner = game.CheckWinner();
 
@@ -337,6 +337,13 @@ namespace Windshield.Test
 			Assert.AreEqual(1, game.playerTwo.wins);
 			Assert.AreEqual(1, game.playerTwo.losses);
 			Assert.AreEqual(1, game.playerTwo.draws);
+		}
+
+		[TestMethod]
+		public void EndGameVsAI()
+		{
+			game = new TicTacToe(new User());
+			EndGame();
 		}
 
 		[TestMethod]
