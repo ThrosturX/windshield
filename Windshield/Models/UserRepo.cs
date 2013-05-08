@@ -18,43 +18,52 @@ namespace Windshield.Models
 			}
 		}
 
-		public uint GetTimesPlayed(User user)
+		public int GetTimesPlayed(User user)
 		{
-			return 1;
+			return (from gameRating in db.GameRatings
+					where user.UserId == gameRating.idUser
+					select gameRating.rating).Sum();
 		}
 
-		public uint GetTimesPlayedByGame(User user, Game game)
+		public int GetTimesPlayedByGame(User user, Game game)
 		{
-			return 2;
+			return (from gameRatings in db.GameRatings
+				    where gameRatings.idUser == user.UserId && gameRatings.idGame == game.id
+				    select gameRatings.rating).SingleOrDefault(); 
 		}
 
 		public IQueryable<Group> GetGroupsByUser(User user)
 		{
-			return from groups in db.Groups
-				   select groups;
+			return from groupMembers in db.GroupMembers
+				   where groupMembers.idUser == user.UserId
+				   select groupMembers.Group;
 		}
 
-		public IQueryable<aspnet_User> GetGroupMembers(Group group)
+		public IQueryable<aspnet_User> GetGroupMembers(Group g)
 		{
-			return from users in db.aspnet_Users
-				   select users;
+			return from groupMembers in db.GroupMembers
+				   where groupMembers.idGroup == g.id
+				   select groupMembers.aspnet_User;
 		}
 
 		public IQueryable<aspnet_User> GetFriends(User user)
 		{
-			return from users in db.aspnet_Users
-				   select users;
+			return from friends in db.Friends
+				   where friends.idOne == user.UserId
+				   select friends.aspnet_User;
 		}
 
 		public IQueryable<GameRating> GetGameRatings(User user)
 		{
 			return from gameRatings in db.GameRatings
+				   where gameRatings.idUser == user.UserId
 				   select gameRatings;
 		}
 
 		public GameRating GetGameRatingByGame(User user, Game game)
 		{
 			return (from gameRatings in db.GameRatings
+					where gameRatings.idUser == user.UserId && gameRatings.idGame == game.id
 				   select gameRatings).FirstOrDefault();
 		}
 	}

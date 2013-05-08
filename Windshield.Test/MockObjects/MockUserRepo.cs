@@ -31,13 +31,13 @@ namespace Windshield.Test.MockObjects
 			// unimplemented
 		}
 		
-		public uint GetTimesPlayed(User user)
+		public int GetTimesPlayed(User user)
 		{
 			// dummy
 			return 0;
 		}
 
-		public uint GetTimesPlayedByGame(User user, Game game)
+		public int GetTimesPlayedByGame(User user, Game game)
 		{
 			// dummy
 			return 0;

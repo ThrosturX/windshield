@@ -14,8 +14,8 @@ namespace Windshield.Models
 		void AddAdmin(User user);
 		void RemoveAdmin(User user);
 		*/
-		uint GetTimesPlayed(User user);
-		uint GetTimesPlayedByGame(User user, Game game);
+		int GetTimesPlayed(User user);
+		int GetTimesPlayedByGame(User user, Game game);
 		IQueryable<Group> GetGroupsByUser(User user);
 		IQueryable<aspnet_User> GetGroupMembers(Group group);
 		IQueryable<aspnet_User> GetFriends(User user);
