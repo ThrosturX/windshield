@@ -12,18 +12,27 @@ namespace Windshield.Test
 		[TestInitialize]
 		public void Setup()
 		{
-			MockUserRepo rep = new MockUserRepo();
+			MockUserRepo usr = new MockUserRepo();
+			MockBoardRepo brd = new MockBoardRepo();
 
 			User sally = new User();
+			User jonas = new User();
 			sally.UserName = "Sally";
+			jonas.UserName = "Jonas";
+			usr.AddUser(sally);
+			usr.AddUser(jonas);
 
-			rep.AddUser(sally);
+			TicTacToe game = new TicTacToe(sally, jonas);
+
+			brd.AddBoard(game);
 		}
 
 		[TestMethod]
 		public void AddSymbol()
 		{
-			TicTacToe game = new TicTacToe();
+			
+
+			Assert.AreEqual(1, 1);
 		}
 	}
 }

@@ -188,6 +188,9 @@ namespace Windshield.Games.TicTacToe
 		/// </summary>
 		public void InitializePlayers()
 		{
+			playerOne = new TTTPlayer();
+			playerTwo = new TTTPlayer();
+
 			playerOne.symbol = 'X';
 			playerTwo.symbol = 'O';
 
