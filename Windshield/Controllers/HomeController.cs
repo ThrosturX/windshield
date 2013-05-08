@@ -9,16 +9,16 @@ namespace Windshield.Controllers
 {
     public class HomeController : Controller
     {
-		private IGameRepo _repository = null;
+		private IGameRepo repository = null;
 
 		public HomeController()
 		{
-			_repository = GameRepo.Instance;
+			repository = new GameRepo();
 		}
 
 		public HomeController(IGameRepo rep)
 		{
-			_repository = rep;
+			repository = rep;
 		}
 		
         public ActionResult Index()
