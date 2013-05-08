@@ -9,7 +9,7 @@ namespace Windshield.Test.MockObjects
 {
 	class MockGameRepo : IGameRepo
 	{
-		public List<Game> rep;
+		public List<Game> rep = new List<Game>();
 
 		public void AddGame(Game type)
 		{

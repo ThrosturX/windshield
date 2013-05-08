@@ -9,7 +9,7 @@ namespace Windshield.Test.MockObjects
 {
 	internal class MockUserRepo : IUserRepo
 	{
-		public List<User> rep;
+		public List<User> rep = new List<User>();
 
 		public void AddUser(User user)
 		{
