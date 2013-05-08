@@ -81,7 +81,7 @@ namespace Windshield.Test
 
 		}
 
-		
+		// Test method to test CellToCoord()
 		[TestMethod]
 		public void CellToCoord()
 		{
@@ -157,12 +157,98 @@ namespace Windshield.Test
 			}
 		}
 
-		//Test method to test GetPlayerBySymbol
+		
+
+		// Test method to test GetPlayerBySymbol
 		[TestMethod]
 		public void GetPlayerBySymbol()
 		{
 			Assert.AreEqual(game.GetPlayerBySymbol('X'), game.playerOne);
 			Assert.AreEqual(game.GetPlayerBySymbol('O'), game.playerTwo);
+		}
+
+		// Test methods to test CheckWinner()
+		// tests for an empty board, should not find a winner
+		[TestMethod]
+		public void CheckWinner1()
+		{
+			game.ClearBoard();
+			Assert.AreEqual(game.CheckWinner(), null);
+		}
+		// tests a game in progress and should find playerTwo winning vertically
+		[TestMethod]
+		public void CheckWinner2()
+		{
+			game.ClearBoard();
+			Assert.AreEqual(game.grid[1, 1], ' ');
+			game.InsertSymbol('X', 4);
+			Assert.AreEqual(game.grid[1, 1], 'X');
+			Assert.AreEqual(game.CheckWinner(), null);
+
+			Assert.AreEqual(game.grid[0, 0], ' ');
+			game.InsertSymbol('O', 0);
+			Assert.AreEqual(game.grid[0, 0], 'O');
+			Assert.AreEqual(game.CheckWinner(), null);
+
+			Assert.AreEqual(game.grid[2, 2], ' ');
+			game.InsertSymbol('X', 8);
+			Assert.AreEqual(game.grid[2, 2], 'X');
+			Assert.AreEqual(game.CheckWinner(), null);
+
+			Assert.AreEqual(game.grid[0, 2], ' ');
+			game.InsertSymbol('O', 6);
+			Assert.AreEqual(game.grid[0, 2], 'O');
+			Assert.AreEqual(game.CheckWinner(), null);
+
+			Assert.AreEqual(game.grid[2, 0], ' ');
+			game.InsertSymbol('X', 2);
+			Assert.AreEqual(game.grid[2, 0], 'X');
+			Assert.AreEqual(game.CheckWinner(), null);
+
+			Assert.AreEqual(game.grid[0, 1], ' ');
+			game.InsertSymbol('O', 3);
+			Assert.AreEqual(game.grid[0, 1], 'O');
+			Assert.AreEqual(game.CheckWinner(), game.playerTwo);
+		}		
+		// tests a game in progress and should find playerOne winning diagonally from upper left to lower right
+		[TestMethod]
+		public void CheckWinner3()
+		{
+			game.ClearBoard();
+			Assert.AreEqual(game.CheckWinner(), null);
+			game.InsertSymbol('X', 4);
+			Assert.AreEqual(game.CheckWinner(), null);
+			game.InsertSymbol('O', 3);
+			Assert.AreEqual(game.CheckWinner(), null);
+			game.InsertSymbol('X', 0);
+			Assert.AreEqual(game.CheckWinner(), null);
+			game.InsertSymbol('O', 2);
+			Assert.AreEqual(game.CheckWinner(), null);
+			game.InsertSymbol('X', 8);
+			Assert.AreEqual(game.CheckWinner(), game.playerOne);
+		}
+		// tests a game in progress and should find playerOne winning diagonally from lower left to upper right
+		[TestMethod]
+		public void CheckWinner4()
+		{
+			game.ClearBoard();
+			Assert.AreEqual(game.CheckWinner(), null);
+			game.InsertSymbol('X', 6);
+			Assert.AreEqual(game.grid[0, 2], 'X');
+			
+			Assert.AreEqual(game.CheckWinner(), null);
+			game.InsertSymbol('O', 3);
+			Assert.AreEqual(game.grid[0, 1], 'O');
+			Assert.AreEqual(game.CheckWinner(), null);
+			game.InsertSymbol('X', 2);
+			Assert.AreEqual(game.grid[2, 0], 'X');
+			Assert.AreEqual(game.CheckWinner(), null);
+			game.InsertSymbol('O', 1);
+			Assert.AreEqual(game.grid[1, 0], 'O');
+			Assert.AreEqual(game.CheckWinner(), null);
+			game.InsertSymbol('X', 4);
+			Assert.AreEqual(game.grid[1, 1], 'X');
+			Assert.AreEqual(game.CheckWinner(), game.playerOne);
 		}
 
 		[TestMethod]
@@ -261,6 +347,5 @@ namespace Windshield.Test
 				Assert.AreEqual(true, game.InsertSymbol('A', game.AISelectCell()));
 			}
 		}
-
 	}
 }
