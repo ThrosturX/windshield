@@ -11,6 +11,7 @@ namespace Windshield.Test
 	{
 		private MockUserRepo usr;
 		private MockBoardRepo brd;
+		private TicTacToe game;
 
 		[TestInitialize]
 		public void Setup()
@@ -25,16 +26,17 @@ namespace Windshield.Test
 			usr.AddUser(sally);
 			usr.AddUser(jonas);
 
-			TicTacToe game = new TicTacToe(sally, jonas);
+			game = new TicTacToe(sally, jonas);
 
 			brd.AddBoard(game);
 		}
 
 		[TestMethod]
-		public void AddSymbol()
+		public void InsertSymbol()
 		{
-			Assert.AreEqual(1, 1);
-			
+			game.InsertSymbol('T', 0);
+
+			Assert.AreEqual('T', game.grid[0, 0]);
 
 		}
 	}
