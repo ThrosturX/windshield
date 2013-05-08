@@ -37,16 +37,21 @@ namespace Windshield.Test.MockObjects
 
 		public IEnumerable<User> GetBoardUsers(Board board)
 		{
+			// dummy
 			return null;
 		}
 
 		public Game GetGameType(Board board)
 		{
-			return null;
+			var result = from n in rep
+						 where n.id == board.id
+						 select n.Game;
+			return result.SingleOrDefault();
 		}
 
 		public User GetBoardOwner(Board board)
 		{
+			// dummy
 			return null;
 		}
 	}
