@@ -1,8 +1,38 @@
-﻿
+﻿@model Windshield.Models.Game
 <!DOCTYPE html>
 
 <html>
 <body>
-<h1>GameLobby</h1>
+	<img src="~/Content/themes/base/images/ui-icons_cd0a0a_256x240.png" alt="flott mynd" />
+	<h1>@Model.name</h1>
+	<div id="game-on-players">
+		<h3>Players</h3>
+		<ul>
+			<li>Hákon</li>
+			<li>Hákarl</li>
+		</ul>
+		<!-- TODO: Sækja player-a sem eru búnir að accepta game request -->
+	</div>
+	<div id="invited-players">
+		<h3>Invited Players</h3>
+		<ul>
+			<li>Dísa</li>
+			<li>Skvísa</li>
+			<li>Halldóra</li>
+		</ul>
+		<!-- TODO: Sækja invite-aða player-a sem eru búnir að accepta game request -->
+	</div>
+	<div id="requests-and-invitations">
+		<input type="search" name="username" />
+		<input type="checkbox" name="Private Game" />
+	</div>
+	<button>START</button> <!-- TODO: linka á leik -->
+	<nav>
+		<ul>
+			<li>Friends</li>
+			<li>Groups</li>
+			<li>Requests</li>
+		</ul>
+	</nav>
 </body>
 </html>
