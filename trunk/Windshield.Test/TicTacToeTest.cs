@@ -39,5 +39,38 @@ namespace Windshield.Test
 			Assert.AreEqual('T', game.grid[0, 0]);
 
 		}
+
+		//Test methods to test ClearBoard()
+		[TestMethod]
+		public void ClearBoard1()
+		{
+			game.ClearBoard();
+			for (int i = 0; i < 3; i++)
+			{
+				for (int j = 0; j < 3; j++)
+				{
+					Assert.AreEqual(game.grid[i, j], ' ');
+				}
+			}
+		}
+		[TestMethod]
+		public void ClearBoard2()
+		{
+			// fill the board
+			for (int i = 0; i < 9; i++)
+			{
+				game.InsertSymbol('T', 0);
+			}
+			// empty the board
+			game.ClearBoard();
+			// assert that the board is empty
+			for (int i = 0; i < 3; i++)
+			{
+				for (int j = 0; j < 3; j++)
+				{
+					Assert.AreEqual(game.grid[i, j], ' ');
+				}
+			}
+		}
 	}
 }
