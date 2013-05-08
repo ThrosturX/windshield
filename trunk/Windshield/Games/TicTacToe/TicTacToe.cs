@@ -248,7 +248,7 @@ namespace Windshield.Games.TicTacToe
 
 				// adjust temporary scores
 				winner.wins++;
-				loser.losses--;
+				loser.losses++;
 			}
 		}
 

@@ -16,6 +16,7 @@ namespace Windshield.Test
 		[TestInitialize]
 		public void Setup()
 		{
+			// Arrange
 			usr = new MockUserRepo();
 			brd = new MockBoardRepo();
 
@@ -34,6 +35,7 @@ namespace Windshield.Test
 		[TestMethod]
 		public void InsertSymbol()
 		{
+			// Act
 			game.InsertSymbol('1', 1);
 			game.InsertSymbol('2', 2);
 			game.InsertSymbol('3', 3);
@@ -44,6 +46,7 @@ namespace Windshield.Test
 			game.InsertSymbol('8', 8);
 			game.InsertSymbol('0', 0);
 
+			// Assert
 			Assert.AreEqual('0', game.grid[0, 0]);
 			Assert.AreEqual('1', game.grid[1, 0]);
 			Assert.AreEqual('2', game.grid[2, 0]);
@@ -58,6 +61,7 @@ namespace Windshield.Test
 		[TestMethod]
 		public void CoordToCell()
 		{
+			// Arrange
 			Coord middleLeft;
 			middleLeft.x = 0;
 			middleLeft.y = 1;
@@ -70,6 +74,7 @@ namespace Windshield.Test
 			last.x = 2;
 			last.y = 2;
 
+			// Act & Assert
 			Assert.AreEqual(3, TicTacToe.CoordToCell(middleLeft));
 			Assert.AreEqual(0, TicTacToe.CoordToCell(first));
 			Assert.AreEqual(8, TicTacToe.CoordToCell(last));
@@ -80,20 +85,22 @@ namespace Windshield.Test
 		[TestMethod]
 		public void CellToCoord()
 		{
+			// Arrange
 			Coord middleGot;
 			Coord middleExpected;
+			Coord expectedCoord;
+			Coord gotCoord;
 
+			// Act
 			middleGot = TicTacToe.CellToCoord(4);
 			middleExpected.x = 1;
 			middleExpected.y = 1;
 
-			Coord expectedCoord;
-			Coord gotCoord;
-
+			// Assert
 			Assert.AreEqual(middleExpected.x, middleGot.x);
 			Assert.AreEqual(middleExpected.y, middleGot.y);
 
-			// Idemnity tests
+			// Idemnity tests...
 			expectedCoord.x = 0;
 			expectedCoord.y = 1;
 			gotCoord = TicTacToe.CellToCoord(TicTacToe.CoordToCell(expectedCoord));
@@ -115,12 +122,14 @@ namespace Windshield.Test
 		[TestMethod]
 		public void ClearBoard1()
 		{
+			// Act
 			game.ClearBoard();
 			for (int i = 0; i < 3; i++)
 			{
 				for (int j = 0; j < 3; j++)
 				{
-					Assert.AreEqual(game.grid[i, j], ' ');
+					// Assert
+					Assert.AreEqual(' ', game.grid[i, j]);
 				}
 			}
 		}
@@ -139,7 +148,11 @@ namespace Windshield.Test
 			{
 				for (int j = 0; j < 3; j++)
 				{
-					Assert.AreEqual(game.grid[i, j], ' ');
+					Coord target;
+					target.x = i;
+					target.y = j;
+					Assert.AreEqual(' ', game.grid[i, j]);
+					Assert.AreEqual(true, game.InsertSymbol('T', TicTacToe.CoordToCell(target)));
 				}
 			}
 		}
@@ -155,6 +168,7 @@ namespace Windshield.Test
 		[TestMethod]
 		public void InitializePlayers()
 		{
+			// InitializePlayers() is automatically called in the constructor
 			Assert.AreEqual('X', game.playerOne.symbol);
 			Assert.AreEqual('O', game.playerTwo.symbol);
 			Assert.AreEqual(0, game.playerOne.wins);
@@ -168,7 +182,75 @@ namespace Windshield.Test
 		[TestMethod]
 		public void EndGame()
 		{
+			// Arrange
+			game.InsertSymbol('X', 0);
+			game.InsertSymbol('O', 7);
+			game.InsertSymbol('X', 4);
+			game.InsertSymbol('O', 6);
+			game.InsertSymbol('X', 8);
 
+			TTTPlayer winner = game.CheckWinner();
+
+			// Act
+			game.EndGame(winner);
+
+			// Assert
+			Assert.AreEqual(1, game.playerOne.wins);
+			Assert.AreEqual(0, game.playerOne.losses);
+			Assert.AreEqual(0, game.playerOne.draws);
+
+			Assert.AreEqual(0, game.playerTwo.wins);
+			Assert.AreEqual(1, game.playerTwo.losses);
+			Assert.AreEqual(0, game.playerTwo.draws);
+
+			// Arrange
+
+			game.ClearBoard();
+
+			game.InsertSymbol('X', 0);
+			game.InsertSymbol('X', 1);
+			game.InsertSymbol('O', 2);
+			game.InsertSymbol('O', 3);
+			game.InsertSymbol('X', 4);
+			game.InsertSymbol('O', 5);
+			game.InsertSymbol('O', 6);
+			game.InsertSymbol('X', 7);
+			game.InsertSymbol('O', 8);
+
+			winner = game.CheckWinner();
+
+			// Act
+			game.EndGame(winner);
+
+			// Assert
+			Assert.AreEqual(1, game.playerOne.wins);
+			Assert.AreEqual(0, game.playerOne.losses);
+			Assert.AreEqual(1, game.playerOne.draws);
+
+			Assert.AreEqual(0, game.playerTwo.wins);
+			Assert.AreEqual(1, game.playerTwo.losses);
+			Assert.AreEqual(1, game.playerTwo.draws);
+
+			// Arrange
+			game.ClearBoard();
+
+			game.InsertSymbol('O', 0);
+			game.InsertSymbol('O', 4);
+			game.InsertSymbol('O', 8);
+			
+			winner = game.CheckWinner();
+
+			// Act
+			game.EndGame(winner);
+
+			// Assert
+			Assert.AreEqual(1, game.playerOne.wins);
+			Assert.AreEqual(1, game.playerOne.losses);
+			Assert.AreEqual(1, game.playerOne.draws);
+
+			Assert.AreEqual(1, game.playerTwo.wins);
+			Assert.AreEqual(1, game.playerTwo.losses);
+			Assert.AreEqual(1, game.playerTwo.draws);
 		}
 
 		[TestMethod]
