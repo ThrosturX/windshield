@@ -22,20 +22,20 @@ namespace Windshield.Test.MockObjects
 			rep.Remove(board);
 		}
 
-		public IEnumerable<Board> GetBoards()
+		public IQueryable<Board> GetBoards()
 		{
-			return rep.AsEnumerable();
+			return rep.AsQueryable();
 		}
 
-		public IEnumerable<Board> GetBoards(Game type)
+		public IQueryable<Board> GetBoards(Game type)
 		{
 			var result = from n in rep
 						 where n.Game == type
 						 select n;
-			return result;
+			return result.AsQueryable();
 		}
 
-		public IEnumerable<User> GetBoardUsers(Board board)
+		public IQueryable<aspnet_User> GetBoardUsers(Board board)
 		{
 			// dummy
 			return null;
@@ -49,7 +49,7 @@ namespace Windshield.Test.MockObjects
 			return result.SingleOrDefault();
 		}
 
-		public User GetBoardOwner(Board board)
+		public aspnet_User GetBoardOwner(Board board)
 		{
 			// dummy
 			return null;
