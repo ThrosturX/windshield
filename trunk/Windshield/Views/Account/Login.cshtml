@@ -4,11 +4,6 @@
     ViewBag.Title = "Log in";
 }
 
-@section Header {
-    @Html.ActionLink("Cancel", "Index", "Home", null, new { data_icon = "arrow-l", data_rel = "back" })
-    <h1>@ViewBag.Title</h1>
-}
-
 <p>
     Please enter your user name and password. @Html.ActionLink("Register", "Register") if you don't have an account.
 </p>
@@ -39,6 +34,8 @@
         </li>
     </ul>
 }
+
+@Html.ActionLink("Cancel", "Index", "Home", null, new { data_icon = "arrow-l", data_rel = "back" })
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
