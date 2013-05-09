@@ -181,27 +181,28 @@
     <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
-    <Compile Include="Games\Common\PlayingCards\Card.cs" />
-    <Compile Include="Games\Common\PlayingCards\CardDeck.cs" />
-    <Compile Include="Games\Hearts\HeartsHand.cs" />
-    <Compile Include="Games\Hearts\HeartsPlayer.cs" />
-    <Compile Include="Games\TicTacToe\TTTPlayer.cs" />
+    <Compile Include="Models\Games\Common\PlayingCards\Card.cs" />
+    <Compile Include="Models\Games\Common\PlayingCards\CardDeck.cs" />
+    <Compile Include="Models\Games\Hearts\HeartsHand.cs" />
+    <Compile Include="Models\Games\Hearts\HeartsPlayer.cs" />
+    <Compile Include="Models\Games\TicTacToe\TTTPlayer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Games\Hearts\Hearts.cs" />
+    <Compile Include="Models\Games\Hearts\Hearts.cs" />
     <Compile Include="Models\BoardGames.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BoardGames.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\BoardRepo.cs" />
+    <Compile Include="Models\GameInstance.cs" />
     <Compile Include="Models\GameRepo.cs" />
     <Compile Include="Models\IBoardRepo.cs" />
     <Compile Include="Models\IGameRepo.cs" />
     <Compile Include="Models\IUserRepo.cs" />
-    <Compile Include="Games\TicTacToe\TicTacToe.cs" />
+    <Compile Include="Models\Games\TicTacToe\TicTacToe.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -332,9 +333,10 @@
     <Content Include="Views\Home\MyGames.cshtml" />
     <Content Include="Views\Home\GameDescription.cshtml" />
     <Content Include="Views\Home\GameLobby.cshtml" />
-    <Content Include="Views\Home\TicTacToe.cshtml" />
-    <Content Include="Views\Games\Index.cshtml" />
+    <Content Include="Views\Home\TTT.cshtml" />
     <Content Include="Views\Games\TicTacToe.cshtml" />
+    <Content Include="Views\Games\Play.cshtml" />
+    <Content Include="Views\Games\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

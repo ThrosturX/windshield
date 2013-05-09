@@ -9,6 +9,7 @@ namespace Windshield.Models
 	{
 		void AddGame(Game type);
 		void DeleteGame(Game type);
+		Game GetGameByName(string name);
 		IQueryable<Game> GetAllGames();
 		IQueryable<GameRating> GetTopRatings();
 		IQueryable<GameRating> GetTopRatings(Game game);

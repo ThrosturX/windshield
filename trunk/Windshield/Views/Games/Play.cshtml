@@ -1,6 +1,8 @@
-﻿@model Windshield.Models.GameInstance
+﻿@model Windshield.Models.Board
 
-<!DOCTYPE html>
+@{
+    Layout = null;
+}
 
 <html>
 <head>
@@ -11,7 +13,7 @@
 	@if(Model != null)
 	 {
 		<div id="game">
-			 @Html.Partial(Model.theView, Model.theGame)
+			 @Html.Partial(Model.viewName);
 		</div>
 	 
 	}

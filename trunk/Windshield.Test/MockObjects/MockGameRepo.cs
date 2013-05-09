@@ -21,6 +21,14 @@ namespace Windshield.Test.MockObjects
 			rep.Remove(type);
 		}
 
+		public Game GetGameByName(string name)
+		{
+			var result = from game in rep 
+						 where game.name == name
+						 select game;
+			return result.SingleOrDefault();
+		}
+
 		public IQueryable<Game> GetAllGames()
 		{
 			return rep.AsQueryable();

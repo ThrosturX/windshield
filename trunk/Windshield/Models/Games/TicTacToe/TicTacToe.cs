@@ -15,6 +15,7 @@ namespace Windshield.Games.TicTacToe
 	public class TicTacToe : Board
 	{
 		public static string name = "Tic Tac Toe";
+		public static string viewName = "TicTacToe";
 		public static string description =    "Tic Tac Toe is a two player game. The goal of Tic Tac Toe is to be the first player "
 											+ "to get three symbols in a row on a 3x3 grid. Each player gets a symbol, either X or O. "
 											+ "The player with X starts. Players alternate placing Xs and Os on the board until either"
@@ -37,7 +38,7 @@ namespace Windshield.Games.TicTacToe
 		public TTTPlayer playerTwo { get; set; }
 
 		/// <summary>
-		/// Default constructor. Note, instances require players to be instantiated!
+		/// Default constructor. Note that instances require players to be instantiated!
 		/// </summary>
 		public TicTacToe()
 		{
@@ -69,6 +70,15 @@ namespace Windshield.Games.TicTacToe
 			playerTwo.user = _playerTwo;
 		}
 
+		/// <summary>
+		/// Returns the name of the partial view which renders the UI.
+		/// </summary>
+		/// <returns></returns>
+		public string getViewName()
+		{
+			return viewName;
+		}
+		
 		/// <summary>
 		/// Converts a cell number to a coordinate struct.
 		/// </summary>
