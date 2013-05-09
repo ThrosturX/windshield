@@ -9,11 +9,17 @@ namespace Windshield.Models
 	{
 		public Board theGame;
 		public string theView;
+		public List<User> group;
 
 		public GameInstance(Board gameBoard, string gameView)
 		{
 			theGame = gameBoard;
 			theView = gameView;
+		}
+
+		public void addPlayer(User player)
+		{
+			group.Add(player);
 		}
 	}
 }

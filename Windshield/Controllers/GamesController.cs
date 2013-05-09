@@ -35,7 +35,7 @@ namespace Windshield.Controllers
 		{
 			User mockingbird = new User();
 			TicTacToe gameBoard = new TicTacToe(mockingbird);
-			GameInstance theGame = new GameInstance(gameBoard, "~/Views/Games/TicTacToe.cshtml");
+			GameInstance theGame = new GameInstance(gameBoard, "TicTacToe");
 
 			return View("Index", theGame);
 		}
