@@ -1,54 +1,43 @@
 ﻿@model Windshield.Models.RegisterModel
+
 @{
     ViewBag.Title = "Register";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>Create a new account.</h2>
-</hgroup>
+<p>
+    Passwords must be at least @Membership.MinRequiredPasswordLength characters long.
+</p>
 
 @using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
     @Html.ValidationSummary()
 
-    <fieldset>
-        <legend>Registration Form</legend>
-        <ol>
-			<li>
-				@Html.LabelFor(m => m.FullName)
-				@Html.TextBoxFor(m => m.FullName)
-			</li>
-			<li>
-				@Html.LabelFor(m => m.Email)
-				@Html.TextBoxFor(m => m.Email)
-			</li>
-            <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.ConfirmPassword)
-                @Html.PasswordFor(m => m.ConfirmPassword)
-            </li>
-			<li>
-					<img src="m.ImageUrl" alt="m.Name" />
-					@Html.LabelFor(m => m.UploadPhoto)
-					@Html.TextBoxFor(m => m.UploadPhoto, new { type = "file"})
-					@Html.ValidationMessageFor(m => m.UploadPhoto)
-			</li>
-			<li>
-				Terms of Agreement
-			</li>
-        </ol>
-		<input type="checkbox" value="I accept your Terms of Agreement" />
-        <input type="submit" value="Register" />
-		<input type="reset" value="Clear" />
-    </fieldset>
+    <ul data-role="listview" data-inset="true">
+        <li data-role="list-divider">Details</li>
+
+        <li data-role="fieldcontain">
+            @Html.LabelFor(m => m.UserName)
+            @Html.TextBoxFor(m => m.UserName)            
+        </li>
+
+        <li data-role="fieldcontain">
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email)            
+        </li>
+
+        <li data-role="fieldcontain">
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password)            
+        </li>
+
+        <li data-role="fieldcontain">
+            @Html.LabelFor(m => m.ConfirmPassword)
+            @Html.PasswordFor(m => m.ConfirmPassword)            
+        </li>
+
+        <li data-role="fieldcontain">
+            <input type="submit" value="Register" />
+        </li>
+    </ul>
 }
 
 @section Scripts {

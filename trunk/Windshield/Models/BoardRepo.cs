@@ -76,17 +76,17 @@ namespace Windshield.Models
 		/// <summary>
 		/// Returns all users for a specific board
 		/// </summary>
-		public IQueryable<aspnet_User> GetBoardUsers(Board board)
+		public IQueryable<User> GetBoardUsers(Board board)
 		{
 			return from player in db.Players
 				   where player.idBoard == board.id
-				   select player.aspnet_User;
+				   select player.User;
 		}
 
 
-		public aspnet_User GetBoardOwner(Board board)
+		public User GetBoardOwner(Board board)
 		{
-			return (from user in db.aspnet_Users
+			return (from user in db.Users
 					where user.UserId == board.idOwner
 					select user).SingleOrDefault();
 		}

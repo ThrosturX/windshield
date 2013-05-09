@@ -35,14 +35,14 @@ namespace Windshield.Test.MockObjects
 			return result.AsQueryable();
 		}
 
-		public IQueryable<aspnet_User> GetBoardUsers(Board board)
+		public IQueryable<User> GetBoardUsers(Board board)
 		{
 			// dummy
 			return null;
 		}
 
 
-		public aspnet_User GetBoardOwner(Board board)
+		public User GetBoardOwner(Board board)
 		{
 			// dummy
 			return null;

@@ -69,6 +69,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.2\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -181,7 +184,6 @@
     <Compile Include="Controllers\GameHub.cs" />
     <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Models\Games\Common\PlayingCards\Card.cs" />
     <Compile Include="Models\Games\Common\PlayingCards\CardDeck.cs" />
     <Compile Include="Models\Games\Hearts\HeartsHand.cs" />
@@ -204,7 +206,6 @@
     <Compile Include="Models\IGameRepo.cs" />
     <Compile Include="Models\IUserRepo.cs" />
     <Compile Include="Models\Games\TicTacToe\TicTacToe.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
