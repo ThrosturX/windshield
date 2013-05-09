@@ -28,8 +28,12 @@
 	background-color: white;
 }
 
-
 body
 {
-	background-color: #CCC;
+	background-color: #666;
+}
+
+.fill
+{
+	height: 100%;
 }

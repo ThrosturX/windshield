@@ -7,16 +7,18 @@
 		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
 		<link href="/Content/Site.css" rel="stylesheet">
 		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
-		
+		<script src="http://code.jquery.com/jquery.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="test.js"></script>
 	</head>
 	<body>
-
 		<div class="container-narrow">
 			
 			<!-- HEADER -->
+
 			<header id="overview" class="subhead">
 				<div class="containter">
-					<h1 class="hidden-phone">BoardGames</h1>
+					<h1 class="hidden-phone">GameBoard</h1>
 					<h1 class="visible-phone">
 						Board
 						Games
@@ -24,34 +26,43 @@
 					<p class="lead hidden-phone">For all your gaming needs</p>
 				</div>
 				@Html.Partial("_LoginPartial")
-				
 			</header>
+
+			<!-- NAVIGATION -->
+
+			<div class="masthead">
+				<ul class="nav nav-pills pull-right">
+					<li>@Html.ActionLink("All Games", "Index", "Home")</li>
+					<li>@Html.ActionLink("Statistics", "Stats", "Home")</li>
+					<li>@Html.ActionLink("My Games", "MyGames", "Home")</li>
+				</ul>
+
+			</div>
+
+			<!--
 			<nav>
 				<div class="btn-group pagination-center">
 					<button class="btn"><li>@Html.ActionLink("Popular games", "Index", "Home")</li></button>
 					<button class="btn"><li>@Html.ActionLink("New Games", "Index", "Home")</li></button>
-					<button class="btn"><li>@Html.ActionLink("All Games", "Index", "Home")</li></button>
-					<button class="btn"><li>@Html.ActionLink("Statistics", "Stats", "Home")</li></button>
-					<button class="btn"><li>@Html.ActionLink("My Games", "MyGames", "Home")</li></button>
+					
+					<button class="btn"></button>
+					<button class="btn"></button>
 				</div>
 			</nav>
-			
+			-->
 
 			<!-- CONTENT -->
 
-			<div class="container-fluid">
-
+			<div class="container-fluid fill">
 				@RenderBody()
 			</div>
 
 
 		</div> <!-- class="container-narrow" -->
 
-		<!-- scripts -->
+		<!-- SCRIPTS -->
 
-		<script src="http://code.jquery.com/jquery.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="test.js"></script>
+		<!-- COMING SOON -->
 
 </body>
 </html>
