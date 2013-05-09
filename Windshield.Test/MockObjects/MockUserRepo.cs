@@ -49,13 +49,13 @@ namespace Windshield.Test.MockObjects
 			return null;
 		}
 
-		public IQueryable<aspnet_User> GetGroupMembers(Group group)
+		public IQueryable<User> GetGroupMembers(Group group)
 		{
 			// dummy
 			return null;
 		}
 
-		public IQueryable<aspnet_User> GetFriends(User user)
+		public IQueryable<User> GetFriends(User user)
 		{
 			// dummy
 			return null;

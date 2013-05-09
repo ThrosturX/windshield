@@ -39,18 +39,18 @@ namespace Windshield.Models
 				   select groupMembers.Group;
 		}
 
-		public IQueryable<aspnet_User> GetGroupMembers(Group g)
+		public IQueryable<User> GetGroupMembers(Group g)
 		{
 			return from groupMembers in db.GroupMembers
 				   where groupMembers.idGroup == g.id
-				   select groupMembers.aspnet_User;
+				   select groupMembers.User;
 		}
 
-		public IQueryable<aspnet_User> GetFriends(User user)
+		public IQueryable<User> GetFriends(User user)
 		{
 			return from friends in db.Friends
 				   where friends.idOne == user.UserId
-				   select friends.aspnet_User;
+				   select friends.User;
 		}
 
 		public IQueryable<GameRating> GetGameRatings(User user)
