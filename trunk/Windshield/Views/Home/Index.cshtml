@@ -4,11 +4,12 @@
 }
 
 
-<div id="Gametablefront">	
+<div id="container-fluid">	
 	@foreach (var game in Model.GetAllGames())
 	{
 		<div class="mini-game-pic">
-		@Html.ActionLink(game.name, "GameDescription", "Home", game, null)
+			@Html.ActionLink(game.name, "GameDescription", "Home", game, null)
+			<img src="/Images/puppy.jpg">
 		</div>
 	}
 </div>
