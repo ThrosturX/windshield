@@ -29,6 +29,14 @@
 					<p class="lead hidden-phone">For all your gaming needs</p>
 				</div>
 				@Html.Partial("_LoginPartial")
+				@if (IsSectionDefined("Scripts"))
+				{
+					@RenderSection("Scripts",false);	
+				}
+				@if (IsSectionDefined("Header"))
+				{
+					@RenderSection("Header",false);
+				}
 			</header>
 
 			<!-- NAVIGATION -->
