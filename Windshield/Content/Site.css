@@ -1,4 +1,15 @@
-﻿
+﻿html
+{
+	height: 100%;
+}
+
+body
+{
+	height: 90%;
+	background-color: #666;
+}
+
+
 #overview
 {
 	background: url("http://www.bestfreeadvice.info/Images/banner_nature.jpg");
@@ -20,6 +31,7 @@
 	margin: 0 auto;
 	max-width: 960px;
 	background-color: white;
+	height: 100%;
 }
 
 .container-narrow > *
@@ -28,12 +40,7 @@
 	background-color: white;
 }
 
-body
-{
-	background-color: #666;
-}
-
-.fill
+.fill:before
 {
 	height: 100%;
 }

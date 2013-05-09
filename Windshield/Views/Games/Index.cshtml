@@ -10,14 +10,15 @@
 <body>
 	@if(Model != null)
 	 {
-		<div id="game">
-			 @Html.Partial(Model.theView, Model.theGame)
-		</div>
+		<div class ="container-fluid">
+			<div id="game">
+				 @Html.Partial(Model.theView, Model.theGame)
+			</div>
 
-		<div id="chat">
-			Chat-placeholder
+			<div id="chat">
+				Chat-placeholder
+			</div>
 		</div>
-	 
 	}
 	else
 	{

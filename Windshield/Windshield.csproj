@@ -267,6 +267,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\knight_logo.gif" />
+    <Content Include="Images\puppy.jpg" />
     <Content Include="Models\BoardGames.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>BoardGames.designer.cs</LastGenOutput>
