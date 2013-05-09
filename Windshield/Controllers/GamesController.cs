@@ -10,17 +10,19 @@ namespace Windshield.Controllers
 {
     public class GamesController : Controller
     {
-        private IBoardRepo repository = null;
-
+        private IBoardRepo boardRepository = null;
+		private IGameRepo gameRepository = null;
 
 		public GamesController()
 		{
-				repository = new BoardRepo();
+			boardRepository = new BoardRepo();
+			gameRepository = new GameRepo();
 		}
 
-		public GamesController(IBoardRepo rep)
+		public GamesController(IBoardRepo bRep, IGameRepo gRep)
 		{
-			repository = rep;
+			boardRepository = bRep;
+			gameRepository = gRep;
 		}
 
         public ActionResult Index()
@@ -29,16 +31,13 @@ namespace Windshield.Controllers
 		//	return RedirectToAction("Index", "Home");
         }
 
-		public ActionResult Dummy()
-		{
-			return View("Index");
-		}
-
 		public ActionResult TicTacToe()
 		{
-			
-			return View("Index");
+			User mockingbird = new User();
+			TicTacToe gameBoard = new TicTacToe(mockingbird);
+			GameInstance theGame = new GameInstance(gameBoard, "~/Views/Games/TicTacToe.cshtml");
+
+			return View("Index", theGame);
 		}
-		
     }
 }

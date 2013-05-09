@@ -47,6 +47,14 @@ namespace Windshield.Models
 		//
 		// query methods
 
+		public Game GetGameByName(string name)
+		{
+			var result = from game in db.Games
+						 where game.name == name
+						 select game;
+			return result.SingleOrDefault();
+		}
+
 		public IQueryable<Game> GetAllGames()
 		{
 			return db.Games;
