@@ -43,6 +43,13 @@ namespace Windshield.Test.MockObjects
 			return 0;
 		}
 
+		public User GetUserByName(string name)
+		{
+			return (from users in rep
+					where users.UserName == name
+					select users).SingleOrDefault();
+		}
+
 		public IQueryable<Group> GetGroupsByUser(User user)
 		{
 			// dummy
