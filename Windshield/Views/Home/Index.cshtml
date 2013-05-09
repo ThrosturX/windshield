@@ -5,11 +5,16 @@
 
 
 <div id="container-fluid">	
-	@foreach (var game in Model.GetAllGames())
-	{
-		<div class="mini-game-pic">
-			@Html.ActionLink(game.name, "GameDescription", "Home", game, null)
-			<img src="/Images/puppy.jpg">
-		</div>
-	}
+	<ul class="thumbnails fluid">
+		@foreach (var game in Model.GetAllGames())
+		{
+		<li class="span3">
+			<a href="@Url.Action("GameDescription", "Home", game.name)">
+			<img src="/Images/puppy.jpg" title="@game.name" alt="@game.name">
+			</a>
+		</li>
+		
+	  
+		}
+	</ul>
 </div>
