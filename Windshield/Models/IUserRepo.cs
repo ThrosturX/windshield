@@ -16,6 +16,7 @@ namespace Windshield.Models
 		*/
 		int GetTimesPlayed(User user);
 		int GetTimesPlayedByGame(User user, Game game);
+		User GetUserByName(string name);
 		IQueryable<Group> GetGroupsByUser(User user);
 		IQueryable<User> GetGroupMembers(Group group);
 		IQueryable<User> GetFriends(User user);

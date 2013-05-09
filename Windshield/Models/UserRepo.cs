@@ -32,6 +32,13 @@ namespace Windshield.Models
 				    select gameRatings.rating).SingleOrDefault(); 
 		}
 
+		public User GetUserByName(string name)
+		{
+			return (from users in db.Users
+					where users.UserName == name
+					select users).SingleOrDefault();
+		}
+
 		public IQueryable<Group> GetGroupsByUser(User user)
 		{
 			return from groupMembers in db.GroupMembers
