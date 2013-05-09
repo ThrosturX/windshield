@@ -23,28 +23,24 @@
 					</h1>
 					<p class="lead hidden-phone">For all your gaming needs</p>
 				</div>
-				<ul class="nav nav-tabs pull-right">
-					<li class="active">
-						<a href="#">Sign up</a>
-					</li>
-					<li class="active">
-						<a href="#">Log in</a>
-					</li>
-				</ul>
+				@Html.Partial("_LoginPartial")
+				
 			</header>
+			<nav>
+				<div class="btn-group pagination-center">
+					<button class="btn"><li>@Html.ActionLink("Popular games", "Index", "Home")</li></button>
+					<button class="btn"><li>@Html.ActionLink("New Games", "Index", "Home")</li></button>
+					<button class="btn"><li>@Html.ActionLink("All Games", "Index", "Home")</li></button>
+					<button class="btn"><li>@Html.ActionLink("Statistics", "Stats", "Home")</li></button>
+					<button class="btn"><li>@Html.ActionLink("My Games", "MyGames", "Home")</li></button>
+				</div>
+			</nav>
 			
-			<!--<div class"btn-group pagination-center">
-				<button class="btn"><li>@Html.ActionLink("Popular games", "Index", "Home")</li></button>
-				<button class="btn"><li>@Html.ActionLink("New Games", "Index", "Home")</li></button>
-				<button class="btn"><li>@Html.ActionLink("All Games", "Index", "Home")</li></button>
-				<button class="btn"><li>@Html.ActionLink("Statistics", "Stats", "Home")</li></button>
-				<button class="btn"><li>@Html.ActionLink("My Games", "MyGames", "Home")</li></button>
-			</div>
-			-->
 
 			<!-- CONTENT -->
 
 			<div class="container-fluid">
+
 				@RenderBody()
 			</div>
 
