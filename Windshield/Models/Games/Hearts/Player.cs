@@ -6,11 +6,17 @@ using Windshield.Models;
 
 namespace Windshield.Games.Hearts
 {
-	public class HeartsPlayer
+	public class Player
 	{
 		public User user;
-		public uint gamePoints;
-		public uint matchPoints;
-		public HeartsHand hand;
+		public int gamePoints;
+		public int matchPoints;
+		public Hand hand;
+
+		public Player()
+		{
+			matchPoints = 0;
+			gamePoints = 0;
+		}
 	}
 }

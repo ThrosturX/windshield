@@ -6,7 +6,7 @@ using Windshield.Common;
 
 namespace Windshield.Games.Hearts
 {
-	public class HeartsHand : List<Card>
+	public class Hand : List<Card>
 	{
 		// intentionally empty
 	}

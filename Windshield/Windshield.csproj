@@ -183,10 +183,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\Games\Common\PlayingCards\Card.cs" />
     <Compile Include="Models\Games\Common\PlayingCards\CardDeck.cs" />
-    <Compile Include="Models\Games\Hearts\HeartsHand.cs" />
-    <Compile Include="Models\Games\Hearts\HeartsPlayer.cs" />
+    <Compile Include="Models\Games\Hearts\Hand.cs" />
+    <Compile Include="Models\Games\Hearts\Player.cs" />
     <Compile Include="Models\Games\AGame.cs" />
     <Compile Include="Models\Games\Common\Exceptions\TooManyPlayersException.cs" />
+    <Compile Include="Models\Games\Hearts\Trick.cs" />
     <Compile Include="Models\Games\TicTacToe\TTTPlayer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
