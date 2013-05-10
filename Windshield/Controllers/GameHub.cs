@@ -5,7 +5,7 @@ using Windshield.Models;
 
 namespace Windshield.Controllers
 {
-//	[Authorize]
+	[Authorize]
 	public class GameHub : Hub
 	{
 		private IBoardRepo boardRepository = new BoardRepo();
@@ -16,6 +16,11 @@ namespace Windshield.Controllers
 			// Context.QueryString
 
 			Groups.Add(Context.ConnectionId, groupId);
+		}
+
+		public void send(string groupName, string user, string message)
+		{
+			Clients.Group(groupName).addMessage(user + " > " + message);
 		}
 
 		public void ClickCell(string groupName, string cellId)

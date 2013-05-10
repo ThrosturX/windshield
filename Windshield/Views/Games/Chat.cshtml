@@ -1,0 +1,36 @@
+﻿@model int
+
+<form id="chat" runat="server">
+
+	<script type="text/javascript">
+		$(function () {
+
+			var group = '@(Model)';
+			var chatConnection = $.connection.gameHub;
+			var user = '@(Context.User.Identity.Name)';
+
+			chatConnection.client.addMessage = function (message) {
+				$('#listMessages').append('<li>' + message + '</li>');
+			};
+
+			$("#sendMessage").click(function() {
+				chatConnection.server.send(group, user, $('#txtMessage').val());
+			});
+
+			$.connection.hub.start().done(function() {
+				chatConnection.server.join(group)
+			} );
+		});
+	</script>
+
+	<div id="chatBox">
+		<input type="text" id="txtMessage" />
+		<input type="button" id="sendMessage" value="Send" />
+		<ul id="listMessages">
+
+
+		</ul>
+
+	</div>
+
+</form>
