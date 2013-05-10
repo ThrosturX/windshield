@@ -316,6 +316,15 @@ namespace Windshield.Games.TicTacToe
 		/// ToSaveString() converts the game's state into a string format, for storage in databases.
 		/// The outputted string can be used in a constructor.
 		/// </summary>
+		/// <remarks>
+		/// Format: [grid][turn#]-[S#W#L#T][(player1name)|(player2name)]
+		///			grid is 9 characters and indicates the cell's values ('X', 'O' or ' ')
+		///			turn# indicates which player's turn it is.
+		///			S indicates player1's symbol.
+		///			Wins, Losses and Ties indicate player 1's WLT's.
+		///			Example:
+		///			XO OXXO X-X3W2L1T(banana)|(superman)
+		/// </remarks>
 		/// <returns>A database-friendly string that can be converted into the game's state.</returns>
 		public string ToSaveString()
 		{

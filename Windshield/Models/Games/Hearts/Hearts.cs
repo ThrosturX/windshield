@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using Windshield.Common;
 using Windshield.Models;
+using Windshield.Models.Common.Exceptions;
+using Windshield.Games.Hearts;
 
 namespace Windshield.Games.Hearts
 {
@@ -51,6 +53,30 @@ namespace Windshield.Games.Hearts
 			}
 
 			deck = new CardDeck();
+		}
+
+		/// <summary>
+		/// Awesome constructor.
+		/// </summary>
+		/// <param name="users">List of users</param>
+		public Hearts(List<User> users)
+		{
+			if (users.Count <= 4)
+			{
+				for (int i = 0; i < users.Count; ++i)
+				{
+					players[i].user = users[i];
+				}
+				for (int i = users.Count ; i < 4; ++int)
+				{
+					players[i].user = new User();
+					players[i].user.UserName = "Computer";
+				}
+			}
+			else
+			{
+				throw new TooManyPlayersException("There are too many players attempting to play Hearts.");
+			}
 		}
 
 		/// <summary>
