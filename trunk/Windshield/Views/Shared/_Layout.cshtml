@@ -45,8 +45,8 @@
 
 			<!-- NAVIGATION -->
 
-			<div class="masthead">
-				<ul class="nav nav-pills">
+			<div class="">
+				<ul class="nav nav-tabs clearfix nav-bar">
 					<li>@Html.ActionLink("Games", "Index", "Home")</li>
 					<li>@Html.ActionLink("Statistics", "Statistics", "Home")</li>
 					@if (User.Identity.IsAuthenticated)
@@ -55,8 +55,8 @@
 					<li>@Html.ActionLink("CARDS", "DisplayCard", "Home")</li>
 					}
 				</ul>
-
 			</div>
+
 
 			<!-- CONTENT -->
 
