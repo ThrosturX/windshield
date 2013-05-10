@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-//using Windshield.Games.TicTacToe;
 using Windshield.Models;
 using Windshield.Models.Games;
 using Windshield.Test.MockObjects;
