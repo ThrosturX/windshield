@@ -11,7 +11,7 @@ else
 	<li class="active">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 }
 </ul>
-<!--
+
 @if (Request.IsAuthenticated)
 {
 		using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "active" })) {
@@ -19,4 +19,3 @@ else
 		<a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
   }
 }
--->
