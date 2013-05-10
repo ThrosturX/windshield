@@ -20,7 +20,11 @@ namespace Windshield.Controllers
 
 		public void send(string groupName, string user, string message)
 		{
-			Clients.Group(groupName).addMessage(user + " > " + message);
+			if (message.Length > 0 && user.Length > 0)
+			{
+				Clients.Group(groupName).addMessage(user + " > " + message);
+			}
+
 		}
 
 		public void ClickCell(string groupName, string cellId)
