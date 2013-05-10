@@ -33,6 +33,19 @@ namespace Windshield.Test
 		}
 
 		[TestMethod]
+		public void TryAction()
+		{
+			game.TryAction("insert cell0", "Sally");
+			game.TryAction("insert cell1", "Jonas");
+			game.TryAction("insert cell2", "Jonas");
+			game.TryAction("insert cell1", "Sally");
+
+			Assert.AreEqual(game.player1.symbol, game.grid[0, 0]);
+			Assert.AreEqual(game.player2.symbol, game.grid[1, 0]);
+			Assert.AreEqual(' ', game.grid[2, 0]);
+		}
+
+		[TestMethod]
 		public void InsertSymbol()
 		{
 			// Act
