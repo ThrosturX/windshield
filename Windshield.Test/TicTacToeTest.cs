@@ -163,8 +163,8 @@ namespace Windshield.Test
 		[TestMethod]
 		public void GetPlayerBySymbol()
 		{
-			Assert.AreEqual(game.GetPlayerBySymbol('X'), game.playerOne);
-			Assert.AreEqual(game.GetPlayerBySymbol('O'), game.playerTwo);
+			Assert.AreEqual(game.GetPlayerBySymbol('X'), game.player1);
+			Assert.AreEqual(game.GetPlayerBySymbol('O'), game.player2);
 		}
 
 		// Test methods to test CheckWinner()
@@ -208,7 +208,7 @@ namespace Windshield.Test
 			Assert.AreEqual(game.grid[0, 1], ' ');
 			game.InsertSymbol('O', 3);
 			Assert.AreEqual(game.grid[0, 1], 'O');
-			Assert.AreEqual(game.CheckWinner(), game.playerTwo);
+			Assert.AreEqual(game.CheckWinner(), game.player2);
 		}		
 		// tests a game in progress and should find playerOne winning diagonally from upper left to lower right
 		[TestMethod]
@@ -225,7 +225,7 @@ namespace Windshield.Test
 			game.InsertSymbol('O', 2);
 			Assert.AreEqual(game.CheckWinner(), null);
 			game.InsertSymbol('X', 8);
-			Assert.AreEqual(game.CheckWinner(), game.playerOne);
+			Assert.AreEqual(game.CheckWinner(), game.player1);
 		}
 		// tests a game in progress and should find playerOne winning diagonally from lower left to upper right
 		[TestMethod]
@@ -248,21 +248,21 @@ namespace Windshield.Test
 			Assert.AreEqual(game.CheckWinner(), null);
 			game.InsertSymbol('X', 4);
 			Assert.AreEqual(game.grid[1, 1], 'X');
-			Assert.AreEqual(game.CheckWinner(), game.playerOne);
+			Assert.AreEqual(game.CheckWinner(), game.player1);
 		}
 
 		[TestMethod]
 		public void InitializePlayers()
 		{
 			// InitializePlayers() is automatically called in the constructor
-			Assert.AreEqual('X', game.playerOne.symbol);
-			Assert.AreEqual('O', game.playerTwo.symbol);
-			Assert.AreEqual(0, game.playerOne.wins);
-			Assert.AreEqual(0, game.playerOne.losses);
-			Assert.AreEqual(0, game.playerOne.draws);
-			Assert.AreEqual(0, game.playerTwo.wins);
-			Assert.AreEqual(0, game.playerTwo.losses);
-			Assert.AreEqual(0, game.playerTwo.draws);
+			Assert.AreEqual('X', game.player1.symbol);
+			Assert.AreEqual('O', game.player2.symbol);
+			Assert.AreEqual(0, game.player1.wins);
+			Assert.AreEqual(0, game.player1.losses);
+			Assert.AreEqual(0, game.player1.draws);
+			Assert.AreEqual(0, game.player2.wins);
+			Assert.AreEqual(0, game.player2.losses);
+			Assert.AreEqual(0, game.player2.draws);
 		}
 
 		[TestMethod]
@@ -281,13 +281,13 @@ namespace Windshield.Test
 			game.EndGame(winner);
 
 			// Assert
-			Assert.AreEqual(1, game.playerOne.wins);
-			Assert.AreEqual(0, game.playerOne.losses);
-			Assert.AreEqual(0, game.playerOne.draws);
+			Assert.AreEqual(1, game.player1.wins);
+			Assert.AreEqual(0, game.player1.losses);
+			Assert.AreEqual(0, game.player1.draws);
 
-			Assert.AreEqual(0, game.playerTwo.wins);
-			Assert.AreEqual(1, game.playerTwo.losses);
-			Assert.AreEqual(0, game.playerTwo.draws);
+			Assert.AreEqual(0, game.player2.wins);
+			Assert.AreEqual(1, game.player2.losses);
+			Assert.AreEqual(0, game.player2.draws);
 
 			// Arrange
 
@@ -309,13 +309,13 @@ namespace Windshield.Test
 			game.EndGame(winner);
 
 			// Assert
-			Assert.AreEqual(1, game.playerOne.wins);
-			Assert.AreEqual(0, game.playerOne.losses);
-			Assert.AreEqual(1, game.playerOne.draws);
+			Assert.AreEqual(1, game.player1.wins);
+			Assert.AreEqual(0, game.player1.losses);
+			Assert.AreEqual(1, game.player1.draws);
 
-			Assert.AreEqual(0, game.playerTwo.wins);
-			Assert.AreEqual(1, game.playerTwo.losses);
-			Assert.AreEqual(1, game.playerTwo.draws);
+			Assert.AreEqual(0, game.player2.wins);
+			Assert.AreEqual(1, game.player2.losses);
+			Assert.AreEqual(1, game.player2.draws);
 
 			// Arrange
 			game.ClearBoard();
@@ -330,13 +330,13 @@ namespace Windshield.Test
 			game.EndGame(winner);
 
 			// Assert
-			Assert.AreEqual(1, game.playerOne.wins);
-			Assert.AreEqual(1, game.playerOne.losses);
-			Assert.AreEqual(1, game.playerOne.draws);
+			Assert.AreEqual(1, game.player1.wins);
+			Assert.AreEqual(1, game.player1.losses);
+			Assert.AreEqual(1, game.player1.draws);
 
-			Assert.AreEqual(1, game.playerTwo.wins);
-			Assert.AreEqual(1, game.playerTwo.losses);
-			Assert.AreEqual(1, game.playerTwo.draws);
+			Assert.AreEqual(1, game.player2.wins);
+			Assert.AreEqual(1, game.player2.losses);
+			Assert.AreEqual(1, game.player2.draws);
 		}
 
 		[TestMethod]

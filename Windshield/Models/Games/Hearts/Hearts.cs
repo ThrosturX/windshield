@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Windshield.Common;
 using Windshield.Models;
 
 namespace Windshield.Games.Hearts
@@ -36,6 +37,119 @@ namespace Windshield.Games.Hearts
 										, "The player with the lowest score wins"
 										};
 
+		public HeartsPlayer [] players;
+		public CardDeck deck;
 
+		/// <summary>
+		/// Default constructor. Note that instances require players to be instantiated!
+		/// </summary>
+		public Hearts()
+		{
+			for (int i = 0; i < 4; ++i)
+			{
+				players[i] = new HeartsPlayer();
+			}
+
+			deck = new CardDeck();
+		}
+
+		/// <summary>
+		/// Creates a single player instance of "Hearts"
+		/// </summary>
+		/// <param name="player">The user that wishes to play</param>
+		public Hearts(User player) : this()
+		{
+			players[0].user = player;
+			players[1].user = new User();
+			players[1].user.UserName = "Computer";
+			players[2].user = players[1].user;
+			players[3].user = players[1].user;
+		}
+
+		/// <summary>
+		/// Creates a two-player instance of "Hearts"
+		/// </summary>
+		/// <param name="user1">The game creator</param>
+		/// <param name="user2">Second user</param>
+		public Hearts(User user1, User user2) : this()
+		{
+			players[0].user = user1;
+			players[1].user = user2;
+			players[2].user = new User();
+			players[2].user.UserName = "Computer";
+			players[3].user = players[2].user;
+		}
+
+		/// <summary>
+		/// Creates a three player instance of "Hearts"
+		/// </summary>
+		/// <param name="user1">The game creator</param>
+		/// <param name="user2">Second user</param>
+		/// <param name="user3">Third user</param>
+		public Hearts(User user1, User user2, User user3) : this()
+		{
+			players[0].user = user1;
+			players[1].user = user2;
+			players[2].user = user3;
+			players[3].user = new User();
+			players[3].user.UserName = "Computer";
+		}
+
+		/// <summary>
+		/// Creates a four player instance of "Hearts"
+		/// </summary>
+		/// <param name="user1">The game creator</param>
+		/// <param name="user2">Second user</param>
+		/// <param name="user3">Third user</param>
+		/// <param name="user4">Fourth user</param>
+		public Hearts(User user1, User user2, User user3, User user4) : this()
+		{
+			players[0].user = user1;
+			players[1].user = user2;
+			players[2].user = user3;
+			players[3].user = user4;
+		}
+
+		/// <summary>
+		/// Gives each player a freshly dealt hand of 13 cards.
+		/// </summary>
+		public void Deal()
+		{
+			deck.Shuffle();
+			for (int i = 0; i < 4; ++i)
+			{
+				players[i].hand = (HeartsHand)deck.GetCards(13);
+			}
+		}
+
+		/// <summary>
+		/// Finds the player with the two of clubs
+		/// </summary>
+		/// <returns>The player with the Two of clubs</returns>
+		private HeartsPlayer GetStartingPlayer()
+		{
+			Card match = new Card(2, Suit.Club);
+
+			for (int i = 0; i < 4; ++i)
+			{
+				if (players[i].hand.Exists(x => x == match)) 
+					return players[i];
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Find the player that should start the round.
+		/// </summary>
+		/// <param name="winner"></param>
+		/// <returns>The last game's winner or the player who has the two of clubs</returns>
+		public HeartsPlayer GetStartingPlayer(HeartsPlayer winner)
+		{
+			if (winner == null)
+				return GetStartingPlayer();
+
+			return winner;
+		}
 	}
 }

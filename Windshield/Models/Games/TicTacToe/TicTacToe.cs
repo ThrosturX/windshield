@@ -15,7 +15,6 @@ namespace Windshield.Games.TicTacToe
 	public class TicTacToe : Board
 	{
 		public static string name = "Tic Tac Toe";
-		public static string viewName = "TicTacToe";
 		public static string description =    "Tic Tac Toe is a two player game. The goal of Tic Tac Toe is to be the first player "
 											+ "to get three symbols in a row on a 3x3 grid. Each player gets a symbol, either X or O. "
 											+ "The player with X starts. Players alternate placing Xs and Os on the board until either"
@@ -34,8 +33,8 @@ namespace Windshield.Games.TicTacToe
 		public char[,] grid;
 		public int freeSquares;
 
-		public TTTPlayer playerOne { get; set; }	// The owner is Player One
-		public TTTPlayer playerTwo { get; set; }
+		public TTTPlayer player1 { get; set; }	// The owner is Player One
+		public TTTPlayer player2 { get; set; }
 
 		/// <summary>
 		/// Default constructor. Note that instances require players to be instantiated!
@@ -45,6 +44,8 @@ namespace Windshield.Games.TicTacToe
 			grid = new char[3, 3];
 			ClearBoard();
 			InitializePlayers();
+			startDate = DateTime.Now;
+			status = "";
 		}
 
 		/// <summary>
@@ -53,10 +54,11 @@ namespace Windshield.Games.TicTacToe
 		/// <param name="_playerOne"></param>
 		public TicTacToe(User _playerOne) : this()
 		{
-			playerOne.user = _playerOne;
-			playerTwo.user = new User();
-			playerTwo.user.UserName = "Computer";
-			playerTwo.isAI = true;
+			player1.user = _playerOne;
+			player2.user = new User();
+			player2.user.UserName = "Computer";
+			player2.isAI = true;
+			idOwner = _playerOne.UserId;
 		}
 
 		/// <summary>
@@ -66,19 +68,11 @@ namespace Windshield.Games.TicTacToe
 		/// <param name="_playerTwo"></param>
 		public TicTacToe(User _playerOne, User _playerTwo) : this() 
 		{
-			playerOne.user = _playerOne;
-			playerTwo.user = _playerTwo;
+			player1.user = _playerOne;
+			player2.user = _playerTwo;
+			idOwner = _playerOne.UserId;
 		}
 
-		/// <summary>
-		/// Returns the name of the partial view which renders the UI.
-		/// </summary>
-		/// <returns></returns>
-		public string getViewName()
-		{
-			return viewName;
-		}
-		
 		/// <summary>
 		/// Converts a cell number to a coordinate struct.
 		/// </summary>
@@ -124,14 +118,22 @@ namespace Windshield.Games.TicTacToe
 		public bool InsertSymbol(char symbol, int cell)
 		{
 			Coord location = CellToCoord(cell);
-			if (grid[location.x, location.y] != ' ')
+			if (cell < 0 || cell > 8)
+			{
 				return false;
+			}
+
+			if (grid[location.x, location.y] != ' ')
+			{
+				return false;
+			}
 
 			grid[location.x, location.y] = symbol;
 			if (--freeSquares < 0)
 			{
 				throw new Exception("InsertSymbol: Board seems erroneously full!");
 			}
+
 			return true;
 		}
 
@@ -142,13 +144,13 @@ namespace Windshield.Games.TicTacToe
 		/// <returns></returns>
 		public TTTPlayer GetPlayerBySymbol(char symbol)
 		{
-			if (playerOne.symbol == symbol)
+			if (player1.symbol == symbol)
 			{
-				return playerOne;
+				return player1;
 			}
-			if (playerTwo.symbol == symbol)
+			if (player2.symbol == symbol)
 			{
-				return playerTwo;
+				return player2;
 			}
 
 			throw new ArgumentException("No player exists with this symbol"); // this should never happen
@@ -224,19 +226,19 @@ namespace Windshield.Games.TicTacToe
 		/// </summary>
 		public void InitializePlayers()
 		{
-			playerOne = new TTTPlayer();
-			playerTwo = new TTTPlayer();
+			player1 = new TTTPlayer();
+			player2 = new TTTPlayer();
 
-			playerOne.symbol = 'X';
-			playerTwo.symbol = 'O';
+			player1.symbol = 'X';
+			player2.symbol = 'O';
 
-			playerOne.wins   =  0 ;
-			playerOne.losses =  0 ;
-			playerOne.draws  =  0 ;
+			player1.wins   =  0 ;
+			player1.losses =  0 ;
+			player1.draws  =  0 ;
 			
-			playerTwo.wins   =  0 ;
-			playerTwo.losses =  0 ;
-			playerTwo.draws  =  0 ;
+			player2.wins   =  0 ;
+			player2.losses =  0 ;
+			player2.draws  =  0 ;
 		}
 
 		/// <summary>
@@ -246,27 +248,27 @@ namespace Windshield.Games.TicTacToe
 		public void EndGame(TTTPlayer winner)
 		{
 			// swap symbols
-			char temp = playerOne.symbol;
-			playerOne.symbol = playerTwo.symbol;
-			playerTwo.symbol = temp;
+			char temp = player1.symbol;
+			player1.symbol = player2.symbol;
+			player2.symbol = temp;
 
 			// check if this is a drawing situation
 			if (winner == null)
 			{
-				playerOne.draws++;
-				playerTwo.draws++;
+				player1.draws++;
+				player2.draws++;
 			}
 			else
 			{
 				TTTPlayer loser;
 				// infer winner from loser
-				if (playerOne == winner)
+				if (player1 == winner)
 				{
-					loser = playerTwo;
+					loser = player2;
 				}
 				else
 				{
-					loser = playerOne;
+					loser = player1;
 				}
 
 				// adjust temporary scores
@@ -312,6 +314,64 @@ namespace Windshield.Games.TicTacToe
 		public string ToSaveString()
 		{
 			throw new NotImplementedException("ToSaveString is not supported");
+		}
+
+		/// <summary>
+		/// Converts a Hub request into business logic. Currently implements:
+		/// * insert: attempts to place a symbol on the grid
+		/// </summary>
+		/// <param name="action">string: "insert cell#" where # is a number between 0 and 8</param>
+		/// <param name="sender">The username of the player attempting the action.</param>
+		/// <returns></returns>
+		public override bool TryAction(string action, string sender)
+		{
+			// check who sent it
+			TTTPlayer player;
+
+			if (player1.user.UserName == sender)
+			{
+				player = player1;
+			}
+			else if (player2.user.UserName == sender)
+			{
+				player = player2;
+			}
+			else
+			{
+				player = null;
+			}
+
+			// check what action was tried
+
+			if (action.Contains("insert"))
+			{
+				// make sure a valid player is trying to insert
+				if (player == null)
+				{
+					return false;
+				}
+
+				// find out where it should be inserted
+				if (action.Contains("cell"))
+				{
+					// find which cell it is
+					int index = action.IndexOf("cell");
+					int cell;
+
+					string cellString = action.Substring(index + 4, 1);
+
+					// ensure that the string is not malformed
+					if (!int.TryParse(cellString, out cell))
+						return false;
+
+					// attempt to insert the symbol
+					return InsertSymbol(player.symbol, cell);
+				}
+			}
+
+
+			// No success
+			return false;
 		}
 	}
 }

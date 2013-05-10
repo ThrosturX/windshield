@@ -53,7 +53,14 @@ namespace Windshield.Models
 
 		//
 		// query methods
-		
+
+		public Board GetBoardById(int id)
+		{
+			return (from board in db.Boards
+					where board.id == id
+					select board).SingleOrDefault();
+		}
+
 		/// <summary>
 		/// Returns all boards from the Boards table
 		/// </summary>

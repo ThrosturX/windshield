@@ -22,6 +22,13 @@ namespace Windshield.Test.MockObjects
 			rep.Remove(board);
 		}
 
+		public Board GetBoardById(int id)
+		{
+			return (from board in rep
+					where board.id == id
+					select board).SingleOrDefault();
+		}
+
 		public IQueryable<Board> GetBoards()
 		{
 			return rep.AsQueryable();
