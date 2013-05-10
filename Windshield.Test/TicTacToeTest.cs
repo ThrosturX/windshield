@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Windshield.Games.TicTacToe;
+//using Windshield.Games.TicTacToe;
 using Windshield.Models;
+using Windshield.Models.Games;
 using Windshield.Test.MockObjects;
 
 namespace Windshield.Test
@@ -20,16 +22,19 @@ namespace Windshield.Test
 			usr = new MockUserRepo();
 			brd = new MockBoardRepo();
 
+			List<User> players = new List<User>();
 			User sally = new User();
 			User jonas = new User();
 			sally.UserName = "Sally";
 			jonas.UserName = "Jonas";
 			usr.AddUser(sally);
 			usr.AddUser(jonas);
+			players.Add(sally);
+			players.Add(jonas);
 
-			game = new TicTacToe(sally, jonas);
+			game = new TicTacToe(players);
 
-			brd.AddBoard(game);
+			brd.AddBoard(game.board);
 		}
 
 		[TestMethod]
@@ -75,15 +80,15 @@ namespace Windshield.Test
 		public void CoordToCell()
 		{
 			// Arrange
-			Coord middleLeft;
+			TicTacToe.Coord middleLeft;
 			middleLeft.x = 0;
 			middleLeft.y = 1;
 
-			Coord first;
+			TicTacToe.Coord first;
 			first.x = 0;
 			first.y = 0;
 
-			Coord last;
+			TicTacToe.Coord last;
 			last.x = 2;
 			last.y = 2;
 
@@ -99,10 +104,10 @@ namespace Windshield.Test
 		public void CellToCoord()
 		{
 			// Arrange
-			Coord middleGot;
-			Coord middleExpected;
-			Coord expectedCoord;
-			Coord gotCoord;
+			TicTacToe.Coord middleGot;
+			TicTacToe.Coord middleExpected;
+			TicTacToe.Coord expectedCoord;
+			TicTacToe.Coord gotCoord;
 
 			// Act
 			middleGot = TicTacToe.CellToCoord(4);
@@ -161,7 +166,7 @@ namespace Windshield.Test
 			{
 				for (int j = 0; j < 3; j++)
 				{
-					Coord target;
+					TicTacToe.Coord target;
 					target.x = i;
 					target.y = j;
 					Assert.AreEqual(' ', game.grid[i, j]);
@@ -288,7 +293,7 @@ namespace Windshield.Test
 			game.InsertSymbol('O', 6);
 			game.InsertSymbol('X', 8);
 
-			TTTPlayer winner = game.CheckWinner();
+			TicTacToe.TTTPlayer winner = game.CheckWinner();
 
 			// Act
 			game.EndGame(winner);
@@ -355,7 +360,7 @@ namespace Windshield.Test
 		[TestMethod]
 		public void EndGameVsAI()
 		{
-			game = new TicTacToe(new User());
+			game = new TicTacToe();
 			EndGame();
 		}
 
@@ -366,6 +371,13 @@ namespace Windshield.Test
 			{
 				Assert.AreEqual(true, game.InsertSymbol('A', game.AISelectCell()));
 			}
+		}
+
+		[TestMethod]
+		public void GettingStatusStringOfTicTacToeGame()
+		{
+
+			Assert.AreEqual("         1-X0W0L0T",game.GetStatus());
 		}
 	}
 }

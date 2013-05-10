@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Windshield.Models;
-using Windshield.Games.TicTacToe;
+using Windshield.Models.Games;
 
 namespace Windshield.Controllers
 {
@@ -38,15 +38,16 @@ namespace Windshield.Controllers
 		public ActionResult TicTacToe()
 		{
 			User playerOne = userRepository.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
-			Board gameBoard = new TicTacToe();
-			GameInstance theGame = new GameInstance(gameBoard, "TicTacToe");
+			TicTacToe gameBoard = new TicTacToe();
+			gameBoard.ClearBoard();
+			/*GameInstance theGame = new GameInstance(gameBoard, "TicTacToe");
 
 			gameBoard.idOwner = playerOne.UserId;
 			gameBoard.Game = gameRepository.GetGameByName("TicTacToe");
 			gameBoard.idGame = gameBoard.Game.id;
 			boardRepository.AddBoard(gameBoard);
-
-			return View("Index", theGame);
+			*/
+			return View("Index");
 		}
     }
 }

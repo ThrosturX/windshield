@@ -2,12 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Text;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Windshield.Test")]
 
 namespace Windshield.Models.Games
 {
 	public class TicTacToe : AGame
 	{
-		static private Coord CellToCoord(int cell)
+		/// <summary>
+		/// Converts a cell number to a coordinate struct.
+		/// </summary>
+		/// <param name="cell"></param>
+		/// <returns></returns>
+		static internal Coord CellToCoord(int cell)
 		{
 			Coord result = new Coord();
 
@@ -19,10 +28,20 @@ namespace Windshield.Models.Games
 			return result;
 		}
 
+		/// <summary>
+		/// Converts a coordinate struct to a cell number.
+		/// </summary>
+		/// <param name="input"></param>
+		/// <returns></returns>
+		static internal int CoordToCell(Coord input)
+		{
+			return (input.y * 3 + input.x);
+		}
+
+		public Board board;
 		public char[,] grid;
-		public int freeSquares;
-		private TTTPlayer turn;
-		private Board board;
+		internal int freeSquares;
+		internal TTTPlayer turn;
 
 		public TTTPlayer player1 { get; set; }	// The owner is Player One
 		public TTTPlayer player2 { get; set; }
@@ -35,7 +54,6 @@ namespace Windshield.Models.Games
 			ClearBoard();
 			InitializePlayers();
 		}
-
 		public TicTacToe(List<User> players) : this()
 		{
 			// TODO try catch á player1.user
@@ -49,12 +67,13 @@ namespace Windshield.Models.Games
 				player2.user.UserName = "Computer";
 				player2.isAI = true;
 			}
+			//board.idOwner = player1.user.UserId;
 		}
 
 		/// <summary>
 		/// Clears the board from all symbols.
 		/// </summary>
-		public void ClearBoard()
+		internal void ClearBoard()
 		{
 			for (int i = 0; i < 3; ++i)
 			{
@@ -70,7 +89,7 @@ namespace Windshield.Models.Games
 		/// <summary>
 		/// Gives the game's players initial values for symbols, wins, losses and draws.
 		/// </summary>
-		public void InitializePlayers()
+		internal void InitializePlayers()
 		{
 			player1 = new TTTPlayer();
 			player2 = new TTTPlayer();
@@ -85,6 +104,8 @@ namespace Windshield.Models.Games
 			player2.wins = 0;
 			player2.losses = 0;
 			player2.draws = 0;
+
+			turn = player1;
 		}
 
 		/// <summary>
@@ -93,7 +114,7 @@ namespace Windshield.Models.Games
 		/// <param name="symbol"></param>
 		/// <param name="cell"></param>
 		/// <returns></returns>
-		public bool InsertSymbol(char symbol, int cell)
+		internal bool InsertSymbol(char symbol, int cell)
 		{
 			Coord location = CellToCoord(cell);
 			if (cell < 0 || cell > 8)
@@ -121,7 +142,7 @@ namespace Windshield.Models.Games
 		/// <summary>
 		/// Switches whose turn it is
 		/// </summary>
-		private void SwitchTurns()
+		internal void SwitchTurns()
 		{
 			if (turn == player1)
 			{
@@ -133,9 +154,190 @@ namespace Windshield.Models.Games
 			}
 		}
 
-		private string Status()
+		/// <summary>
+		/// Returns the Tic Tac Toe Player that uses the specified symbol (X or O).
+		/// </summary>
+		/// <param name="symbol"></param>
+		/// <returns></returns>
+		internal TTTPlayer GetPlayerBySymbol(char symbol)
 		{
-			return "lol";
+			if (player1.symbol == symbol)
+			{
+				return player1;
+			}
+			if (player2.symbol == symbol)
+			{
+				return player2;
+			}
+
+			throw new ArgumentException("No player exists with this symbol"); // this should never happen
+		}
+
+		/// <summary>
+		/// Checks if there is a winner.
+		/// </summary>
+		/// <returns>Tic Tac Toe Player that has won the game.</returns>
+		internal TTTPlayer CheckWinner()
+		{
+			char center;
+			int i;
+			// check rows
+			for (i = 0; i < 3; ++i)
+			{
+				if (grid[0, i] == grid[1, i] && grid[1, i] == grid[2, i])
+				{
+					// check for player symbol
+					if (grid[0, i] != ' ')
+					{
+						return GetPlayerBySymbol(grid[0, i]);
+					}
+				}
+			}
+
+			// check columns
+			for (i = 0; i < 3; ++i)
+			{
+				if (grid[i, 0] == grid[i, 1] && grid[i, 1] == grid[i, 2])
+				{
+					// check for player symbol
+					if (grid[i, 0] != ' ')
+					{
+						return GetPlayerBySymbol(grid[i, 0]);
+					}
+				}
+			}
+
+			// check diagonals
+			center = grid[1, 1];
+			if ((center == grid[0, 0] && center == grid[2, 2]) || (center == grid[0, 2] && center == grid[2, 0]))
+			{
+				// check for player symbol
+				if (center != ' ')
+				{
+					return GetPlayerBySymbol(center);
+				}
+			}
+
+			// there is no winner
+			return null;
+		}
+
+		/// <summary>
+		/// swaps the player's symbols if they should elect to play a new game and adjusts their scores
+		/// </summary>
+		/// <param name="winner">should be null if there is a draw</param>
+		internal void EndGame(TTTPlayer winner)
+		{
+			// swap symbols
+			char temp = player1.symbol;
+			player1.symbol = player2.symbol;
+			player2.symbol = temp;
+
+			// check if this is a drawing situation
+			if (winner == null)
+			{
+				player1.draws++;
+				player2.draws++;
+			}
+			else
+			{
+				TTTPlayer loser;
+				// infer winner from loser
+				if (player1 == winner)
+				{
+					loser = player2;
+				}
+				else
+				{
+					loser = player1;
+				}
+
+				// adjust temporary scores
+				winner.wins++;
+				loser.losses++;
+			}
+		}
+
+		/// <summary>
+		/// Selects a cell to be picked by the AI.
+		/// </summary>
+		/// <returns>A cell number to insert the symbol.</returns>
+		internal int AISelectCell()
+		{
+			Coord selected = new Coord();
+			Random rnd = new Random();
+			// try and get the center
+			if (grid[1, 1] == ' ')
+			{
+				selected.x = 1;
+				selected.y = 1;
+				return CoordToCell(selected);
+			}
+
+			// select a random cell until it finds a free cell
+			do
+			{
+				selected.x = rnd.Next(3);
+				selected.y = rnd.Next(3);
+				if (grid[selected.x, selected.y] == ' ')
+				{
+					return CoordToCell(selected);
+				}
+			}
+			while (true);
+		}
+
+		/// <summary>
+		/// Status() converts the game's state into a string format, for storage in databases.
+		/// The outputted string can be used in a constructor.
+		/// </summary>
+		/// <remarks>
+		/// Format: [grid][turn#]-[S#W#L#T][(player1name)|(player2name)]
+		///			grid is 9 characters and indicates the cell's values ('X', 'O' or ' ')
+		///			turn# indicates which player's turn it is.
+		///			S indicates player1's symbol.
+		///			Wins, Losses and Ties indicate player 1's WLT's.
+		///			Example:
+		///			XO OXXO X1-X3W2L1T(banana)|(superman)
+		/// </remarks>
+		/// <returns>A database-friendly string that can be converted into the game's state.</returns>
+		internal string GetStatus()
+		{
+			StringBuilder builder = new StringBuilder();
+			//grid
+			for (int i = 0; i < 9; i++)
+			{
+				builder.Append(grid[CellToCoord(i).x,CellToCoord(i).y]);
+			}
+			//turn
+			if (turn == player1)
+			{
+				builder.Append("1");
+			}
+			else
+			{
+				builder.Append("2");
+			}
+			// - 
+			builder.Append("-");
+			// Symbol
+			builder.Append(turn.symbol);
+			// Wins
+			builder.Append(turn.wins + "W");
+			// Losses
+			builder.Append(turn.losses + "L");
+			// Draws
+			builder.Append(turn.draws + "T");
+
+			return builder.ToString();
+		}
+
+		internal void SetStatus(string status)
+		{
+			for (int i = 0; i < 9; i++)
+			{
+				// ÞR=STUR!!?!
+			}
 		}
 
 		/// <summary>
@@ -199,6 +401,12 @@ namespace Windshield.Models.Games
 			return false;
 		}
 
+		internal struct Coord
+		{
+			public int x;
+			public int y;
+		}
+
 		public class TTTPlayer
 		{
 			public User user;
@@ -208,14 +416,6 @@ namespace Windshield.Models.Games
 			public int draws;
 			public bool isAI;
 		}
-
-		private struct Coord
-		{
-			public int x;
-			public int y;
-		}
-
-
 	}
 
 }

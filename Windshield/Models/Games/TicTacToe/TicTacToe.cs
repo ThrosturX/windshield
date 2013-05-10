@@ -407,6 +407,5 @@ namespace Windshield.Games.TicTacToe
 				turn = player1;
 			}
 		}
-
 	}
 }
