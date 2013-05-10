@@ -40,3 +40,89 @@ body
 	background-color: white;
 }
 
+
+.fill:before
+{
+	height: 100%;
+}
+
+.card {
+  height: 8.85em;
+  width: 6.4em;
+  background-color: #fff;
+  border: 1px solid #695d39;
+  border-radius: .5em;                       /* omitted -moz- and -webkit- hacks */
+  box-shadow: -.25em .25em .5em -.25em #000; /* omitted -moz- and -webkit- hacks */
+  font-family: 'Times', serif;
+  line-height: 1em;
+  padding-top: .25em;
+  padding-left: .1em;
+  letter-spacing: -.2em;
+  position: absolute;
+  background: #fff url('http://d37rcl8t6g8sj5.cloudfront.net/wp-content/uploads/card-set.png') no-repeat;
+  background-size: 1300% 400%;
+}
+
+
+.H      
+{ 
+        background-position-y: 100%; 
+        color: #890000;
+
+}
+.S
+{
+        background-position-y: 66.6%;
+        color: black;
+}
+.D
+{
+        background-position-y: 33.3%;
+        color: #890000;
+}
+.C
+{
+        background-position-y: 0%;
+        color: black;
+}
+.rank13 { background-position-x: 100%;}
+.rank12 { background-position-x: 91.7%;}
+.rank11 { background-position-x: 83.3%;}
+.rank10 { background-position-x: 75%;}
+.rank9 {background-position-x: 66.5%;}
+.rank8 {background-position-x: 58.2%;}
+.rank7 {background-position-x: 49.8%;}
+.rank6 {background-position-x: 41.7%;}
+.rank5 {background-position-x: 33.1%;}
+.rank4 {background-position-x: 24.6%;}
+.rank3 {background-position-x: 17%;}
+.rank2 {background-position-x: 8.5%;}
+.rank1 {background-position-x: 0%;}
+
+#stage 
+{ 
+        border: 1px solid #ccc; 
+} 
+#felt 
+{ 
+        position: relative; 
+        margin: 0 0 0 200px; 
+        height: 500px; 
+        background: green; 
+}
+ 
+#felt div 
+{ 
+        position: absolute; 
+        left: -140px; 
+        top: 100px; 
+}
+
+ #felt div 
+ { 
+        -webkit-transition: all 0.5s ease-in-out; 
+        -moz-transition: all 0.5s ease-in-out; 
+        -o-transition: all 0.5s ease-in-out; 
+        -ms-transition: all 0.5s ease-in-out; 
+}=======
+

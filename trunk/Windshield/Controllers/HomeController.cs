@@ -85,5 +85,10 @@ namespace Windshield.Controllers
 			return View("TicTacToe");
 		}
  */
+
+		public ActionResult DisplayCard()
+		{
+			return View("DisplayCard");
+		}
     }
 }
