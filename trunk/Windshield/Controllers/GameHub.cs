@@ -24,7 +24,7 @@ namespace Windshield.Controllers
 			//			Clients.Others.cellClicked(cellId);
 		}
 
-		public void TryAction(string boardID, string groupName, string action, string sender)
+		public void TryAction(string boardID, string action, string sender)
 		{
 			int id;
 			int.TryParse(boardID, out id);

@@ -53,7 +53,7 @@
 			hub.server.join(group);
 
 			$("#tictactoe tr td").click(function () {
-				hub.server.clickCell(group, this.id, currentUser);
+				hub.server.tryAction(group, this.id, currentUser);
 				$(this).text('@(Model.player1.symbol)');
 			});
 		});

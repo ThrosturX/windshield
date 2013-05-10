@@ -43,6 +43,12 @@ namespace Windshield.Common
 			suit = _suit;
 		}
 
+		public Card(Rank _face, Suit _suit)
+		{
+			face = (int)_face;
+			suit = _suit;
+		}
+
 		public override string ToString()
 		{
 			string card_string;

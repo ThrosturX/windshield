@@ -39,8 +39,10 @@ namespace Windshield.Games.Hearts
 										, "The player with the lowest score wins"
 										};
 
-		public HeartsPlayer [] players;
+		public Player [] players;
+		public Player turn;
 		public CardDeck deck;
+		public Trick trick;
 
 		/// <summary>
 		/// Default constructor. Note that instances require players to be instantiated!
@@ -49,10 +51,12 @@ namespace Windshield.Games.Hearts
 		{
 			for (int i = 0; i < 4; ++i)
 			{
-				players[i] = new HeartsPlayer();
+				players[i] = new Player();
 			}
 
 			deck = new CardDeck();
+			turn = players[0];
+			trick.ongoing = false;
 		}
 
 		/// <summary>
@@ -77,13 +81,17 @@ namespace Windshield.Games.Hearts
 			{
 				throw new TooManyPlayersException("There are too many players attempting to play Hearts.");
 			}
+
+			// Deal cards to the players
+			Deal();
 		}
 
 		/// <summary>
 		/// Creates a single player instance of "Hearts"
 		/// </summary>
 		/// <param name="player">The user that wishes to play</param>
-		public Hearts(User player) : this()
+		public Hearts(User player)
+			: this()
 		{
 			players[0].user = player;
 			players[1].user = new User();
@@ -144,7 +152,7 @@ namespace Windshield.Games.Hearts
 			deck.Shuffle();
 			for (int i = 0; i < 4; ++i)
 			{
-				players[i].hand = (HeartsHand)deck.GetCards(13);
+				players[i].hand = (Hand)deck.GetCards(13);
 			}
 		}
 
@@ -152,7 +160,7 @@ namespace Windshield.Games.Hearts
 		/// Finds the player with the two of clubs
 		/// </summary>
 		/// <returns>The player with the Two of clubs</returns>
-		private HeartsPlayer GetStartingPlayer()
+		private Player GetStartingPlayer()
 		{
 			Card match = new Card(2, Suit.Club);
 
@@ -170,12 +178,56 @@ namespace Windshield.Games.Hearts
 		/// </summary>
 		/// <param name="winner"></param>
 		/// <returns>The last game's winner or the player who has the two of clubs</returns>
-		public HeartsPlayer GetStartingPlayer(HeartsPlayer winner)
+		public Player GetStartingPlayer(Player winner)
 		{
 			if (winner == null)
 				return GetStartingPlayer();
 
 			return winner;
+		}
+
+		public bool PlayCard(Player player, Card card)
+		{
+			if (player != turn)
+				return false;
+
+			if (trick.ongoing)
+			{
+				// check if the card he's playing is valid
+				if (card.suit != trick.leader)
+				{
+					// make sure he doesn't have a card in the leading suit
+					foreach (var found in player.hand)
+					{
+						if (found.suit == trick.leader)
+						{
+							return false;
+						}
+					}
+				}
+
+				// add the card to the trick
+				trick.Add(new KeyValuePair<Player, Card>(player, card));
+
+				// check if this is the last card for this trick
+				if (trick.Count == 4)
+				{
+					// allocate points to the claimer and clear the trick
+					KeyValuePair<Player, int> allocation = trick.GetClaimer();
+
+					allocation.Key.matchPoints += allocation.Value;
+
+					trick.ongoing = false;
+					trick.RemoveAll(x => true);
+				}
+
+			}
+			else
+			{
+				trick = new Trick(player, card);
+			}
+
+			return true;
 		}
 	}
 }
