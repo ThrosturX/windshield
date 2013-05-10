@@ -293,13 +293,13 @@ namespace Windshield.Models.Games
 		/// The outputted string can be used in a constructor.
 		/// </summary>
 		/// <remarks>
-		/// Format: [grid][turn#]-[S#W#L#T][(player1name)|(player2name)]
+		/// Format: [grid]|[the player whose turn it is(1 or 2)]|[player1's symbol]|[p1's wins]|[p1's draws]|[p1's losses]
 		///			grid is 9 characters and indicates the cell's values ('X', 'O' or ' ')
 		///			turn# indicates which player's turn it is.
 		///			S indicates player1's symbol.
 		///			Wins, Losses and Ties indicate player 1's WLT's.
 		///			Example:
-		///			XO OXXO X1-X3W2L1T(banana)|(superman)
+		///			XO OXXO X|1|X|3|2|1
 		/// </remarks>
 		/// <returns>A database-friendly string that can be converted into the game's state.</returns>
 		internal string GetStatus()
@@ -333,12 +333,12 @@ namespace Windshield.Models.Games
 			return builder.ToString();
 		}
 
-		internal void SetStatus(string status)
+		//	
+		internal void SetStatus(string status, List<User> )
 		{
-			for (int i = 0; i < 9; i++)
-			{
-				// ÞR=STUR!!?!
-			}
+			// TODO
+
+
 		}
 
 		/// <summary>
