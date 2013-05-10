@@ -342,6 +342,7 @@
     <Content Include="Views\Games\TicTacToe.cshtml" />
     <Content Include="Views\Games\Play.cshtml" />
     <Content Include="Views\Games\Index.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
