@@ -284,7 +284,7 @@ namespace Windshield.Test
 		}
 
 		[TestMethod]
-		public void EndGame()
+		public void EndGame1()
 		{
 			// Arrange
 			game.InsertSymbol('X', 0);
@@ -361,7 +361,7 @@ namespace Windshield.Test
 		public void EndGameVsAI()
 		{
 			game = new TicTacToe();
-			EndGame();
+			EndGame1();
 		}
 
 		[TestMethod]
