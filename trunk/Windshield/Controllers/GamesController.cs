@@ -41,12 +41,10 @@ namespace Windshield.Controllers
 			Board gameBoard = new TicTacToe(playerOne);
 			GameInstance theGame = new GameInstance(gameBoard, "TicTacToe");
 
-			gameBoard.startDate = DateTime.Now;
 			gameBoard.idOwner = playerOne.UserId;
-			gameBoard.status = "";
 			gameBoard.Game = gameRepository.GetGameByName("TicTacToe");
 			gameBoard.idGame = gameBoard.Game.id;
-			boardRepository.AddBoard(gameBoard);
+			//boardRepository.AddBoard(gameBoard);
 
 			return View("Index", theGame);
 		}

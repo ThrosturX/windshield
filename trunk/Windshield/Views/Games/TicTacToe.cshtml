@@ -40,13 +40,13 @@
 		var group = '@(Model.id)';
 		var hub = $.connection.gameHub;
 		var currentUser = '@(Context.User.Identity.Name)';
-		var playerOne = '@(Model.playerOne.user.UserName)';
-		var playerTwo = '@(Model.playerTwo.user.UserName)';
+		var playerOne = '@(Model.player1.user.UserName)';
+		var playerTwo = '@(Model.player2.user.UserName)';
 
 		var mySymbol;
 
 		hub.client.cellClicked = function (cellId) {
-			$("#" + cellId).text('@(Model.playerOne.symbol)');
+			$("#" + cellId).text('@(Model.player1.symbol)');
 		};
 
 		$.connection.hub.start().done(function() {
@@ -54,7 +54,7 @@
 
 			$("#tictactoe tr td").click(function () {
 				hub.server.clickCell(group, this.id, currentUser);
-				$(this).text('@(Model.playerOne.symbol)');
+				$(this).text('@(Model.player1.symbol)');
 			});
 		});
 	});

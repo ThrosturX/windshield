@@ -399,6 +399,11 @@ namespace Windshield.Models
 		private EntitySet<Player> _Players;
 		
 		private EntityRef<Game> _Game;
+
+		public virtual bool TryAction(string action, string sender)
+		{
+			return false;
+		}
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
