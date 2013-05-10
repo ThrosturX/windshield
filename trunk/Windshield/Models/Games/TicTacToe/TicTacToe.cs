@@ -35,6 +35,7 @@ namespace Windshield.Games.TicTacToe
 
 		public TTTPlayer player1 { get; set; }	// The owner is Player One
 		public TTTPlayer player2 { get; set; }
+		private TTTPlayer turn;
 
 		/// <summary>
 		/// Default constructor. Note that instances require players to be instantiated!
@@ -133,6 +134,9 @@ namespace Windshield.Games.TicTacToe
 			{
 				throw new Exception("InsertSymbol: Board seems erroneously full!");
 			}
+
+			// swap players
+			SwitchTurns();
 
 			return true;
 		}
@@ -239,6 +243,8 @@ namespace Windshield.Games.TicTacToe
 			player2.wins   =  0 ;
 			player2.losses =  0 ;
 			player2.draws  =  0 ;
+
+			turn = player1;
 		}
 
 		/// <summary>
@@ -351,6 +357,10 @@ namespace Windshield.Games.TicTacToe
 					return false;
 				}
 
+				// check if it is player's turn
+				if (turn != player)
+					return false;
+
 				// find out where it should be inserted
 				if (action.Contains("cell"))
 				{
@@ -373,5 +383,21 @@ namespace Windshield.Games.TicTacToe
 			// No success
 			return false;
 		}
+
+		/// <summary>
+		/// Switches whose turn it is
+		/// </summary>
+		private void SwitchTurns()
+		{
+			if (turn == player1)
+			{
+				turn = player2;
+			}
+			else
+			{
+				turn = player1;
+			}
+		}
+
 	}
 }

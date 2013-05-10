@@ -30,7 +30,8 @@ namespace Windshield.Controllers
 			int.TryParse(boardID, out id);
 			Board board = boardRepository.GetBoardById(id);
 
-			board.TryAction(action, sender);			
+			if(board.TryAction(action, sender))
+				/* TODO: Broadcast */;			
 		}
 	}
 }
