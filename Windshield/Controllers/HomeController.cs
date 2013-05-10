@@ -60,8 +60,9 @@ namespace Windshield.Controllers
 			return View("MyGames");
 		}
 
-		public ActionResult GameDescription(Game game)
+		public ActionResult GameDescription(Game gameName)
 		{
+			var game = gameRepo.GetGameByName(gameName.name);
 			return View("GameDescription", game);
 		}
 
@@ -77,8 +78,23 @@ namespace Windshield.Controllers
 
 		public ActionResult Boards(Game game)
 		{
-			var viewModel = boardRepo.GetBoards(gameRepo.GetGameByName("game"));
-			return View("Boards", viewModel.ToList());
+			
+
+			if (game.name == "game")
+			{
+				var viewModel = boardRepo.GetBoards(gameRepo.GetGameByName("game"));
+				return View("Boards", viewModel.ToList());
+			}
+			else if (game.name == "TicTacToe")
+			{
+				var viewModel = boardRepo.GetBoards(gameRepo.GetGameByName("TicTacToe"));
+				return View("Boards", viewModel.ToList());
+			}
+			else
+			{
+				var ViewModel = boardRepo.GetBoards(gameRepo.GetGameByName("game"));
+				return View("Boards", ViewModel.ToList());
+			}
 		}
     }
 }

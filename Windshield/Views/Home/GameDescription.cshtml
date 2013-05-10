@@ -1,15 +1,10 @@
 ﻿@model Windshield.Models.Game
 
-<!DOCTYPE html>
-<html>
-<body>
-    <h1>@Model.name</h1>
-	<img src="~/Images/board.gif" alt="myndafleik" />
-	<h2>Game Description</h2>
-	<p>@Model.description</p>
-	<h2>Your Statistics</h2>
-	<!-- TODO: check how ASPNET user tables work -->
-	<button>@Html.ActionLink("Play Against Friends", "GameLobby", "Home")</button>
-	<button>@Html.ActionLink("Find Match", "Index", "Home")</button>
-</body>
-</html>
+<h1>@Model.name</h1>
+<img src="~/Content/themes/base/images/ui-icons_cd0a0a_256x240.png" alt="myndafleik" />
+<h2>Game Description</h2>
+<p>@Model.description</p>
+<h2>Your Statistics</h2>
+<!-- TODO: check how ASPNET user tables work -->
+<button>@Html.ActionLink("Create Game", "GameLobby", "Home")</button>
+<button>@Html.ActionLink("Find Game", "Boards", "Home")</button>
