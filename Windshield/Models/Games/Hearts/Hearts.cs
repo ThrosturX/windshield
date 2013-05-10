@@ -67,7 +67,7 @@ namespace Windshield.Games.Hearts
 				{
 					players[i].user = users[i];
 				}
-				for (int i = users.Count ; i < 4; ++int)
+				for (int i = users.Count ; i < 4; ++i)
 				{
 					players[i].user = new User();
 					players[i].user.UserName = "Computer";
