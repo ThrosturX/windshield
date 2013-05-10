@@ -344,10 +344,10 @@
     <Content Include="Views\Home\GameLobby.cshtml" />
     <Content Include="Views\Home\TTT.cshtml" />
     <Content Include="Views\Games\TicTacToe.cshtml" />
-    <Content Include="Views\Games\Play.cshtml" />
     <Content Include="Views\Games\Index.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Home\Boards.cshtml" />
+    <Content Include="Views\Games\Chat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
