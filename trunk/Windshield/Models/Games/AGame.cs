@@ -7,7 +7,12 @@ namespace Windshield.Models.Games
 {
 	public abstract class AGame
 	{
-		public virtual bool TryMove(Board board, string move)
+		public virtual Board NewBoard()
+		{
+			return new Board();
+		}
+
+		public virtual bool TryAction(string action, string sender)
 		{
 			return false;
 		}
