@@ -7,9 +7,12 @@ namespace Windshield.Models.Games
 {
 	public abstract class AGame
 	{
-		public virtual Board NewBoard()
+		/// <summary>
+		/// Update the status string of the board
+		/// </summary>
+		public virtual void Update()
 		{
-			return new Board();
+			;  // intentionally empty
 		}
 
 		public virtual bool TryAction(string action, string sender)

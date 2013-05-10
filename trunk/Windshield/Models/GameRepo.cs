@@ -4,12 +4,10 @@ using System.Linq;
 using System.Web;
 using Windshield.Models;
 
-
 namespace Windshield.Models
 {
 	public class GameRepo : IGameRepo
 	{
-		
 		public static BoardGamesDataContext db = null;
 
 		public GameRepo()
