@@ -26,9 +26,9 @@ namespace Windshield.Games.Hearts
 			claimer = player;
 		}
 
-		public void AddCard()
+		public void AddCard(Player player, Card card)
 		{
-			// TODO: Why is this empty???
+			this.Add(new KeyValuePair<Player, Card>(player, card));
 		}
 
 		public void CalculatePoints()
