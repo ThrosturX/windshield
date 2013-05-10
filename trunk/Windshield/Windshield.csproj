@@ -186,7 +186,7 @@
     <Compile Include="Models\Games\Hearts\Hand.cs" />
     <Compile Include="Models\Games\Hearts\Player.cs" />
     <Compile Include="Models\Games\AGame.cs" />
-    <Compile Include="Models\Games\Common\Exceptions\TooManyPlayersException.cs" />
+    <Compile Include="Models\Games\TicTacToe.cs" />
     <Compile Include="Models\Games\Hearts\Trick.cs" />
     <Compile Include="Models\Games\TicTacToe\TTTPlayer.cs" />
     <Compile Include="Global.asax.cs">
