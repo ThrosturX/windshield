@@ -4,8 +4,18 @@
 }
 
 
-<div id="container-fluid">	
-	<ul class="thumbnails fluid">
+<div class="span4 offset2">
+	<div class="btn-group pagination-centered row-fluid" data-toggle="buttons-radio">
+		<button type="button" class="btn btn-primary">All</button>
+		<button type="button" class="btn btn-primary">Popular</button>
+		<button type="button" class="btn btn-primary">New</button>
+	</div>
+</div>
+
+
+
+<div id="row-fluid">	
+	<ul class="thumbnails">
 		@foreach (var game in Model.GetAllGames())
 		{
 		<li class="span3">
@@ -13,8 +23,6 @@
 			<img src="/Images/puppy.jpg" title="@game.name" alt="@game.name">
 			</a>
 		</li>
-		
-	  
 		}
 	</ul>
 </div>

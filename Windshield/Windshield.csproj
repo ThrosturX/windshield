@@ -267,6 +267,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\board.gif" />
     <Content Include="Images\knight_logo.gif" />
     <Content Include="Images\puppy.jpg" />
     <Content Include="Models\BoardGames.dbml">
