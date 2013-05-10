@@ -48,7 +48,7 @@ namespace Windshield.Models.Games
 
 		public TicTacToe()
 		{
-			Board board = new Board();
+			board = new Board();
 			board.status = "";
 			grid = new char[3, 3];
 			ClearBoard();

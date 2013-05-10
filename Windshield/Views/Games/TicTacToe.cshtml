@@ -1,4 +1,4 @@
-﻿@model Windshield.Games.TicTacToe.TicTacToe
+﻿@model Windshield.Models.Games.TicTacToe
 
 <style type="text/css">
 	table {
@@ -37,7 +37,7 @@
 
 <script>
 	$(document).ready(function () {
-		var group = '@(Model.id)';
+		var group = '@(Model.board.id)';
 		var hub = $.connection.gameHub;
 		var currentUser = '@(Context.User.Identity.Name)';
 		var playerOne = '@(Model.player1.user.UserName)';

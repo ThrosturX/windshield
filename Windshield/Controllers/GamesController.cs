@@ -37,17 +37,20 @@ namespace Windshield.Controllers
 		[Authorize]
 		public ActionResult TicTacToe()
 		{
+			List<User> players = new List<User>();
 			User playerOne = userRepository.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
-			TicTacToe gameBoard = new TicTacToe();
-			gameBoard.ClearBoard();
-			/*GameInstance theGame = new GameInstance(gameBoard, "TicTacToe");
+			players.Add(playerOne);
+			User playerTwo = userRepository.GetUserByName("banana");
+			players.Add(playerTwo);
+			TicTacToe gameBoard = new TicTacToe(players);
+			GameInstance theGame = new GameInstance(gameBoard.board.id, gameBoard, "TicTacToe");
 
-			gameBoard.idOwner = playerOne.UserId;
-			gameBoard.Game = gameRepository.GetGameByName("TicTacToe");
-			gameBoard.idGame = gameBoard.Game.id;
-			boardRepository.AddBoard(gameBoard);
-			*/
-			return View("Index");
+			gameBoard.board.idOwner = playerOne.UserId;
+			gameBoard.board.Game = gameRepository.GetGameByName("TicTacToe");
+			gameBoard.board.idGame = gameBoard.board.Game.id;
+			boardRepository.AddBoard(gameBoard.board);
+
+			return View("Index", theGame);
 		}
     }
 }
