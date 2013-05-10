@@ -402,6 +402,11 @@ namespace Windshield.Models.Games
 			return false;
 		}
 
+		public override void Update()
+		{
+			board.status = GetStatus();
+		}
+
 		internal struct Coord
 		{
 			public int x;
