@@ -26,7 +26,10 @@ namespace Windshield.Games.Hearts
 			claimer = player;
 		}
 
-		public void AddCard();
+		public void AddCard()
+		{
+			// TODO: Why is this empty???
+		}
 
 		public void CalculatePoints()
 		{

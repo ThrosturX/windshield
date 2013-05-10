@@ -181,6 +181,7 @@
     <Compile Include="Controllers\GameHub.cs" />
     <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\Games\Common\Exceptions\TooManyPlayersException.cs" />
     <Compile Include="Models\Games\Common\PlayingCards\Card.cs" />
     <Compile Include="Models\Games\Common\PlayingCards\CardDeck.cs" />
     <Compile Include="Models\Games\Hearts\Hand.cs" />
