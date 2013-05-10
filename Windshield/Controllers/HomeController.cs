@@ -9,16 +9,17 @@ namespace Windshield.Controllers
 {
     public class HomeController : Controller
     {
-		private  IGameRepo repository = new GameRepo();
-
+		private IGameRepo gameRepo = new GameRepo();
+		private IBoardRepo boardRepo = new BoardRepo();
+		
 		public HomeController()
 		{
 			//repository = new GameRepo();
 		}
 
-		public HomeController(IGameRepo rep)
+		public HomeController(IGameRepo repo)
 		{
-			repository = rep;
+			gameRepo = repo;
 		}
 		
         public ActionResult Index()
@@ -27,7 +28,7 @@ namespace Windshield.Controllers
 			
 
 			
-            return View("Index", repository);
+            return View("Index", gameRepo);
         }
 
         public ActionResult About()
@@ -45,11 +46,11 @@ namespace Windshield.Controllers
         }
 
 			
-		public ActionResult Stats()
+		public ActionResult Statistics()
 		{
 			ViewBag.Message = "Your contact page.";
 
-			return View("Stats");
+			return View("Statistics");
 		}
 
 		public ActionResult MyGames()
@@ -69,26 +70,15 @@ namespace Windshield.Controllers
 			return View("GameLobby", game);
 		}
 
-		public ActionResult derp()
-		{
-			if (User.Identity.IsAuthenticated)
-			{
-				return View("Stats");
-			}
-			else
-			{
-				return View("About");
-			}
-		}
-/*		public ActionResult TicTacToe()
-		{
-			return View("TicTacToe");
-		}
- */
-
 		public ActionResult DisplayCard()
 		{
 			return View("DisplayCard");
+		}
+
+		public ActionResult Boards(Game game)
+		{
+			var viewModel = boardRepo.GetBoards(gameRepo.GetGameByName("game"));
+			return View("Boards", viewModel.ToList());
 		}
     }
 }

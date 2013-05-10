@@ -337,7 +337,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\Stats.cshtml" />
+    <Content Include="Views\Home\Statistics.cshtml" />
     <Content Include="Views\Home\MyGames.cshtml" />
     <Content Include="Views\Home\GameDescription.cshtml" />
     <Content Include="Views\Home\GameLobby.cshtml" />
@@ -346,6 +346,7 @@
     <Content Include="Views\Games\Play.cshtml" />
     <Content Include="Views\Games\Index.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Home\Boards.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
