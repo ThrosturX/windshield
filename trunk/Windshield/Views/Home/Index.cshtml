@@ -19,7 +19,7 @@
 		@foreach (var game in Model.GetAllGames())
 		{
 		<li class="span3">
-			<a href="@Url.Action("GameDescription", "Home", game.name)">
+			<a href="@Url.Action("GameDescription", "Home", new { name = game.name })">
 			<img src="/Images/puppy.jpg" title="@game.name" alt="@game.name">
 			</a>
 		</li>
