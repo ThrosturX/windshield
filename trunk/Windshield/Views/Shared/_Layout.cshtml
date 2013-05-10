@@ -32,7 +32,7 @@
 
 			<header id="overview" class="subhead">
 				<div class="containter">
-					<h1 class="hidden-phone">GameBoard</h1>
+					<h1 class="hidden-phone">@Html.ActionLink("GameBoard", "Index", "Home")</h1>
 					<h1 class="visible-phone">
 						Board
 						Games
@@ -47,7 +47,7 @@
 			<div class="masthead">
 				<ul class="nav nav-pills">
 					<li>@Html.ActionLink("Games", "Index", "Home")</li>
-					<li>@Html.ActionLink("Statistics", "Stats", "Home")</li>
+					<li>@Html.ActionLink("Statistics", "Statistics", "Home")</li>
 					@if (User.Identity.IsAuthenticated)
 					{
 					<li>@Html.ActionLink("My Games", "MyGames", "Home")</li>
