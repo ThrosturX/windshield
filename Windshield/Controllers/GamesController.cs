@@ -38,13 +38,13 @@ namespace Windshield.Controllers
 		public ActionResult TicTacToe()
 		{
 			User playerOne = userRepository.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
-			Board gameBoard = new TicTacToe(playerOne);
+			Board gameBoard = new TicTacToe();
 			GameInstance theGame = new GameInstance(gameBoard, "TicTacToe");
 
 			gameBoard.idOwner = playerOne.UserId;
 			gameBoard.Game = gameRepository.GetGameByName("TicTacToe");
 			gameBoard.idGame = gameBoard.Game.id;
-			//boardRepository.AddBoard(gameBoard);
+			boardRepository.AddBoard(gameBoard);
 
 			return View("Index", theGame);
 		}
