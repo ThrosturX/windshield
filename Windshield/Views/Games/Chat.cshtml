@@ -17,6 +17,21 @@
 				chatConnection.server.send(group, user, $('#txtMessage').val());
 			});
 
+			$('#txtMessage').bind('keydown', function (e) {
+
+				if (e.keyCode === 13) { // 13 is enter key
+					chatConnection.server.send(group, user, $('#txtMessage').val());
+					e.preventDefault();
+				}
+
+			});
+
+			$(document).keypress(function(e) {
+				if(e.which == 13) {
+					chatConnection.server.send(group, user, $('#txtMessage').val());
+				}
+			});
+
 			$.connection.hub.start().done(function() {
 				chatConnection.server.join(group)
 			} );
