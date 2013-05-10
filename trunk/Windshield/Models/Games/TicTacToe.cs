@@ -334,7 +334,7 @@ namespace Windshield.Models.Games
 		}
 
 		//	
-		internal void SetStatus(string status, List<User> )
+		internal void SetStatus(string status, List<User> players)
 		{
 			// TODO
 
