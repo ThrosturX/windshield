@@ -185,6 +185,8 @@
     <Compile Include="Models\Games\Common\PlayingCards\CardDeck.cs" />
     <Compile Include="Models\Games\Hearts\HeartsHand.cs" />
     <Compile Include="Models\Games\Hearts\HeartsPlayer.cs" />
+    <Compile Include="Models\Games\AGame.cs" />
+    <Compile Include="Models\Games\TicTacToe.cs" />
     <Compile Include="Models\Games\TicTacToe\TTTPlayer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
