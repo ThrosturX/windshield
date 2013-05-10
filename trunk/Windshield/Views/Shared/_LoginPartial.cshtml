@@ -4,6 +4,10 @@
 	<li class="active">
 		@Html.ActionLink(User.Identity.Name, "ChangePassword", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "ChangePassword" })
 	</li>
+	<li class="active">
+		<a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
+		}
+	</li>
 }
 else
 {
@@ -12,10 +16,12 @@ else
 }
 </ul>
 
-@if (Request.IsAuthenticated)
+<!--
+if (Request.IsAuthenticated)
 {
-		using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "active" })) {
-		@Html.AntiForgeryToken()
+		using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", class = "active" })) {
+		Html.AntiForgeryToken()
 		<a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
   }
 }
+-->

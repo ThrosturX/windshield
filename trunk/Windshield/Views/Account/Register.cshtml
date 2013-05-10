@@ -8,36 +8,47 @@
     Passwords must be at least @Membership.MinRequiredPasswordLength characters long.
 </p>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm()) 
+{
+	<form class="form-horizontal">
+	<legend>
+		Register
+	</legend>
+	
+	
     @Html.ValidationSummary()
-
-    <ul data-role="listview" data-inset="true">
-        <li data-role="list-divider">Details</li>
-
-        <li data-role="fieldcontain">
+	<div class="control-group">
+		<div class="control-label">
             @Html.LabelFor(m => m.UserName)
-            @Html.TextBoxFor(m => m.UserName)            
-        </li>
-
-        <li data-role="fieldcontain">
+		</div>
+		<div class="controls">
+            @Html.TextBoxFor(m => m.UserName)    
+		</div>        
+		<div class="control-label">
             @Html.LabelFor(m => m.Email)
-            @Html.TextBoxFor(m => m.Email)            
-        </li>
-
-        <li data-role="fieldcontain">
+		</div>
+		<div class="controls">
+            @Html.TextBoxFor(m => m.Email)
+        </div>
+        <div class="control-group">
             @Html.LabelFor(m => m.Password)
+		</div>
+		<div class="controls">
             @Html.PasswordFor(m => m.Password)            
-        </li>
-
-        <li data-role="fieldcontain">
+        </div>
+        <div class="control-group">
             @Html.LabelFor(m => m.ConfirmPassword)
+		</div>
+		<div class="controls">
             @Html.PasswordFor(m => m.ConfirmPassword)            
-        </li>
+        </div>
+	</div>
 
-        <li data-role="fieldcontain">
-            <input type="submit" value="Register" />
-        </li>
-    </ul>
+    <div class="control-group">
+		<input type="submit" class="btn" value="Register" />
+		<input type="reset" class="btn" value="Clear" />
+    </div>
+	</form>
 }
 
 @section Scripts {
