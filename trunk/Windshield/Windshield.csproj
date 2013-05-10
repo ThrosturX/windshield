@@ -187,9 +187,7 @@
     <Compile Include="Models\Games\Hearts\Hand.cs" />
     <Compile Include="Models\Games\Hearts\Player.cs" />
     <Compile Include="Models\Games\AGame.cs" />
-    <Compile Include="Models\Games\TicTacToe.cs" />
     <Compile Include="Models\Games\Hearts\Trick.cs" />
-    <Compile Include="Models\Games\TicTacToe.cs" />
     <Compile Include="Models\Games\TicTacToe\TTTPlayer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -207,7 +205,8 @@
     <Compile Include="Models\IBoardRepo.cs" />
     <Compile Include="Models\IGameRepo.cs" />
     <Compile Include="Models\IUserRepo.cs" />
-    <Compile Include="Models\Games\TicTacToe\TicTacToe.cs" />
+    <Compile Include="Models\Games\TicTacToe\Legacy_TicTacToe.cs" />
+    <Compile Include="Models\TicTacToe.cs" />
     <Compile Include="Models\UserRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

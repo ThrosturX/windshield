@@ -46,7 +46,7 @@ namespace Windshield.Models.Games
 		public TTTPlayer player1 { get; set; }	// The owner is Player One
 		public TTTPlayer player2 { get; set; }
 
-		public TicTacToe ()
+		public TicTacToe()
 		{
 			Board board = new Board();
 			board.status = "";
@@ -54,7 +54,8 @@ namespace Windshield.Models.Games
 			ClearBoard();
 			InitializePlayers();
 		}
-		public TicTacToe(List<User> players) : this()
+		public TicTacToe(List<User> players)
+			: this()
 		{
 			// TODO try catch á player1.user
 			player1.user = players[0];
@@ -307,7 +308,7 @@ namespace Windshield.Models.Games
 			//grid
 			for (int i = 0; i < 9; i++)
 			{
-				builder.Append(grid[CellToCoord(i).x,CellToCoord(i).y]);
+				builder.Append(grid[CellToCoord(i).x, CellToCoord(i).y]);
 			}
 			//turn
 			if (turn == player1)
