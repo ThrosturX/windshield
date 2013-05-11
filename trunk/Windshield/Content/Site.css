@@ -1,14 +1,63 @@
-﻿html
+﻿
+/*
+ *
+ * BOOTSTRAP
+ *	
+ */
+
+html, body
 {
 	height: 100%;
+	background-color: #666;
 }
 
-body
+/* i searched forever for a solution to this and finally found this
+ * http://stackoverflow.com/questions/10099422/flushing-footer-to-bottom-of-the-page-twitter-bootstrap
+ * only had to modify it a bit
+ */
+
+#main
 {
-	height: 90%;
-	background-color: #969696;
+	min-height: 100%;
 }
 
+#main > div
+{
+	overflow: auto;
+	padding-bottom: 24px;
+}
+
+.footer
+{
+	position: relative;
+	margin-top: -64px;
+	height: 64px;
+	clear: both;
+}
+
+.background-white
+{
+	background-color: white;
+}
+
+/* fix for thumbnails */
+
+ul.thumbnails li.span4:nth-child(3n + 4)
+{
+	margin-left : 0px;
+}
+
+ul.thumbnails li.span3:nth-child(4n + 5) 
+{
+	margin-left : 0px;
+}
+
+ul.thumbnails li.span12 + li
+{
+	margin-left : 0px;
+}
+
+/* banner */
 
 #overview
 {
@@ -18,43 +67,12 @@ body
 	color: white;
 	background-repeat: no-repeat;
 	background-color: black;
+	height: 64px;
 }
 
 #overview h1
 {
 	display: inline;
-}
-
-
-.container-narrow
-{
-	margin: 0 auto;
-	max-width: 960px;
-	background-color: white;
-	height: 100%;
-}
-
-.container-narrow > *
-{
-	padding: 0 32px;
-	background-color: white;
-}
-
-
-.fill:before
-{
-	height: 100%;
-}
-
-.user-bar
-{
-	background-color: white;
-}
-
-.nav-bar
-{
-	background: white;
-	color: white;
 }
 
 h1 > a
@@ -69,12 +87,38 @@ h1 > a:hover
 }
 
 
-.btn-group
+/* TODO: what is this? */
+
+.btn-primary
 {
 	margin-bottom: 25px;
 	background: white;
 	color: #0088cc;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

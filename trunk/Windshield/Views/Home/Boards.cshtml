@@ -1,17 +1,14 @@
-﻿@model List<Windshield.Models.Board>
-@{
-	ViewBag.Title = "Games available";
-}
-	
-	<table class="table table-striped">
+﻿@model IQueryable<Windshield.Models.Board>
+
+	<table class="table table-hover">
 
 		<thead>
 			<tr>
 				<th>
-					Data 1
+					Game ID
 				</th>
 				<th>
-					data 2
+					Game
 				</th>
 			</tr>
 		</thead>

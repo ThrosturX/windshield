@@ -1,0 +1,13 @@
+﻿@model Windshield.Models.Game
+
+@{
+if (Model.image == null)
+	{
+		<!-- no image for this game; enjoy one of a pug -->
+		<img src="/Images/pug.jpg" alt="@Model.name" title="@Model.name">
+	}
+	else
+	{
+		<img src=@("/Images/" + Model.image) alt="@Model.name" title="@Model.name">
+	}
+} 

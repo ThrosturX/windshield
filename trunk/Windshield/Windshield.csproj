@@ -265,9 +265,13 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\2cool4skool.png" />
     <Content Include="Images\board.gif" />
     <Content Include="Images\knight_logo.gif" />
+    <Content Include="Images\pug.jpg" />
     <Content Include="Images\puppy.jpg" />
+    <Content Include="Images\sunny.png" />
+    <Content Include="Images\wakeup.jpg" />
     <Content Include="Models\BoardGames.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>BoardGames.designer.cs</LastGenOutput>
@@ -330,7 +334,6 @@
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
@@ -346,6 +349,7 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Home\Boards.cshtml" />
     <Content Include="Views\Games\Chat.cshtml" />
+    <Content Include="Views\Shared\_GameImagePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

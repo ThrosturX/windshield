@@ -1,27 +1,32 @@
-﻿@model Windshield.Models.IGameRepo
-@{
-    ViewBag.Title = "Home Page";
-}
+﻿@model IQueryable<Windshield.Models.Game>
 
-
-<div class="span4 offset3">
-	<div class="btn-group">
-		<button class="btn">All</button>
-		<button class="btn">Popular</button>
-		<button class="btn">New</button>
+<div class="row-fluid">
+	<div class="span4 offset4">
+		<div class="btn-group pagination-centered row-fluid" data-toggle="buttons-radio">
+			<button type="button" class="btn btn-primary">All</button>
+			<button type="button" class="btn btn-primary">Popular</button>
+			<button type="button" class="btn btn-primary">New</button>
+		</div>
 	</div>
 </div>
 
 
 
-<div id="row-fluid">	
+
+<div class="row-fluid">	
 	<ul class="thumbnails">
-		@foreach (var game in Model.GetAllGames())
+		@foreach (Windshield.Models.Game game in Model)
 		{
-		<li class="span3">
+		<li class="span4">
 			<a href="@Url.Action("GameDescription", "Home", new { name = game.name })">
-			<img src="/Images/puppy.jpg" title="@game.name" alt="@game.name">
+				@Html.Partial("_GameImagePartial", game)
 			</a>
+		</li>
+		}
+		@foreach (Windshield.Models.Game game in Model)
+		{
+		<li class="span4">
+			@Html.Partial("_GameImagePartial", game)
 		</li>
 		}
 	</ul>

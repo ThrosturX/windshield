@@ -24,39 +24,27 @@ namespace Windshield.Controllers
 		
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-			
-
-			
-            return View("Index", gameRepo);
+            return View("Index", gameRepo.GetAllGames());
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your app description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
 			
 		public ActionResult Statistics()
 		{
-			ViewBag.Message = "Your contact page.";
-
 			return View("Statistics");
 		}
 
 		public ActionResult MyGames()
 		{
-			ViewBag.Message = "Your contact page.";
-
 			return View("MyGames");
 		}
 
@@ -78,23 +66,9 @@ namespace Windshield.Controllers
 
 		public ActionResult Boards(Game game)
 		{
-			
-
-			if (game.name == "game")
-			{
-				var viewModel = boardRepo.GetBoards(gameRepo.GetGameByName("game"));
-				return View("Boards", viewModel.ToList());
-			}
-			else if (game.name == "TicTacToe")
-			{
-				var viewModel = boardRepo.GetBoards(gameRepo.GetGameByName("TicTacToe"));
-				return View("Boards", viewModel.ToList());
-			}
-			else
-			{
-				var ViewModel = boardRepo.GetBoards(gameRepo.GetGameByName("game"));
-				return View("Boards", ViewModel.ToList());
-			}
+			var name = gameRepo.GetGameByName(game.name);
+			var viewModel = boardRepo.GetBoards(name);
+			return View("Boards", viewModel);
 		}
     }
 }

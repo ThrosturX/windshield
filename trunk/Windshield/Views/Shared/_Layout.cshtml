@@ -24,57 +24,127 @@
 		{
 			@RenderSection("Header",false);
 		}
-
 	</head>
+
 	<body>
-		<div class="container-narrow">
-			
-			<!-- HEADER -->
 
-			<header id="overview" class="subhead">
-				<div class="containter">
-					<h1 class="hidden-phone">@Html.ActionLink("GameBoard", "Index", "Home")</h1>
-					<h1 class="visible-phone  header-color">
-						Board
-						Games
-					</h1>
-					<p class="lead hidden-phone">For all your gaming needs</p>
-				</div>
-				@Html.Partial("_LoginPartial")
-			</header>
+		<div id="main" class="span8 offset2 background-white">
+			<div class="row-fluid">
+				<!-- HEADER -->
+				<header id="overview" class="hidden-phone">
+					<div class="containter">
+						<h1 class="hidden-phone">@Html.ActionLink("BoardGames", "Index", "Home")</h1>
+						<h1 class="visible-phone  header-color">
+							@Html.ActionLink("Board\nGames", "Index", "Home")
+						</h1>
+						<p class="lead">For all your gaming needs</p>
+					</div>
+				</header>
 
-			<!-- NAVIGATION -->
-
-			<div class="">
-				<ul class="nav nav-tabs clearfix nav-bar">
-					<li>@Html.ActionLink("Games", "Index", "Home")</li>
-					<li>@Html.ActionLink("Statistics", "Statistics", "Home")</li>
-					@if (User.Identity.IsAuthenticated)
+				<!-- NAVIGATION -->
+				<!--
+				<div class="navbar">
+					<ul class="nav nav-pills nav-collapse collapse">
+						<li>@Html.ActionLink("Games", "Index", "Home")</li>
+						<li>@Html.ActionLink("Statistics", "Statistics", "Home")</li>
+						@if (User.Identity.IsAuthenticated)
+						{
+						<li>@Html.ActionLink("My Games", "MyGames", "Home")</li>
+						<li>@Html.ActionLink("CARDS", "DisplayCard", "Home")</li>
+						}
+					</ul>
+					<ul class="nav nav-pills nav-collapse collapse pull-right">
+					@if (Request.IsAuthenticated)
 					{
-					<li>@Html.ActionLink("My Games", "MyGames", "Home")</li>
-					<li>@Html.ActionLink("CARDS", "DisplayCard", "Home")</li>
+						<li>
+							@Html.ActionLink(User.Identity.Name, "ChangePassword", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "ChangePassword" })
+						</li>
+						<li>
+							<a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
+						</li>
 					}
-				</ul>
-			</div>
+					else
+					{
+						<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+						<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+					}
+					</ul>
+				</div>
+				-->
+
+				<div class="navbar">
+					<div class="navbar-inner">
+						<div class="container">
+							<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+								Menu
+							</a>
+							@Html.ActionLink("GameBoards", "Index", "Home", new { @class="brand hidden-desktop" })
+							<div class="nav-collapse collapse">
+								<ul class="nav nav-pills">
+									<li class="active">
+										<a href="#">Entry1</a>
+									</li>
+									<li>
+										<a href="#">Entry1</a>
+									</li>
+									<li>
+										<a href="#">Entry1</a>
+									</li>
+									<li>
+										<a href="#">Entry1</a>
+									</li>
+								</ul>
+								<ul class="nav nav-pills pull-right">
+								@if (Request.IsAuthenticated)
+								{
+									<li>
+										@Html.ActionLink(User.Identity.Name, "ChangePassword", "Account", routeValues: null, htmlAttributes: new { @class = "username" })
+									</li>
+									<li>
+										<a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
+									</li>
+								}
+								else
+								{
+									<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+									<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+								}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
 
 
-			<!-- CONTENT -->
+				<!-- CONTENT -->
 
-			<div class="container-fluid">
-				@RenderBody()
-			</div>
+				<div class="container-fluid background-white">
+					@RenderBody()
+				</div>
 
+			</div> <!-- class="row-fluid" -->
 			
-		</div> <!-- class="container-narrow" -->
+			<!-- space between main content and footer -->
+
+			<div class="row-fluid">
+
+			</div>
+
+		</div> <!-- id="main" class="span8 offset2 background-white" -->
 
 		<!-- FOOTER -->
 
-		<!--
-			<footer>
-				<p>Group 9</p>
+		<div class="footer span8 offset2 background-white">
+			<div class="well pagination-centered">
 				@Html.ActionLink("About", "About", "Home")
-			</footer>
-		-->
+			</div>
+		</div>
+
+		<!-- LOGOUT FORM -->
+
+		@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "active", style="display: none;" })) {
+			@Html.AntiForgeryToken()
+		}
 
 		<!-- SCRIPTS -->
 
