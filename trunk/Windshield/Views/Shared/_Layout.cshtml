@@ -45,13 +45,8 @@
 				<!--
 				<div class="navbar">
 					<ul class="nav nav-pills nav-collapse collapse">
-						<li>@Html.ActionLink("Games", "Index", "Home")</li>
-						<li>@Html.ActionLink("Statistics", "Statistics", "Home")</li>
-						@if (User.Identity.IsAuthenticated)
-						{
-						<li>@Html.ActionLink("My Games", "MyGames", "Home")</li>
-						<li>@Html.ActionLink("CARDS", "DisplayCard", "Home")</li>
-						}
+						
+						
 					</ul>
 					<ul class="nav nav-pills nav-collapse collapse pull-right">
 					@if (Request.IsAuthenticated)
@@ -73,6 +68,7 @@
 				-->
 
 				<div class="navbar">
+					<!-- remove div.navbar-inner to unify nav bar with main content -->
 					<div class="navbar-inner">
 						<div class="container">
 							<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -81,34 +77,29 @@
 							@Html.ActionLink("GameBoards", "Index", "Home", new { @class="brand hidden-desktop" })
 							<div class="nav-collapse collapse">
 								<ul class="nav nav-pills">
-									<li class="active">
-										<a href="#">Entry1</a>
-									</li>
-									<li>
-										<a href="#">Entry1</a>
-									</li>
-									<li>
-										<a href="#">Entry1</a>
-									</li>
-									<li>
-										<a href="#">Entry1</a>
-									</li>
+									<li>@Html.ActionLink("Games", "Index", "Home")</li>
+									<li>@Html.ActionLink("Statistics", "Statistics", "Home")</li>
+									@if (User.Identity.IsAuthenticated)
+									{
+									<li>@Html.ActionLink("My Games", "MyGames", "Home")</li>
+									<li>@Html.ActionLink("CARDS", "DisplayCard", "Home")</li>
+									}
 								</ul>
 								<ul class="nav nav-pills pull-right">
-								@if (Request.IsAuthenticated)
-								{
+									@if (Request.IsAuthenticated)
+									{
 									<li>
 										@Html.ActionLink(User.Identity.Name, "ChangePassword", "Account", routeValues: null, htmlAttributes: new { @class = "username" })
 									</li>
 									<li>
 										<a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
 									</li>
-								}
-								else
-								{
+									}
+									else
+									{
 									<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
 									<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-								}
+									}
 								</ul>
 							</div>
 						</div>
