@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="verk2013_hopur09" Class="BoardGamesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=hrnem.ru.is;Initial Catalog=verk2013_hopur09;Persist Security Info=True;User ID=hopur09_user" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="verk2013_hopur09ConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=hrnem.ru.is;Initial Catalog=verk2013_hopur09;Persist Security Info=True;User ID=hopur09_user" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DefaultConnection" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Players" Member="Players">
     <Type Name="Player">
       <Column Name="idUser" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -22,26 +22,14 @@
       <Association Name="Game_Board" Member="Game" ThisKey="idGame" OtherKey="id" Type="Game" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Games" Member="Games">
-    <Type Name="Game">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="minPlayers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="maxPlayers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="timesPlayed" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Game_Board" Member="Boards" ThisKey="id" OtherKey="idGame" Type="Board" />
-      <Association Name="Game_GameRating" Member="GameRatings" ThisKey="id" OtherKey="idGame" Type="GameRating" />
-    </Type>
-  </Table>
   <Table Name="dbo.GameRatings" Member="GameRatings">
     <Type Name="GameRating">
       <Column Name="idUser" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="idGame" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="rating" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="timesPlayed" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Game_GameRating" Member="Game" ThisKey="idGame" OtherKey="id" Type="Game" IsForeignKey="true" />
       <Association Name="User_GameRating" Member="User" ThisKey="idUser" OtherKey="UserId" Type="User" IsForeignKey="true" />
+      <Association Name="Game_GameRating" Member="Game" ThisKey="idGame" OtherKey="id" Type="Game" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Friends" Member="Friends">
@@ -97,6 +85,20 @@
       <Association Name="User_UserRating" Member="UserRatings" ThisKey="UserId" OtherKey="idRater" Type="UserRating" />
       <Association Name="User_UserRating1" Member="UserRatings1" ThisKey="UserId" OtherKey="idUser" Type="UserRating" />
       <Association Name="User_GroupMember" Member="GroupMembers" ThisKey="UserId" OtherKey="idUser" Type="GroupMember" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Games" Member="Games">
+    <Type Name="Game">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="minPlayers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="maxPlayers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="timesPlayed" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="model" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="image" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Game_Board" Member="Boards" ThisKey="id" OtherKey="idGame" Type="Board" />
+      <Association Name="Game_GameRating" Member="GameRatings" ThisKey="id" OtherKey="idGame" Type="GameRating" />
     </Type>
   </Table>
 </Database>

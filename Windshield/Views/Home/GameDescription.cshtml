@@ -1,10 +1,10 @@
 ﻿@model Windshield.Models.Game
 
-<h1>@Model.name</h1>
-<img src="~/Content/themes/base/images/ui-icons_cd0a0a_256x240.png" alt="myndafleik" />
-<h2>Game Description</h2>
+<h2>@Model.name</h2>
+@Html.Partial("_GameImagePartial", Model)
+<h3>Game Description</h3>
 <p>@Model.description</p>
-<h2>Your Statistics</h2>
+<h3>Your Statistics</h3>
 <!-- TODO: check how ASPNET user tables work -->
 <button>@Html.ActionLink("Create Game", "GameLobby", "Home")</button>
-<button>@Html.ActionLink("Find Game", "Boards", "Home")</button>
+<button>@Html.ActionLink("Find Game", "Boards", new {name = Model.name })</button>
