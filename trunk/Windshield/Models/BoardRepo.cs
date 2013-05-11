@@ -90,12 +90,15 @@ namespace Windshield.Models
 				   select player.User;
 		}
 
-
+		/// <summary>
+		/// Returns the owner of a specific board
+		/// </summary>
 		public User GetBoardOwner(Board board)
 		{
-			return (from user in db.Users
-					where user.UserId == board.idOwner
-					select user).SingleOrDefault();
+			var result =  (from user in db.Users
+			               where user.UserId == board.idOwner
+			               select user).SingleOrDefault();
+			return result;
 		}
 	}
 }

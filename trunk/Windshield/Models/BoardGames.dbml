@@ -85,6 +85,7 @@
       <Association Name="User_UserRating" Member="UserRatings" ThisKey="UserId" OtherKey="idRater" Type="UserRating" />
       <Association Name="User_UserRating1" Member="UserRatings1" ThisKey="UserId" OtherKey="idUser" Type="UserRating" />
       <Association Name="User_GroupMember" Member="GroupMembers" ThisKey="UserId" OtherKey="idUser" Type="GroupMember" />
+      <Association Name="User_UserDetail" Member="UserDetail" ThisKey="UserId" OtherKey="idUser" Type="UserDetail" Cardinality="One" />
     </Type>
   </Table>
   <Table Name="dbo.Games" Member="Games">
@@ -99,6 +100,22 @@
       <Column Name="image" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Game_Board" Member="Boards" ThisKey="id" OtherKey="idGame" Type="Board" />
       <Association Name="Game_GameRating" Member="GameRatings" ThisKey="id" OtherKey="idGame" Type="GameRating" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserDetails" Member="UserDetails">
+    <Type Name="UserDetail">
+      <Column Name="idUser" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="gender" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="age" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="settings" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="occupation" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="country" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="avatar" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="userRating" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateJoined" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="User_UserDetail" Member="User" ThisKey="idUser" OtherKey="UserId" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
