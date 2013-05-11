@@ -57,6 +57,9 @@ namespace Windshield.Models
     partial void InsertGame(Game instance);
     partial void UpdateGame(Game instance);
     partial void DeleteGame(Game instance);
+    partial void InsertUserDetail(UserDetail instance);
+    partial void UpdateUserDetail(UserDetail instance);
+    partial void DeleteUserDetail(UserDetail instance);
     #endregion
 		
 		public BoardGamesDataContext() : 
@@ -158,6 +161,14 @@ namespace Windshield.Models
 			get
 			{
 				return this.GetTable<Game>();
+			}
+		}
+		
+		public System.Data.Linq.Table<UserDetail> UserDetails
+		{
+			get
+			{
+				return this.GetTable<UserDetail>();
 			}
 		}
 	}
@@ -1685,6 +1696,8 @@ namespace Windshield.Models
 		
 		private EntitySet<GroupMember> _GroupMembers;
 		
+		private EntityRef<UserDetail> _UserDetail;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1710,6 +1723,7 @@ namespace Windshield.Models
 			this._UserRatings = new EntitySet<UserRating>(new Action<UserRating>(this.attach_UserRatings), new Action<UserRating>(this.detach_UserRatings));
 			this._UserRatings1 = new EntitySet<UserRating>(new Action<UserRating>(this.attach_UserRatings1), new Action<UserRating>(this.detach_UserRatings1));
 			this._GroupMembers = new EntitySet<GroupMember>(new Action<GroupMember>(this.attach_GroupMembers), new Action<GroupMember>(this.detach_GroupMembers));
+			this._UserDetail = default(EntityRef<UserDetail>);
 			OnCreated();
 		}
 		
@@ -1901,6 +1915,35 @@ namespace Windshield.Models
 			set
 			{
 				this._GroupMembers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserDetail", Storage="_UserDetail", ThisKey="UserId", OtherKey="idUser", IsUnique=true, IsForeignKey=false)]
+		public UserDetail UserDetail
+		{
+			get
+			{
+				return this._UserDetail.Entity;
+			}
+			set
+			{
+				UserDetail previousValue = this._UserDetail.Entity;
+				if (((previousValue != value) 
+							|| (this._UserDetail.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._UserDetail.Entity = null;
+						previousValue.User = null;
+					}
+					this._UserDetail.Entity = value;
+					if ((value != null))
+					{
+						value.User = this;
+					}
+					this.SendPropertyChanged("UserDetail");
+				}
 			}
 		}
 		
@@ -2292,6 +2335,349 @@ namespace Windshield.Models
 		{
 			this.SendPropertyChanging();
 			entity.Game = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserDetails")]
+	public partial class UserDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _idUser;
+		
+		private bool _gender;
+		
+		private int _age;
+		
+		private string _settings;
+		
+		private string _occupation;
+		
+		private string _country;
+		
+		private string _avatar;
+		
+		private string _email;
+		
+		private int _userRating;
+		
+		private System.Nullable<System.DateTime> _dateJoined;
+		
+		private string _name;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidUserChanging(System.Guid value);
+    partial void OnidUserChanged();
+    partial void OngenderChanging(bool value);
+    partial void OngenderChanged();
+    partial void OnageChanging(int value);
+    partial void OnageChanged();
+    partial void OnsettingsChanging(string value);
+    partial void OnsettingsChanged();
+    partial void OnoccupationChanging(string value);
+    partial void OnoccupationChanged();
+    partial void OncountryChanging(string value);
+    partial void OncountryChanged();
+    partial void OnavatarChanging(string value);
+    partial void OnavatarChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
+    partial void OnuserRatingChanging(int value);
+    partial void OnuserRatingChanged();
+    partial void OndateJoinedChanging(System.Nullable<System.DateTime> value);
+    partial void OndateJoinedChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    #endregion
+		
+		public UserDetail()
+		{
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUser", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid idUser
+		{
+			get
+			{
+				return this._idUser;
+			}
+			set
+			{
+				if ((this._idUser != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidUserChanging(value);
+					this.SendPropertyChanging();
+					this._idUser = value;
+					this.SendPropertyChanged("idUser");
+					this.OnidUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gender", DbType="Bit NOT NULL")]
+		public bool gender
+		{
+			get
+			{
+				return this._gender;
+			}
+			set
+			{
+				if ((this._gender != value))
+				{
+					this.OngenderChanging(value);
+					this.SendPropertyChanging();
+					this._gender = value;
+					this.SendPropertyChanged("gender");
+					this.OngenderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_age", DbType="Int NOT NULL")]
+		public int age
+		{
+			get
+			{
+				return this._age;
+			}
+			set
+			{
+				if ((this._age != value))
+				{
+					this.OnageChanging(value);
+					this.SendPropertyChanging();
+					this._age = value;
+					this.SendPropertyChanged("age");
+					this.OnageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_settings", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string settings
+		{
+			get
+			{
+				return this._settings;
+			}
+			set
+			{
+				if ((this._settings != value))
+				{
+					this.OnsettingsChanging(value);
+					this.SendPropertyChanging();
+					this._settings = value;
+					this.SendPropertyChanged("settings");
+					this.OnsettingsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_occupation", DbType="NVarChar(MAX)")]
+		public string occupation
+		{
+			get
+			{
+				return this._occupation;
+			}
+			set
+			{
+				if ((this._occupation != value))
+				{
+					this.OnoccupationChanging(value);
+					this.SendPropertyChanging();
+					this._occupation = value;
+					this.SendPropertyChanged("occupation");
+					this.OnoccupationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_country", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string country
+		{
+			get
+			{
+				return this._country;
+			}
+			set
+			{
+				if ((this._country != value))
+				{
+					this.OncountryChanging(value);
+					this.SendPropertyChanging();
+					this._country = value;
+					this.SendPropertyChanged("country");
+					this.OncountryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_avatar", DbType="NVarChar(MAX)")]
+		public string avatar
+		{
+			get
+			{
+				return this._avatar;
+			}
+			set
+			{
+				if ((this._avatar != value))
+				{
+					this.OnavatarChanging(value);
+					this.SendPropertyChanging();
+					this._avatar = value;
+					this.SendPropertyChanged("avatar");
+					this.OnavatarChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this.OnemailChanging(value);
+					this.SendPropertyChanging();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userRating", DbType="Int NOT NULL")]
+		public int userRating
+		{
+			get
+			{
+				return this._userRating;
+			}
+			set
+			{
+				if ((this._userRating != value))
+				{
+					this.OnuserRatingChanging(value);
+					this.SendPropertyChanging();
+					this._userRating = value;
+					this.SendPropertyChanged("userRating");
+					this.OnuserRatingChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateJoined", DbType="DateTime")]
+		public System.Nullable<System.DateTime> dateJoined
+		{
+			get
+			{
+				return this._dateJoined;
+			}
+			set
+			{
+				if ((this._dateJoined != value))
+				{
+					this.OndateJoinedChanging(value);
+					this.SendPropertyChanging();
+					this._dateJoined = value;
+					this.SendPropertyChanged("dateJoined");
+					this.OndateJoinedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserDetail", Storage="_User", ThisKey="idUser", OtherKey="UserId", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.UserDetail = null;
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.UserDetail = this;
+						this._idUser = value.UserId;
+					}
+					else
+					{
+						this._idUser = default(System.Guid);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }
