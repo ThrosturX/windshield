@@ -28,7 +28,7 @@
 
 	<body>
 
-		<div id="main" class="span8 offset2 background-white">
+		<div id="main" class="container background-white">
 			<div class="row-fluid">
 				<!-- HEADER -->
 				<header id="overview" class="hidden-phone">
@@ -42,30 +42,6 @@
 				</header>
 
 				<!-- NAVIGATION -->
-				<!--
-				<div class="navbar">
-					<ul class="nav nav-pills nav-collapse collapse">
-						
-						
-					</ul>
-					<ul class="nav nav-pills nav-collapse collapse pull-right">
-					@if (Request.IsAuthenticated)
-					{
-						<li>
-							@Html.ActionLink(User.Identity.Name, "ChangePassword", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "ChangePassword" })
-						</li>
-						<li>
-							<a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
-						</li>
-					}
-					else
-					{
-						<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-						<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-					}
-					</ul>
-				</div>
-				-->
 
 				<div class="navbar">
 					<!-- remove div.navbar-inner to unify nav bar with main content -->
@@ -125,7 +101,7 @@
 
 		<!-- FOOTER -->
 
-		<div class="footer span8 offset2 background-white">
+		<div class="container footer background-white">
 			<div class="well pagination-centered">
 				@Html.ActionLink("About", "About", "Home")
 			</div>

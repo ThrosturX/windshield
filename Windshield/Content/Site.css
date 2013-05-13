@@ -89,6 +89,11 @@ ul.thumbnails li.span12 + li
 	margin-left : 0px;
 }
 
+ul.thumbnails li
+{
+	text-align: center;
+}
+
 /* banner */
 
 #overview
@@ -97,6 +102,7 @@ ul.thumbnails li.span12 + li
 	padding: 32px;
 	margin: 0;
 	color: white;
+	background-color: black;
 	background-repeat: no-repeat;
 	height: 64px;
 }
