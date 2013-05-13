@@ -89,5 +89,19 @@ namespace Windshield.Controllers
 		{
 			return View("GameLobby", game);
 		}
+
+		public ActionResult Boards(Game game)
+		{
+			var name = gameRepository.GetGameByName(game.name);
+			var viewModel = boardRepository.GetBoards(name);
+			return View("Boards", viewModel);
+		}
+
+		public ActionResult GameDescription(Game gameName)
+		{
+			var game = gameRepository.GetGameByName(gameName.name);
+			return View("GameDescription", game);
+		}
+
     }
 }
