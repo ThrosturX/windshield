@@ -1,43 +1,6 @@
 ﻿@model int
 
 <form id="chat" runat="server">
-
-	<script type="text/javascript">
-		$(function () {
-
-			var group = '@(Model)';
-			var chatConnection = $.connection.gameHub;
-			var user = '@(Context.User.Identity.Name)';
-
-			chatConnection.client.addMessage = function (message) {
-				$('#listMessages').append('<li>' + message + '</li>');
-			};
-
-			$("#sendMessage").click(function() {
-				chatConnection.server.send(group, user, $('#txtMessage').val());
-			});
-
-			$('#txtMessage').bind('keydown', function (e) {
-
-				if (e.keyCode === 13) { // 13 is enter key
-					chatConnection.server.send(group, user, $('#txtMessage').val());
-					e.preventDefault();
-				}
-
-			});
-
-			$(document).keypress(function(e) {
-				if(e.which == 13) {
-					chatConnection.server.send(group, user, $('#txtMessage').val());
-				}
-			});
-
-			$.connection.hub.start().done(function() {
-				chatConnection.server.join(group)
-			} );
-		});
-	</script>
-
 	<div id="chatBox">
 		<input type="text" id="txtMessage" />
 		<input type="button" id="sendMessage" value="Send" />
@@ -45,7 +8,41 @@
 
 
 		</ul>
-
 	</div>
-
 </form>
+
+<script type="text/javascript">
+	$(function () {
+
+		var group = '@(Model)';
+		var chatConnection = $.connection.gameHub;
+		var user = '@(Context.User.Identity.Name)';
+
+		chatConnection.client.addMessage = function (message) {
+			$('#listMessages').append('<li>' + message + '</li>');
+		};
+
+		$("#sendMessage").click(function() {
+			chatConnection.server.send(group, user, $('#txtMessage').val());
+		});
+
+		$('#txtMessage').bind('keydown', function (e) {
+
+			if (e.keyCode === 13) { // 13 is enter key
+				chatConnection.server.send(group, user, $('#txtMessage').val());
+				e.preventDefault();
+			}
+
+		});
+
+		$(document).keypress(function(e) {
+			if(e.which == 13) {
+				chatConnection.server.send(group, user, $('#txtMessage').val());
+			}
+		});
+
+		$.connection.hub.start().done(function() {
+			chatConnection.server.join(group)
+		} );
+	});
+</script>
