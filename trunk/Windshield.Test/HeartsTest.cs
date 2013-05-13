@@ -84,7 +84,6 @@ namespace Windshield.Test
 		[TestMethod]
 		public void CheckIfFirstTurnIsCorrect()
 		{
-			// TODO: find the heisenbug
 			Assert.AreEqual(game.GetStartingPlayer(null), game.turn);
 		}
 
