@@ -9,13 +9,35 @@ using System.Runtime.CompilerServices;
 
 namespace Windshield.Models.Games
 {
+	/// <summary>
+	/// A Tic Tac Toe logic and view model class
+	/// </summary>
+	/// <remarks>
+	/// When creating a new board
+	///   List<User> players = ...;  // some list of one to two users
+	///   var ttt = new TicTacToe(players);
+	///   Board board = new Board();
+	///   board.status = ttt.GetStatus();
+	///   board.idGame = ...;  // get id of the game from the repo
+	///   boardRepo.AddBoard(board);
+	///   boardRepo.Save()
+	/// When getting the board from database
+	///   Board board = ...;  // get board from repo
+	///   var ttt = new TicTacToe();
+	///   ttt.SetStatus(board.status);
+	///   if (ttt.TryAction(...))
+	///   {
+	///	      board.status = ttt.GetStatus();
+	///	      boardRepo.Save();
+	///	      // broadcast with SignalR
+	///	  }
+	///   
+	/// </remarks>
 	public class TicTacToe : AGame
 	{
 		/// <summary>
 		/// Converts a cell number to a coordinate struct.
 		/// </summary>
-		/// <param name="cell"></param>
-		/// <returns></returns>
 		static internal Coord CellToCoord(int cell)
 		{
 			Coord result = new Coord();
@@ -38,7 +60,6 @@ namespace Windshield.Models.Games
 			return (input.y * 3 + input.x);
 		}
 
-		public Board board;
 		public char[,] grid;
 		internal int freeSquares;
 		internal TTTPlayer turn;
@@ -48,12 +69,11 @@ namespace Windshield.Models.Games
 
 		public TicTacToe()
 		{
-			board = new Board();
-			board.status = "";
 			grid = new char[3, 3];
 			ClearBoard();
 			InitializePlayers();
 		}
+
 		public TicTacToe(List<User> players)
 			: this()
 		{
@@ -68,7 +88,7 @@ namespace Windshield.Models.Games
 				player2.user.UserName = "Computer";
 				player2.isAI = true;
 			}
-			//board.idOwner = player1.user.UserId;
+			//TODO: Þarf þetta nokkuð ?   board.idOwner = player1.user.UserId;
 		}
 
 		/// <summary>
@@ -112,9 +132,6 @@ namespace Windshield.Models.Games
 		/// <summary>
 		/// Inserts a symbol into a cell in the game grid.
 		/// </summary>
-		/// <param name="symbol"></param>
-		/// <param name="cell"></param>
-		/// <returns></returns>
 		internal bool InsertSymbol(char symbol, int cell)
 		{
 			Coord location = CellToCoord(cell);
@@ -136,7 +153,7 @@ namespace Windshield.Models.Games
 
 			// swap players
 			SwitchTurns();
-
+			
 			return true;
 		}
 
@@ -333,12 +350,12 @@ namespace Windshield.Models.Games
 			return builder.ToString();
 		}
 
-		//	
-		internal void SetStatus(string status, List<User> players)
+		/// <summary>
+		/// Initiates the board
+		/// </summary>
+		internal void SetStatus(string status)
 		{
-			// TODO
-
-
+			
 		}
 
 		/// <summary>
@@ -400,11 +417,6 @@ namespace Windshield.Models.Games
 
 			// No success
 			return false;
-		}
-
-		public override void Update()
-		{
-			board.status = GetStatus();
 		}
 
 		internal struct Coord
