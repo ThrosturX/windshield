@@ -17,7 +17,7 @@
 		@foreach (Windshield.Models.Game game in Model)
 		{
 		<li class="span4">
-			<a href="@Url.Action("GameDescription", "Games", new { name = game.name })">
+			<a href="@Url.Action("GameDescription", "Home", new { name = game.name })">
 				@Html.Partial("_GameImagePartial", game)
 			</a>
 		</li>

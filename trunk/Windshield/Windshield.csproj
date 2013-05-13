@@ -340,10 +340,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Statistics.cshtml" />
-    <Content Include="Views\Home\MyGames.cshtml" />
-    <Content Include="Views\Games\GameDescription.cshtml" />
+    <Content Include="Views\Games\MyGames.cshtml" />
+    <Content Include="Views\Home\GameDescription.cshtml" />
     <Content Include="Views\Games\GameLobby.cshtml" />
-    <Content Include="Views\Home\TTT.cshtml" />
     <Content Include="Views\Games\TicTacToe.cshtml" />
     <Content Include="Views\Games\Index.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
