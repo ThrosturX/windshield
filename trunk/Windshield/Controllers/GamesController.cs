@@ -45,15 +45,16 @@ namespace Windshield.Controllers
 			User playerTwo = userRepository.GetUserByName("banana");
 			players.Add(playerTwo);
 			TicTacToe gameBoard = new TicTacToe(players);
-		//	GameInstance theGame = new GameInstance(gameBoard.board.id, gameBoard, "TicTacToe");
-
-	//		boardRepository.AddBoard(gameBoard.board);
-			
-	//		gameBoard.board.idOwner = playerOne.UserId;
-	//		gameBoard.board.idGame = gameRepository.GetGameByName("Tic Tac Toe").id;
+			Board board = new Board();
+			board.status = gameBoard.GetStatus();
+			board.idGame = 2; // TODO: FIX
+			boardRepository.AddBoard(board);
 			boardRepository.Save();
+			gameBoard.id = board.id;
 
-			return View("Index");
+			GameInstance theGame = new GameInstance(gameBoard, board);
+
+			return View("Index", theGame);
 		}
 
 		[Authorize]
