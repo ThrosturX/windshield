@@ -73,5 +73,21 @@ namespace Windshield.Models
 					where gameRatings.idUser == user.UserId && gameRatings.idGame == game.id
 				   select gameRatings).FirstOrDefault();
 		}
+
+		public IQueryable<User> GetAllUsers()
+		{
+			return (from user in db.Users
+				   select user);
+		}
+
+		public IQueryable<User> GetTopUsersByGame(Game game)
+		{
+			return	from gameRatings in db.GameRatings
+					where game.id == gameRatings.idGame
+					orderby gameRatings.rating descending
+					select gameRatings.User;
+
+
+		}
 	}
 }

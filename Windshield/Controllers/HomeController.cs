@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Windshield.Common;
 using Windshield.Models;
 
 namespace Windshield.Controllers
@@ -11,6 +12,7 @@ namespace Windshield.Controllers
     {
 		private IGameRepo gameRepo = new GameRepo();
 		private IBoardRepo boardRepo = new BoardRepo();
+		private IUserRepo userRepo = new UserRepo();
 		
 		public HomeController()
 		{
@@ -40,12 +42,17 @@ namespace Windshield.Controllers
 			
 		public ActionResult Statistics()
 		{
-			return View("Statistics");
-		}
+			Game game = gameRepo.GetGameByName("Tic Tac Toe");
+
+			var derp = userRepo.GetTopUsersByGame(game);
+			return View("Statistics", derp);
+		} 
 
 		public ActionResult DisplayCard()
 		{
-			return View("DisplayCard");
+			CardDeck cardDeck = new CardDeck();
+			cardDeck.Shuffle();
+			return View("DisplayCard", cardDeck);
 		}
 
 		public ActionResult GameDescription(Game gameName)

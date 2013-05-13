@@ -203,7 +203,7 @@ table#tic-tac-toe td:hover
 {
 	height: 8.85em;
 	width: 6.4em;
-	background: #fff url('../Images/naked.jpg'); 
+	background: #fff url('../Images/cardback.jpg'); 
 	background-size: 100% 100%;
 }
 
@@ -268,7 +268,6 @@ table#tic-tac-toe td:hover
         -o-transition: all 0.5s ease-in-out; 
         -ms-transition: all 0.5s ease-in-out; 
 }
-
 
 
 

@@ -1,3 +1,11 @@
-﻿
+﻿@model IQueryable<Windshield.Models.User>
+
 <h2>Here are some amazing Statistics:</h2>
-<p class="lead">Bjössi er bestur</p>
+<ul>
+@foreach (Windshield.Models.User user in Model)
+{
+	<li>@user.UserName - </li>
+}
+
+</ul>
+

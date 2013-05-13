@@ -29,27 +29,27 @@
 				int i = 1;
 					foreach(var card in Model)
 					{
-						if(card.Face > 1 && card.Face <= 10)
+						if(card.face > 1 && card.face <= 10)
 						{
 						//gice each card in our deck a unique identity
-						<div id="card_@i" class="cardback rank_@card.Face @card.Suit"> <span class="spanDisplay" style="display:none;"> @card.Face <br />  </span> </div>
+						<div id="card_@i" class="cardback rank_@card.face @card.suit"> <span class="spanDisplay" style="display:none;"> @card.face <br />  </span> </div>
 						}
 						
 						else
 						{
-							switch (card.Face)
+							switch (card.face)
 							{
 								case (1):
-									<div id="card_@i" class="cardback rank_@card.Face @card.Suit"> <span class="spanDisplay" style="display:none;"> A <br /> </span> </div>
+									<div id="card_@i" class="cardback rank_@card.face @card.suit"> <span class="spanDisplay" style="display:none;"> A <br /> </span> </div>
 									break;
 								case (11):
-									<div id="card_@i" class="cardback rank_@card.Face @card.Suit"> <span class="spanDisplay" style="display:none;"> J <br /> </span> </div>	
+									<div id="card_@i" class="cardback rank_@card.face @card.suit"> <span class="spanDisplay" style="display:none;"> J <br /> </span> </div>	
 									break;
 								case (12):
-									<div id="card_@i" class="cardback rank_@card.Face @card.Suit"> <span class="spanDisplay" style="display:none;"> Q <br /> </span> </div>	
+									<div id="card_@i" class="cardback rank_@card.face @card.suit"> <span class="spanDisplay" style="display:none;"> Q <br /> </span> </div>	
 									break;
 								case (13):
-									<div id="card_@i" class="cardback rank_@card.Face @card.Suit"> <span class="spanDisplay" style="display:none;"> K <br /> </span> </div>
+									<div id="card_@i" class="cardback rank_@card.face @card.suit"> <span class="spanDisplay" style="display:none;"> K <br /> </span> </div>
 									break;
 								default:
 									break;

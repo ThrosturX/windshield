@@ -21,6 +21,9 @@ namespace Windshield.Models
 		IQueryable<User> GetGroupMembers(Group group);
 		IQueryable<User> GetFriends(User user);
 		IQueryable<GameRating> GetGameRatings(User user);
+		IQueryable<User> GetAllUsers();
+		IQueryable<User> GetTopUsersByGame(Game game);
 		GameRating GetGameRatingByGame(User user, Game game);
+
 	}
 }
