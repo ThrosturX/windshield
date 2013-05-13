@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Windshield.Models;
-using Windshield.Models.Games;
+using Windshield.Models.Games.TicTacToe;
 using Windshield.Test.MockObjects;
 
 namespace Windshield.Test
@@ -292,7 +292,7 @@ namespace Windshield.Test
 			game.InsertSymbol('O', 6);
 			game.InsertSymbol('X', 8);
 
-			TicTacToe.TTTPlayer winner = game.CheckWinner();
+			TPlayer winner = game.CheckWinner();
 
 			// Act
 			game.EndGame(winner);
@@ -376,7 +376,28 @@ namespace Windshield.Test
 		public void GettingStatusStringOfTicTacToeGame()
 		{
 
-			Assert.AreEqual("         1-X0W0L0T",game.GetStatus());
+			Assert.AreEqual("         |1|X|0|0|0",game.GetStatus());
+		}
+
+		[TestMethod]
+		public void CheckingIfSaveStringsAreIdempotent()
+		{
+			string status = game.GetStatus();
+
+			User sally = usr.GetUserByName("Sally");
+			User jonas = usr.GetUserByName("Jonas");
+			List<User> users = new List<User>();
+
+			users.Add(sally);
+			users.Add(jonas);
+
+			TicTacToe newGame = new TicTacToe(users);
+
+			newGame.SetStatus(status);
+
+			string status2 = newGame.GetStatus();
+
+			Assert.AreEqual(status, status2);
 		}
 	}
 }

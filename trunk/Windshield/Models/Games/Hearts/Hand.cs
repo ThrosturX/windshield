@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Windshield.Common;
 
-namespace Windshield.Games.Hearts
+namespace Windshield.Models.Games.Hearts
 {
 	public class Hand : List<Card>
 	{
