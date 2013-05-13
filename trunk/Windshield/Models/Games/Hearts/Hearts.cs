@@ -43,12 +43,20 @@ namespace Windshield.Games.Hearts
 		public Player turn;
 		public CardDeck deck;
 		public Trick trick;
+		public Board board;
+		public bool brokenHearts;
+		public bool started = false;
 
 		/// <summary>
 		/// Default constructor. Note that instances require players to be instantiated!
 		/// </summary>
 		public Hearts()
 		{
+			board = new Board();
+			board.status = "";
+
+			players = new Player[4];
+
 			for (int i = 0; i < 4; ++i)
 			{
 				players[i] = new Player();
@@ -56,14 +64,15 @@ namespace Windshield.Games.Hearts
 
 			deck = new CardDeck();
 			turn = players[0];
-			trick.ongoing = false;
+			brokenHearts = false;
+			started = false;
 		}
 
 		/// <summary>
 		/// Awesome constructor.
 		/// </summary>
 		/// <param name="users">List of users</param>
-		public Hearts(List<User> users)
+		public Hearts(List<User> users) : this()
 		{
 			if (users.Count <= 4)
 			{
@@ -152,7 +161,21 @@ namespace Windshield.Games.Hearts
 			deck.Shuffle();
 			for (int i = 0; i < 4; ++i)
 			{
-				players[i].hand = (Hand)deck.GetCards(13);
+				players[i].hand = new Hand(deck.GetCards(13));
+			}
+		}
+
+		/// <summary>
+		/// Makes it the next player's turn
+		/// </summary>
+		public void IncrementTurn()
+		{
+			for (int i = 0; i < 4; ++i)
+			{
+				if (turn == players[i])
+				{
+					turn = players[(++i % 4)];
+				}
 			}
 		}
 
@@ -166,8 +189,12 @@ namespace Windshield.Games.Hearts
 
 			for (int i = 0; i < 4; ++i)
 			{
-				if (players[i].hand.Exists(x => x == match)) 
-					return players[i];
+
+				foreach (var card in players[i].hand)
+				{
+					if (card.suit == Suit.Club && card.face == 2)
+						return players[i];
+				}
 			}
 
 			return null;
@@ -204,6 +231,24 @@ namespace Windshield.Games.Hearts
 							return false;
 						}
 					}
+
+					// check if he's playing hearts, and only allow him to play it if hearts are broken
+					// or if he has no other choice
+					if (card.suit == Suit.Heart && trick.leader != Suit.Heart)
+					{
+						// check if hearts are broken
+						if (brokenHearts == false)
+						{
+							// check if he only has hearts
+							foreach (var found in player.hand)
+							{
+								if (found.suit != Suit.Heart)
+								{
+									return false;
+								}
+							}
+						}
+					}
 				}
 
 				// add the card to the trick
@@ -227,6 +272,7 @@ namespace Windshield.Games.Hearts
 				trick = new Trick(player, card);
 			}
 
+			IncrementTurn();
 			return true;
 		}
 	}

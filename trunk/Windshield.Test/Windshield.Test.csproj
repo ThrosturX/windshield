@@ -55,6 +55,7 @@
     <Compile Include="MockObjects\MockUserRepo.cs" />
     <Compile Include="TicTacToeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="HeartsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Windshield\Windshield.csproj">
