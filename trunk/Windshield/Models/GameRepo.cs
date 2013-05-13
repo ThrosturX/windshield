@@ -69,8 +69,8 @@ namespace Windshield.Models
 		{
 			return from gameRatings in db.GameRatings
 				   where gameRatings.idGame == game.id
+				   orderby gameRatings.rating descending
 				   select gameRatings;
 		}
-
 	}
 }

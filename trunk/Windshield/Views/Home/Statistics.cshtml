@@ -1,11 +1,36 @@
-﻿@model IQueryable<Windshield.Models.User>
+﻿@model IQueryable<Windshield.Models.GameRating>
+<script src="@Url.Content("~/Scripts/GetStatistics.js")" type="text/javascript"></script>
 
 <h2>Here are some amazing Statistics:</h2>
-<ul>
-@foreach (Windshield.Models.User user in Model)
-{
-	<li>@user.UserName - </li>
-}
 
-</ul>
+<select id="dropdown" name="dropdown">
+	<option value="1" selected="selected">Tic Tac Toe</option>
+	<option value="2">Hearts</option>
+</select>
 
+<table id="statistics">
+		<thead>
+			<tr>
+				<th>Username</th>
+				<th>Elo Rating</th>
+			</tr>
+		</thead>
+	<tbody id="statbody">
+
+	</tbody>
+
+</table>
+
+<script id ="StatsTemplate" type ="text/html">
+	<table id="stats">
+		<tbody>
+			<tr>
+				<td id="name"></td>
+				<td id="rating"></td>
+			</tr>
+		</tbody>
+
+	</table>
+
+
+</script>

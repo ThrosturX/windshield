@@ -8,12 +8,12 @@ using Windshield.Models;
 
 namespace Windshield.Controllers
 {
-    public class HomeController : Controller
-    {
+	public class HomeController : Controller
+	{
 		private IGameRepo gameRepo = new GameRepo();
 		private IBoardRepo boardRepo = new BoardRepo();
 		private IUserRepo userRepo = new UserRepo();
-		
+
 		public HomeController()
 		{
 			//repository = new GameRepo();
@@ -23,33 +23,37 @@ namespace Windshield.Controllers
 		{
 			gameRepo = repo;
 		}
-		
-        public ActionResult Index()
-        {
-            return View("Index", gameRepo.GetAllGames());
-        }
 
-        public ActionResult About()
-        {
-            return View();
-        }
+		public ActionResult Index()
+		{
+			return View("Index", gameRepo.GetAllGames());
+		}
 
-        public ActionResult Contact()
-        {
-            return View();
-        }
+		public ActionResult About()
+		{
+			return View();
+		}
 
-			
+		public ActionResult Contact()
+		{
+			return View();
+		}
+
+
 		public ActionResult Statistics()
 		{
 			Game game = gameRepo.GetGameByName("Tic Tac Toe");
 
-			var derp = userRepo.GetTopUsersByGame(game);
-			return View("Statistics", derp);
-		} 
+			var derp = gameRepo.GetTopRatings(game);
+
+			//ViewData["GameName"] = new SelectList(
+			//Games,
+		
+			return View("Statistics");
+		}
 
 		public ActionResult DisplayCard()
-		{
+		{ 
 			CardDeck cardDeck = new CardDeck();
 			cardDeck.Shuffle();
 			return View("DisplayCard", cardDeck);
@@ -61,5 +65,17 @@ namespace Windshield.Controllers
 			return View("GameDescription", game);
 		}
 
-    }
+		public JsonResult GetStatistics(Game gameName)
+		{
+			Game game = gameRepo.GetGameByName(gameName.name);
+
+			var derp = gameRepo.GetTopRatings(game);
+
+			//TODO: Fix this circular reference thingamajing, however possible
+			//might be the only way is to make a viewmodel class which contains exacly the properties
+			//we need for our javascript (userName and rating).
+			return Json(derp, JsonRequestBehavior.AllowGet);
+		}
+
+	}
 }
