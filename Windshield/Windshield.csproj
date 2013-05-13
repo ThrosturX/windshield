@@ -341,13 +341,13 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Statistics.cshtml" />
     <Content Include="Views\Home\MyGames.cshtml" />
-    <Content Include="Views\Home\GameDescription.cshtml" />
+    <Content Include="Views\Games\GameDescription.cshtml" />
     <Content Include="Views\Games\GameLobby.cshtml" />
     <Content Include="Views\Home\TTT.cshtml" />
     <Content Include="Views\Games\TicTacToe.cshtml" />
     <Content Include="Views\Games\Index.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
-    <Content Include="Views\Home\Boards.cshtml" />
+    <Content Include="Views\Games\Boards.cshtml" />
     <Content Include="Views\Games\Chat.cshtml" />
     <Content Include="Views\Shared\_GameImagePartial.cshtml" />
   </ItemGroup>

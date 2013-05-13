@@ -48,24 +48,10 @@ namespace Windshield.Controllers
 			return View("MyGames");
 		}
 
-		public ActionResult GameDescription(Game gameName)
-		{
-			var game = gameRepo.GetGameByName(gameName.name);
-			return View("GameDescription", game);
-		}
-
-		
-
 		public ActionResult DisplayCard()
 		{
 			return View("DisplayCard");
 		}
 
-		public ActionResult Boards(Game game)
-		{
-			var name = gameRepo.GetGameByName(game.name);
-			var viewModel = boardRepo.GetBoards(name);
-			return View("Boards", viewModel);
-		}
     }
 }
