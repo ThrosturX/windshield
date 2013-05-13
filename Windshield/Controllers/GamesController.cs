@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Reflection;
 using Windshield.Models;
-using Windshield.Models.Games;
+using Windshield.Models.Games.TicTacToe;
+using Windshield.Models.Games.Hearts;
 
 namespace Windshield.Controllers
 {

@@ -5,9 +5,9 @@ using System.Web;
 using Windshield.Common;
 using Windshield.Models;
 using Windshield.Models.Common.Exceptions;
-using Windshield.Games.Hearts;
+using Windshield.Models.Games.Hearts;
 
-namespace Windshield.Games.Hearts
+namespace Windshield.Models.Games.Hearts
 {
 	public class Hearts : Board
 	{
@@ -39,8 +39,8 @@ namespace Windshield.Games.Hearts
 										, "The player with the lowest score wins"
 										};
 
-		public Player [] players;
-		public Player turn;
+		public HPlayer [] players;
+		public HPlayer turn;
 		public CardDeck deck;
 		public Trick trick;
 		public Board board;
@@ -55,11 +55,11 @@ namespace Windshield.Games.Hearts
 			board = new Board();
 			board.status = "";
 
-			players = new Player[4];
+			players = new HPlayer[4];
 
 			for (int i = 0; i < 4; ++i)
 			{
-				players[i] = new Player();
+				players[i] = new HPlayer();
 			}
 
 			deck = new CardDeck();
@@ -182,7 +182,7 @@ namespace Windshield.Games.Hearts
 		/// Finds the player with the two of clubs
 		/// </summary>
 		/// <returns>The player with the Two of clubs</returns>
-		private Player GetStartingPlayer()
+		private HPlayer GetStartingPlayer()
 		{
 			for (int i = 0; i < 4; ++i)
 			{
@@ -201,7 +201,7 @@ namespace Windshield.Games.Hearts
 		/// </summary>
 		/// <param name="winner"></param>
 		/// <returns>The last game's winner or the player who has the two of clubs</returns>
-		public Player GetStartingPlayer(Player winner)
+		public HPlayer GetStartingPlayer(HPlayer winner)
 		{
 			if (winner == null)
 			{
@@ -211,7 +211,7 @@ namespace Windshield.Games.Hearts
 			return winner;
 		}
 
-		public bool PlayCard(Player player, Card card)
+		public bool PlayCard(HPlayer player, Card card)
 		{
 			if (player != turn)
 				return false;
@@ -250,13 +250,13 @@ namespace Windshield.Games.Hearts
 				}
 
 				// add the card to the trick
-				trick.Add(new KeyValuePair<Player, Card>(player, card));
+				trick.Add(new KeyValuePair<HPlayer, Card>(player, card));
 
 				// check if this is the last card for this trick
 				if (trick.Count == 4)
 				{
 					// allocate points to the claimer and clear the trick
-					KeyValuePair<Player, int> allocation = trick.GetClaimer();
+					KeyValuePair<HPlayer, int> allocation = trick.GetClaimer();
 
 					allocation.Key.matchPoints += allocation.Value;
 

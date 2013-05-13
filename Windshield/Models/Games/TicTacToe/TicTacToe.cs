@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Windshield.Test")]
 
-namespace Windshield.Models.Games
+namespace Windshield.Models.Games.TicTacToe
 {
 	/// <summary>
 	/// A Tic Tac Toe logic and view model class
@@ -62,10 +62,10 @@ namespace Windshield.Models.Games
 
 		public char[,] grid;
 		internal int freeSquares;
-		internal TTTPlayer turn;
+		internal TPlayer turn;
 
-		public TTTPlayer player1 { get; set; }	// The owner is Player One
-		public TTTPlayer player2 { get; set; }
+		public TPlayer player1 { get; set; }	// The owner is Player One
+		public TPlayer player2 { get; set; }
 
 		public TicTacToe()
 		{
@@ -112,8 +112,8 @@ namespace Windshield.Models.Games
 		/// </summary>
 		internal void InitializePlayers()
 		{
-			player1 = new TTTPlayer();
-			player2 = new TTTPlayer();
+			player1 = new TPlayer();
+			player2 = new TPlayer();
 
 			player1.symbol = 'X';
 			player2.symbol = 'O';
@@ -177,7 +177,7 @@ namespace Windshield.Models.Games
 		/// </summary>
 		/// <param name="symbol"></param>
 		/// <returns></returns>
-		internal TTTPlayer GetPlayerBySymbol(char symbol)
+		internal TPlayer GetPlayerBySymbol(char symbol)
 		{
 			if (player1.symbol == symbol)
 			{
@@ -195,7 +195,7 @@ namespace Windshield.Models.Games
 		/// Checks if there is a winner.
 		/// </summary>
 		/// <returns>Tic Tac Toe Player that has won the game.</returns>
-		internal TTTPlayer CheckWinner()
+		internal TPlayer CheckWinner()
 		{
 			char center;
 			int i;
@@ -244,7 +244,7 @@ namespace Windshield.Models.Games
 		/// swaps the player's symbols if they should elect to play a new game and adjusts their scores
 		/// </summary>
 		/// <param name="winner">should be null if there is a draw</param>
-		internal void EndGame(TTTPlayer winner)
+		internal void EndGame(TPlayer winner)
 		{
 			// swap symbols
 			char temp = player1.symbol;
@@ -259,7 +259,7 @@ namespace Windshield.Models.Games
 			}
 			else
 			{
-				TTTPlayer loser;
+				TPlayer loser;
 				// infer winner from loser
 				if (player1 == winner)
 				{
@@ -327,6 +327,8 @@ namespace Windshield.Models.Games
 			{
 				builder.Append(grid[CellToCoord(i).x, CellToCoord(i).y]);
 			}
+			// separator 1
+			builder.Append("|");
 			//turn
 			if (turn == player1)
 			{
@@ -336,16 +338,14 @@ namespace Windshield.Models.Games
 			{
 				builder.Append("2");
 			}
-			// - 
-			builder.Append("-");
 			// Symbol
-			builder.Append(turn.symbol);
+			builder.Append("|" + turn.symbol + "|");
 			// Wins
-			builder.Append(turn.wins + "W");
-			// Losses
-			builder.Append(turn.losses + "L");
+			builder.Append(turn.wins + "|");
 			// Draws
-			builder.Append(turn.draws + "T");
+			builder.Append(turn.draws + "|");
+			// Losses
+			builder.Append(turn.losses);
 
 			return builder.ToString();
 		}
@@ -355,7 +355,57 @@ namespace Windshield.Models.Games
 		/// </summary>
 		internal void SetStatus(string status)
 		{
-			
+			string[] strings = status.Split('|');
+
+			// Process grid
+			for (int i = 0; i < 9; ++i)
+			{
+				// find coordinate
+				Coord loc;
+
+				loc = CellToCoord(i);
+
+				grid[loc.x, loc.y] = strings[0][i];
+			}
+
+			// process p1 stats
+
+			// turn
+			if (strings[1][0] == '1')
+			{
+				turn = player1;
+			}
+			else
+			{
+				turn = player2;
+			}
+
+			// symbol
+			player1.symbol = strings[2][0];
+
+			// wins
+			int.TryParse(strings[3], out player1.wins);
+
+			// draws
+			int.TryParse(strings[4], out player1.draws);
+
+			// losses
+			int.TryParse(strings[5], out player1.losses);
+
+			// player 2
+			if (player1.symbol == 'X')
+			{
+				player2.symbol = 'O';
+			}
+			else
+			{
+				player2.symbol = 'X';
+			}
+
+			player2.wins = player1.losses;
+			player2.losses = player2.wins;
+			player2.draws = player1.draws;
+
 		}
 
 		/// <summary>
@@ -368,7 +418,7 @@ namespace Windshield.Models.Games
 		public override bool TryAction(string action, string sender)
 		{
 			// check who sent it
-			TTTPlayer player;
+			TPlayer player;
 
 			if (player1.user.UserName == sender)
 			{
@@ -425,15 +475,7 @@ namespace Windshield.Models.Games
 			public int y;
 		}
 
-		public class TTTPlayer
-		{
-			public User user;
-			public char symbol;
-			public int wins;
-			public int losses;
-			public int draws;
-			public bool isAI;
-		}
+
 	}
 
 }

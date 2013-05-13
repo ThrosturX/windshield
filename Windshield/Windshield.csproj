@@ -185,7 +185,7 @@
     <Compile Include="Models\Games\Common\PlayingCards\Card.cs" />
     <Compile Include="Models\Games\Common\PlayingCards\CardDeck.cs" />
     <Compile Include="Models\Games\Hearts\Hand.cs" />
-    <Compile Include="Models\Games\Hearts\Player.cs" />
+    <Compile Include="Models\Games\Hearts\HPlayer.cs" />
     <Compile Include="Models\Games\AGame.cs" />
     <Compile Include="Models\Games\Hearts\Trick.cs" />
     <Compile Include="Global.asax.cs">
@@ -201,10 +201,11 @@
     <Compile Include="Models\BoardRepo.cs" />
     <Compile Include="Models\GameInstance.cs" />
     <Compile Include="Models\GameRepo.cs" />
+    <Compile Include="Models\Games\TicTacToe\TPlayer.cs" />
     <Compile Include="Models\IBoardRepo.cs" />
     <Compile Include="Models\IGameRepo.cs" />
     <Compile Include="Models\IUserRepo.cs" />
-    <Compile Include="Models\Games\TicTacToe.cs" />
+    <Compile Include="Models\Games\TicTacToe\TicTacToe.cs" />
     <Compile Include="Models\UserRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

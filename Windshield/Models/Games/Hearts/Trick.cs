@@ -4,29 +4,29 @@ using System.Linq;
 using System.Web;
 using Windshield.Common;
 
-namespace Windshield.Games.Hearts
+namespace Windshield.Models.Games.Hearts
 {
-	public class Trick : List<KeyValuePair<Player, Card>>
+	public class Trick : List<KeyValuePair<HPlayer, Card>>
 	{
 		public Suit leader { get; set; }
-		public Player claimer { get; set; }
+		public HPlayer claimer { get; set; }
 		public int points { get; set; }
 
 		/// <summary>
 		/// Creates a new trick with a leading suit specified by card
 		/// </summary>
 		/// <param name="card">The card played to start the trick</param>
-		public Trick(Player player, Card card)
+		public Trick(HPlayer player, Card card)
 		{
-			KeyValuePair<Player, Card> pair = new KeyValuePair<Player, Card>(player, card);
+			KeyValuePair<HPlayer, Card> pair = new KeyValuePair<HPlayer, Card>(player, card);
 			leader = card.suit;
 			Add(pair);
 			claimer = player;
 		}
 
-		public void AddCard(Player player, Card card)
+		public void AddCard(HPlayer player, Card card)
 		{
-			this.Add(new KeyValuePair<Player, Card>(player, card));
+			this.Add(new KeyValuePair<HPlayer, Card>(player, card));
 		}
 
 		public void CalculatePoints()
@@ -46,7 +46,7 @@ namespace Windshield.Games.Hearts
 			}
 		}
 
-		public Player GetPlayerByCard(Card card)
+		public HPlayer GetPlayerByCard(Card card)
 		{
 			foreach (var pair in this)
 			{
@@ -59,7 +59,7 @@ namespace Windshield.Games.Hearts
 			return null; // no player found!
 		}
 
-		public KeyValuePair<Player, int> GetClaimer()
+		public KeyValuePair<HPlayer, int> GetClaimer()
 		{
 			// check how many points the trick is worth
 			CalculatePoints();
@@ -77,7 +77,7 @@ namespace Windshield.Games.Hearts
 
 			claimer = GetPlayerByCard(highest);
 
-			KeyValuePair<Player, int> trick = new KeyValuePair<Player, int>(claimer, points);
+			KeyValuePair<HPlayer, int> trick = new KeyValuePair<HPlayer, int>(claimer, points);
 
 			return trick;
 		}

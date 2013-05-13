@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Windshield.Common;
-using Windshield.Games.Hearts;
+using Windshield.Models.Games.Hearts;
 using Windshield.Models.Common.Exceptions;
 using Windshield.Models.Games;
 using Windshield.Test.MockObjects;
 using Windshield.Models;
 
-using HPlayer = Windshield.Games.Hearts.Player;
+using HPlayer = Windshield.Models.Games.Hearts.HPlayer;
 
 namespace Windshield.Test
 {
