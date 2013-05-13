@@ -52,5 +52,9 @@ namespace Windshield.Controllers
 
 			return View("Index", theGame);
 		}
+		public ActionResult GameLobby(Game game)
+		{
+			return View("GameLobby", game);
+		}
     }
 }
