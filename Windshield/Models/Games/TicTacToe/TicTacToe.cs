@@ -85,6 +85,7 @@ namespace Windshield.Models.Games.TicTacToe
 			}
 			else
 			{
+				player2.user = new User();
 				player2.user.UserName = "Computer";
 				player2.isAI = true;
 			}
@@ -306,17 +307,43 @@ namespace Windshield.Models.Games.TicTacToe
 		}
 
 		/// <summary>
+		/// Execute any necessary actions when an action has been completed by a client
+		/// </summary>
+		internal int ActionCompleted()
+		{
+			TPlayer winner;
+			if (freeSquares == 0)
+			{
+				winner = CheckWinner();
+				return 2;
+			}
+
+			if (player2.isAI)
+			{
+				InsertSymbol(player2.symbol, AISelectCell());
+			}
+
+			winner = CheckWinner();
+			if (winner != null)
+			{
+				return 2;
+			}
+
+			return 1;
+		}
+
+		/// <summary>
 		/// Status() converts the game's state into a string format, for storage in databases.
 		/// The outputted string can be used in a constructor.
 		/// </summary>
 		/// <remarks>
-		/// Format: [grid]|[the player whose turn it is(1 or 2)]|[player1's symbol]|[p1's wins]|[p1's draws]|[p1's losses]
+		/// Format: [grid]|[the player whose turn it is(1 or 2)]|[player1's symbol]|[p1's wins]|[p1's draws]|[p1's losses]|[User1 name]|[User2 name]
 		///			grid is 9 characters and indicates the cell's values ('X', 'O' or ' ')
 		///			turn# indicates which player's turn it is.
 		///			S indicates player1's symbol.
 		///			Wins, Losses and Ties indicate player 1's WLT's.
 		///			Example:
-		///			XO OXXO X|1|X|3|2|1
+		///			XO OXXO X|1|X|3|2|1|john|banana
 		/// </remarks>
 		/// <returns>A database-friendly string that can be converted into the game's state.</returns>
 		internal string GetStatus()
@@ -345,9 +372,23 @@ namespace Windshield.Models.Games.TicTacToe
 			// Draws
 			builder.Append(turn.draws + "|");
 			// Losses
-			builder.Append(turn.losses);
+			builder.Append(turn.losses + "|");
+
+			// players
+			builder.Append(player1.user.UserName + "|" + player2.user.UserName);
 
 			return builder.ToString();
+		}
+
+		internal string GetGameOver()
+		{
+			TPlayer winner = CheckWinner();
+			EndGame(winner);
+			ClearBoard();
+			if (winner != null)
+				return winner.user.UserName;
+
+			return "";
 		}
 
 		/// <summary>
@@ -366,6 +407,11 @@ namespace Windshield.Models.Games.TicTacToe
 				loc = CellToCoord(i);
 
 				grid[loc.x, loc.y] = strings[0][i];
+
+				if (strings[0][i] != ' ')
+				{
+					--freeSquares;
+				}
 			}
 
 			// process p1 stats
@@ -414,8 +460,8 @@ namespace Windshield.Models.Games.TicTacToe
 		/// </summary>
 		/// <param name="action">string: "insert cell#" where # is a number between 0 and 8</param>
 		/// <param name="sender">The username of the player attempting the action.</param>
-		/// <returns></returns>
-		public override bool TryAction(string action, string sender)
+		/// <returns>returns 0 for failure, 1 for OK and 2 for Game Over</returns>
+		public override int TryAction(string action, string sender)
 		{
 			// check who sent it
 			TPlayer player;
@@ -440,12 +486,12 @@ namespace Windshield.Models.Games.TicTacToe
 				// make sure a valid player is trying to insert
 				if (player == null)
 				{
-					return false;
+					return 0;
 				}
 
 				// check if it is player's turn
 				if (turn != player)
-					return false;
+					return 0;
 
 				// find out where it should be inserted
 				if (action.Contains("cell"))
@@ -458,15 +504,18 @@ namespace Windshield.Models.Games.TicTacToe
 
 					// ensure that the string is not malformed
 					if (!int.TryParse(cellString, out cell))
-						return false;
+						return 0;
 
 					// attempt to insert the symbol
-					return InsertSymbol(player.symbol, cell);
+					if (InsertSymbol(player.symbol, cell))
+					{
+						return ActionCompleted();
+					};
 				}
 			}
 
 			// No success
-			return false;
+			return 0;
 		}
 
 		internal struct Coord

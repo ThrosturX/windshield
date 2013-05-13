@@ -11,13 +11,15 @@ namespace Windshield.Models
 		public int id;
 		public AGame theGame;
 		public string theView;
+		public string theName;
 		public List<User> group;
 
 		public GameInstance(AGame gameBoard, Board board)
 		{
 			id = board.id;
 			theGame = gameBoard;
-			theView = board.Game.model; 
+			theView = board.Game.model;
+			theName = board.Game.name;
 		}
 
 		public GameInstance(int ID, AGame gameBoard, string gameView)
