@@ -48,7 +48,7 @@ namespace Windshield.Models
 		public Game GetGameByName(string name)
 		{
 			var result = from game in db.Games
-						 where game.name == name
+						 where game.name.Equals(name)
 						 select game;
 			return result.SingleOrDefault();
 		}

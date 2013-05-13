@@ -43,9 +43,8 @@
 		var playerOne = '@(Model.player1.user.UserName)';
 		var playerTwo = '@(Model.player2.user.UserName)';
 
-		var mySymbol;
-
 		hub.client.cellClicked = function (cellId) {
+			//$("#" + cellId).text(currentUser.symbol);
 			$("#" + cellId).text('@(Model.player1.symbol)');
 		};
 
