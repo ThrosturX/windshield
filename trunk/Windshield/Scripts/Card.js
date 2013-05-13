@@ -1,16 +1,141 @@
-﻿// Original JavaScript code by Chirp Internet: www.chirp.com.au
+﻿var card_left = [];
+var card_top = [];
+
+function Card(rank, suit) {
+
+	this.rank = rank;
+	this.suit = suit;
+
+	this.toString = cardToString;
+	this.createNode = cardCreateNode;
+}
+
+$(document).ready(function () {
+	
+
+
+	$(".cardback").click(function () {
+		dealCards();
+	});
+
+});
+
+function dealCards() {
+
+	dealCards(1);
+	
+	/*for (k = 13; k < 26; k++) {
+		card_top[k] = -50 + 40 * k;
+		card_left[k] = 50;
+	}
+	for (k = 26; k < 39 ; k++) {
+		card_left[k] = 340 + 40 * (k - 12);
+		card_top[k] = 0;
+	}
+	for (k = 39; k < 52 ; k++) {
+		card_top[k] = -50 + 40 * (k - 18);
+		card_left[k] = 700;
+	}
+
+
+	for (i = 1; i <= 52; i++) setTimeout("moveToPlace(" + i + ")", i * 100);
+	started = true; */
+
+}
+
+function dealCards(playerNo)
+{
+	
+		for (k = 1; k <= 13; k++) {
+			card_left[k] = 240 + 40 * k;
+			card_top[k] = 530;
+		}
+		for (k = 14; k <= 26; k++) {
+			card_top[k] = -500 + 40 * k;
+			card_left[k] = 50;
+		}
+		for (k = 27; k <= 39 ; k++) {
+			card_left[k] = 235 + 40 * (k - 26);
+			card_top[k] = 0;
+		}
+		for (k = 40; k <= 52 ; k++) {
+			card_top[k] = 15 + 40 * (k - 39);
+			card_left[k] = 970;
+		}
+		
+		for (i = 1; i <= 52; i++) setTimeout("moveToPlace(" + i + ")", i * 100);
+	
+
+	showPlayer1Cards();
+
+}
+
+function moveToPlace(id) {
+	el = document.getElementById("card_" + id);
+	//var el = $("#card_"+ id);
+	el.style["zIndex"] = 10;
+	el.style["left"] = card_left[id] + "px";
+	el.style["top"] = card_top[id] + "px";
+	//el.style["WebkitTransform"] = "rotate(180deg)";
+	el.style["zIndex"] = 0;
+
+	if ((id > 13 && id < 27) || (id > 39 && id <= 52))
+		el.style["WebkitTransform"] = "rotate(90deg)";
+}
+function showPlayer1Cards() {
+	for (i = 1 ; i <= 13 ; i++) {
+		id = "#card_" + i;
+		spanid = id + " span";
+		el = $(id);
+		el.removeClass("cardback");
+		el.addClass("card");
+		//spanEl = $(".spanDisplay");
+	
+		if (el.hasClass("Club"))
+			el.append("&clubs;");
+
+		else if (el.hasClass("Spade"))
+			el.append("&spades;");
+
+		else if (el.hasClass("Heart"))
+			el.append("&hearts;");
+
+		else //el.hasClass("Diamond")
+			el.append("&diams;");
+
+		spanEl = $(spanid);
+		spanEl.css({ "display": "inline" });
+	}
+}
+
+// Original JavaScript code by Chirp Internet: www.chirp.com.au
 // Please acknowledge use of this code by including this header.
 
-var card_value = ['rank1 H', 'rank2 H', 'rank3 H', 'rank4 H', 'rank5 H', 'rank6 H', 'rank7 H'
+/*var card_value = ['rank1 H', 'rank2 H', 'rank3 H', 'rank4 H', 'rank5 H', 'rank6 H', 'rank7 H'
                  , 'rank8 H', 'rank9 H', 'rank10 H', 'rank11 H', 'rank12 H', 'rank13 H', 'rank1 S'
 				 , 'rank2 S', 'rank3 S', 'rank4 S', 'rank5 S', 'rank6 S', 'rank7 S', 'rank8 S'
 				 , 'rank9 S', 'rank10 S', 'rank11 S', 'rank12 S', 'rank13 S', ];
-
+				 */
 // set default positions
-var card_left = [];
+
+
+
+/*var card_left = [];
 var card_top = [];
 
 
+function Card(rank, suit) {
+
+	this.rank = rank;
+	this.suit = suit;
+
+	this.toString = cardToString;
+	this.createNode = cardCreateNode;
+}
+
+
+
+//card positions
 for (k = 0; k < 6; k++) {
 	card_left[k] = 340 + 40 * k;
 	card_top[k] = 380;
@@ -104,4 +229,4 @@ function cardClick(id) {
 		for (i = 0; i < 26; i++) setTimeout("moveToPlace(" + i + ")", i * 100);
 		started = true;
 	}
-}
+}  */

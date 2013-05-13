@@ -167,5 +167,24 @@ namespace Windshield.Test
 				Assert.Fail();
 			}
 		}
+
+		[TestMethod]
+		public void CheckIfTrickIsCreated()
+		{
+			HPlayer p = game.GetStartingPlayer(null);
+			Card r = null;
+			foreach (var card in p.hand)
+			{
+				if (card.suit == Suit.Club && card.face == 2)
+				{
+					r = card;
+				}
+			}
+
+			Assert.AreEqual(true, game.PlayCard(p, r));
+
+			Assert.AreNotEqual(null, r);
+			Assert.AreNotEqual(null, game.trick);
+		}
 	}
 }
