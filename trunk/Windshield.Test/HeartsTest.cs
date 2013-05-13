@@ -51,6 +51,17 @@ namespace Windshield.Test
 		}
 
 		[TestMethod]
+		public void CheckIfComputerPlayerIsAdded()
+		{
+			User p = new User();
+			List<User> users = new List<User>();
+			users.Add(p);
+			game = new Hearts(users);
+
+			Assert.AreEqual("Computer", game.players[1].user.UserName);
+		}
+
+		[TestMethod]
 		public void CheckingWhetherPlayersAreDealtRandomCards()
 		{
 			CardDeck deck = new CardDeck();
@@ -119,7 +130,7 @@ namespace Windshield.Test
 				{
 					if (i != j)
 					{
-						Assert.AreNotEqual(game.players[i], playerReference[j]);
+						Assert.AreNotEqual(playerReference[i], playerReference[j]);
 					}
 				}
 			}

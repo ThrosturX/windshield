@@ -44,8 +44,8 @@ namespace Windshield.Games.Hearts
 		public CardDeck deck;
 		public Trick trick;
 		public Board board;
+		public bool trickOngoing = false;
 		public bool brokenHearts;
-		public bool started = false;
 
 		/// <summary>
 		/// Default constructor. Note that instances require players to be instantiated!
@@ -64,7 +64,6 @@ namespace Windshield.Games.Hearts
 
 			deck = new CardDeck();
 			brokenHearts = false;
-			started = false;
 		}
 
 		/// <summary>
@@ -92,7 +91,7 @@ namespace Windshield.Games.Hearts
 
 			// Deal cards to the players
 			Deal();
-			turn = GetStartingPlayer();
+			turn = GetStartingPlayer(null);
 		}
 
 		/// <summary>
@@ -205,7 +204,9 @@ namespace Windshield.Games.Hearts
 		public Player GetStartingPlayer(Player winner)
 		{
 			if (winner == null)
+			{
 				return GetStartingPlayer();
+			}
 
 			return winner;
 		}
@@ -215,7 +216,7 @@ namespace Windshield.Games.Hearts
 			if (player != turn)
 				return false;
 
-			if (trick.ongoing)
+			if (trickOngoing)
 			{
 				// check if the card he's playing is valid
 				if (card.suit != trick.leader)
@@ -259,7 +260,7 @@ namespace Windshield.Games.Hearts
 
 					allocation.Key.matchPoints += allocation.Value;
 
-					trick.ongoing = false;
+					trickOngoing = false;
 					trick.RemoveAll(x => true);
 				}
 
@@ -267,6 +268,7 @@ namespace Windshield.Games.Hearts
 			else
 			{
 				trick = new Trick(player, card);
+				trickOngoing = true;
 			}
 
 			IncrementTurn();
