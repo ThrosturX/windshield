@@ -9,7 +9,6 @@ namespace Windshield.Games.Hearts
 	public class Trick : List<KeyValuePair<Player, Card>>
 	{
 		public Suit leader { get; set; }
-		public bool ongoing { get; set; }
 		public Player claimer { get; set; }
 		public int points { get; set; }
 
@@ -21,7 +20,6 @@ namespace Windshield.Games.Hearts
 		{
 			KeyValuePair<Player, Card> pair = new KeyValuePair<Player, Card>(player, card);
 			leader = card.suit;
-			ongoing = true;
 			Add(pair);
 			claimer = player;
 		}
