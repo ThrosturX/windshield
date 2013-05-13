@@ -8,9 +8,9 @@ namespace Windshield.Models.Games
 	public abstract class AGame
 	{
 		public int id;
-		public virtual bool TryAction(string action, string sender)
+		public virtual int TryAction(string action, string sender)
 		{
-			return false;
+			return 0;
 		}
 	}
 

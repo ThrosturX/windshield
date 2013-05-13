@@ -36,14 +36,15 @@ namespace Windshield.Controllers
 		//	return RedirectToAction("Index", "Home");
         }
 
+		// play against computer
 		[Authorize]
 		public ActionResult TicTacToe()
 		{
 			List<User> players = new List<User>();
 			User playerOne = userRepository.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
 			players.Add(playerOne);
-			User playerTwo = userRepository.GetUserByName("banana");
-			players.Add(playerTwo);
+//			User playerTwo = userRepository.GetUserByName("banana");
+//			players.Add(playerTwo);
 			TicTacToe gameBoard = new TicTacToe(players);
 			Board board = new Board();
 			board.status = gameBoard.GetStatus();

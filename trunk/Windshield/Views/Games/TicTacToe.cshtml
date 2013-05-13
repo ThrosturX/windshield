@@ -28,17 +28,36 @@
 		var playerOne = '@(Model.player1.user.UserName)';
 		var playerTwo = '@(Model.player2.user.UserName)';
 
-		hub.client.cellClicked = function (cellId) {
+	//	hub.client.cellClicked = function (cellId) {
 			//$("#" + cellId).text(currentUser.symbol);
-			$("#" + cellId).text('@(Model.player1.symbol)');
+	//		$("#" + cellId).text('@(Model.player1.symbol)');
+//		};
+
+		hub.client.Broadcast = function (status) {
+			for (var i=0; i<9; i++)
+			{
+				$("#cell" + i).text(status[i]);
+			}
+
 		};
+
+		hub.client.GameOver = function (winner) {
+			if (winner != "") {
+				alert(winner + " wins!");
+			}
+			else {
+				alert("It's a draw!");
+			}
+
+			hub.server.refresh(group);
+		}
 
 		$.connection.hub.start().done(function() {
 			hub.server.join(group);
 
 			$("#tic-tac-toe tr td").click(function () {
-				hub.server.tryAction(group, this.id, currentUser);
-				$(this).text('@(Model.player1.symbol)');
+				hub.server.tryAction(group, "insert" + this.id, currentUser);
+			//	$(this).text('@(Model.player1.symbol)');
 			});
 		});
 	});

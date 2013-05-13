@@ -17,6 +17,11 @@ namespace Windshield.Test.MockObjects
 			rep.Add(board);
 		}
 
+		public void Save()
+		{
+			// intentionally blank
+		}
+
 		public void DeleteBoard(Board board)
 		{
 			rep.Remove(board);
