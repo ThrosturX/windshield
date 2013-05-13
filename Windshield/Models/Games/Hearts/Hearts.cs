@@ -63,7 +63,6 @@ namespace Windshield.Games.Hearts
 			}
 
 			deck = new CardDeck();
-			turn = players[0];
 			brokenHearts = false;
 			started = false;
 		}
@@ -93,6 +92,7 @@ namespace Windshield.Games.Hearts
 
 			// Deal cards to the players
 			Deal();
+			turn = GetStartingPlayer();
 		}
 
 		/// <summary>
@@ -185,11 +185,8 @@ namespace Windshield.Games.Hearts
 		/// <returns>The player with the Two of clubs</returns>
 		private Player GetStartingPlayer()
 		{
-			Card match = new Card(2, Suit.Club);
-
 			for (int i = 0; i < 4; ++i)
 			{
-
 				foreach (var card in players[i].hand)
 				{
 					if (card.suit == Suit.Club && card.face == 2)
