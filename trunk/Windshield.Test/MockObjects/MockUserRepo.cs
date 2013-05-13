@@ -74,11 +74,23 @@ namespace Windshield.Test.MockObjects
 			return null;
 		}
 
-		public GameRating GetGameRatingByGame(User user, Game game)
+		public IQueryable<User> GetTopUsersByGame(Game game)
 		{
 			// dummy
 			return null;
 		}
 
+		public IQueryable<User> GetAllUsers()
+		{
+			// dummy
+			return null;
+		}
+
+		public GameRating GetGameRatingByGame(User user, Game game)
+		{
+			// dummy
+			return null;
+		}
+		
 	}
 }
