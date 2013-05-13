@@ -97,10 +97,9 @@ namespace Windshield.Controllers
 			return View("Boards", viewModel);
 		}
 
-		public ActionResult GameDescription(Game gameName)
+		public ActionResult MyGames()
 		{
-			var game = gameRepository.GetGameByName(gameName.name);
-			return View("GameDescription", game);
+			return View("MyGames");
 		}
 
     }

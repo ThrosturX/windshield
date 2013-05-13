@@ -43,14 +43,15 @@ namespace Windshield.Controllers
 			return View("Statistics");
 		}
 
-		public ActionResult MyGames()
-		{
-			return View("MyGames");
-		}
-
 		public ActionResult DisplayCard()
 		{
 			return View("DisplayCard");
+		}
+
+		public ActionResult GameDescription(Game gameName)
+		{
+			var game = gameRepo.GetGameByName(gameName.name);
+			return View("GameDescription", game);
 		}
 
     }
