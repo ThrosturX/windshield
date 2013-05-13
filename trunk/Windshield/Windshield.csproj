@@ -342,7 +342,7 @@
     <Content Include="Views\Home\Statistics.cshtml" />
     <Content Include="Views\Home\MyGames.cshtml" />
     <Content Include="Views\Home\GameDescription.cshtml" />
-    <Content Include="Views\Home\GameLobby.cshtml" />
+    <Content Include="Views\Games\GameLobby.cshtml" />
     <Content Include="Views\Home\TTT.cshtml" />
     <Content Include="Views\Games\TicTacToe.cshtml" />
     <Content Include="Views\Games\Index.cshtml" />
