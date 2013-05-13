@@ -174,42 +174,48 @@ h1 > a:hover
   background: #fff url('http://d37rcl8t6g8sj5.cloudfront.net/wp-content/uploads/card-set.png') no-repeat;
   background-size: 1300% 400%;
 }
+.cardback
+{
+	height: 8.85em;
+	width: 6.4em;
+	background: #fff url('../Images/naked.jpg'); 
+	background-size: 100% 100%;
+}
 
-
-.H      
+.Heart      
 { 
         background-position-y: 100%; 
         color: #890000;
 
 }
-.S
+.Spade
 {
         background-position-y: 66.6%;
         color: black;
 }
-.D
+.Diamond
 {
         background-position-y: 33.3%;
         color: #890000;
 }
-.C
+.Club
 {
         background-position-y: 0%;
         color: black;
 }
-.rank13 { background-position-x: 100%;}
-.rank12 { background-position-x: 91.7%;}
-.rank11 { background-position-x: 83.3%;}
-.rank10 { background-position-x: 75%;}
-.rank9 {background-position-x: 66.5%;}
-.rank8 {background-position-x: 58.2%;}
-.rank7 {background-position-x: 49.8%;}
-.rank6 {background-position-x: 41.7%;}
-.rank5 {background-position-x: 33.1%;}
-.rank4 {background-position-x: 24.6%;}
-.rank3 {background-position-x: 17%;}
-.rank2 {background-position-x: 8.5%;}
-.rank1 {background-position-x: 0%;}
+.rank_13 { background-position-x: 100%;}
+.rank_12 { background-position-x: 91.7%;}
+.rank_11 { background-position-x: 83.3%;}
+.rank_10 { background-position-x: 75%;}
+.rank_9 {background-position-x: 66.5%;}
+.rank_8 {background-position-x: 58.2%;}
+.rank_7 {background-position-x: 49.8%;}
+.rank_6 {background-position-x: 41.7%;}
+.rank_5 {background-position-x: 33.1%;}
+.rank_4 {background-position-x: 24.6%;}
+.rank_3 {background-position-x: 17%;}
+.rank_2 {background-position-x: 8.5%;}
+.rank_1 {background-position-x: 0%;}
 
 #stage 
 { 
@@ -219,7 +225,7 @@ h1 > a:hover
 { 
         position: relative; 
         margin: 0 0 0 200px; 
-        height: 500px; 
+        height: 700px; 
         background: green; 
 }
  
@@ -237,6 +243,8 @@ h1 > a:hover
         -o-transition: all 0.5s ease-in-out; 
         -ms-transition: all 0.5s ease-in-out; 
 }
+<<<<<<< .mine
+=======
 
 
 
@@ -372,3 +380,4 @@ h1 > a:hover
 .control-group.success .fileupload .thumbnail {
   border-color: #468847;
 }
+>>>>>>> .r142
