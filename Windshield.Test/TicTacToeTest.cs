@@ -33,7 +33,7 @@ namespace Windshield.Test
 
 			game = new TicTacToe(players);
 
-			brd.AddBoard(game.board);
+			//brd.AddBoard(game.board);
 		}
 
 		[TestMethod]
