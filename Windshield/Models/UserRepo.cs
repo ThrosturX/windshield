@@ -86,8 +86,7 @@ namespace Windshield.Models
 					where game.id == gameRatings.idGame
 					orderby gameRatings.rating descending
 					select gameRatings.User;
-
-
 		}
+
 	}
 }
