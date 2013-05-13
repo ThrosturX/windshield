@@ -1,39 +1,24 @@
 ﻿@model Windshield.Models.Games.TicTacToe
 
-<style type="text/css">
-	table {
-		background: #fafafa;
-		border: 1px dotted grey;
-		}
-
-	td {
-		padding: 30px;
-		border: 1px dashed lightblue;
-		}
-
-</style>
-
-<h2>Tic Tac Toe</h2>
-
-<table id="tictactoe">
-	<tbody>
-		<tr>
-			<td id="cell0">&nbsp;</td>
-			<td id="cell1">&nbsp;</td>
-			<td id="cell2">&nbsp;</td>
-		</tr>
-		<tr>
-			<td id="cell3">&nbsp;</td>
-			<td id="cell4">&nbsp;</td>
-			<td id="cell5">&nbsp;</td>
-		</tr>
-		<tr>
-			<td id="cell6">&nbsp;</td>
-			<td id="cell7">&nbsp;</td>
-			<td id="cell8">&nbsp;</td>
-		</tr>
-	</tbody>
-</table>
+	<table id="tic-tac-toe" class="table-bordered">
+		<tbody>
+			<tr>
+				<td id="cell0"></td>
+				<td id="cell1"></td>
+				<td id="cell2"></td>
+			</tr>
+			<tr>
+				<td id="cell3"></td>
+				<td id="cell4"></td>
+				<td id="cell5"></td>
+			</tr>
+			<tr>
+				<td id="cell6"></td>
+				<td id="cell7"></td>
+				<td id="cell8"></td>
+			</tr>
+		</tbody>
+	</table>
 
 <script>
 	$(document).ready(function () {
@@ -51,7 +36,7 @@
 		$.connection.hub.start().done(function() {
 			hub.server.join(group);
 
-			$("#tictactoe tr td").click(function () {
+			$("#tic-tac-toe tr td").click(function () {
 				hub.server.tryAction(group, this.id, currentUser);
 				$(this).text('@(Model.player1.symbol)');
 			});

@@ -62,7 +62,6 @@ html, body
 .footer
 {
 	position: relative;
-	margin-top: -64px;
 	height: 64px;
 	clear: both;
 }
@@ -98,11 +97,12 @@ ul.thumbnails li
 
 #overview
 {
-	background: url("http://www.bestfreeadvice.info/Images/banner_nature.jpg");
+	background-image: url('../Images/red_dices_psd_s.jpg');
+	background-position: right;
 	padding: 32px;
 	margin: 0;
-	color: white;
-	background-color: black;
+	color: black;
+	background-color: white;
 	background-repeat: no-repeat;
 	height: 64px;
 }
@@ -114,15 +114,40 @@ ul.thumbnails li
 
 h1 > a
 {
-	color: white;
+	color: black;
 }
 
 h1 > a:hover
 {
-	color: white;
+	color: black;
 	text-decoration: none;
 }
 
+/* Tic Tac Toe */
+
+table#tic-tac-toe 
+{
+	background: #fafafa;
+	border: 1px dotted grey;
+	margin: auto;
+}
+
+table#tic-tac-toe td 
+{
+	height: 96px;
+	width: 96px;
+	border: 1px solid lightblue;
+	text-align: center;
+	font-family: Delicious;
+	font-size: 48px;
+	color: red;
+}
+
+table#tic-tac-toe td:hover
+{ 
+	background-color: #e6e6e6;
+	cursor: pointer;
+} 
 
 
 
@@ -243,8 +268,7 @@ h1 > a:hover
         -o-transition: all 0.5s ease-in-out; 
         -ms-transition: all 0.5s ease-in-out; 
 }
-<<<<<<< .mine
-=======
+
 
 
 
@@ -380,4 +404,3 @@ h1 > a:hover
 .control-group.success .fileupload .thumbnail {
   border-color: #468847;
 }
->>>>>>> .r142

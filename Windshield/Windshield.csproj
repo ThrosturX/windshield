@@ -268,9 +268,11 @@
     <Content Include="Global.asax" />
     <Content Include="Images\2cool4skool.png" />
     <Content Include="Images\board.gif" />
+    <Content Include="Images\dice-banner.jpg" />
     <Content Include="Images\knight_logo.gif" />
     <Content Include="Images\pug.jpg" />
     <Content Include="Images\puppy.jpg" />
+    <Content Include="Images\red_dices_psd_s.jpg" />
     <Content Include="Images\sunny.png" />
     <Content Include="Images\wakeup.jpg" />
     <Content Include="Models\BoardGames.dbml">
