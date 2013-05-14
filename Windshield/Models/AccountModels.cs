@@ -79,20 +79,12 @@ namespace Windshield.Models
 		public string Age { get; set; }
 
 		[DataType(DataType.Text)]
-		[Display(Name = "Settings")]
-		public string Settings { get; set; }
-
-		[DataType(DataType.Text)]
 		[Display(Name = "Occupation")]
 		public string Occupation { get; set; }
 
 		[DataType(DataType.Text)]
 		[Display(Name = "Country")]
 		public string Country { get; set; }
-
-		[DataType(DataType.Text)]
-		[Display(Name = "Avatar")]
-		public string Avatar { get; set; }
 
 		[DataType(DataType.Text)]
 		[Display(Name = "Email")]

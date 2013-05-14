@@ -146,8 +146,6 @@ namespace Windshield.Controllers
 				{
 					userDetail.age = outputAge;
 				}
-				// Avatar
-				userDetail.avatar = model.changeUserDetailsModel.Avatar;
 				// Country
 				userDetail.country = model.changeUserDetailsModel.Country;
 				// Date Joined
@@ -165,8 +163,6 @@ namespace Windshield.Controllers
 				userDetail.name = model.changeUserDetailsModel.Name;
 				// Occupation
 				userDetail.occupation = model.changeUserDetailsModel.Occupation;
-				// Settings
-				userDetail.settings = model.changeUserDetailsModel.Settings;
 				// UserRating
 				string inputUserRating = model.changeUserDetailsModel.UserRating;
 				int outputUserRating;
