@@ -1,0 +1,30 @@
+﻿@model IQueryable<Windshield.Models.Board>
+
+<table class="table table-hover">
+
+	<thead>
+		<tr>
+			<th>
+				Game ID
+			</th>
+			<th>
+				Game
+			</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		@foreach (var board in Model)
+		{
+		<tr>
+			<td>
+				@board.id
+			</td>
+			<td>
+				@board.Game.name
+			</td>
+		</tr>
+		}	
+	</tbody>
+
+</table>

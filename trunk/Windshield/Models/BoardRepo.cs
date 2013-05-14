@@ -81,6 +81,29 @@ namespace Windshield.Models
 		}
 
 		/// <summary>
+		/// Get all the active boards for a specific user
+		/// </summary>
+		public IQueryable<Board> GetBoards(User user)
+		{
+			var playerInGames = from players in db.Players
+								where players.idUser == user.UserId && players.Board.endDate == null
+								select players.Board;
+			return playerInGames;
+		}
+
+		/// <summary>
+		/// Get all the active boards for a specific user and game
+		/// </summary>
+		public IQueryable<Board> GetBoards(Game game, User user)
+		{
+			var result = from boards in GetBoards(user)
+						 where boards.Game == game
+						 select boards;
+			return result;
+		}
+
+
+		/// <summary>
 		/// Returns all users for a specific board
 		/// </summary>
 		public IQueryable<User> GetBoardUsers(Board board)

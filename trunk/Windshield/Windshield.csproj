@@ -359,6 +359,7 @@
     <Content Include="Views\Account\_UploadPhotoPartial.cshtml" />
     <Content Include="Views\Account\_DescriptionPartial.cshtml" />
     <Content Include="Views\Account\_UserProfilePartial.cshtml" />
+    <Content Include="Views\Shared\_BoardTablePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
