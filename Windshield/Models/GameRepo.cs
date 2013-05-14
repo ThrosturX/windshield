@@ -72,5 +72,24 @@ namespace Windshield.Models
 				   orderby gameRatings.rating descending
 				   select gameRatings;
 		}
+		public List<StatisticsViewModel> GetTopRatingsForViewModel(Game game)
+		{
+			List<StatisticsViewModel> statistics = new List<StatisticsViewModel>();
+
+			var ratings = from gameRatings in db.GameRatings
+						  where gameRatings.idGame == game.id
+						  orderby gameRatings.rating descending
+						  select gameRatings;
+
+			foreach (GameRating r in ratings)
+			{
+				StatisticsViewModel m = new StatisticsViewModel();
+				m.Name = r.User.UserName;
+				m.Rating = r.rating;
+				m.TimesPlayed = r.timesPlayed;
+				statistics.Add(m);
+			}
+			return statistics;
+		}
 	}
 }

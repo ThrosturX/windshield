@@ -69,7 +69,7 @@ namespace Windshield.Controllers
 		{
 			Game game = gameRepo.GetGameByName(gameName.name);
 
-			var derp = gameRepo.GetTopRatings(game);
+			var derp = gameRepo.GetTopRatingsForViewModel(game);
 
 			//TODO: Fix this circular reference thingamajing, however possible
 			//might be the only way is to make a viewmodel class which contains exacly the properties

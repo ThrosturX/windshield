@@ -51,6 +51,10 @@ namespace Windshield.Test.MockObjects
 			// dummy
 			return null;
 		}
-
+		public List<StatisticsViewModel> GetTopRatingsForViewModel(Game game)
+		{
+			// dummy
+			return null;
+		}
 	}
 }
