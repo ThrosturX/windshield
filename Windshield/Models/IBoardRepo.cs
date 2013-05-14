@@ -9,6 +9,7 @@ namespace Windshield.Models
 	{
 		void AddBoard(Board board);	
 		void DeleteBoard(Board board);
+		void AddPlayer(Player player);
 		void Save();
 		Board GetBoardById(int id);
 		IQueryable<Board> GetBoards();

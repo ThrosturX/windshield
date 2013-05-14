@@ -12,22 +12,22 @@ namespace Windshield.Controllers
 {
     public class GamesController : Controller
     {
-        private BoardRepo boardRepository = null;
-		private IGameRepo gameRepository = null;
-		private IUserRepo userRepository = null;
+        private IBoardRepo boardRepo = null;
+		private IGameRepo gameRepo = null;
+		private IUserRepo userRepo = null;
 
 		public GamesController()
 		{
-			boardRepository = new BoardRepo();
-			gameRepository = new GameRepo();
-			userRepository = new UserRepo();
+			boardRepo = new BoardRepo();
+			gameRepo = new GameRepo();
+			userRepo = new UserRepo();
 		}
 
 		public GamesController(BoardRepo bRep, IGameRepo gRep, IUserRepo uRep)
 		{
-			boardRepository = bRep;
-			gameRepository = gRep;
-			userRepository = uRep;
+			boardRepo = bRep;
+			gameRepo = gRep;
+			userRepo = uRep;
 		}
 
         public ActionResult Index()
@@ -41,7 +41,7 @@ namespace Windshield.Controllers
 		public ActionResult TicTacToe()
 		{
 			List<User> players = new List<User>();
-			User playerOne = userRepository.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
+			User playerOne = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
 			players.Add(playerOne);
 //			User playerTwo = userRepository.GetUserByName("banana");
 //			players.Add(playerTwo);
@@ -49,8 +49,8 @@ namespace Windshield.Controllers
 			Board board = new Board();
 			board.status = gameBoard.GetStatus();
 			board.idGame = 2; // TODO: FIX
-			boardRepository.AddBoard(board);
-			boardRepository.Save();
+			boardRepo.AddBoard(board);
+			boardRepo.Save();
 			gameBoard.id = board.id;
 
 			GameInstance theGame = new GameInstance(gameBoard, board);
@@ -59,32 +59,68 @@ namespace Windshield.Controllers
 		}
 
 		[Authorize]
+		//[HttpPost]
 		public ActionResult NewBoard(string gameName)
 		{
-			List<User> players = new List<User>();
-			User playerOne = userRepository.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
-			players.Add(playerOne);
-			User playerTwo = userRepository.GetUserByName("banana"); //mock user
-			players.Add(playerTwo);                                  //mock user
+			User owner = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
 
-			Game game = gameRepository.GetGameByName(gameName);
+			Game game = gameRepo.GetGameByName(gameName);
 			if (game == null)
 			{
 				return View("Error");
 			}
 			else
 			{
-				Assembly executingAssembly = Assembly.GetExecutingAssembly();
-				Type gameType = executingAssembly.GetType("Windshield.Models.Games." + game.model);
+				// Create a new board and save it in the database
+				Board board = new Board();
+				board.idGame = game.id;
+				board.ownerName = owner.UserName;
+				boardRepo.AddBoard(board);
+				boardRepo.Save();
 
-				//object gameInstance = Activator.CreateInstance(gameType); <-- óþarfi
-				MethodInfo getFullNameMethod = gameType.GetMethod("GetFullName");
+				// Create a Player that associates the 'owner' with the board
+				Player player = new Player();
+				player.dateJoined = DateTime.Now;
+				player.UserName = owner.UserName;
+				player.idBoard = board.id;
+				player.playerNumber = 0; //owner is player0
+				boardRepo.AddPlayer(player);
+				boardRepo.Save();
+
+				return View("GameLobby");
+				// RedirectToAction
+
+				/*	owner.Players.Clear();
+					Player player = new Player();
+					player.dateJoined = DateTime.Now;
+					player.playerNumber = 0;
+
+					game.Boards.Add(board);
+					board.Players.Add(player);
+
+					owner.Players.Add(player);
+
+					boardRepo.Save();
+					foreach (var f in owner.Players)
+					{
+						//if(f.idUser == owner.UserId && f.Board.Game.id == game.id)
+						System.Diagnostics.Debug.WriteLine(f.dateJoined);
+					}
+					return View("GameLobby");
+					// RedirectToAction
+				}
+
+				/*
+				 * Assembly executingAssembly = Assembly.GetExecutingAssembly();
+					Type gameType = executingAssembly.GetType("Windshield.Models.Games." + game.model);
+
+					//object gameInstance = Activator.CreateInstance(gameType); <-- óþarfi
+					MethodInfo getFullNameMethod = gameType.GetMethod("GetFullName");
 
 
-				ConstructorInfo ctor = gameType.GetConstructor(new[] { typeof(List<User>) });
-				object gameInstance = ctor.Invoke(new object[] { players });
-				
-				return View("GameLobby", gameInstance);
+					ConstructorInfo ctor = gameType.GetConstructor(new[] { typeof(List<User>) });
+					object gameInstance = ctor.Invoke(new object[] { players });
+				*/
 			}
 		}
 
@@ -95,15 +131,15 @@ namespace Windshield.Controllers
 
 		public ActionResult Boards(Game game)
 		{
-			var name = gameRepository.GetGameByName(game.name);
-			var viewModel = boardRepository.GetBoards(name);
+			var name = gameRepo.GetGameByName(game.name);
+			var viewModel = boardRepo.GetBoards(name);
 			return View("Boards", viewModel);
 		}
 
 		public ActionResult MyGames()
 		{
-			User user = userRepository.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
-			var model = boardRepository.GetBoards(user);
+			User user = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
+			var model = boardRepo.GetBoards(user);
 			return View("MyGames", model);
 		}
 
