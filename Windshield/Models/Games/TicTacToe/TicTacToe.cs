@@ -501,7 +501,9 @@ namespace Windshield.Models.Games.TicTacToe
 
 				// check if it is player's turn
 				if (turn != player)
+				{
 					return 0;
+				}
 
 				// find out where it should be inserted
 				if (action.Contains("cell"))

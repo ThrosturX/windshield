@@ -20,7 +20,7 @@ namespace Windshield.Models.Games.Common.Ratings
 		public Elo()
 		{
 			points = 1200;
-			K = 32;
+			K = 10;
 		}
 
 		public Elo(int id, User usr) : this()
@@ -58,7 +58,7 @@ namespace Windshield.Models.Games.Common.Ratings
 
 			if (count == 0)
 			{
-				otherPoints = 1000; // computer
+				otherPoints = 400; // computer
 			}
 			else
 			{

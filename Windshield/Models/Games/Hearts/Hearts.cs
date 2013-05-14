@@ -274,5 +274,130 @@ namespace Windshield.Models.Games.Hearts
 			IncrementTurn();
 			return true;
 		}
+		
+		public int TryAction(string action, string sender)
+		{
+			// check the sender
+			HPlayer player = new HPlayer();
+
+			foreach (var p in players)
+			{
+				if (p.user.UserName == sender)
+					player = p;
+			}
+			
+			// not a valid sender
+			if (player == null)
+				return 0;
+
+			// examples
+			// play|2|S (try to play the two of spades)
+			// play|A|H (ace of hearts)
+			if (action.Contains("play"))
+			{
+				// check if it's the player's turn
+				if (turn != player)
+				{
+					return 0;
+				}
+
+				// find which card is being played
+				// H = Hearts, S = Spades, D = Diamons, C = Clubs
+				string[] cardString = action.Split('|');
+
+				Card card = new Card();
+
+				try
+				{
+					// get suit
+					switch (cardString[1][0])
+					{
+						case 'H':
+							{
+								card.suit = Suit.Heart;
+								break;
+							}
+						case 'S':
+							{
+								card.suit = Suit.Spade;
+								break;
+							}
+						case 'D':
+							{
+								card.suit = Suit.Diamond;
+								break;
+							}
+						case 'C':
+							{
+								card.suit = Suit.Club;
+								break;
+							}
+						default:
+							return 0;	// invalid card
+					}
+					
+					// get rank
+					int rank;
+					if (int.TryParse(cardString[2], out rank))
+					{
+						if (rank > 0 && rank < 13)
+						{
+							card.face = rank;
+						}
+						else
+						{
+							return 0; // invalid rank
+						}
+					}
+					else
+					{
+						switch (cardString[2][0])
+						{
+							case 'A':
+								{
+									card.face = (int)Rank.Ace;
+									break;
+								}
+							case 'T':
+								{
+									card.face = (int)Rank.Ten;
+									break;
+								}
+							case 'J':
+								{
+									card.face = (int)Rank.Jack;
+									break;
+								}
+							case 'Q':
+								{
+									card.face = (int)Rank.Queen;
+									break;
+								}
+							case 'K':
+								{
+									card.face = (int)Rank.King;
+									break;
+								}
+							default:
+								return 0; // invalid card
+						}
+					}
+				}
+				catch (Exception)
+				{
+					return 0; // fail; malformed action
+				}
+
+				// try playing the card
+				if (PlayCard(player, card))
+				{
+					return 1;	// success!
+				}
+			}
+
+			// no success
+			return 0;
+		}
+		//public bool PlayCard(HPlayer player, Card card)
 	}
 }
