@@ -20,6 +20,14 @@
 		</tbody>
 	</table>
 
+	<input id="GameRestart" type="button" value="Restart" />
+
+	<div id="GameScore">
+		Wins: <span id="GameWins">0</span>
+		Draws: <span id="GameDraws">0</span>
+		Losses: <span id="GameLoss">0</span>
+	</div>
+
 <script>
 	$(document).ready(function () {
 		var group = '@(Model.id)';
@@ -33,10 +41,23 @@
 	//		$("#" + cellId).text('@(Model.player1.symbol)');
 //		};
 
+		$("#GameRestart").hide();
+
 		hub.client.Broadcast = function (status) {
 			for (var i=0; i<9; i++)
 			{
 				$("#cell" + i).text(status[i]);
+			}
+			
+			if (currentUser == playerOne) {
+				$("#GameWins").text(status[14]);
+				$("#GameDraws").text(status[16]);
+				$("#GameLoss").text(status[18]);
+			}
+			else {
+				$("#GameWins").text(status[18]);
+				$("#GameDraws").text(status[16]);
+				$("#GameLoss").text(status[14]);
 			}
 
 		};
@@ -44,12 +65,19 @@
 		hub.client.GameOver = function (winner) {
 			if (winner != "") {
 				alert(winner + " wins!");
+				if (winner == currentUser) {
+					$("#GameWins").html(parseInt($("#GameWins").html(), 10) + 1);
+				}
+				else {
+					$("#GameLoss").html(parseInt($("#GameLoss").html(), 10) + 1);
+				}
 			}
 			else {
 				alert("It's a draw!");
+				$("#GameDraws").html(parseInt($("#GameDraws").html(), 10) + 1);
 			}
 
-			hub.server.refresh(group);
+			$("#GameRestart").show();
 		}
 
 		$.connection.hub.start().done(function() {
@@ -57,7 +85,12 @@
 
 			$("#tic-tac-toe tr td").click(function () {
 				hub.server.tryAction(group, "insert" + this.id, currentUser);
-			//	$(this).text('@(Model.player1.symbol)');
+			});
+
+			$("#GameRestart").click(function () {
+				hub.server.tryAction(group, "checkAI", currentUser);
+	//			setTimeout(function () { hub.server.refresh(group); }, 1250);
+				$("#GameRestart").hide();
 			});
 		});
 	});
