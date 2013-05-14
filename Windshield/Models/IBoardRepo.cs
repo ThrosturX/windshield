@@ -7,10 +7,26 @@ namespace Windshield.Models
 {
 	public interface IBoardRepo
 	{
-		void AddBoard(Board board);	
-		void DeleteBoard(Board board);
+
+		//
+		// insert methods
+
+		void AddBoard(Board board);
 		void AddPlayer(Player player);
+
+		//
+		// delete methods
+
+		void DeleteBoard(Board board);
+
+		//
+		// commit methods
+
 		void Save();
+
+		//
+		// query methods
+
 		Board GetBoardById(int id);
 		IQueryable<Board> GetBoards();
 		IQueryable<Board> GetBoards(Game game);

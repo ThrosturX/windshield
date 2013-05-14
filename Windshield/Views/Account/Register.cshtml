@@ -16,7 +16,7 @@
 	</legend>
 	
 	
-    @Html.ValidationSummary()
+    @Html.Partial("_ValidationSummaryPartial", ViewData.ModelState)
 	<div class="control-group">
 		<div class="control-label">
             @Html.LabelFor(m => m.UserName)
