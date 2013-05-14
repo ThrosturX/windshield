@@ -10,6 +10,7 @@ namespace Windshield.Models
 		void AddGame(Game type);
 		void DeleteGame(Game type);
 		Game GetGameByName(string name);
+		List<StatisticsViewModel> GetTopRatingsForViewModel(Game game);
 		IQueryable<Game> GetAllGames();
 		IQueryable<GameRating> GetTopRatings();
 		IQueryable<GameRating> GetTopRatings(Game game);

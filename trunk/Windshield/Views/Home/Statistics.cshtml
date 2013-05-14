@@ -1,6 +1,8 @@
 ﻿@model IQueryable<Windshield.Models.GameRating>
 <script src="@Url.Content("~/Scripts/GetStatistics.js")" type="text/javascript"></script>
 
+
+
 <h2>Here are some amazing Statistics:</h2>
 
 <select id="dropdown" name="dropdown">
@@ -13,6 +15,7 @@
 			<tr>
 				<th>Username</th>
 				<th>Elo Rating</th>
+				<th>Games Played </th>
 			</tr>
 		</thead>
 	<tbody id="statbody">
@@ -22,15 +25,11 @@
 </table>
 
 <script id ="StatsTemplate" type ="text/html">
-	<table id="stats">
-		<tbody>
-			<tr>
-				<td id="name"></td>
-				<td id="rating"></td>
+
+			<tr class ="statsrow">
+				<td id="name"> ${Name}</td>
+				<td id="rating"> ${Rating} </td>
+				<td id="played"> ${TimesPlayed} </td>
 			</tr>
-		</tbody>
-
-	</table>
-
 
 </script>
