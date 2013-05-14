@@ -53,6 +53,14 @@ namespace Windshield.Models
 			return result.SingleOrDefault();
 		}
 
+		public Game GetGameByID(int id)
+		{
+			var result = from game in db.Games
+						 where game.id.Equals(id)
+						 select game;
+			return result.SingleOrDefault();
+		}
+
 		public IQueryable<Game> GetAllGames()
 		{
 			return db.Games;

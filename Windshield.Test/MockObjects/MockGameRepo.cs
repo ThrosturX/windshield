@@ -29,6 +29,13 @@ namespace Windshield.Test.MockObjects
 			return result.SingleOrDefault();
 		}
 
+		public Game GetGameByID(int id)
+		{
+			return (from game in rep
+					where game.id == id
+					select game).SingleOrDefault();
+		}
+
 		public IQueryable<Game> GetAllGames()
 		{
 			return rep.AsQueryable();

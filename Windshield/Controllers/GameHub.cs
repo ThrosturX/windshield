@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 using Windshield.Models;
+using Windshield.Models.Games.Common.Ratings;
 
 
 namespace Windshield.Controllers
@@ -16,6 +18,7 @@ namespace Windshield.Controllers
 
 		private IBoardRepo boardRepository = new BoardRepo();
 		private IUserRepo userRepository = new UserRepo();
+		private IGameRepo gameRepository = new GameRepo();
 
 		public void Join(string groupId)
 		{
@@ -77,7 +80,54 @@ namespace Windshield.Controllers
 				case 2:
 					{
 						Clients.Group(id.ToString()).Broadcast(ttt.GetStatus());
-						Clients.Group(id.ToString()).GameOver(ttt.GetGameOver());
+
+						// Begin update ratings
+
+						IQueryable<User> players;
+						List<Elo> ratings = new List<Elo>();
+						User outlier;
+						Elo elo;
+						int outlierScore;
+						string winner;
+						players = boardRepository.GetBoardUsers(board);
+
+						winner = ttt.GetGameOver();
+						outlier = userRepository.GetUserByName(winner);
+						GameRating rating = userRepository.GetGameRatingByGame(outlier, gameRepository.GetGameByID(2)); // TODO: late binding (2 = tictactoe id)
+
+						outlierScore = rating.rating;
+						elo = new Elo(2, outlier); // TODO: late binding (2 = tictactoe id)
+						if (outlierScore != 0)
+						{
+							elo.points = outlierScore;
+						}
+						foreach (var user in players)
+						{
+							if (user != outlier)
+							{
+								Elo tempElo = new Elo(2, user); // TODO LATE BINDING
+								GameRating trating = userRepository.GetGameRatingByGame(user, gameRepository.GetGameByID(2)); // TODO LATE BINDING
+								if (rating.rating != 0)
+								{
+									tempElo.points = trating.rating;
+								}
+								ratings.Add(tempElo);
+							}
+						}
+
+						elo.UpdateAll(1, ratings);
+
+						rating.rating = elo.points;
+
+						foreach (var r in ratings)
+						{
+							GameRating gr = userRepository.GetGameRatingByGame(r.user, gameRepository.GetGameByID(2)); // TODO LATE BINDING
+							gr.rating = r.points;
+						}
+
+						// End update ratings
+
+						Clients.Group(id.ToString()).GameOver(winner);
 						string message = ttt.GetStatus();
 						//Clients.Group(id.ToString()).Broadcast(message);
 						board.status = message;
