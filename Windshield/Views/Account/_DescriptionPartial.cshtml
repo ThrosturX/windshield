@@ -1,13 +1,10 @@
-﻿<h3>Description</h3>
-
-@using (Html.BeginForm("Manage", "Account")) 
+﻿@using (Html.BeginForm("Manage", "Account")) 
 {
 	<form class="form-horizontal">
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
 
     <fieldset>
-		<legend>Description</legend>
 		<div class="control-group">
 			<textarea rows="10" cols="30">Write your description..</textarea>
 		</div>
