@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using Windshield.Models;
+using Windshield.ViewModels;
 
 namespace Windshield.Controllers
 {
@@ -13,6 +14,13 @@ namespace Windshield.Controllers
 	[Authorize]
 	public class AccountController : Controller
 	{
+		private IUserRepo userRepository = null;
+
+		public AccountController()
+		{
+			userRepository = new UserRepo();
+		}
+
 		//
 		// GET: /Account/Index
 
@@ -113,7 +121,11 @@ namespace Windshield.Controllers
 
 		public ActionResult ChangePassword()
 		{
-			return View();
+			AccountChangeUserDetailsViewModel model = new AccountChangeUserDetailsViewModel();
+			model.currentUser = userRepository.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
+			model.userDetailsModel = new ChangeUserDetailsModel();
+			model.changePasswordModel = new ChangePasswordModel();
+			return View("ChangePassword", model); //"ChangePassword" redundant but perhaps good practice
 		}
 
 		//
@@ -146,6 +158,20 @@ namespace Windshield.Controllers
 				{
 					ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
 				}
+			}
+			// If we got this far, something failed, redisplay form
+			return View(model);
+		}
+
+		//
+		// POST: /Account/ChangePassword
+
+		[HttpPost]
+		public ActionResult ChangePassword(AccountChangeUserDetailsViewModel model)
+		{
+			if (ModelState.IsValid)
+			{
+
 			}
 
 			// If we got this far, something failed, redisplay form
