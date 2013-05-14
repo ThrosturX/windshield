@@ -74,5 +74,15 @@ namespace Windshield.Controllers
 			return Json(derp, JsonRequestBehavior.AllowGet);
 		}
 
+		public JsonResult GetPopularity(Game g)
+		{
+			var game = gameRepo.GetTopGamesPlayedForViewModel();
+			if (g.name == "All")
+			{
+				return Json(game, JsonRequestBehavior.AllowGet);
+			}
+			//var GamesTimePlayed = 
+			return Json(game, JsonRequestBehavior.AllowGet);
+		}
 	}
 }
