@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Windshield.Models;
+using Windshield.ViewModels;
 
 namespace Windshield.Models
 {
@@ -105,6 +106,23 @@ namespace Windshield.Models
 				statistics.Add(m);
 			}
 			return statistics;
+		}
+
+		public List<PopularViewModel> GetTopGamesPlayedForViewModel()
+		{
+			var games = from game in db.Games
+						select game;
+
+			List<PopularViewModel> model = new List<PopularViewModel>();
+
+			foreach(var g in games)
+			{
+				PopularViewModel m = new PopularViewModel();
+				m.Name = g.name;
+				m.Image = g.image;
+				model.Add(m);
+			}
+			return model;							   
 		}
 	}
 }
