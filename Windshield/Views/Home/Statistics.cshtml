@@ -7,7 +7,7 @@
 
 <hr>
 
-<select id="dropdown" name="dropdown">
+<select id="dropdown" name="dropdown" class="pull-right">
 	<option value="" selected="selected"> ... </option>
 	@foreach (var game in Model)
 	{
@@ -21,7 +21,9 @@
 			<tr>
 				<th>Username</th>
 				<th>Elo Rating</th>
-				<th>Games Played </th>
+				<th>Games Played</th>
+				<th>Wins</th>
+				<th>Losses</th>
 			</tr>
 		</thead>
 	<tbody id="statistics-table-body">
@@ -36,6 +38,8 @@
 				<td id="name"> ${Name}</td>
 				<td id="rating"> ${Rating} </td>
 				<td id="played"> ${TimesPlayed} </td>
+				<td>1337</td>
+				<td>42</td>
 			</tr>
 
 </script>
