@@ -92,37 +92,42 @@ namespace Windshield.Controllers
 						players = boardRepository.GetBoardUsers(board);
 
 						winner = ttt.GetGameOver();
-						outlier = userRepository.GetUserByName(winner);
-						GameRating rating = userRepository.GetGameRatingByGame(outlier, gameRepository.GetGameByID(2)); // TODO: late binding (2 = tictactoe id)
+						if (winner != "")
+						{
+							outlier = userRepository.GetUserByName(winner);
+							GameRating rating = userRepository.GetGameRatingByGame(outlier, gameRepository.GetGameByID(2)); // TODO: late binding (2 = tictactoe id)
 
-						outlierScore = rating.rating;
-						elo = new Elo(2, outlier); // TODO: late binding (2 = tictactoe id)
-						if (outlierScore != 0)
-						{
-							elo.points = outlierScore;
-						}
-						foreach (var user in players)
-						{
-							if (user != outlier)
+							outlierScore = rating.rating;
+							elo = new Elo(2, outlier); // TODO: late binding (2 = tictactoe id)
+							if (outlierScore != 0)
 							{
-								Elo tempElo = new Elo(2, user); // TODO LATE BINDING
-								GameRating trating = userRepository.GetGameRatingByGame(user, gameRepository.GetGameByID(2)); // TODO LATE BINDING
-								if (rating.rating != 0)
-								{
-									tempElo.points = trating.rating;
-								}
-								ratings.Add(tempElo);
+								elo.points = outlierScore;
 							}
-						}
+							foreach (var user in players)
+							{
+								if (user != outlier)
+								{
+									Elo tempElo = new Elo(2, user); // TODO LATE BINDING
+									GameRating trating = userRepository.GetGameRatingByGame(user, gameRepository.GetGameByID(2)); // TODO LATE BINDING
+									if (rating.rating != 0)
+									{
+										tempElo.points = trating.rating;
+									}
+									ratings.Add(tempElo);
+								}
+							}
 
-						elo.UpdateAll(1, ratings);
+							elo.UpdateAll(1, ratings);
 
-						rating.rating = elo.points;
+							rating.rating = elo.points;
 
-						foreach (var r in ratings)
-						{
-							GameRating gr = userRepository.GetGameRatingByGame(r.user, gameRepository.GetGameByID(2)); // TODO LATE BINDING
-							gr.rating = r.points;
+							foreach (var r in ratings)
+							{
+								GameRating gr = userRepository.GetGameRatingByGame(r.user, gameRepository.GetGameByID(2)); // TODO LATE BINDING
+								gr.rating = r.points;
+							}
+
+							userRepository.Save();
 						}
 
 						// End update ratings

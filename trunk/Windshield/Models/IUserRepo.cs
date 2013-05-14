@@ -14,6 +14,7 @@ namespace Windshield.Models
 		void AddAdmin(User user);
 		void RemoveAdmin(User user);
 		*/
+		void Save();
 		int GetTimesPlayed(User user);
 		int GetTimesPlayedByGame(User user, Game game);
 		User GetUserByName(string name);

@@ -18,6 +18,11 @@ namespace Windshield.Models
 			}
 		}
 
+		public void Save()
+		{
+			db.SubmitChanges();
+		}
+
 		public int GetTimesPlayed(User user)
 		{
 			return (from gameRating in db.GameRatings

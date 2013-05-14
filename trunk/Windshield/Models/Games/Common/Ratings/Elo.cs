@@ -56,7 +56,14 @@ namespace Windshield.Models.Games.Common.Ratings
 				rating.Update(1 - score, points);
 			}
 
-			otherPoints = accumulator / count;
+			if (count == 0)
+			{
+				otherPoints = 1000; // computer
+			}
+			else
+			{
+				otherPoints = accumulator / count;
+			}
 
 			this.Update(score, otherPoints);
 		}
