@@ -87,15 +87,16 @@ namespace Windshield.Controllers
 						List<Elo> ratings = new List<Elo>();
 						User outlier;
 						Elo elo;
+						GameRating rating;
 						int outlierScore;
 						string winner;
 						players = boardRepository.GetBoardUsers(board);
 
 						winner = ttt.GetGameOver();
-						if (winner != "")
+						if (winner != "" && winner != "Computer") // don't let the computer win and take elo :)
 						{
 							outlier = userRepository.GetUserByName(winner);
-							GameRating rating = userRepository.GetGameRatingByGame(outlier, gameRepository.GetGameByID(2)); // TODO: late binding (2 = tictactoe id)
+							rating = userRepository.GetGameRatingByGame(outlier, gameRepository.GetGameByID(2)); // TODO: late binding (2 = tictactoe id)
 
 							outlierScore = rating.rating;
 							elo = new Elo(2, outlier); // TODO: late binding (2 = tictactoe id)
