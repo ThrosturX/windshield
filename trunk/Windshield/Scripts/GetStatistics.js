@@ -10,11 +10,12 @@
 			data: {'name' : opt},
 			dataType: "json",
 			success: function (gameRatings) {
-					
+					alert("gah");
 					$(".statistics-table-row").remove();
 					$("#statistics-table-row-template").tmpl(gameRatings).insertAfter("#statistics-table-body");
 			},
 			error: function () {
+				alert("blah");
 				$(".statistics-table-row").remove();
 			}
 			
