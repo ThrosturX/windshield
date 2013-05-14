@@ -209,6 +209,7 @@
     <Compile Include="Models\StatisticsViewModel.cs" />
     <Compile Include="Models\UserRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AccountChangeUserDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -355,6 +356,9 @@
     <Content Include="Views\Games\Boards.cshtml" />
     <Content Include="Views\Games\Chat.cshtml" />
     <Content Include="Views\Shared\_GameImagePartial.cshtml" />
+    <Content Include="Views\Account\_UploadPhotoPartial.cshtml" />
+    <Content Include="Views\Account\_DescriptionPartial.cshtml" />
+    <Content Include="Views\Account\_UserProfilePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

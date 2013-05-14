@@ -67,4 +67,48 @@ namespace Windshield.Models
 		[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
 		public string ConfirmPassword { get; set; }
 	}
+
+	public class ChangeUserDetailsModel
+	{
+		[DataType(DataType.Text)]
+		[Display(Name = "Gender")]
+		public string Gender { get; set; }
+
+		[DataType(DataType.Text)]
+		[Display(Name = "Age")]
+		public string Age { get; set; }
+
+		[DataType(DataType.Text)]
+		[Display(Name = "Settings")]
+		public string Settings { get; set; }
+
+		[DataType(DataType.Text)]
+		[Display(Name = "Occupation")]
+		public string Occupation { get; set; }
+
+		[DataType(DataType.Text)]
+		[Display(Name = "Country")]
+		public string Country { get; set; }
+
+		[DataType(DataType.Text)]
+		[Display(Name = "Avatar")]
+		public string Avatar { get; set; }
+
+		[DataType(DataType.Text)]
+		[Display(Name = "Email")]
+		public string Email { get; set; }
+
+		[DataType(DataType.Text)]
+		[Display(Name = "UserRating")]
+		public string UserRating { get; set; }
+
+		[DataType(DataType.Text)]
+		[Display(Name = "DateJoined")]
+		public string DateJoined { get; set; }
+
+		[DataType(DataType.Text)]
+		[Display(Name = "Name")]
+		public string Name { get; set; }
+
+	}
 }

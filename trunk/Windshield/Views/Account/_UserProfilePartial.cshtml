@@ -1,0 +1,81 @@
+﻿@model Windshield.ViewModels.AccountChangeUserDetailsViewModel
+
+<h3>Change profile information</h3>
+
+@using (Html.BeginForm("Manage", "Account")) 
+{
+	<form class="form-horizontal">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Change Profile Form</legend>
+        <div class="control-group">
+            <div class="control-label">
+				@Html.LabelFor(m => m.userDetailsModel.Age)
+			</div>
+			<div class="controls">
+				@Html.TextBoxFor(m => m.userDetailsModel.Age, new { Value = Model.currentUser.UserDetail.age })
+            </div>
+            <div class="control-label">
+                @Html.LabelFor(m => m.userDetailsModel.Avatar)
+			</div>
+			<div class="controls">
+                @Html.TextBoxFor(m => m.userDetailsModel.Avatar, new { Value = Model.currentUser.UserDetail.avatar })
+            </div>
+            <div class="control-label">
+                @Html.LabelFor(m => m.userDetailsModel.Country)
+			</div>
+			<div class="controls">
+                @Html.TextBoxFor(m => m.userDetailsModel.Country, new { Value = Model.currentUser.UserDetail.country })
+            </div>
+            <div class="control-label">
+                @Html.LabelFor(m => m.userDetailsModel.DateJoined)
+			</div>
+			<div class="controls">
+                @Html.TextBoxFor(m => m.userDetailsModel.DateJoined, new { Value = Model.currentUser.UserDetail.dateJoined })
+            </div>
+            <div class="control-label">
+                @Html.LabelFor(m => m.userDetailsModel.Email)
+			</div>
+			<div class="controls">
+                @Html.TextBoxFor(m => m.userDetailsModel.Email, new { Value = Model.currentUser.UserDetail.email })
+            </div>
+            <div class="control-label">
+                @Html.LabelFor(m => m.userDetailsModel.Gender)
+			</div>
+			<div class="controls">
+                @Html.TextBoxFor(m => m.userDetailsModel.Gender, new { Value = Model.currentUser.UserDetail.gender })
+            </div>
+            <div class="control-label">
+                @Html.LabelFor(m => m.userDetailsModel.Name)
+			</div>
+			<div class="controls">
+                @Html.TextBoxFor(m => m.userDetailsModel.Name, new { Value = Model.currentUser.UserDetail.name })
+            </div>
+            <div class="control-label">
+                @Html.LabelFor(m => m.userDetailsModel.Occupation)
+			</div>
+			<div class="controls">
+                @Html.TextBoxFor(m => m.userDetailsModel.Occupation, new { Value = Model.currentUser.UserDetail.occupation })
+            </div>
+            <div class="control-label">
+                @Html.LabelFor(m => m.userDetailsModel.Settings)
+			</div>
+			<div class="controls">
+                @Html.TextBoxFor(m => m.userDetailsModel.Settings, new { Value = Model.currentUser.UserDetail.settings })
+            </div>
+            <div class="control-label">
+                @Html.LabelFor(m => m.userDetailsModel.UserRating)
+			</div>
+			<div class="controls">
+                @Html.TextBoxFor(m => m.userDetailsModel.UserRating, new { Value = Model.currentUser.UserDetail.userRating })
+            </div>
+        </div>
+		<div class="control-group">
+			<input type="submit" class="btn" value="Change user details" />
+			<button class="btn"><a href="@Html.ActionLink("Home", "About", "Home")"></a>Cancel</button>
+		</div>
+    </fieldset>
+	</form>
+}
