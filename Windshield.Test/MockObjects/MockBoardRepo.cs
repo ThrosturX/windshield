@@ -53,6 +53,17 @@ namespace Windshield.Test.MockObjects
 			return null;
 		}
 
+		public IQueryable<Board> GetBoards(User user)
+		{
+			// dummy
+			return null;
+		}
+
+		public IQueryable<Board> GetBoards(Game game, User user)
+		{
+			// dummy
+			return null;
+		}
 
 		public User GetBoardOwner(Board board)
 		{

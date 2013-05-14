@@ -102,7 +102,9 @@ namespace Windshield.Controllers
 
 		public ActionResult MyGames()
 		{
-			return View("MyGames");
+			User user = userRepository.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
+			var model = boardRepository.GetBoards(user);
+			return View("MyGames", model);
 		}
 
     }

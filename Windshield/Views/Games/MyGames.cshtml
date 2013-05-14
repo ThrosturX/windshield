@@ -1,7 +1,13 @@
-﻿
-<h2>Here are some amazing Statistics:</h2>
+﻿@model IQueryable<Windshield.Models.Board>
 
-<p>There is a 100% chance that your user name is </p><p class="lead">@User.Identity.Name</p>
+<div class="row-fluid">
+	<h2>My Games</h2>
+</div>
+
+<div class="row-fluid">
+	@Html.Partial("_BoardTablePartial", Model)
+</div>
+
 
 
 
