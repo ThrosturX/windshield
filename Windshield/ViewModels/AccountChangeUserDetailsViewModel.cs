@@ -8,8 +8,8 @@ namespace Windshield.ViewModels
 {
 	public class AccountChangeUserDetailsViewModel
 	{
-		public User currentUser { get; set; }
-		public ChangeUserDetailsModel userDetailsModel { get; set; }
+		public User currentUserModel { get; set; }
+		public ChangeUserDetailsModel changeUserDetailsModel { get; set; }
 		public ChangePasswordModel changePasswordModel { get; set; }
 	}
 }
