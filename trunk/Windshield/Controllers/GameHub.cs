@@ -79,7 +79,7 @@ namespace Windshield.Controllers
 						Clients.Group(id.ToString()).Broadcast(ttt.GetStatus());
 						Clients.Group(id.ToString()).GameOver(ttt.GetGameOver());
 						string message = ttt.GetStatus();
-						Clients.Group(id.ToString()).Broadcast(message);
+						//Clients.Group(id.ToString()).Broadcast(message);
 						board.status = message;
 						boardRepository.Save();
 						break;

@@ -136,6 +136,11 @@ namespace Windshield.Models.Games.TicTacToe
 		internal bool InsertSymbol(char symbol, int cell)
 		{
 			Coord location = CellToCoord(cell);
+			if (turn.symbol != symbol)
+			{
+				return false;
+			}
+
 			if (cell < 0 || cell > 8)
 			{
 				return false;
@@ -311,19 +316,23 @@ namespace Windshield.Models.Games.TicTacToe
 		/// </summary>
 		internal int ActionCompleted()
 		{
-			TPlayer winner;
+			TPlayer winner = CheckWinner();
 			if (freeSquares == 0)
 			{
-				winner = CheckWinner();
 				return 2;
 			}
 
-			if (player2.isAI)
+			if (player2.isAI && winner == null && player2 == turn)
 			{
 				InsertSymbol(player2.symbol, AISelectCell());
+				winner = CheckWinner();
 			}
 
-			winner = CheckWinner();
+			if (freeSquares == 0)
+			{
+				return 2;
+			}
+
 			if (winner != null)
 			{
 				return 2;
@@ -366,13 +375,13 @@ namespace Windshield.Models.Games.TicTacToe
 				builder.Append("2");
 			}
 			// Symbol
-			builder.Append("|" + turn.symbol + "|");
+			builder.Append("|" + player1.symbol + "|");
 			// Wins
-			builder.Append(turn.wins + "|");
+			builder.Append(player1.wins + "|");
 			// Draws
-			builder.Append(turn.draws + "|");
+			builder.Append(player1.draws + "|");
 			// Losses
-			builder.Append(turn.losses + "|");
+			builder.Append(player1.losses + "|");
 
 			// players
 			builder.Append(player1.user.UserName + "|" + player2.user.UserName);
@@ -457,6 +466,7 @@ namespace Windshield.Models.Games.TicTacToe
 		/// <summary>
 		/// Converts a Hub request into business logic. Currently implements:
 		/// * insert: attempts to place a symbol on the grid
+		/// * checkAI: asks the computer to move if it's the computer's turn
 		/// </summary>
 		/// <param name="action">string: "insert cell#" where # is a number between 0 and 8</param>
 		/// <param name="sender">The username of the player attempting the action.</param>
@@ -512,6 +522,10 @@ namespace Windshield.Models.Games.TicTacToe
 						return ActionCompleted();
 					};
 				}
+			}
+			else if (action.Contains("checkAI"))
+			{
+				return ActionCompleted();
 			}
 
 			// No success
