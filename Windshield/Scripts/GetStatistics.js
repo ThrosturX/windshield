@@ -11,11 +11,11 @@
 			dataType: "json",
 			success: function (gameRatings) {
 				
-					$(".statsrow").remove();
-					$("#StatsTemplate").tmpl(gameRatings).insertAfter("#statbody");
+					$(".statistics-table-row").remove();
+					$("#statistics-table-row-template").tmpl(gameRatings).insertAfter("#statistics-table-body");
 			},
 			error: function () {
-				$(".statsrow").remove();
+				$(".statistics-table-row").remove();
 			}
 			
 		});
@@ -32,12 +32,12 @@
 				dataType: "json",
 				success: function (gameRatings) {
 					
-						$(".statsrow").remove();
-						$("#StatsTemplate").tmpl(gameRatings).insertAfter("#statbody");
+						$(".statistics-table-row").remove();
+						$("#statistics-table-row-template").tmpl(gameRatings).appendTo("#statistics-table-body");
 					
 				},
 				error: function () {
-					$(".statsrow").remove();
+					$(".statistics-table-row").remove();
 				}
 			});
 		});

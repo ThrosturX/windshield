@@ -1,0 +1,13 @@
+﻿@model ModelStateDictionary
+
+@if(!Model.IsValid)
+{
+    <div class="validation-summary-errors">
+		@foreach (var modelError in Model.SelectMany(keyValuePair => keyValuePair.Value.Errors))
+		{
+		<div class="alert alert-error">
+			@modelError.ErrorMessage
+		</div>
+		}
+    </div>
+}

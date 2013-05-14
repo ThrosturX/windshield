@@ -3,8 +3,9 @@
 
 
 
-<h2>Here are some amazing Statistics:</h2>
+<h2>Statistics</h2>
 
+<hr>
 
 <select id="dropdown" name="dropdown">
 	<option value="" selected="selected"> ... </option>
@@ -15,7 +16,7 @@
 </select>
 
 
-<table id="statistics">
+<table id="statistics" class="table table-hover">
 		<thead>
 			<tr>
 				<th>Username</th>
@@ -23,15 +24,15 @@
 				<th>Games Played </th>
 			</tr>
 		</thead>
-	<tbody id="statbody">
+	<tbody id="statistics-table-body">
 
 	</tbody>
 
 </table>
 
-<script id ="StatsTemplate" type ="text/html">
+<script id ="statistics-table-row-template" type ="text/html">
 
-			<tr class ="statsrow">
+			<tr class ="statistics-table-row">
 				<td id="name"> ${Name}</td>
 				<td id="rating"> ${Rating} </td>
 				<td id="played"> ${TimesPlayed} </td>
