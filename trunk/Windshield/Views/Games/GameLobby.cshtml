@@ -1,4 +1,4 @@
-﻿@model Windshield.Models.Games.AGame
+﻿@model Windshield.ViewModels.LobbyViewModel
 
 
 	<img src="~/Images/board.gif" alt="flott mynd" />
@@ -27,6 +27,20 @@
 	</div>
 	<button>START</button>  <!-- TODO: linka á leik -->
 	@Html.ActionLink("Start","Index","Games")
+	@Html.ActionLink("Start", "TicTacToe", "Games", new { targetId = @Model.boardId }, null)
+
+<script>
+	$(document).ready(function () {
+		var group = '@Model.boardId';
+		var hub = $.connection.gameHub;
+		
+		hub.client.Start = function (id) {
+			self.location = "JoinGame?targetId=" + id;
+		}
+	});
+
+</script>
+
 	<nav>
 		<ul>
 			<li>Friends &hearts</li>
@@ -34,3 +48,6 @@
 			<li>Requests</li>
 		</ul>
 	</nav>
+	<div id="chat-wrapper" class="container-fluid span4 visible-desktop">
+		@Html.Partial("Chat", Model.boardId)
+	</div>

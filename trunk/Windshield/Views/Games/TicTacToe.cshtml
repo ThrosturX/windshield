@@ -21,6 +21,11 @@
 	</tbody>
 </table>
 
+<div id="winner-dialog-popup">
+
+
+</div>
+
 <div class="ttt-game-score">
 	<div id="GameScore">
 		Wins: <span id="GameWins">0</span>
@@ -45,6 +50,7 @@
 //		};
 
 		$("#GameRestart").hide();
+		$("#winner-dialog-popup").hide();
 
 		hub.client.Broadcast = function (status) {
 			for (var i=0; i<9; i++)
@@ -67,7 +73,7 @@
 
 		hub.client.GameOver = function (winner) {
 			if (winner != "") {
-				alert(winner + " wins!");
+				$("#winner-dialog-popup").text(winner + " wins!");
 				if (winner == currentUser) {
 					$("#GameWins").html(parseInt($("#GameWins").html(), 10) + 1);
 				}
@@ -76,15 +82,22 @@
 				}
 			}
 			else {
-				alert("It's a draw!");
+				$("#winner-dialog-popup").text("It's a draw!");
 				$("#GameDraws").html(parseInt($("#GameDraws").html(), 10) + 1);
 			}
+
+			$("#winner-dialog-popup").show(2);
+
+			setTimeout(function () {
+				$("#winner-dialog-popup").hide();
+			}, 3000);
 
 			$("#GameRestart").show();
 		}
 
 		$.connection.hub.start().done(function() {
 			hub.server.join(group);
+			hub.server.gameStarted(group);
 
 			$("#tic-tac-toe tr td").click(function () {
 				hub.server.tryAction(group, "insert" + this.id, currentUser);
