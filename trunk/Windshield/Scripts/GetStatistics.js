@@ -10,8 +10,12 @@
 			data: {'name' : opt},
 			dataType: "json",
 			success: function (gameRatings) {
+				
+					$(".statsrow").remove();
+					$("#StatsTemplate").tmpl(gameRatings).insertAfter("#statbody");
+			},
+			error: function () {
 				$(".statsrow").remove();
-				$("#StatsTemplate").tmpl(gameRatings).insertAfter("#statbody");
 			}
 			
 		});
@@ -27,10 +31,14 @@
 				data: { 'name': opt },
 				dataType: "json",
 				success: function (gameRatings) {
+					
+						$(".statsrow").remove();
+						$("#StatsTemplate").tmpl(gameRatings).insertAfter("#statbody");
+					
+				},
+				error: function () {
 					$(".statsrow").remove();
-					$("#StatsTemplate").tmpl(gameRatings).insertAfter("#statbody");
 				}
-
 			});
 		});
 });
