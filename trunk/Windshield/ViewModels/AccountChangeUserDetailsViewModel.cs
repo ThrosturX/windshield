@@ -9,7 +9,7 @@ namespace Windshield.ViewModels
 	public class AccountChangeUserDetailsViewModel
 	{
 		public User currentUserModel { get; set; }
-		public ChangeUserDetailsModel changeUserDetailsModel { get; set; }
+		public UserDetail changeUserDetailsModel { get; set; }
 		public ChangePasswordModel changePasswordModel { get; set; }
 	}
 }
