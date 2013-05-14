@@ -168,10 +168,16 @@ h1 > a:hover
 #list-messages
 {
 	height: 256px;
-	overflow-y: hidden;
+	overflow-y: scroll;
 	list-style-type: none;
 	overflow-wrap: break-word;
 	margin: 0;
+}
+
+.ttt-game-score
+{
+	text-align: center;
+	padding: 12px 0;
 }
 
 
