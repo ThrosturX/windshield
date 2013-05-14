@@ -2,7 +2,7 @@
 
 <h3>Change profile information</h3>
 
-@using (Html.BeginForm("Manage", "Account")) 
+@using (Html.BeginForm("ChangeUserDetail", "Account")) 
 {
 	<form class="form-horizontal">
     @Html.AntiForgeryToken()
@@ -12,64 +12,64 @@
         <legend>Change Profile Form</legend>
         <div class="control-group">
             <div class="control-label">
-				@Html.LabelFor(m => m.userDetailsModel.Age)
+				@Html.LabelFor(m => m.changeUserDetailsModel.Age)
 			</div>
 			<div class="controls">
-				@Html.TextBoxFor(m => m.userDetailsModel.Age, new { Value = Model.currentUser.UserDetail.age })
+				@Html.TextBoxFor(m => m.changeUserDetailsModel.Age, new { Value = Model.currentUserModel.UserDetail.age })
             </div>
             <div class="control-label">
-                @Html.LabelFor(m => m.userDetailsModel.Avatar)
+                @Html.LabelFor(m => m.changeUserDetailsModel.Avatar)
 			</div>
 			<div class="controls">
-                @Html.TextBoxFor(m => m.userDetailsModel.Avatar, new { Value = Model.currentUser.UserDetail.avatar })
+                @Html.TextBoxFor(m => m.changeUserDetailsModel.Avatar, new { Value = Model.currentUserModel.UserDetail.avatar })
             </div>
             <div class="control-label">
-                @Html.LabelFor(m => m.userDetailsModel.Country)
+                @Html.LabelFor(m => m.changeUserDetailsModel.Country)
 			</div>
 			<div class="controls">
-                @Html.TextBoxFor(m => m.userDetailsModel.Country, new { Value = Model.currentUser.UserDetail.country })
+                @Html.TextBoxFor(m => m.changeUserDetailsModel.Country, new { Value = Model.currentUserModel.UserDetail.country })
             </div>
             <div class="control-label">
-                @Html.LabelFor(m => m.userDetailsModel.DateJoined)
+                @Html.LabelFor(m => m.changeUserDetailsModel.DateJoined)
 			</div>
 			<div class="controls">
-                @Html.TextBoxFor(m => m.userDetailsModel.DateJoined, new { Value = Model.currentUser.UserDetail.dateJoined })
+                @Html.TextBoxFor(m => m.changeUserDetailsModel.DateJoined, new { Value = Model.currentUserModel.UserDetail.dateJoined, @readonly="readonly" })
             </div>
             <div class="control-label">
-                @Html.LabelFor(m => m.userDetailsModel.Email)
+                @Html.LabelFor(m => m.changeUserDetailsModel.Email)
 			</div>
 			<div class="controls">
-                @Html.TextBoxFor(m => m.userDetailsModel.Email, new { Value = Model.currentUser.UserDetail.email })
+                @Html.TextBoxFor(m => m.changeUserDetailsModel.Email, new { Value = Model.currentUserModel.UserDetail.email })
             </div>
             <div class="control-label">
-                @Html.LabelFor(m => m.userDetailsModel.Gender)
+                @Html.LabelFor(m => m.changeUserDetailsModel.Gender)
 			</div>
 			<div class="controls">
-                @Html.TextBoxFor(m => m.userDetailsModel.Gender, new { Value = Model.currentUser.UserDetail.gender })
+                @Html.DropDownListFor(m => m.changeUserDetailsModel.Gender, new SelectList(new List<Object> { new { Value = true , text = "KK" }, new { Value = false, text = "KVK" } }, "Value", "text", Model.currentUserModel.UserDetail.gender))
             </div>
             <div class="control-label">
-                @Html.LabelFor(m => m.userDetailsModel.Name)
+                @Html.LabelFor(m => m.changeUserDetailsModel.Name)
 			</div>
 			<div class="controls">
-                @Html.TextBoxFor(m => m.userDetailsModel.Name, new { Value = Model.currentUser.UserDetail.name })
+                @Html.TextBoxFor(m => m.changeUserDetailsModel.Name, new { Value = Model.currentUserModel.UserDetail.name })
             </div>
             <div class="control-label">
-                @Html.LabelFor(m => m.userDetailsModel.Occupation)
+                @Html.LabelFor(m => m.changeUserDetailsModel.Occupation)
 			</div>
 			<div class="controls">
-                @Html.TextBoxFor(m => m.userDetailsModel.Occupation, new { Value = Model.currentUser.UserDetail.occupation })
+                @Html.TextBoxFor(m => m.changeUserDetailsModel.Occupation, new { Value = Model.currentUserModel.UserDetail.occupation })
             </div>
             <div class="control-label">
-                @Html.LabelFor(m => m.userDetailsModel.Settings)
+                @Html.LabelFor(m => m.changeUserDetailsModel.Settings)
 			</div>
 			<div class="controls">
-                @Html.TextBoxFor(m => m.userDetailsModel.Settings, new { Value = Model.currentUser.UserDetail.settings })
+                @Html.TextBoxFor(m => m.changeUserDetailsModel.Settings, new { Value = Model.currentUserModel.UserDetail.settings })
             </div>
             <div class="control-label">
-                @Html.LabelFor(m => m.userDetailsModel.UserRating)
+                @Html.LabelFor(m => m.changeUserDetailsModel.UserRating)
 			</div>
 			<div class="controls">
-                @Html.TextBoxFor(m => m.userDetailsModel.UserRating, new { Value = Model.currentUser.UserDetail.userRating })
+                @Html.TextBoxFor(m => m.changeUserDetailsModel.UserRating, new { Value = Model.currentUserModel.UserDetail.userRating })
             </div>
         </div>
 		<div class="control-group">

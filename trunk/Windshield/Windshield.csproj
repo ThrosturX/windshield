@@ -205,9 +205,11 @@
     <Compile Include="Models\Games\TicTacToe\TPlayer.cs" />
     <Compile Include="Models\IBoardRepo.cs" />
     <Compile Include="Models\IGameRepo.cs" />
+    <Compile Include="Models\IUserDetailsRepo.cs" />
     <Compile Include="Models\IUserRepo.cs" />
     <Compile Include="Models\Games\TicTacToe\TicTacToe.cs" />
     <Compile Include="Models\StatisticsViewModel.cs" />
+    <Compile Include="Models\UserDetailsRepo.cs" />
     <Compile Include="Models\UserRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AccountChangeUserDetailsViewModel.cs" />
