@@ -74,12 +74,19 @@ namespace Windshield.Models
 		}
 		public List<StatisticsViewModel> GetTopRatingsForViewModel(Game game)
 		{
+
+			if (game == null)
+				return null;
+
 			List<StatisticsViewModel> statistics = new List<StatisticsViewModel>();
 
-			var ratings = from gameRatings in db.GameRatings
-						  where gameRatings.idGame == game.id
-						  orderby gameRatings.rating descending
-						  select gameRatings;
+			var ratings = (from gameRatings in db.GameRatings
+						   where gameRatings.idGame == game.id
+						   orderby gameRatings.rating descending
+						   select gameRatings);
+			
+			if (!(ratings.Any()))
+				return null;
 
 			foreach (GameRating r in ratings)
 			{

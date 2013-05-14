@@ -44,12 +44,12 @@ namespace Windshield.Controllers
 		{
 			Game game = gameRepo.GetGameByName("Tic Tac Toe");
 
-			var derp = gameRepo.GetTopRatings(game);
+			var derp = gameRepo.GetAllGames();
 
 			//ViewData["GameName"] = new SelectList(
 			//Games,
 		
-			return View("Statistics");
+			return View("Statistics",derp);
 		}
 
 		public ActionResult DisplayCard()
@@ -70,10 +70,7 @@ namespace Windshield.Controllers
 			Game game = gameRepo.GetGameByName(gameName.name);
 
 			var derp = gameRepo.GetTopRatingsForViewModel(game);
-
-			//TODO: Fix this circular reference thingamajing, however possible
-			//might be the only way is to make a viewmodel class which contains exacly the properties
-			//we need for our javascript (userName and rating).
+				
 			return Json(derp, JsonRequestBehavior.AllowGet);
 		}
 
