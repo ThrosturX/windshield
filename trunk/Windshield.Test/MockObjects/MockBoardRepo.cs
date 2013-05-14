@@ -17,6 +17,11 @@ namespace Windshield.Test.MockObjects
 			rep.Add(board);
 		}
 
+		public void AddPlayer(Player player)
+		{
+			// dummy
+		}
+
 		public void Save()
 		{
 			// intentionally blank

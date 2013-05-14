@@ -29,6 +29,11 @@ namespace Windshield.Models
 			db.Boards.InsertOnSubmit(board);
 		}
 
+		public void AddPlayer(Player player)
+		{
+			db.Players.InsertOnSubmit(player);
+		}
+
 		//
 		// delete methods
 
@@ -86,7 +91,7 @@ namespace Windshield.Models
 		public IQueryable<Board> GetBoards(User user)
 		{
 			var playerInGames = from players in db.Players
-								where players.idUser == user.UserId && players.Board.endDate == null
+								where players.UserName == user.UserName && players.Board.endDate == null
 								select players.Board;
 			return playerInGames;
 		}
@@ -119,7 +124,7 @@ namespace Windshield.Models
 		public User GetBoardOwner(Board board)
 		{
 			var result =  (from user in db.Users
-			               where user.UserId == board.idOwner
+			               where user.UserName == board.ownerName
 			               select user).SingleOrDefault();
 			return result;
 		}
