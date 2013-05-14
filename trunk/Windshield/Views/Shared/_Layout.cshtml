@@ -32,7 +32,9 @@
 
 		<div id="main" class="container background-white">
 			<div class="row-fluid">
+
 				<!-- HEADER -->
+
 				<header id="overview" class="visible-desktop">
 					<div class="containter">
 						<h1 class="hidden-phone">@Html.ActionLink("BoardGames", "Index", "Home")</h1>
@@ -96,22 +98,18 @@
 
 			</div> <!-- class="row-fluid" -->
 			
-			<!-- space between main content and footer -->
 
-			<div class="row-fluid">
-
-			</div>
-
-		</div> <!-- id="main" class="span8 offset2 background-white" -->
+		</div> <!-- id="main" class="container background-white" -->
 
 		<!-- FOOTER -->
 
 		<div class="container footer background-white">
 			<div class="well pagination-centered">
-				@Html.ActionLink("About", "About", "Home")
+				@Html.ActionLink("About", "About", "Home")<br>
+				<a href="mailto:raggi@raggi.is">Contact Us</a>		
 			</div>
 		</div>
-
+		
 		<!-- LOGOUT FORM -->
 
 		@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "active", style="display: none;" })) {
