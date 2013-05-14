@@ -1,13 +1,21 @@
 ﻿@model int
 
-<form id="chat" runat="server">
-	<div id="chatBox">
-		<input type="text" id="txtMessage" />
-		<input type="button" id="sendMessage" value="Send" />
-		<ul id="listMessages">
-
-
-		</ul>
+<form id="chat" runat="server" class="form-horizontal">
+	<legend>Chat</legend>
+	<div id="chatBox" class="container-fluid">
+		<div class="row-fluid well">
+			<div class="span12">
+				<ul id="list-messages">
+					<!-- messages will appear here -->
+				</ul>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="input-append span12">
+				<input type="text" class="span8" id="txt-message">
+				<input type="button" class="btn" id="send-message" value="Send">
+			</div>
+		</div>
 	</div>
 </form>
 
@@ -19,17 +27,17 @@
 		var user = '@(Context.User.Identity.Name)';
 
 		chatConnection.client.addMessage = function (message) {
-			$('#listMessages').append('<li>' + message + '</li>');
+			$('#list-messages').prepend('<li>' + message + '</li>');
 		};
 
-		$("#sendMessage").click(function() {
-			chatConnection.server.send(group, user, $('#txtMessage').val());
+		$("#send-message").click(function() {
+			chatConnection.server.send(group, user, $('#txt-message').val());
 		});
 
-		$('#txtMessage').bind('keydown', function (e) {
+		$('#txt-message').bind('keydown', function (e) {
 
 			if (e.keyCode === 13) { // 13 is enter key
-				chatConnection.server.send(group, user, $('#txtMessage').val());
+				chatConnection.server.send(group, user, $('#txt-message').val());
 				e.preventDefault();
 			}
 
@@ -37,7 +45,7 @@
 
 		$(document).keypress(function(e) {
 			if(e.which == 13) {
-				chatConnection.server.send(group, user, $('#txtMessage').val());
+				chatConnection.server.send(group, user, $('#txt-message').val());
 			}
 		});
 

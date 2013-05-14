@@ -1,22 +1,23 @@
 ﻿@model Windshield.Models.GameInstance
 
+<div class="row">
+	<h2>Derp</h2>
+</div>
 
-<h2>Tic Tac Toe í bili en nafnið er fiskað úr viewmodel</h2>
+<hr>
 
-
-@if(Model != null)
-{
 <div class="row-fluid">
-	<div id="game" class="span8">
-			@Html.Partial(Model.theView, Model.theGame)
+	@if(Model != null)
+	{
+	<div id="game-wrapper" class="container-fluid span8">
+		@Html.Partial(Model.theView, Model.theGame)
 	</div>
-
-	<div id="chat" class="span4">
+	<div id="chat-wrapper" class="container-fluid span4 visible-desktop">
 		@Html.Partial("Chat", Model.id)
 	</div>
+	}
+	else
+	{
+	<h2>Can't render a game without a game!</h2>
+	}
 </div>
-}
-else
-{
-<h2>Can't render a game without a game!</h2>
-}

@@ -29,7 +29,7 @@ namespace Windshield.Controllers
 		{
 			if (message.Length > 0 && user.Length > 0)
 			{
-				Clients.Group(groupName).addMessage("<span class=\"chatusername\">" + user + "</span> &gt; " + message);
+				Clients.Group(groupName).addMessage("<span class=\"chatusername\">" + user + ":</span><br>" + message);
 			}
 
 		}
