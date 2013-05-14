@@ -43,6 +43,11 @@ namespace Windshield.Controllers
 			//			Clients.Others.cellClicked(cellId);
 		}
 
+		public void GameStarted(string boardID)
+		{
+			Clients.OthersInGroup(boardID).start(boardID);
+		}
+
 		public void Refresh(string boardID)
 		{
 			int id;
@@ -97,6 +102,10 @@ namespace Windshield.Controllers
 						{
 							outlier = userRepository.GetUserByName(winner);
 							rating = userRepository.GetGameRatingByGame(outlier, gameRepository.GetGameByID(2)); // TODO: late binding (2 = tictactoe id)
+							if (rating == null)
+							{
+								rating.rating = 0;
+							}
 
 							outlierScore = rating.rating;
 							elo = new Elo(2, outlier); // TODO: late binding (2 = tictactoe id)

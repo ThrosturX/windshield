@@ -21,7 +21,7 @@
 				@board.id
 			</td>
 			<td>
-				@Html.ActionLink(board.Game.name, "TicTacToe", "Games")
+				@Html.ActionLink(board.Game.name, "JoinLobby", "Games", new {targetId = @board.id}, null)
 			</td>
 		</tr>
 		}	
