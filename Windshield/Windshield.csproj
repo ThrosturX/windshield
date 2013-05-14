@@ -285,6 +285,7 @@
     <Content Include="Images\sunny.png" />
     <Content Include="Images\tic-tac-toe.png" />
     <Content Include="Images\tic-tac-toe256.png" />
+    <Content Include="Images\two-kittens.jpg" />
     <Content Include="Images\wabbit.jpg" />
     <Content Include="Images\wakeup.jpg" />
     <Content Include="Models\BoardGames.dbml">
