@@ -14,13 +14,11 @@ namespace Windshield.Controllers
 	[Authorize]
 	public class AccountController : Controller
 	{
-		private IUserRepo userRepository = null;
-		private IUserDetailsRepo userDetailsRepository = null;
+		private IUserRepo userRepo = null;
 
 		public AccountController()
 		{
-			userRepository = new UserRepo();
-			userDetailsRepository = new UserDetailsRepo();
+			userRepo = new UserRepo();
 		}
 
 		//
@@ -123,9 +121,10 @@ namespace Windshield.Controllers
 
 		public ActionResult ChangePassword()
 		{
+			User user = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
 			AccountChangeUserDetailsViewModel model = new AccountChangeUserDetailsViewModel();
-			model.currentUserModel = userRepository.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
-			model.changeUserDetailsModel = new ChangeUserDetailsModel();
+			model.currentUserModel = user;
+			model.changeUserDetailsModel = user.UserDetail;
 			model.changePasswordModel = new ChangePasswordModel();
 			return View("ChangePassword", model); //"ChangePassword" redundant but perhaps good practice
 		}
@@ -134,50 +133,84 @@ namespace Windshield.Controllers
 		// POST: /Account/ChangePassword
 
 		[HttpPost]
-		public ActionResult ChangeUserDetail(AccountChangeUserDetailsViewModel model)
+		public ActionResult ChangePassword(ChangePasswordModel model)
 		{
 			if (ModelState.IsValid)
 			{
-				UserDetail userDetail = userRepository.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString()).UserDetail;
-				// Age
-				string inputAge = model.changeUserDetailsModel.Age;
-				int outputAge;
-				if (int.TryParse(inputAge, out outputAge))
+
+				// ChangePassword will throw an exception rather
+				// than return false in certain failure scenarios.
+				bool changePasswordSucceeded;
+				try
 				{
-					userDetail.age = outputAge;
+					MembershipUser currentUser = Membership.GetUser(User.Identity.Name, userIsOnline: true);
+					changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
 				}
-				// Country
-				userDetail.country = model.changeUserDetailsModel.Country;
-				// Date Joined
-				// -never changes
-				// Email
-				userDetail.email = model.changeUserDetailsModel.Email;
-				// Gender
-				string inputGender = model.changeUserDetailsModel.Gender;
-				bool outputGender;
-				if (bool.TryParse(inputGender, out outputGender))
+				catch (Exception)
 				{
-					userDetail.gender = outputGender;
-				}
-				// Name
-				userDetail.name = model.changeUserDetailsModel.Name;
-				// Occupation
-				userDetail.occupation = model.changeUserDetailsModel.Occupation;
-				// UserRating
-				string inputUserRating = model.changeUserDetailsModel.UserRating;
-				int outputUserRating;
-				if (int.TryParse(inputUserRating, out outputUserRating))
-				{
-					userDetail.userRating = outputUserRating;
+					changePasswordSucceeded = false;
 				}
 
-				// Commit to database
-				userDetailsRepository.Save();
-				return RedirectToAction("Index", "Home");
+				if (changePasswordSucceeded)
+				{
+					return RedirectToAction("ChangePasswordSuccess");
+				}
+				else
+				{
+					ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+				}
+			}
+			// If we got this far, something failed, redisplay form
+			return View(model);
+		}
+
+		//
+		// POST: /Account/ChangeUserDetails
+
+		[HttpPost]
+		public ActionResult ChangeUserDetail(AccountChangeUserDetailsViewModel model)
+		{
+			UserDetail userDetail = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString()).UserDetail;
+			// Age
+			string inputAge = model.changeUserDetailsModel.age.ToString();
+			int outputAge;
+			if (int.TryParse(inputAge, out outputAge))
+			{
+				userDetail.age = outputAge;
+			}
+			// Country
+			userDetail.country = model.changeUserDetailsModel.country;
+			// Date Joined
+			// -never changes
+			// Email
+			userDetail.email = model.changeUserDetailsModel.email;
+			// Gender
+			string inputGender = model.changeUserDetailsModel.gender.ToString();
+			bool outputGender;
+			if (bool.TryParse(inputGender, out outputGender))
+			{
+				userDetail.gender = outputGender;
+			}
+			// Name
+			userDetail.name = model.changeUserDetailsModel.name;
+			// Occupation
+			userDetail.occupation = model.changeUserDetailsModel.occupation;
+			// UserRating
+			string inputUserRating = model.changeUserDetailsModel.userRating.ToString();
+			int outputUserRating;
+			if (int.TryParse(inputUserRating, out outputUserRating))
+			{
+				userDetail.userRating = outputUserRating;
 			}
 
-			// If we got this far, something failed, redisplay form
-			return View("ChangePassword", model);
+			// Commit to database
+			userRepo.Save();
+			return RedirectToAction("ChangeInformationSuccess", "Account");
+		}
+
+		public ActionResult ChangeInformationSuccess()
+		{
+			return View();
 		}
 
 		//
