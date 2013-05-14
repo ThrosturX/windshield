@@ -5,9 +5,6 @@
  *	
  */
 
-.well {
-    box-sizing: border-box;
-}
 
 html
 {
@@ -56,7 +53,7 @@ html, body
 #main > div
 {
 	overflow: auto;
-	padding-bottom: 72px;
+	padding-bottom: 84px;
 }
 
 .footer
@@ -69,6 +66,20 @@ html, body
 {
 	background-color: white;
 }
+
+#game-description-buttons
+{
+	padding: 32px 0;
+}
+
+
+
+
+
+
+
+
+
 
 /* THUMBNAILS */
 
@@ -91,6 +102,14 @@ ul.thumbnails li
 {
 	text-align: center;
 }
+
+
+
+
+
+
+
+
 
 /* BANNER */
 
@@ -122,6 +141,56 @@ h1 > a:hover
 	text-decoration: none;
 }
 
+
+
+
+
+
+
+/* CHAT */
+
+#chat
+{
+	height: 100%;
+}
+
+#chat-wrapper
+{
+	margin: 0;
+	height: 442px;
+}
+
+.chatusername
+{
+	font-weight: bold;
+}
+
+#list-messages
+{
+	height: 256px;
+	overflow-y: hidden;
+	list-style-type: none;
+	overflow-wrap: break-word;
+	margin: 0;
+	vertical-align: bottom;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Tic Tac Toe */
 
 table#tic-tac-toe 
@@ -147,59 +216,6 @@ table#tic-tac-toe td:hover
 	background-color: #e6e6e6;
 	cursor: pointer;
 } 
-
-
-
-
-
-/* CHAT */
-
-#chat
-{
-	height: 100%;
-}
-
-#chat-wrapper
-{
-	/*
-	background: -moz-linear-gradient(left,  rgba(255,175,48,0.8) 0%, rgba(239,139,0,0.8) 21%, rgba(239,139,0,0.8) 100%);
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,175,48,0.8)), color-stop(21%,rgba(239,139,0,0.8)), color-stop(100%,rgba(239,139,0,0.8)));
-	background: -webkit-linear-gradient(left,  rgba(255,175,48,0.8) 0%,rgba(239,139,0,0.8) 21%,rgba(239,139,0,0.8) 100%);
-	background: -o-linear-gradient(left,  rgba(255,175,48,0.8) 0%,rgba(239,139,0,0.8) 21%,rgba(239,139,0,0.8) 100%);
-	background: -ms-linear-gradient(left,  rgba(255,175,48,0.8) 0%,rgba(239,139,0,0.8) 21%,rgba(239,139,0,0.8) 100%);
-	background: linear-gradient(to right,  rgba(255,175,48,0.8) 0%,rgba(239,139,0,0.8) 21%,rgba(239,139,0,0.8) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ccffaf30', endColorstr='#ccef8b00',GradientType=1 );
-	*/
-
-	margin: 0;
-	height: 442px;
-}
-
-.chatusername
-{
-	font-weight: bold;
-}
-
-#list-messages
-{
-	height: 256px;
-	overflow-y: scroll;
-	list-style-type: none;
-	overflow-wrap: break-word;
-	margin: 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

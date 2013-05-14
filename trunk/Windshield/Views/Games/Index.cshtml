@@ -1,15 +1,15 @@
 ﻿@model Windshield.Models.GameInstance
 
-<div class="row">
-	<h2>Derp</h2>
-</div>
 
-<hr>
 
 <div class="row-fluid">
 	@if(Model != null)
 	{
+	
 	<div id="game-wrapper" class="container-fluid span8">
+		<div class="row">
+			<h2>@Model.theName</h2>
+		</div>
 		@Html.Partial(Model.theView, Model.theGame)
 	</div>
 	<div id="chat-wrapper" class="container-fluid span4 visible-desktop">
