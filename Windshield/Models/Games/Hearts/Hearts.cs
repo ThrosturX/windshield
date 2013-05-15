@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using Windshield.Common;
 using Windshield.Models;
@@ -51,6 +52,7 @@ namespace Windshield.Models.Games.Hearts
 		/// <summary>
 		/// Default constructor. Note that instances require players to be instantiated!
 		/// </summary>
+		/// <remarks>Shouldn't be used.</remarks>
 		public Hearts()
 		{
 			board = new Board();
@@ -93,64 +95,6 @@ namespace Windshield.Models.Games.Hearts
 			// Deal cards to the players
 			Deal();
 			turn = GetStartingPlayer(null);
-		}
-
-		/// <summary>
-		/// Creates a single player instance of "Hearts"
-		/// </summary>
-		/// <param name="player">The user that wishes to play</param>
-		public Hearts(User player)
-			: this()
-		{
-			players[0].user = player;
-			players[1].user = new User();
-			players[1].user.UserName = "Computer";
-			players[2].user = players[1].user;
-			players[3].user = players[1].user;
-		}
-
-		/// <summary>
-		/// Creates a two-player instance of "Hearts"
-		/// </summary>
-		/// <param name="user1">The game creator</param>
-		/// <param name="user2">Second user</param>
-		public Hearts(User user1, User user2) : this()
-		{
-			players[0].user = user1;
-			players[1].user = user2;
-			players[2].user = new User();
-			players[2].user.UserName = "Computer";
-			players[3].user = players[2].user;
-		}
-
-		/// <summary>
-		/// Creates a three player instance of "Hearts"
-		/// </summary>
-		/// <param name="user1">The game creator</param>
-		/// <param name="user2">Second user</param>
-		/// <param name="user3">Third user</param>
-		public Hearts(User user1, User user2, User user3) : this()
-		{
-			players[0].user = user1;
-			players[1].user = user2;
-			players[2].user = user3;
-			players[3].user = new User();
-			players[3].user.UserName = "Computer";
-		}
-
-		/// <summary>
-		/// Creates a four player instance of "Hearts"
-		/// </summary>
-		/// <param name="user1">The game creator</param>
-		/// <param name="user2">Second user</param>
-		/// <param name="user3">Third user</param>
-		/// <param name="user4">Fourth user</param>
-		public Hearts(User user1, User user2, User user3, User user4) : this()
-		{
-			players[0].user = user1;
-			players[1].user = user2;
-			players[2].user = user3;
-			players[3].user = user4;
 		}
 
 		/// <summary>
@@ -284,7 +228,77 @@ namespace Windshield.Models.Games.Hearts
 			IncrementTurn();
 			return true;
 		}
-		
+
+		public int GetPlayerIndex(HPlayer player)
+		{
+			for (int i = 0; i < 4; ++i)
+			{
+				if (player == players[i])
+				{
+					return i;
+				}
+			}
+
+			return -1;
+		}
+
+		public string GetStatus()
+		{
+			StringBuilder builder = new StringBuilder();
+			// Cards in trick
+			if (trickOngoing)
+			{
+				for (int i = 0; i < 4; ++i)
+				{
+					Card card = trick.GetCardAtIndex(i);
+
+					if (card == Card.Joker)
+					{
+						builder.Append("  ");
+					}
+					else
+					{
+						builder.Append(Card.CreateCardString(card));
+					}
+					builder.Append(",");
+				}
+
+			}
+			else
+			{
+				builder.Append("  ,  ,  ,  ,");
+			}
+			
+			// Player whose turn it is (number)
+			builder.Append(GetPlayerIndex(turn));
+
+			builder.Append('|');
+
+			// Players' cards
+
+			for (int i = 0; i < 4; ++i)
+			{
+				builder.Append(players[i].hand.CreateHandString());
+				if (i != 3)
+					builder.Append('/');
+			}
+
+			builder.Append('|');
+
+			// Players' stats
+
+			for (int i = 0; i < 4; ++i)
+			{
+				builder.Append(players[i].matchPoints.ToString() + ",");
+				builder.Append(players[i].gamePoints.ToString() + ",");
+				builder.Append(players[i].user.UserName);
+				if (i != 3)
+					builder.Append('/');
+			}
+
+			return builder.ToString();
+		}
+
 		public int TryAction(string action, string sender)
 		{
 			// check the sender

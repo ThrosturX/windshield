@@ -82,5 +82,19 @@ namespace Windshield.Models.Games.Hearts
 			return trick;
 		}
 
+		public Card GetCardAtIndex(int index)
+		{
+			KeyValuePair<HPlayer, Card> pair;
+
+			pair = this.ElementAt(index);
+
+			if (pair.Value == null)
+			{
+				return new Card(Rank.Joker, Suit.Joker);
+			}
+
+			return pair.Value;
+		}
+
 	}
 }
