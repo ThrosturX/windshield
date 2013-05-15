@@ -139,9 +139,13 @@ namespace Windshield.Models
 			{
 				PopularViewModel m = new PopularViewModel();
 				m.Name = g.name;
-				m.Image = g.image;
 				m.Url = "/Home/GameDescription?name=" + g.name;
 				model.Add(m);
+
+				if (g.image == null)
+					m.Image = "/Images/pug.jpg";
+				else
+					m.Image = g.image;
 			}
 			return model;							   
 		}

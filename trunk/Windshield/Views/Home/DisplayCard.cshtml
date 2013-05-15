@@ -1,28 +1,11 @@
 ﻿@model Windshield.Common.CardDeck
 
 @{
-    Layout = null;
-}
-@{
 	//ViewBag.Title = "Card animations";
 }
-	
-<!DOCTYPE html>
-	<html>
-        <head>
-				<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-				<!--<script src="http://code.jquery.com/jquery.js"></script>
-				<script src="js/bootstrap.min.js"></script>
-				<script src="test.js"></script>
-				<script src="~/Scripts/jquery.signalR-1.0.1.min.js"></script>
-				<script src="~/signalr/hubs"></script> -->
-				 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" > </script>
-				<script src="@Url.Content("~/Scripts/Card.js")" type="text/javascript"></script>
-				<!--<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script> -->
-                <title> Card animations </title>
-        </head>
-        <body> 
-			<div id="stage">
+<script src="@Url.Content("~/Scripts/Card.js")" type="text/javascript"></script>
+		
+	<div class="span8">
 			<div id="felt">
 			
 			@{
@@ -59,7 +42,5 @@
 						i++;
 					}
 			 }
-				</div></div> 
-
-		</body>
-		</html> 
+				</div> 
+		</div>

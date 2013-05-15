@@ -47,20 +47,20 @@ function dealCards(playerNo)
 {
 	
 		for (k = 1; k <= 13; k++) {
-			card_left[k] = 240 + 40 * k;
-			card_top[k] = 530;
+			card_left[k] = 25 + 2.5 * k;
+			card_top[k] = 75;
 		}
 		for (k = 14; k <= 26; k++) {
-			card_top[k] = -500 + 40 * k;
-			card_left[k] = 50;
+			card_top[k] =  - 12 + 2.5 * k;
+			card_left[k] = 5;
 		}
 		for (k = 27; k <= 39 ; k++) {
-			card_left[k] = 235 + 40 * (k - 26);
-			card_top[k] = 0;
+			card_left[k] = 25 + 2.5 * (k - 26);
+			card_top[k] = 5;
 		}
 		for (k = 40; k <= 52 ; k++) {
-			card_top[k] = 15 + 40 * (k - 39);
-			card_left[k] = 970;
+			card_top[k] = - 12 + 2.5 * (k - 26);
+			card_left[k] = 80;
 		}
 		
 		for (i = 1; i <= 52; i++) setTimeout("moveToPlace(" + i + ")", i * 100);
@@ -74,8 +74,8 @@ function moveToPlace(id) {
 	el = document.getElementById("card_" + id);
 	//var el = $("#card_"+ id);
 	el.style["zIndex"] = 10;
-	el.style["left"] = card_left[id] + "px";
-	el.style["top"] = card_top[id] + "px";
+	el.style["left"] = card_left[id] + "%";
+	el.style["top"] = card_top[id] + "%";
 	//el.style["WebkitTransform"] = "rotate(180deg)";
 	el.style["zIndex"] = 0;
 
