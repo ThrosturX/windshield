@@ -57,24 +57,19 @@
 			{
 				$("#cell" + i).text(status[i]);
 			}
-			
+
+			var statusArray = status.split("|");
+
 			if (currentUser == playerOne) {
-				$("#GameWins").text(status[14]);
-				$("#GameDraws").text(status[16]);
-				$("#GameLoss").text(status[18]);
+				$("#GameWins").text(statusArray[3]);
+				$("#GameDraws").text(statusArray[4]);
+				$("#GameLoss").text(statusArray[5]);
 			}
 			else {
-				$("#GameWins").text(status[18]);
-				$("#GameDraws").text(status[16]);
-				$("#GameLoss").text(status[14]);
+				$("#GameWins").text(statusArray[5]);
+				$("#GameDraws").text(statusArray[4]);
+				$("#GameLoss").text(statusArray[3]);
 			}
-
-			if (status[18] === '|' || status[16] === '|' || status[14] === '|') {
-				$("#GameWins".text("1337"));
-				$("#GameDraws".text("1337"));
-				$("#GameLoss".text("1337"));
-			}
-
 		};
 
 		hub.client.GameOver = function (winner) {
