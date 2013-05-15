@@ -142,6 +142,8 @@ namespace Windshield.Controllers
 			// Send the player to the game lobby
 			LobbyViewModel vm = new LobbyViewModel();
 			vm.boardId = targetId;
+			vm.Image = board.Game.image;
+			vm.theName = board.Game.name;
 			vm.guests = new List<User>();
 			vm.guests.Add(user);
 
@@ -203,6 +205,8 @@ namespace Windshield.Controllers
 			LobbyViewModel vm = new LobbyViewModel();
 			vm.boardId = targetId;
 			vm.guests = users;
+			vm.Image = board.Game.image;
+			vm.theName = board.Game.name;
 
 			return View("GameLobby", vm);
 		}

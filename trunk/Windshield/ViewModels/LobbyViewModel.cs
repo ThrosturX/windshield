@@ -10,5 +10,7 @@ namespace Windshield.ViewModels
 	{
 		public int boardId { get; set; }
 		public List<User> guests;
+		public string Image { get; set; }
+		public string theName { get; set; }
 	}
 }

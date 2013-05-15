@@ -1,43 +1,61 @@
 ﻿@model Windshield.ViewModels.LobbyViewModel
 <script src="@Url.Content("~/Scripts/GameLobby.js")" type="text/javascript"></script>
 
-	<img src="~/Images/board.gif" alt="flott mynd" />
-	<h2></h2>
-	<div id="game-on-players">
-		<h3>Players</h3>
-		<span id="board-id" style="display:none;"> @Model.boardId </span>
-		<ul class="list-of-players">
-			@foreach(var player in Model.guests)
-			{
-				<li> @player.UserName </li>
+<div class="row-fluid">
+	<h2>Lobby</h2>
+</div>
+<div class="row-fluid">
+	<div class="span4">
+		<div class="row-fluid">
+			<legend>@Model.theName</legend> <!-- TODO: Láta virka -->
+			@Html.Partial("_GameImagePartial", new Windshield.Models.Game { image = Model.Image })
+		</div>
+	</div>
+	<div class="span4">
+		<div id="game-on-players" class="row-fluid">
+			<legend>Players</legend>
+			<span id="board-id" style="display:none;"> @Model.boardId </span>
+			<ul class="list-of-players">
+				@foreach(var player in Model.guests)
+				{
+					<li> @player.UserName </li>
+				}
+				
+			</ul>
+
+			<!-- "Container" for the javascript -->
+			<ul id="userlist">
+
+			</ul>
+		</div>
+		<div class="row-fluid lobby-buttons">
+			@Html.ActionLink("Start", "TicTacToe", "Games", new { targetId = @Model.boardId }, new { @class = "btn" })
+			@Html.ActionLink("Cancel", "GameDescription", "Games", new { @class = "btn" })
+			
+			<!--Html.ActionLink("Start","Index","Games")-->
+		</div>
+	</div>
+	<script id="lobby-template" type="text/html">
+		<li class="list-of-players">
+			${UserName}
+		</li>
+	</script>
+
+	<script>
+		$(document).ready(function () {
+			var group = '@Model.boardId';
+			var hub = $.connection.gameHub;
+		
+			hub.client.Start = function (id) {
+				self.location = "JoinGame?targetId=" + id;
 			}
-		</ul> 
-		<!-- "Container" for the javascript -->
-		<ul id="userlist">
+		});
 
-		</ul>
-		<!-- TODO: Sækja player-a sem eru búnir að accepta game request -->
-	</div>
-	<div id="invited-players">
-		<!-- TODO: Sækja invite-aða player-a sem eru búnir að accepta game request -->
-	</div>
-	<div id="requests-and-invitations">
-		<input type="search" name="user name" />
-		<input type="checkbox" name="Private Game" />
-	</div>
-	<button>START</button>  <!-- TODO: linka á leik -->
-	@Html.ActionLink("Start","Index","Games")
-	@Html.ActionLink("Start", "TicTacToe", "Games", new { targetId = @Model.boardId }, null)
+	</script>
 
-<script id="lobby-template" type="text/html">
-	<li class="list-of-players">
-		${UserName}
-	</li>
-</script>
-
-	<nav>
-	
-	</nav>
-	<div id="chat-wrapper" class="container-fluid span4 visible-desktop">
-	<!--	Html.Partial("Chat", Model.boardId)-->
+	<div class="span4">
+		<div id="chat-wrapper" class="container-fluid visible-desktop">
+			@Html.Partial("Chat", Model.boardId)
+		</div>
 	</div>
+</div>
