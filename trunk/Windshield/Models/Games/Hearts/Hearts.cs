@@ -73,7 +73,7 @@ namespace Windshield.Models.Games.Hearts
 		/// Awesome constructor.
 		/// </summary>
 		/// <param name="users">List of users</param>
-		public Hearts(List<User> users) : this()
+		public Hearts(List<User> users, bool testing) : this()
 		{
 			if (users.Count <= 4)
 			{
@@ -93,16 +93,20 @@ namespace Windshield.Models.Games.Hearts
 			}
 
 			// Deal cards to the players
-			Deal();
+			Deal(testing);
 			turn = GetStartingPlayer(null);
 		}
 
 		/// <summary>
 		/// Gives each player a freshly dealt hand of 13 cards.
 		/// </summary>
-		public void Deal()
+		public void Deal(bool? testing)
 		{
-			deck.Shuffle();
+			// Ensures that the class is testable due to Shuffle() randomization
+			if (!(testing ?? false))
+			{
+				deck.Shuffle();
+			}
 			for (int i = 0; i < 4; ++i)
 			{
 				players[i].hand = new Hand(deck.GetCards(13));
