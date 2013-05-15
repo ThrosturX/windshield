@@ -20,18 +20,21 @@ namespace Windshield.ViewModels
 		{
 			GameName = "All Games";
 			IsEmpty = true;
+			Rows = new List<Row>();
 		}
 
-		public BoardTableViewModel(string gameName)
+		public BoardTableViewModel(string gameName) : this()
 		{
 			GameName = gameName;
-			IsEmpty = true;
 		}
 		
 		public void Add(Windshield.Models.Board board)
 		{
 			Rows.Add(new Row(board));
-			IsEmpty = false;
+			if (IsEmpty)
+			{
+				IsEmpty = false;
+			}
 		}
 
 		public class Row
