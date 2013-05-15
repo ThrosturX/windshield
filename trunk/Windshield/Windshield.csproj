@@ -208,6 +208,7 @@
     <Compile Include="Models\IGameRepo.cs" />
     <Compile Include="Models\IUserRepo.cs" />
     <Compile Include="Models\Games\TicTacToe\TicTacToe.cs" />
+    <Compile Include="ViewModels\GameLobbyViewModel.cs" />
     <Compile Include="ViewModels\PopularViewModel.cs" />
     <Compile Include="ViewModels\StatisticsViewModel.cs" />
     <Compile Include="Models\UserRepo.cs" />
@@ -297,6 +298,7 @@
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\bootstrap-fileupload.js" />
     <Content Include="Scripts\Card.js" />
+    <Content Include="Scripts\GameLobby.js" />
     <Content Include="Scripts\GetPopularity.js" />
     <Content Include="Scripts\GetStatistics.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
