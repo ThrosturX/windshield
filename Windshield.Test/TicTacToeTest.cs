@@ -203,7 +203,7 @@ namespace Windshield.Test
 		// Test methods to test CheckWinner()
 		// tests for an empty board, should not find a winner
 		[TestMethod]
-		public void CheckWinner1()
+		public void TicTacToeCheckWinner1()
 		{
 			game.ClearBoard();
 			game.turn = game.player1;

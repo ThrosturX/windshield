@@ -51,7 +51,7 @@ namespace Windshield.Test
 		}
 
 		[TestMethod]
-		public void CheckIfComputerPlayerIsAdded()
+		public void HeartsCheckIfComputerPlayerIsAdded()
 		{
 			User p = new User();
 			List<User> users = new List<User>();
@@ -62,7 +62,7 @@ namespace Windshield.Test
 		}
 
 		[TestMethod]
-		public void CheckingWhetherPlayersAreDealtRandomCards()
+		public void HeartsCheckingWhetherPlayersAreDealtRandomCards()
 		{
 			CardDeck deck = new CardDeck();
 
@@ -74,7 +74,7 @@ namespace Windshield.Test
 		}
 
 		[TestMethod]
-		public void CheckStartingPlayerHasTwoOfClubs()
+		public void HeartsCheckStartingPlayerHasTwoOfClubs()
 		{
 			HPlayer starter = new HPlayer();
 			bool failMe = true;
@@ -93,13 +93,13 @@ namespace Windshield.Test
 		}
 
 		[TestMethod]
-		public void CheckIfFirstTurnIsCorrect()
+		public void HeartsCheckIfFirstTurnIsCorrect()
 		{
 			Assert.AreEqual(game.GetStartingPlayer(null), game.turn);
 		}
 
 		[TestMethod]
-		public void CheckIncrement()
+		public void HeartsCheckIncrement()
 		{
 			HPlayer first = game.turn;
 
@@ -109,7 +109,7 @@ namespace Windshield.Test
 		}
 
 		[TestMethod]
-		public void EnsureTurnsCoverAllPlayersInSomeOrder()
+		public void HeartsnsureTurnsCoverAllPlayersInSomeOrder()
 		{
 			HPlayer [] playerReference = new HPlayer[4];
 
@@ -138,7 +138,7 @@ namespace Windshield.Test
 		}
 
 		[TestMethod]
-		public void CreatingALargeHeartsGroupThrowsTooManyPlayersException()
+		public void HeartsCreatingALargeHeartsGroupThrowsTooManyPlayersException()
 		{
 			try
 			{
@@ -180,7 +180,7 @@ namespace Windshield.Test
 		}
 
 		[TestMethod]
-		public void CheckIfTrickIsCreated()
+		public void HeartsCheckIfTrickIsCreated()
 		{
 			HPlayer p = game.GetStartingPlayer(null);
 			Card r = null;
