@@ -195,10 +195,8 @@ namespace Windshield.Controllers
 		public ActionResult Boards(Game game)
 		{
 			// EDIT: 15 - 11:00 - Ragnar and Bjorn
-
-			var name = gameRepo.GetGameByName(game.name);
 			var viewModel = new BoardTableViewModel(game.name);
-			foreach (Board board in boardRepo.GetBoards(game))
+			foreach (Board board in boardRepo.GetBoards(gameRepo.GetGameByName(game.name)))
 			{
 				viewModel.Add(board);
 			}
