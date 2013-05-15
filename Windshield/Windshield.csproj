@@ -199,20 +199,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BoardGames.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\BoardRepo.cs" />
-    <Compile Include="Models\LiveInstanceRepo.cs" />
+    <Compile Include="Models\Repositories\BoardRepo.cs" />
+    <Compile Include="Models\Repositories\LiveInstanceRepo.cs" />
     <Compile Include="ViewModels\BoardTableViewModel.cs" />
     <Compile Include="ViewModels\GameInstance.cs" />
-    <Compile Include="Models\GameRepo.cs" />
+    <Compile Include="Models\Repositories\GameRepo.cs" />
     <Compile Include="Models\Games\TicTacToe\TPlayer.cs" />
-    <Compile Include="Models\IBoardRepo.cs" />
-    <Compile Include="Models\IGameRepo.cs" />
-    <Compile Include="Models\IUserRepo.cs" />
+    <Compile Include="Models\Repositories\IBoardRepo.cs" />
+    <Compile Include="Models\Repositories\IGameRepo.cs" />
+    <Compile Include="Models\Repositories\IUserRepo.cs" />
     <Compile Include="Models\Games\TicTacToe\TicTacToe.cs" />
     <Compile Include="ViewModels\GameLobbyViewModel.cs" />
     <Compile Include="ViewModels\PopularViewModel.cs" />
     <Compile Include="ViewModels\StatisticsViewModel.cs" />
-    <Compile Include="Models\UserRepo.cs" />
+    <Compile Include="Models\Repositories\UserRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AccountChangeUserDetailsViewModel.cs" />
     <Compile Include="ViewModels\LobbyViewModel.cs" />

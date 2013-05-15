@@ -197,5 +197,59 @@ namespace Windshield.Test
 			Assert.AreNotEqual(null, r);
 			Assert.AreNotEqual(null, game.trick);
 		}
+
+		[TestMethod]
+		public void HeartsTryPlayingWrongCardAtStart()
+		{
+			HPlayer p = game.GetStartingPlayer(null);
+			foreach (var card in p.hand)
+			{
+				if (card.face != 2 || card.suit != Suit.Club)
+				{
+					Assert.IsFalse(game.PlayCard(p, card));
+				}
+			}
+		}
+
+		[TestMethod]
+		public void HeartsTryPlayingTwoOfClubsAtStart()
+		{
+			HPlayer p = game.GetStartingPlayer(null);
+
+			Assert.IsTrue(game.PlayCard(p, p.hand.FindCard(2, Suit.Club)));
+		}
+
+		[TestMethod]
+		public void HeartsPlaySecondCardInTrick()
+		{
+			HPlayer p = game.GetStartingPlayer(null);
+			bool pass = false;
+
+			game.PlayCard(p, p.hand.FindCard(2, Suit.Club));
+
+			p = game.turn;
+
+			if (p.hand.FindAnyInSuit(Suit.Club) != null)
+			{
+				pass = game.PlayCard(p, p.hand.FindAnyInSuit(Suit.Club));
+			}
+			else
+			{
+				pass = pass || game.PlayCard(p, p.hand.FindNotInSuit(Suit.Club));
+			}
+
+			Assert.IsTrue(pass);
+		}
+
+		[TestMethod]
+		public void HeartsPlayFullTrick()
+		{
+			game.PlayCard(game.turn, game.turn.hand.FindCard(2, Suit.Club));
+			game.PlayCard(game.turn, game.turn.hand.FindPreferablyInSuit(Suit.Club));
+			game.PlayCard(game.turn, game.turn.hand.FindPreferablyInSuit(Suit.Club));
+			Assert.IsTrue(game.PlayCard(game.turn, game.turn.hand.FindPreferablyInSuit(Suit.Club)));
+		}
+
+
 	}
 }
