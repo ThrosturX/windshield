@@ -37,8 +37,9 @@ namespace Windshield.Test
 		}
 
 		[TestMethod]
-		public void TryAction()
+		public void TicTacToeTryAction()
 		{
+			game.turn = game.player1;
 			game.TryAction("insert cell0", "Sally");
 			game.TryAction("insert cell1", "Jonas");
 			game.TryAction("insert cell2", "Jonas");
@@ -50,33 +51,39 @@ namespace Windshield.Test
 		}
 
 		[TestMethod]
-		public void InsertSymbol()
+		public void TicTacToeInsertSymbolToGrid()
 		{
+			game.turn = game.player1;
 			// Act
-			game.InsertSymbol('1', 1);
-			game.InsertSymbol('2', 2);
-			game.InsertSymbol('3', 3);
-			game.InsertSymbol('4', 4);
-			game.InsertSymbol('5', 5);
-			game.InsertSymbol('6', 6);
-			game.InsertSymbol('7', 7);
-			game.InsertSymbol('8', 8);
-			game.InsertSymbol('0', 0);
+			for (int i = 0; i < 9; i++)
+			{
+				if (i % 2 == 0)
+				{
+					game.InsertSymbol('X', i);
+				}
+				else
+				{
+					game.InsertSymbol('O', i);
+				}
+			}
 
 			// Assert
-			Assert.AreEqual('0', game.grid[0, 0]);
-			Assert.AreEqual('1', game.grid[1, 0]);
-			Assert.AreEqual('2', game.grid[2, 0]);
-			Assert.AreEqual('3', game.grid[0, 1]);
-			Assert.AreEqual('4', game.grid[1, 1]);
-			Assert.AreEqual('5', game.grid[2, 1]);
-			Assert.AreEqual('6', game.grid[0, 2]);
-			Assert.AreEqual('7', game.grid[1, 2]);
-			Assert.AreEqual('8', game.grid[2, 2]);
+			for (int i = 0; i < 9; i++)
+			{
+				TicTacToe.Coord coord = TicTacToe.CellToCoord(i);
+				if (i % 2 == 0)
+				{
+					Assert.AreEqual('X', game.grid[coord.x, coord.y]);
+				}
+				else
+				{
+					Assert.AreEqual('O', game.grid[coord.x, coord.y]);
+				}
+			}
 		}
 
 		[TestMethod]
-		public void CoordToCell()
+		public void TicTacToeCoordToCell()
 		{
 			// Arrange
 			TicTacToe.Coord middleLeft;
@@ -100,7 +107,7 @@ namespace Windshield.Test
 
 		// Test method to test CellToCoord()
 		[TestMethod]
-		public void CellToCoord()
+		public void TicTacToeCellToCoord()
 		{
 			// Arrange
 			TicTacToe.Coord middleGot;
@@ -137,7 +144,7 @@ namespace Windshield.Test
 
 		//Test methods to test ClearBoard()
 		[TestMethod]
-		public void ClearBoard1()
+		public void TicTacToeClearBoard1()
 		{
 			// Act
 			game.ClearBoard();
@@ -151,7 +158,7 @@ namespace Windshield.Test
 			}
 		}
 		[TestMethod]
-		public void ClearBoard2()
+		public void TicTacToeClearBoard2()
 		{
 			// fill the board
 			for (int i = 0; i < 9; i++)
@@ -160,6 +167,7 @@ namespace Windshield.Test
 			}
 			// empty the board
 			game.ClearBoard();
+			game.turn = game.player1;
 			// assert that the board is empty
 			for (int i = 0; i < 3; i++)
 			{
@@ -169,7 +177,15 @@ namespace Windshield.Test
 					target.x = i;
 					target.y = j;
 					Assert.AreEqual(' ', game.grid[i, j]);
-					Assert.AreEqual(true, game.InsertSymbol('T', TicTacToe.CoordToCell(target)));
+					// Check if it is possible to insert symbol after clearing has been completed
+					if ((i + j) % 2 == 0)
+					{
+						Assert.AreEqual(true, game.InsertSymbol('X', TicTacToe.CoordToCell(target)));
+					}
+					else
+					{
+						Assert.AreEqual(true, game.InsertSymbol('O', TicTacToe.CoordToCell(target)));
+					}
 				}
 			}
 		}
@@ -178,7 +194,7 @@ namespace Windshield.Test
 
 		// Test method to test GetPlayerBySymbol
 		[TestMethod]
-		public void GetPlayerBySymbol()
+		public void TicTacToeGetPlayerBySymbol()
 		{
 			Assert.AreEqual(game.GetPlayerBySymbol('X'), game.player1);
 			Assert.AreEqual(game.GetPlayerBySymbol('O'), game.player2);
@@ -190,13 +206,15 @@ namespace Windshield.Test
 		public void CheckWinner1()
 		{
 			game.ClearBoard();
+			game.turn = game.player1;
 			Assert.AreEqual(game.CheckWinner(), null);
 		}
 		// tests a game in progress and should find playerTwo winning vertically
 		[TestMethod]
-		public void CheckWinner2()
+		public void TicTacToeCheckWinner2()
 		{
 			game.ClearBoard();
+			game.turn = game.player1;
 			Assert.AreEqual(game.grid[1, 1], ' ');
 			game.InsertSymbol('X', 4);
 			Assert.AreEqual(game.grid[1, 1], 'X');
@@ -229,9 +247,10 @@ namespace Windshield.Test
 		}		
 		// tests a game in progress and should find playerOne winning diagonally from upper left to lower right
 		[TestMethod]
-		public void CheckWinner3()
+		public void TicTacToeCheckWinner3()
 		{
 			game.ClearBoard();
+			game.turn = game.player1;
 			Assert.AreEqual(game.CheckWinner(), null);
 			game.InsertSymbol('X', 4);
 			Assert.AreEqual(game.CheckWinner(), null);
@@ -246,9 +265,11 @@ namespace Windshield.Test
 		}
 		// tests a game in progress and should find playerOne winning diagonally from lower left to upper right
 		[TestMethod]
-		public void CheckWinner4()
+		public void TicTacToeCheckWinner4()
 		{
 			game.ClearBoard();
+			game.turn = game.player1;
+
 			Assert.AreEqual(game.CheckWinner(), null);
 			game.InsertSymbol('X', 6);
 			Assert.AreEqual(game.grid[0, 2], 'X');
@@ -269,7 +290,7 @@ namespace Windshield.Test
 		}
 
 		[TestMethod]
-		public void InitializePlayers()
+		public void TicTacToeInitializePlayers()
 		{
 			// InitializePlayers() is automatically called in the constructor
 			Assert.AreEqual('X', game.player1.symbol);
@@ -283,9 +304,11 @@ namespace Windshield.Test
 		}
 
 		[TestMethod]
-		public void EndGame1()
+		public void TicTacToeEndGame1()
 		{
+			game.turn = game.player1;
 			// Arrange
+			game.InsertSymbol('O', 5);
 			game.InsertSymbol('X', 0);
 			game.InsertSymbol('O', 7);
 			game.InsertSymbol('X', 4);
@@ -309,15 +332,16 @@ namespace Windshield.Test
 			// Arrange
 
 			game.ClearBoard();
+			game.turn = game.player1;
 
 			game.InsertSymbol('X', 0);
 			game.InsertSymbol('O', 1);
 			game.InsertSymbol('X', 2);
-			game.InsertSymbol('X', 3);
 			game.InsertSymbol('O', 4);
+			game.InsertSymbol('X', 3);
 			game.InsertSymbol('O', 5);
-			game.InsertSymbol('O', 6);
 			game.InsertSymbol('X', 7);
+			game.InsertSymbol('O', 6);
 			game.InsertSymbol('X', 8);
 
 			winner = game.CheckWinner();
@@ -336,9 +360,13 @@ namespace Windshield.Test
 
 			// Arrange
 			game.ClearBoard();
+			game.turn = game.player1;
 
+			game.InsertSymbol('X', 3);
 			game.InsertSymbol('O', 0);
+			game.InsertSymbol('X', 1);
 			game.InsertSymbol('O', 4);
+			game.InsertSymbol('X', 2);
 			game.InsertSymbol('O', 8);
 			
 			winner = game.CheckWinner();
@@ -357,30 +385,39 @@ namespace Windshield.Test
 		}
 
 		[TestMethod]
-		public void EndGameVsAI()
+		public void TicTacToeEndGameVsAI()
 		{
 			game = new TicTacToe();
-			EndGame1();
+			TicTacToeEndGame1();
 		}
 
 		[TestMethod]
-		public void AISelectCell()
+		public void TicTacToeAISelectCell()
 		{
+			game.turn = game.player1;
 			for (int i = 0; i < 9; ++i)
 			{
-				Assert.AreEqual(true, game.InsertSymbol('A', game.AISelectCell()));
+				if (i % 2 == 0)
+				{
+					Assert.AreEqual(true, game.InsertSymbol('X', game.AISelectCell()));
+				}
+				else
+				{
+					Assert.AreEqual(true, game.InsertSymbol('O', game.AISelectCell()));
+				}
 			}
 		}
 
 		[TestMethod]
-		public void GettingStatusStringOfTicTacToeGame()
+		public void TicTacToeGettingStatusString()
 		{
+			game.turn = game.player1;
 
-			Assert.AreEqual("         |1|X|0|0|0",game.GetStatus());
+			Assert.AreEqual("         |1|X|0|0|0|Sally|Jonas",game.GetStatus());
 		}
 
 		[TestMethod]
-		public void CheckingIfSaveStringsAreIdempotent()
+		public void TicTacToeCheckingThatSaveStringsAreIdempotent()
 		{
 			string status = game.GetStatus();
 
