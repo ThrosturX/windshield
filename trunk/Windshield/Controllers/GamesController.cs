@@ -39,6 +39,7 @@ namespace Windshield.Controllers
 			return View();
         }
 
+/*
 		// play against computer
 		[Authorize]
 		public ActionResult TicTacToes()
@@ -46,12 +47,11 @@ namespace Windshield.Controllers
 			List<User> players = new List<User>();
 			User playerOne = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
 			players.Add(playerOne);
-//			User playerTwo = userRepository.GetUserByName("banana");
-//			players.Add(playerTwo);
 			TicTacToe gameBoard = new TicTacToe(players);
 			Board board = new Board();
 			board.status = gameBoard.GetStatus();
 			board.idGame = 2; // TODO: FIX
+			board.startDate = DateTime.Now;
 			boardRepo.AddBoard(board);
 			boardRepo.Save();
 			gameBoard.id = board.id;
@@ -60,25 +60,48 @@ namespace Windshield.Controllers
 
 			return View("Index", theGame);
 		}
+*/
 
 		// Creates a tictactoe game
 		[Authorize]
-		public ActionResult TicTacToe(int targetId)
+		public ActionResult TicTacToe(int? targetId)
 		{
-			Board board = boardRepo.GetBoardById(targetId);
+			if (targetId == null)
+			{
+				List<User> players = new List<User>();
+				User playerOne = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
+				players.Add(playerOne);
+				TicTacToe gameBoard = new TicTacToe(players);
+				Board board = new Board();
+				board.status = gameBoard.GetStatus();
+				board.idGame = 2; // TODO: FIX
+				board.startDate = DateTime.Now;
+				boardRepo.AddBoard(board);
+				boardRepo.Save();
+				gameBoard.id = board.id;
 
-			IQueryable<User> userlist = boardRepo.GetBoardUsers(board);
+				GameInstance theGame = new GameInstance(gameBoard, board);
 
-			List<User> players = userlist.ToList();
-			TicTacToe gameBoard = new TicTacToe(players);
-			gameBoard.id = targetId;
-			board.status = gameBoard.GetStatus();
-			
-			GameInstance theGame = new GameInstance(gameBoard, board);
+				return View("Index", theGame);
+			}
+			else
+			{
 
-			liveRepo.Add(theGame);
+				Board board = boardRepo.GetBoardById((int)targetId);
 
-			return View("Index", theGame);
+				IQueryable<User> userlist = boardRepo.GetBoardUsers(board);
+
+				List<User> players = userlist.ToList();
+				TicTacToe gameBoard = new TicTacToe(players);
+				gameBoard.id = (int)targetId;
+				board.status = gameBoard.GetStatus();
+
+				GameInstance theGame = new GameInstance(gameBoard, board);
+
+				liveRepo.Add(theGame);
+
+				return View("Index", theGame);
+			}
 		}
 
 		[Authorize]

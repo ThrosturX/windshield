@@ -28,6 +28,11 @@ namespace Windshield.Controllers
 			Groups.Add(Context.ConnectionId, groupId);
 		}
 
+		public void RefreshLobby(string boardID)
+		{
+			Clients.Group(boardID).UpdateList();
+		}
+
 		public void send(string groupName, string user, string message)
 		{
 			if (message.Length > 0 && user.Length > 0)

@@ -35,21 +35,9 @@
 	</li>
 </script>
 
-<script>
-	$(document).ready(function () {
-		var group = '@Model.boardId';
-		var hub = $.connection.gameHub;
-		
-		hub.client.Start = function (id) {
-			self.location = "JoinGame?targetId=" + id;
-		}
-	});
-
-</script>
-
 	<nav>
 	
 	</nav>
 	<div id="chat-wrapper" class="container-fluid span4 visible-desktop">
-		@Html.Partial("Chat", Model.boardId)
+	<!--	Html.Partial("Chat", Model.boardId)-->
 	</div>
