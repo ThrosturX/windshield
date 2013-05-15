@@ -9,7 +9,7 @@ using Windshield.Models.Games.Hearts;
 
 namespace Windshield.Models.Games.Hearts
 {
-	public class Hearts : Board
+	public class Hearts : AGame
 	{
 		public static string name = "Hearts";
 		public static string description =   "Hearts is an \"evasion-type\" trick-taking card game for four players. "
