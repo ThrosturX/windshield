@@ -1,5 +1,11 @@
 ﻿@model Windshield.Models.Games.TicTacToe.TicTacToe
 
+<div class="text-center">
+	<small>
+		Players: @Model.player1.user.UserName and @Model.player2.user.UserName
+	</small>
+</div>
+
 <div>
 <table id="tic-tac-toe" class="table-bordered">
 	<tbody>
@@ -21,10 +27,6 @@
 	</tbody>
 </table>
 
-<div id="winner-dialog-popup">
-
-
-</div>
 
 <div class="ttt-game-score">
 	<div id="GameScore">
@@ -32,9 +34,14 @@
 		Draws: <span id="GameDraws">0</span>
 		Losses: <span id="GameLoss">0</span>
 	</div>
+	<div id="winner-dialog-popup">
+
+	</div>
 	<input type="button" id="GameRestart" class="btn" value="Restart" />
 </div>
 </div>
+
+
 
 <script>
 	$(document).ready(function () {
