@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Windshield.Common;
 using Windshield.Models.Games.Hearts;
@@ -45,7 +46,7 @@ namespace Windshield.Test
 			players.Add(c);
 			players.Add(d);
 
-			game = new Hearts(players);
+			game = new Hearts(players, true);
 
 			brd.AddBoard(game.board);
 		}
@@ -56,7 +57,7 @@ namespace Windshield.Test
 			User p = new User();
 			List<User> users = new List<User>();
 			users.Add(p);
-			game = new Hearts(users);
+			game = new Hearts(users, true);
 
 			Assert.AreEqual("Computer", game.players[1].user.UserName);
 		}
@@ -166,7 +167,7 @@ namespace Windshield.Test
 
 				brd.AddBoard(game.board);
 
-				game = new Hearts(players);
+				game = new Hearts(players, true);
 				Assert.Fail();
 			}
 			catch (TooManyPlayersException) 
@@ -248,6 +249,36 @@ namespace Windshield.Test
 			game.PlayCard(game.turn, game.turn.hand.FindPreferablyInSuit(Suit.Club));
 			game.PlayCard(game.turn, game.turn.hand.FindPreferablyInSuit(Suit.Club));
 			Assert.IsTrue(game.PlayCard(game.turn, game.turn.hand.FindPreferablyInSuit(Suit.Club)));
+		}
+
+		[TestMethod]
+		public void HeartsGetStatusString()
+		{
+			StringBuilder builder = new StringBuilder();
+			// Jokers
+			builder.Append("  ,  ,  ,  ,");
+			// Player whose turn it is
+			builder.Append("3");
+			// Seperator
+			builder.Append("|");
+			// Hearts, Spades, Diamonds, Clubs
+			builder.Append("AH,2H,3H,4H,5H,6H,7H,8H,9H,TH,JH,QH,KH/");
+			builder.Append("AS,2S,3S,4S,5S,6S,7S,8S,9S,TS,JS,QS,KS/");
+			builder.Append("AD,2D,3D,4D,5D,6D,7D,8D,9D,TD,JD,QD,KD/");
+			builder.Append("AC,2C,3C,4C,5C,6C,7C,8C,9C,TC,JC,QC,KC");
+			// Seperator
+			builder.Append("|");
+			// Match points, Game points, Username [User1]
+			builder.Append("0,0,North/");
+			// Match points, Game points, Username [User2]
+			builder.Append("0,0,South/");
+			// Match points, Game points, Username [User3]
+			builder.Append("0,0,East/");
+			// Match points, Game points, Username [User4]
+			builder.Append("0,0,West");
+
+			string testString = builder.ToString();
+			Assert.AreEqual(testString, game.GetStatus());
 		}
 
 
