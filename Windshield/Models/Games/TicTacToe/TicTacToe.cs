@@ -127,15 +127,7 @@ namespace Windshield.Models.Games.TicTacToe
 			player2.losses = 0;
 			player2.draws = 0;
 
-			Random rnd = new Random();
-			if (rnd.Next(2) == 0)
-			{
-				turn = player1;
-			}
-			else
-			{
-				turn = player2;
-			}
+			turn = player1;
 		}
 
 		/// <summary>
