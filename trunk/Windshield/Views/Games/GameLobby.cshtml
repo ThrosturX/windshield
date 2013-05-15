@@ -30,7 +30,7 @@
 		</div>
 		<div class="row-fluid lobby-buttons">
 			@Html.ActionLink("Start", "TicTacToe", "Games", new { targetId = @Model.boardId }, new { @class = "btn" })
-			@Html.ActionLink("Cancel", "GameDescription", "Games", new { @class = "btn" })
+			@Html.ActionLink("Cancel", "GameDescription", "Home", new { name = "Tic Tac Toe" }, new { @class = "btn" })
 			
 			<!--Html.ActionLink("Start","Index","Games")-->
 		</div>
