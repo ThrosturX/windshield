@@ -27,6 +27,11 @@ namespace Windshield.Models
 			db.Games.InsertOnSubmit(game);
 		}
 
+		public void AddRating(GameRating rating)
+		{
+			db.GameRatings.InsertOnSubmit(rating);
+		}
+
 		//
 		// delete methods
 
