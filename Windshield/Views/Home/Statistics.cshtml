@@ -6,15 +6,18 @@
 <h2>Statistics</h2>
 
 <hr>
-
-<select id="dropdown" name="dropdown" class="pull-right">
-	<option value="" selected="selected"> ... </option>
-	@foreach (var game in Model)
-	{
-	<option value=@game.id>@game.name</option>
-	}
-</select>
-
+<div class="row-fluid">
+	<div class="pull-left">
+		<p class="lead">Top Players</p>
+	</div>
+	<select id="dropdown" name="dropdown" class="pull-right">
+		<option value="" selected="selected"> ... </option>
+		@foreach (var game in Model)
+		{
+		<option value=@game.id>@game.name</option>
+		}
+	</select>
+</div>
 
 <table id="statistics" class="table table-hover">
 		<thead>

@@ -42,14 +42,8 @@ namespace Windshield.Controllers
 
 		public ActionResult Statistics()
 		{
-			Game game = gameRepo.GetGameByName("Tic Tac Toe");
-
-			var derp = gameRepo.GetAllGames();
-
-			//ViewData["GameName"] = new SelectList(
-			//Games,
-		
-			return View("Statistics",derp);
+			var games = gameRepo.GetAllGames();
+			return View("Statistics", games);
 		}
 
 		public ActionResult DisplayCard()
@@ -69,9 +63,9 @@ namespace Windshield.Controllers
 		{
 			Game game = gameRepo.GetGameByName(gameName.name);
 
-			var derp = gameRepo.GetTopRatingsForViewModel(game);
+			var statistics = gameRepo.GetTopRatingsForViewModel(game);
 				
-			return Json(derp, JsonRequestBehavior.AllowGet);
+			return Json(statistics, JsonRequestBehavior.AllowGet);
 		}
 
 		public JsonResult GetPopularity(Game g)
