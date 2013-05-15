@@ -9,6 +9,6 @@ namespace Windshield.ViewModels
 	{
 		public string Name { get; set; }
 		public string Image { get; set; }
-
+		public string Url { get; set; }
 	}
 }
