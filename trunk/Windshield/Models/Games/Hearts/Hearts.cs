@@ -46,6 +46,7 @@ namespace Windshield.Models.Games.Hearts
 		public Board board;
 		public bool trickOngoing = false;
 		public bool brokenHearts;
+		public bool mustPlayTwoOfClubs = true;
 
 		/// <summary>
 		/// Default constructor. Note that instances require players to be instantiated!
@@ -267,6 +268,15 @@ namespace Windshield.Models.Games.Hearts
 			}
 			else
 			{
+				if (mustPlayTwoOfClubs)
+				{
+					if (card.face != 2 || card.suit != Suit.Club)
+					{
+						return false;
+					}
+
+					mustPlayTwoOfClubs = false;
+				}
 				trick = new Trick(player, card);
 				trickOngoing = true;
 			}

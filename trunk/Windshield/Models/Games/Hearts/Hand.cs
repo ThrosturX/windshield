@@ -26,5 +26,56 @@ namespace Windshield.Models.Games.Hearts
 			
 			return ret;
 		}
+
+		public Card FindCard(int face, Suit suit)
+		{
+			foreach (var card in this)
+			{
+				if (card.face == face && card.suit == suit)
+				{
+					return card;
+				}
+			}
+
+			return null;
+		}
+
+		public Card FindAnyInSuit(Suit suit)
+		{
+			foreach (var card in this)
+			{
+				if (card.suit == suit)
+				{
+					return card;
+				}
+			}
+
+			return null;
+		}
+
+		public Card FindNotInSuit(Suit suit)
+		{
+			foreach (var card in this)
+			{
+				if (card.suit != suit)
+				{
+					return card;
+				}
+			}
+
+			return null;
+		}
+
+		public Card FindPreferablyInSuit(Suit suit)
+		{
+			if (FindAnyInSuit(suit) == null)
+			{
+				return FindNotInSuit(suit);
+			}
+			else
+			{
+				return FindAnyInSuit(suit);
+			}
+		}
 	}
 }
