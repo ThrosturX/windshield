@@ -108,11 +108,26 @@ namespace Windshield.Models
 			return statistics;
 		}
 
-		public List<PopularViewModel> GetTopGamesPlayedForViewModel()
+		/// <summary>
+		/// Gets the top games played for the index view specified by id
+		/// if id is null, then we retrieve all games
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public List<PopularViewModel> GetTopGamesPlayedForViewModel(int? id)
 		{
-			var games = from game in db.Games
-						select game;
-
+			IQueryable<Game> games;
+			if (!(id.HasValue))
+			{
+				games = from game in db.Games
+							select game;
+			}
+			else
+			{
+				games = (from game in db.Games
+							 orderby game.timesPlayed descending
+							 select game).Take(id.Value);
+			}
 			List<PopularViewModel> model = new List<PopularViewModel>();
 
 			foreach(var g in games)
@@ -120,9 +135,30 @@ namespace Windshield.Models
 				PopularViewModel m = new PopularViewModel();
 				m.Name = g.name;
 				m.Image = g.image;
+				m.Url = "/Home/GameDescription?name=" + g.name;
 				model.Add(m);
 			}
 			return model;							   
+		}
+
+		public List<PopularViewModel> GetNewGamesPlayedForViewModel()
+		{
+			var games = (from game in db.Games
+						 orderby game.timesPlayed ascending
+						 select game).Take(5);
+
+			List<PopularViewModel> model = new List<PopularViewModel>();
+
+			foreach (var g in games)
+			{
+				PopularViewModel m = new PopularViewModel();
+				m.Name = g.name;
+				m.Image = g.image;
+				m.Url = "/Home/GameDescription?name=" + g.name;
+				model.Add(m);
+			}
+
+			return model;
 		}
 	}
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windshield.Models;
+using Windshield.ViewModels;
 
 namespace Windshield.Test.MockObjects
 {
@@ -59,6 +60,17 @@ namespace Windshield.Test.MockObjects
 			return null;
 		}
 		public List<StatisticsViewModel> GetTopRatingsForViewModel(Game game)
+		{
+			// dummy
+			return null;
+		}
+		public List<PopularViewModel> GetTopGamesPlayedForViewModel(int? id)
+		{
+			// dummy
+			return null;
+		}
+
+		public List<PopularViewModel> GetNewGamesPlayedForViewModel()
 		{
 			// dummy
 			return null;

@@ -14,7 +14,8 @@ namespace Windshield.Models
 		Game GetGameByName(string name);
 		Game GetGameByID(int id);
 		List<StatisticsViewModel> GetTopRatingsForViewModel(Game game);
-		List<PopularViewModel> GetTopGamesPlayedForViewModel();
+		List<PopularViewModel> GetTopGamesPlayedForViewModel(int ?id);
+		List<PopularViewModel> GetNewGamesPlayedForViewModel();
 		IQueryable<Game> GetAllGames();
 		IQueryable<GameRating> GetTopRatings();
 		IQueryable<GameRating> GetTopRatings(Game game);

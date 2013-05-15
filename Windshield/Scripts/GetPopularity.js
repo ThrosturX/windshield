@@ -1,9 +1,7 @@
 ﻿$(document).ready(function () {
 
 	$(".btn").click(function () {
-		//alert('button clicked');
 		var item = $(this).html();
-
 		$.ajax({
 			type: "GET",
 			contentType: "application/json; charset=utf-8",
@@ -11,13 +9,12 @@
 			data: { 'name': item },
 			dataType: "json",
 			success: function (popularGames) {
-				alert('jeij')
-				$(".thumbnails").remove();
-				$("#popularity-template").tmpl(popularGames).insertAfter(".thumbnails");
+				$(".popularlink").remove();
+				$("#popularity-template").tmpl(popularGames).appendTo("#gamelist");
 
 			},
 			error: function () {
-				$(".statistics-table-row").remove();
+				//$(".statistics-table-row").remove();
 			}
 
 		});
