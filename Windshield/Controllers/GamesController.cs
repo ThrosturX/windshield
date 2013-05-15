@@ -181,6 +181,21 @@ namespace Windshield.Controllers
 			return View("MyGames", model);
 		}
 
+		public JsonResult GetPlayersInGameLobby(Board board)
+		{
+
+			List<GameLobbyViewModel> model = new List<GameLobbyViewModel>();
+			// note that the only property board has is id, but that should be sufficient
+			var users = boardRepo.GetBoardUsers(board);
+			foreach (var user in users)
+			{
+				GameLobbyViewModel m = new GameLobbyViewModel();
+				m.UserName = user.UserName;
+				model.Add(m);
+			}
+			return Json(model, JsonRequestBehavior.AllowGet);
+		}
+
     }
 }
 
