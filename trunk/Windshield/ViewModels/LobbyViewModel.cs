@@ -12,5 +12,6 @@ namespace Windshield.ViewModels
 		public List<User> guests;
 		public string Image { get; set; }
 		public string theName { get; set; }
+		public string modelName { get; set; }
 	}
 }

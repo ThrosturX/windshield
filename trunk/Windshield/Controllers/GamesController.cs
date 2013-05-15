@@ -207,6 +207,7 @@ namespace Windshield.Controllers
 			vm.guests = users;
 			vm.Image = board.Game.image;
 			vm.theName = board.Game.name;
+			vm.modelName = board.Game.model;
 
 			return View("GameLobby", vm);
 		}
