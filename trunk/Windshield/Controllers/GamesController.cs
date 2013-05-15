@@ -116,11 +116,18 @@ namespace Windshield.Controllers
 		{
 			Board board = boardRepo.GetBoardById(targetId);
 			User user = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
-			Player player = new Player();
-			player.idBoard = board.id;
-			player.UserName = user.UserName;
-			boardRepo.AddPlayer(player);
-			boardRepo.Save();
+
+			// Check if the player is already in the selected game instance
+			IQueryable<User> currentPlayers = boardRepo.GetBoardUsers(board);
+			if (!currentPlayers.Contains(user))
+			{
+				// The player is not in the game instance, therefore he has to be added to it
+				Player player = new Player();
+				player.idBoard = board.id;
+				player.UserName = user.UserName;
+				boardRepo.AddPlayer(player);
+				boardRepo.Save();
+			}
 
 			LobbyViewModel vm = new LobbyViewModel();
 			vm.boardId = targetId;
