@@ -1,7 +1,5 @@
 ﻿@model Windshield.Models.GameInstance
 
-
-
 <div class="row-fluid">
 	@if(Model != null)
 	{
@@ -9,8 +7,15 @@
 	<div id="game-wrapper" class="container-fluid span8">
 		<div class="row">
 			<h2>@Model.theName</h2>
+			<!-- <ul class="inline">
+				<li>With:</li>
+				<li>Model.player1.user.UserName</li>
+				<li>Model.player2.user.UserName</li>
+			</ul> -->
 		</div>
-		@Html.Partial(Model.theView, Model.theGame)
+		<div class="row-fluid">
+			@Html.Partial(Model.theView, Model.theGame)
+		</div>
 	</div>
 	<div id="chat-wrapper" class="container-fluid span4 visible-desktop">
 		@Html.Partial("Chat", Model.id)

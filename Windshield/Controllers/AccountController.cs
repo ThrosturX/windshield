@@ -119,25 +119,25 @@ namespace Windshield.Controllers
 		//
 		// GET: /Account/ChangePassword
 
-		public ActionResult ChangePassword()
+		public ActionResult ChangePassword(ChangePasswordModel pwModel)
 		{
 			User user = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
 			AccountChangeUserDetailsViewModel model = new AccountChangeUserDetailsViewModel();
 			model.currentUserModel = user;
 			model.changeUserDetailsModel = user.UserDetail;
-			model.changePasswordModel = new ChangePasswordModel();
-			return View("ChangePassword", model); //"ChangePassword" redundant but perhaps good practice
+			model.changePasswordModel = pwModel;
+			return View("ChangePassword", model);
 		}
 
 		//
 		// POST: /Account/ChangePassword
 
 		[HttpPost]
-		public ActionResult ChangePassword(ChangePasswordModel model)
+		public ActionResult ChangePassword(AccountChangeUserDetailsViewModel inModel)
 		{
+			var model = inModel.changePasswordModel;
 			if (ModelState.IsValid)
 			{
-
 				// ChangePassword will throw an exception rather
 				// than return false in certain failure scenarios.
 				bool changePasswordSucceeded;
@@ -161,7 +161,7 @@ namespace Windshield.Controllers
 				}
 			}
 			// If we got this far, something failed, redisplay form
-			return View(model);
+			return RedirectToAction("ChangePassword", model);
 		}
 
 		//
