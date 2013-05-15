@@ -15,7 +15,7 @@
 						if(card.face > 1 && card.face <= 10)
 						{
 						//gice each card in our deck a unique identity
-						<div id="card_@i" class="cardback rank_@card.face @card.suit"> <span class="spanDisplay" style="display:none;"> @card.face <br />  </span> </div>
+						<div id="card_@i" class="cardback rank_@card.face @card.suit"> <span class="spanDisplay" style="display:none;"> @card.face   </span> </div>
 						}
 						
 						else
@@ -23,16 +23,16 @@
 							switch (card.face)
 							{
 								case (1):
-									<div id="card_@i" class="cardback rank_@card.face @card.suit"> <span class="spanDisplay" style="display:none;"> A <br /> </span> </div>
+									<div id="card_@i" class="cardback rank_@card.face @card.suit"> <span class="spanDisplay" style="display:none;"> A  </span> </div>
 									break;
 								case (11):
-									<div id="card_@i" class="cardback rank_@card.face @card.suit"> <span class="spanDisplay" style="display:none;"> J <br /> </span> </div>	
+									<div id="card_@i" class="cardback rank_@card.face @card.suit"> <span class="spanDisplay" style="display:none;"> J  </span> </div>	
 									break;
 								case (12):
-									<div id="card_@i" class="cardback rank_@card.face @card.suit"> <span class="spanDisplay" style="display:none;"> Q <br /> </span> </div>	
+									<div id="card_@i" class="cardback rank_@card.face @card.suit"> <span class="spanDisplay" style="display:none;"> Q  </span> </div>	
 									break;
 								case (13):
-									<div id="card_@i" class="cardback rank_@card.face @card.suit"> <span class="spanDisplay" style="display:none;"> K <br /> </span> </div>
+									<div id="card_@i" class="cardback rank_@card.face @card.suit"> <span class="spanDisplay" style="display:none;"> K  </span> </div>
 									break;
 								default:
 									break;

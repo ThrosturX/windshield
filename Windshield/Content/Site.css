@@ -260,6 +260,10 @@ table#tic-tac-toe td:hover
   background: #fff url('http://d37rcl8t6g8sj5.cloudfront.net/wp-content/uploads/card-set.png') no-repeat;
   background-size: 1300% 400%;
 }
+.spanDisplay
+{
+	min-height: 0 !important;
+}
 .cardback
 {
 	height: 20%;

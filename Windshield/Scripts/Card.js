@@ -22,40 +22,24 @@ $(document).ready(function () {
 
 function dealCards() {
 
-	dealCards(1);
+	dealCards();
 	
-	/*for (k = 13; k < 26; k++) {
-		card_top[k] = -50 + 40 * k;
-		card_left[k] = 50;
-	}
-	for (k = 26; k < 39 ; k++) {
-		card_left[k] = 340 + 40 * (k - 12);
-		card_top[k] = 0;
-	}
-	for (k = 39; k < 52 ; k++) {
-		card_top[k] = -50 + 40 * (k - 18);
-		card_left[k] = 700;
-	}
-
-
-	for (i = 1; i <= 52; i++) setTimeout("moveToPlace(" + i + ")", i * 100);
-	started = true; */
 
 }
 
-function dealCards(playerNo)
+function dealCards()
 {
 	
 		for (k = 1; k <= 13; k++) {
-			card_left[k] = 25 + 2.5 * k;
+			card_left[k] = 27 + 2.5 * k;
 			card_top[k] = 75;
 		}
 		for (k = 14; k <= 26; k++) {
 			card_top[k] =  - 12 + 2.5 * k;
-			card_left[k] = 5;
+			card_left[k] = 10;
 		}
 		for (k = 27; k <= 39 ; k++) {
-			card_left[k] = 25 + 2.5 * (k - 26);
+			card_left[k] = 27 + 2.5 * (k - 26);
 			card_top[k] = 5;
 		}
 		for (k = 40; k <= 52 ; k++) {
