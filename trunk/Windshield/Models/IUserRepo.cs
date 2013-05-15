@@ -7,13 +7,6 @@ namespace Windshield.Models
 {
 	public interface IUserRepo
 	{
-		// TODO: possibly remove when User is clear
-		/*
-		void AddUser(User user);
-		void DeleteUser(User user);
-		void AddAdmin(User user);
-		void RemoveAdmin(User user);
-		*/
 		void Save();
 		int GetTimesPlayed(User user);
 		int GetTimesPlayedByGame(User user, Game game);

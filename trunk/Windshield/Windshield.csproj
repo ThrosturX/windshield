@@ -201,6 +201,7 @@
     </Compile>
     <Compile Include="Models\BoardRepo.cs" />
     <Compile Include="Models\LiveInstanceRepo.cs" />
+    <Compile Include="ViewModels\BoardTableViewModel.cs" />
     <Compile Include="ViewModels\GameInstance.cs" />
     <Compile Include="Models\GameRepo.cs" />
     <Compile Include="Models\Games\TicTacToe\TPlayer.cs" />
