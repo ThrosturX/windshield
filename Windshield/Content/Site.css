@@ -238,8 +238,8 @@ table#tic-tac-toe td:hover
 
 
 .card {
-  height: 8.85em;
-  width: 6.4em;
+  height: 20%;
+  width: 11%;
   background-color: #fff;
   border: 1px solid #695d39;
   border-radius: .5em;                       /* omitted -moz- and -webkit- hacks */
@@ -255,8 +255,8 @@ table#tic-tac-toe td:hover
 }
 .cardback
 {
-	height: 8.85em;
-	width: 6.4em;
+	height: 20%;
+	width: 11%;
 	background: #fff url('../Images/cardback.jpg'); 
 	background-size: 100% 100%;
 }
@@ -296,28 +296,23 @@ table#tic-tac-toe td:hover
 .rank_2 {background-position-x: 8.5%;}
 .rank_1 {background-position-x: 0%;}
 
-#stage 
-{ 
-        border: 1px solid #ccc; 
-} 
+
 #felt 
 { 
-        position: relative; 
-        margin: 0 0 0 200px; 
-        height: 700px; 
-        background: green; 
+		border: 1px solid #ccc;
+		position: relative;
+		background: green;
+		height: 450px;
+		width: 100%;
 }
  
 #felt div 
 { 
-        position: absolute; 
-        left: -140px; 
-        top: 100px; 
-}
+        position: absolute;
+        top: 40%;
+		left: 45%; 
 
- #felt div 
- { 
-        -webkit-transition: all 0.5s ease-in-out; 
+		-webkit-transition: all 0.5s ease-in-out; 
         -moz-transition: all 0.5s ease-in-out; 
         -o-transition: all 0.5s ease-in-out; 
         -ms-transition: all 0.5s ease-in-out; 
