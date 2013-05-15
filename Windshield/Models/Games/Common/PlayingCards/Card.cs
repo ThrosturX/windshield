@@ -19,11 +19,9 @@ namespace Windshield.Common
 		public int face { get; set; }
 		public Suit suit { get; set; }
 
-		public static Card Joker = new Card(Rank.Joker, Suit.Joker);
-
 		public Card()
 		{
-			face = 0;
+			face = (int)Rank.Joker;
 			suit = Suit.Joker;
 		}
 
@@ -35,7 +33,7 @@ namespace Windshield.Common
 
 		public Card(Suit _suit)
 		{
-			face = 0;
+			face = (int)Rank.Joker;
 			suit = _suit;
 		}
 
@@ -84,6 +82,15 @@ namespace Windshield.Common
 			return card_string;
 		}
 
+		public bool IsJoker()
+		{
+			if (face == 0 && suit == Suit.Joker)
+			{
+				return true;
+			}
+
+			return false;
+		}
 
 		/// <summary>
 		/// Creates a two-character string representing a card
@@ -94,6 +101,11 @@ namespace Windshield.Common
 		internal static string CreateCardString(Card card)
 		{
 			string str;
+
+			if (card.IsJoker())
+			{
+				return "  ";
+			}
 
 			// face
 			switch (card.face)
@@ -140,7 +152,7 @@ namespace Windshield.Common
 					}
 				case Suit.Spade:
 					{
-						str += "H";
+						str += "S";
 						break;
 					}
 				case Suit.Diamond:

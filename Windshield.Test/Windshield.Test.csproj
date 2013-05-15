@@ -54,9 +54,10 @@
     <Compile Include="MockObjects\MockBoardRepo.cs" />
     <Compile Include="MockObjects\MockGameRepo.cs" />
     <Compile Include="MockObjects\MockUserRepo.cs" />
-    <Compile Include="TicTacToeTest.cs" />
+    <Compile Include="ModelTests\TicTacToe\TicTacToeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HeartsTest.cs" />
+    <Compile Include="ModelTests\Hearts\HeartsTest.cs" />
+    <Compile Include="ModelTests\Hearts\PlayingCardsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Windshield\Windshield.csproj">
