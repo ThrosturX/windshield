@@ -143,7 +143,7 @@ namespace Windshield.Models
 				model.Add(m);
 
 				if (g.image == null)
-					m.Image = "/Images/pug.jpg";
+					m.Image = "pug.jpg";
 				else
 					m.Image = g.image;
 			}
@@ -162,8 +162,11 @@ namespace Windshield.Models
 			{
 				PopularViewModel m = new PopularViewModel();
 				m.Name = g.name;
-				m.Image = g.image;
 				m.Url = "/Home/GameDescription?name=" + g.name;
+				if (g.image == null)
+					m.Image = "pug.jpg";
+				else
+					m.Image = g.image;
 				model.Add(m);
 			}
 
