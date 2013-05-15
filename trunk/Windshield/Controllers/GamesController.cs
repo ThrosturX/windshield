@@ -116,19 +116,30 @@ namespace Windshield.Controllers
 		{
 			Board board = boardRepo.GetBoardById(targetId);
 			User user = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
+			IQueryable<User> currentPlayers = boardRepo.GetBoardUsers(board);
+			bool gameIsFull = board.Players.Count() >= board.Game.maxPlayers;
 
 			// Check if the player is already in the selected game instance
-			IQueryable<User> currentPlayers = boardRepo.GetBoardUsers(board);
 			if (!currentPlayers.Contains(user))
 			{
-				// The player is not in the game instance, therefore he has to be added to it
-				Player player = new Player();
-				player.idBoard = board.id;
-				player.UserName = user.UserName;
-				boardRepo.AddPlayer(player);
-				boardRepo.Save();
+				// Ensure the game is not full before trying to insert the player
+				if (!gameIsFull)
+				{
+					// The player is not in the game instance, therefore he has to be added to it
+					Player player = new Player();
+					player.idBoard = board.id;
+					player.UserName = user.UserName;
+					boardRepo.AddPlayer(player);
+					boardRepo.Save();
+				}
+				else
+				{
+					// TODO The player is not a part of the players and the game is full
+					return RedirectToAction("Index", "Home");
+				}
 			}
 
+			// Send the player to the game lobby
 			LobbyViewModel vm = new LobbyViewModel();
 			vm.boardId = targetId;
 			vm.guests = new List<User>();
