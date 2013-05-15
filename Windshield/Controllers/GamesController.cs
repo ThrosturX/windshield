@@ -37,7 +37,6 @@ namespace Windshield.Controllers
         public ActionResult Index()
         {
 			return View();
-		//	return RedirectToAction("Index", "Home");
         }
 
 		// play against computer
@@ -167,18 +166,36 @@ namespace Windshield.Controllers
 			return View("GameLobby", vm);
 		}
 
+		/// <summary>
+		/// Controller that returns the view that displays all boards for a game
+		/// </summary>
 		public ActionResult Boards(Game game)
 		{
+			// EDIT: 15 - 11:00 - Ragnar and Bjorn
+
 			var name = gameRepo.GetGameByName(game.name);
-			var viewModel = boardRepo.GetBoards(name);
+			var viewModel = new BoardTableViewModel(game.name);
+			foreach (Board board in boardRepo.GetBoards(game))
+			{
+				viewModel.Add(board);
+			}
 			return View("Boards", viewModel);
 		}
 
+		/// <summary>
+		/// Controller that returns the view that displays all the boards that user is playing in
+		/// </summary>
 		public ActionResult MyGames()
 		{
-			User user = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
-			var model = boardRepo.GetBoards(user);
-			return View("MyGames", model);
+			// EDIT: 15 - 11:00 - Ragnar and Bjorn
+
+			User user = userRepo.GetUserByName(User.Identity.Name);
+			var viewModel = new BoardTableViewModel();
+			foreach (Board board in boardRepo.GetBoards(user))
+			{
+				viewModel.Add(board);
+			}
+			return View("MyGames", viewModel);
 		}
 
 		public JsonResult GetPlayersInGameLobby(Board board)
@@ -200,7 +217,7 @@ namespace Windshield.Controllers
 }
 
 				// RedirectToAction
-
+				// TODO: Latebindinglol
 				/*	owner.Players.Clear();
 					Player player = new Player();
 					player.dateJoined = DateTime.Now;

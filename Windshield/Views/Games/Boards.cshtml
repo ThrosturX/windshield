@@ -1,4 +1,14 @@
-﻿@model IQueryable<Windshield.Models.Board>
+﻿@model Windshield.ViewModels.BoardTableViewModel
 
-@Html.Partial("_BoardTablePartial", Model)
+<div class="row-fluid">
+	<h2>@Model.GameName</h2>
+</div>
+
+<hr>
+
+<div class="row-fluid">
+	@Html.Partial("_BoardTablePartial", Model)
+</div>
+
+
 

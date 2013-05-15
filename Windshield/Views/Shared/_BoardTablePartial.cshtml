@@ -1,30 +1,50 @@
-﻿@model IQueryable<Windshield.Models.Board>
+﻿@model Windshield.ViewModels.BoardTableViewModel
 
+@if (Model.IsEmpty)
+{
+	<p class="lead">
+		Sorry!
+	</p>
+	<p>
+		There are no boards to be displayed for this game.
+	</p>
+}
+else
+{
 <table class="table table-hover">
 
 	<thead>
 		<tr>
 			<th>
-				Game ID
-			</th>
-			<th>
 				Game
 			</th>
+			<th>
+				Owner
+			</th>
+			<th>
+				Players
+			</th>
+			
 		</tr>
 	</thead>
 
 	<tbody>
-		@foreach (var board in Model)
+		@foreach (var row in Model.Rows)
 		{
 		<tr>
 			<td>
-				@board.id
+				@Model.GameName
+				@Html.ActionLink(Model.GameName, "JoinLobby", "Games", new {targetId = @row.ID}, null)
 			</td>
 			<td>
-				@Html.ActionLink(board.Game.name, "JoinLobby", "Games", new {targetId = @board.id}, null)
+				@row.OwnerName
+			</td>
+			<td>
+				@row.Players / @row.MaxPlayers
 			</td>
 		</tr>
 		}	
 	</tbody>
 
 </table>
+}
