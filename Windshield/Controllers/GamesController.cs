@@ -146,7 +146,20 @@ namespace Windshield.Controllers
 			Board board = boardRepo.GetBoardById(targetId);
 			IQueryable<User> lobbyGuests = boardRepo.GetBoardUsers(board);
 			List<User> users = lobbyGuests.ToList();
+		
 
+			foreach (var user in users)
+			{
+				if (userRepo.GetGameRatingByGame(user, board.Game) == null)
+				{
+					GameRating rating = new GameRating();
+					rating.idGame = board.Game.id;
+					rating.userName = user.UserName;
+					rating.rating = 1200;
+					gameRepo.AddRating(rating);
+					gameRepo.Save();
+				}
+			}
 			LobbyViewModel vm = new LobbyViewModel();
 			vm.boardId = targetId;
 			vm.guests = users;

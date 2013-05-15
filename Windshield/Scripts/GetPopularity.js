@@ -14,7 +14,7 @@
 
 			},
 			error: function () {
-				//$(".statistics-table-row").remove();
+				$(".popularlink").remove();
 			}
 
 		});

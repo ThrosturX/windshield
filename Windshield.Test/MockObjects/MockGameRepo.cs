@@ -16,12 +16,18 @@ namespace Windshield.Test.MockObjects
 		{
 			rep.Add(type);
 		}
-
+		public void AddRating(GameRating rating)
+		{
+			//dummy
+		}
 		public void DeleteGame(Game type)
 		{
 			rep.Remove(type);
 		}
-
+		public void Save()
+		{
+			// dummy
+		}
 		public Game GetGameByName(string name)
 		{
 			var result = from game in rep 
