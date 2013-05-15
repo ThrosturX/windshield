@@ -19,6 +19,8 @@ namespace Windshield.Common
 		public int face { get; set; }
 		public Suit suit { get; set; }
 
+		public static Card Joker = new Card(Rank.Joker, Suit.Joker);
+
 		public Card()
 		{
 			face = 0;
@@ -81,7 +83,80 @@ namespace Windshield.Common
 
 			return card_string;
 		}
-	}
 
-	
+
+		/// <summary>
+		/// Creates a two-character string representing a card
+		/// </summary>
+		/// <param name="card">the card to convert</param>
+		/// <returns>A two character string representing the input</returns>
+		/// <example>CreateCardString(new Card(2, Suit.Club)) returns "2C"</example>
+		internal static string CreateCardString(Card card)
+		{
+			string str;
+
+			// face
+			switch (card.face)
+			{
+				case (int)Rank.Ace:
+					{
+						str = "A";
+						break;
+					}
+				case (int)Rank.Ten:
+					{
+						str = "T";
+						break;
+					}
+				case (int)Rank.Jack:
+					{
+						str = "J";
+						break;
+					}
+				case (int)Rank.Queen:
+					{
+						str = "Q";
+						break;
+					}
+				case (int)Rank.King:
+					{
+						str = "K";
+						break;
+					}
+				default:
+					{
+						str = card.face.ToString();
+						break;
+					}
+			}
+
+			// Suit
+			switch (card.suit)
+			{
+				case Suit.Heart:
+					{
+						str += "H";
+						break;
+					}
+				case Suit.Spade:
+					{
+						str += "H";
+						break;
+					}
+				case Suit.Diamond:
+					{
+						str += "D";
+						break;
+					}
+				case Suit.Club:
+					{
+						str += "C";
+						break;
+					}
+			}
+
+			return str;
+		}
+
+	}
 }

@@ -77,5 +77,18 @@ namespace Windshield.Models.Games.Hearts
 				return FindAnyInSuit(suit);
 			}
 		}
+
+		public string CreateHandString()
+		{
+			List<string> cardList = new List<string>();
+			foreach (var card in this)
+			{
+				cardList.Add(Card.CreateCardString(card));
+			}
+
+			string str = String.Join(",", cardList);
+
+			return str;
+		}
 	}
 }
