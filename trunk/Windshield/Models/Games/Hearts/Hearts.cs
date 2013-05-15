@@ -252,7 +252,7 @@ namespace Windshield.Models.Games.Hearts
 				{
 					Card card = trick.GetCardAtIndex(i);
 
-					if (card == Card.Joker)
+					if (card.IsJoker())
 					{
 						builder.Append("  ");
 					}
