@@ -80,7 +80,8 @@ namespace Windshield.Controllers
 
 			string status = board.status;
 			// TODO: Generalize
-			iGame.AddPlayers(ExtractUsers((int)GamesTypeIDs.TicTacToe, status));
+			//iGame.AddPlayers(ExtractUsers(board.idGame, status));
+			iGame.AddPlayers(boardRepository.GetBoardUsers(board).ToList());
 			iGame.SetStatus(board.status);
 
 			int response = iGame.TryAction(action, sender);
