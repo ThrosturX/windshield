@@ -7,28 +7,30 @@
 <div class="row-fluid">
 	<div class="span4">
 		<div class="row-fluid">
-			<legend>@Model.theName</legend> <!-- TODO: Láta virka -->
+			<legend>@Model.theName</legend>
 			@Html.Partial("_GameImagePartial", new Windshield.Models.Game { image = Model.Image })
 		</div>
 	</div>
-	<div class="span4">
+	<div class="span4 container-fluid  invited-players-wrapper">
 		<div id="game-on-players" class="row-fluid">
 			<legend>Players</legend>
 			<span id="board-id" style="display:none;"> @Model.boardId </span>
-			<ul class="list-of-players">
-				@foreach(var player in Model.guests)
-				{
-					<li> @player.UserName </li>
-				}
+			<div>
+				<ul class="list-of-players">
+					@foreach(var player in Model.guests)
+					{
+						<li> @player.UserName </li>
+					}
 				
-			</ul>
-
+				</ul>
+			</div>
 			<!-- "Container" for the javascript -->
-			<ul id="userlist">
-
-			</ul>
 		</div>
-		<div class="row-fluid lobby-buttons">
+		<ul id="userlist">
+
+		</ul>
+
+		<div class="row-fluid span12">
 			@Html.ActionLink("Start", Model.modelName, "Games", new { targetId = @Model.boardId }, new { @class = "btn" })
 			@Html.ActionLink("Cancel", "GameDescription", "Home", new { name = Model.theName}, new { @class = "btn" })
 			

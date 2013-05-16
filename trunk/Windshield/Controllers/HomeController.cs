@@ -59,7 +59,8 @@ namespace Windshield.Controllers
 
 		public ActionResult GameDescription(Game gameName)
 		{
-			var game = gameRepo.GetGameByName(gameName.name);
+			Game game = gameRepo.GetGameByName(gameName.name);
+
 			return View("GameDescription", game);
 		}
 

@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>BoardGames Inc.</title>
+		<link rel="SHORTCUT ICON" href="/Images/favicon.png"/>
+		
 		<!-- Bootstrap -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -38,9 +40,9 @@
 				<header id="overview" class="visible-desktop">
 					<div class="containter">
 						<h1 class="hidden-phone">@Html.ActionLink("BoardGames", "Index", "Home")</h1>
-						<h1 class="visible-phone  header-color">
-							@Html.ActionLink("Board\nGames", "Index", "Home")
-						</h1>
+						<div class="visible-phone  header-color">
+							<h1>@Html.ActionLink("Board\nGames", "Index", "Home")</h1>
+						</div>
 						<p class="lead">For all your gaming needs</p>
 					</div>
 				</header>
@@ -55,7 +57,7 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 							</a>
-							@Html.ActionLink("GameBoards", "Index", "Home", new { @class="brand hidden-desktop" })
+							@Html.ActionLink("GameBoards", "Index", new { controller = "Home" }, new { @class = "brand hidden-desktop" })
 							<div class="nav-collapse navbar-responsive-collapse collapse">
 								<ul class="nav">
 									<li>@Html.ActionLink("Games", "Index", "Home")</li>
