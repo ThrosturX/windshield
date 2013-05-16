@@ -65,7 +65,7 @@ namespace Windshield.Test.ControllersTest
 		}
   */
 
-		[TestMethod]
+/*		[TestMethod]
 		public void TestGameJoined()
 		{
 			Board board = new Board();
@@ -75,6 +75,6 @@ namespace Windshield.Test.ControllersTest
 
 
 			ViewResult result = games.JoinGame() as ViewResult;
-		}
+		}*/
 	}
 }
