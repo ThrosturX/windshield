@@ -62,7 +62,10 @@ namespace Windshield.Controllers
 		{
 			var viewModel = new GameDescriptionViewModel();
 			viewModel.game = gameRepo.GetGameByName(gameName.name);
-			viewModel.gameRating = userRepo.GetGameRatingByGame(userRepo.GetUserByName(User.Identity.Name), viewModel.game);
+			if (User.Identity.IsAuthenticated)
+			{
+				viewModel.gameRating = userRepo.GetGameRatingByGame(userRepo.GetUserByName(User.Identity.Name), viewModel.game);
+			}
 			return View("GameDescription", viewModel);
 		}
 

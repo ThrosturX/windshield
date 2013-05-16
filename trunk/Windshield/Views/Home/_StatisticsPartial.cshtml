@@ -1,9 +1,23 @@
-﻿@model Windshield.Models.GameRating
+﻿@model Windshield.ViewModels.GameDescriptionViewModel
 
 
 <div class="text-center alert alert-info padding-lr padding-tb">
 	<strong>Elo</strong>
-	<p>@Model.rating</p>
+	@if( Model.gameRating == null )
+	{
+	<p>Unrated!</p>
+	}
+	else
+	{
+	<p>@Model.gameRating.rating</p>
+	}
 	<strong>Times played</strong>
-	<p>@Model.timesPlayed</p>
+	@if( Model.gameRating == null )
+	{
+	<p>0</p>
+	}
+	else
+	{
+	<p>@Model.gameRating.timesPlayed</p>
+	}
 </div>

@@ -67,6 +67,7 @@ namespace Windshield.Controllers
 			int.TryParse(boardID, out id);
 			Board board = boardRepository.GetBoardById(id);
 
+			//TODO: Late binding with our class
 			IGame iGame;
 			switch (board.Game.model)
 			{
@@ -79,13 +80,11 @@ namespace Windshield.Controllers
 					break;
 
 				default:
-					iGame = null;  // TODO: return error or nothing
+					iGame = null;  // TODO: Frá Ragnari Til Þrastar - "return error or nothing?"
 					break;
 			}
 
 			string status = board.status;
-			// TODO: Generalize
-			//iGame.AddPlayers(ExtractUsers(board.idGame, status));
 			iGame.AddPlayers(boardRepository.GetBoardUsers(board).ToList());
 			iGame.SetStatus(board.status);
 
@@ -120,7 +119,7 @@ namespace Windshield.Controllers
 						if (winner != "" && !winner.StartsWith("Computer"))  // don't let the computer win and take elo :)
 						{
 							outlier = userRepository.GetUserByName(winner);
-							rating = userRepository.GetGameRatingByGame(outlier, gameRepository.GetGameByID(board.idGame));
+							rating = userRepository.GetGameRatingByGame(outlier, board.Game);
 							if (rating == null)
 							{
 								rating.rating = 0;
@@ -137,7 +136,7 @@ namespace Windshield.Controllers
 								if (user != outlier)
 								{
 									Elo tempElo = new Elo(board.idGame, user); 
-									GameRating trating = userRepository.GetGameRatingByGame(user, gameRepository.GetGameByID(board.idGame));
+									GameRating trating = userRepository.GetGameRatingByGame(user, board.Game);
 									if (rating.rating != 0)
 									{
 										tempElo.points = trating.rating;
@@ -152,7 +151,7 @@ namespace Windshield.Controllers
 
 							foreach (var r in ratings)
 							{
-								GameRating gr = userRepository.GetGameRatingByGame(r.user, gameRepository.GetGameByID(2)); // TODO LATE BINDING
+								GameRating gr = userRepository.GetGameRatingByGame(r.user, board.Game);
 								gr.rating = r.points;
 							}
 
@@ -176,8 +175,7 @@ namespace Windshield.Controllers
 						break;
 					}
 			}
-
-		}
+		}  // public void TryAction(string boardID, string action, string sender)
 
 		public List<User> ExtractUsers(int gameTypeID, string status)
 		{
