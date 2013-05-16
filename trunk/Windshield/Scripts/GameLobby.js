@@ -16,7 +16,7 @@
 			dataType: "json",
 			success: function (users) {
 				$(".list-of-players").remove();
-				$("#lobby-template").tmpl(users).insertAfter("#userlist");
+				$("#lobby-template").tmpl(users).appendTo("#player-list");
 			},
 			error: function () {
 				alert("Developer error!");

@@ -67,49 +67,53 @@ namespace Windshield.Models
 		}
 
 		/// <summary>
-		/// Returns all boards from the Boards table
+		/// Returns all boards from the Boards table; the most recent boards first
 		/// </summary>
 		public IQueryable<Board> GetBoards()
 		{
 			return from board in db.Boards
+				   orderby board.id descending
 				   select board;
 		}
 
 		/// <summary>
-		/// Returns all boards for a specific game 
+		/// Returns all boards for a specific game ; the most recent boards first
 		/// </summary>
 		public IQueryable<Board> GetBoards(Game game)
 		{
 			return from board in db.Boards
 				   where board.idGame == game.id
+				   orderby board.id descending
 				   select board;
 		}
 
 		/// <summary>
-		/// Get all the active boards for a specific user
+		/// Get all the active boards for a specific user; the most recent ones first
 		/// </summary>
 		public IQueryable<Board> GetBoards(User user)
 		{
 			var playerInGames = from players in db.Players
 								where players.UserName == user.UserName && players.Board.endDate == null
+								orderby players.idBoard descending
 								select players.Board;
 			return playerInGames;
 		}
 
 		/// <summary>
-		/// Get all the active boards for a specific user and game
+		/// Get all the active boards for a specific user and game; the most recent ones first
 		/// </summary>
 		public IQueryable<Board> GetBoards(Game game, User user)
 		{
 			var result = from boards in GetBoards(user)
 						 where boards.Game == game
+						 orderby boards.id descending
 						 select boards;
 			return result;
 		}
 
 
 		/// <summary>
-		/// Returns all users for a specific board
+		/// Returns all users for a specific board in the order they were added to the board
 		/// </summary>
 		public IQueryable<User> GetBoardUsers(Board board)
 		{

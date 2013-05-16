@@ -7,24 +7,18 @@
 <div class="row-fluid">
 	<div class="span4">
 		<div class="row-fluid">
-			<legend>@Model.theName</legend>
+			<h3>@Model.theName</h3>
+			<hr>
 			@Html.Partial("_GameImagePartial", new Windshield.Models.Game { image = Model.Image })
 		</div>
 	</div>
 	<div class="span4">
 		<div id="game-on-players" class="row-fluid">
-			<legend>Players</legend>
+			<h3>Players</h3>
+			<hr>
 			<span id="board-id" style="display:none;"> @Model.boardId </span>
-			<ul class="list-of-players">
-				@foreach(var player in Model.guests)
-				{
-					<li> @player.UserName </li>
-				}
-				
-			</ul>
-
 			<!-- "Container" for the javascript -->
-			<ul id="userlist">
+			<ul id="player-list">
 
 			</ul>
 		</div>
@@ -36,11 +30,18 @@
 		</div>
 	</div>
 	<script id="lobby-template" type="text/html">
-		<li class="list-of-players">
-			${UserName}
-		</li>
+		<li class="list-of-players">${UserName}</li>
 	</script>
 
+	<div class="span4">
+		<div id="chat-wrapper" class="container-fluid visible-desktop">
+			@Html.Partial("Chat", Model.boardId)
+		</div>
+	</div>
+</div>
+
+
+<!-- TODO: Remove? his was a bit up there in the html -->
 	<!--<script>
 		$(document).ready(function () {
 			var group = 'Model.boardId';
@@ -52,10 +53,3 @@
 		});
 
 	</script> -->
-
-	<div class="span4">
-		<div id="chat-wrapper" class="container-fluid visible-desktop">
-			@Html.Partial("Chat", Model.boardId)
-		</div>
-	</div>
-</div>
