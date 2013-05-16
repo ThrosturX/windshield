@@ -1,0 +1,56 @@
+﻿@model Windshield.Models.Games.Hearts.Hearts
+
+@{
+    ViewBag.Title = "Hearts";
+}
+
+<h2>Hearts</h2>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		var group = '@(Model.id)';
+		var hub = $.connection.gameHub;
+		var currentUser = '@(Context.User.Identity.Name)';
+		var playerOne = '@(Model.players[0].user.UserName)';
+		var playerTwo = '@(Model.players[1].user.UserName)';
+		var playerThree = '@(Model.players[2].user.UserName)';
+		var playerFour = '@(Model.players[3].user.UserName)';
+
+		$("#GameRestart").hide();
+		$("#winner-dialog-popup").hide();
+
+		hub.client.Broadcast = function (status) {
+			var statusArray = status.split("|");
+		};
+
+		hub.client.GameOver = function (winner) {
+			if (winner != "") {
+				$("#winner-dialog-popup").text(winner + " wins!");
+				if (winner == currentUser) {
+					$("#GameWins").html(parseInt($("#GameWins").html(), 10) + 1);
+				}
+				else {
+					$("#GameLoss").html(parseInt($("#GameLoss").html(), 10) + 1);
+				}
+			}
+			else {
+				$("#winner-dialog-popup").text("It's a draw!");
+				$("#GameDraws").html(parseInt($("#GameDraws").html(), 10) + 1);
+			}
+
+			$("#winner-dialog-popup").show(2);
+
+		}
+
+		$.connection.hub.start().done(function() {
+			hub.server.join(group);
+			hub.server.gameStarted(group);
+			hub.server.tryAction(group, "checkAI", currentUser);
+
+			$("#tic-tac-toe tr td").click(function () {
+				hub.server.tryAction(group, "insert" + this.id, currentUser);
+			});
+
+		});
+	});
+</script>
