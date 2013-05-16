@@ -356,6 +356,11 @@ namespace Windshield.Models.Games.Hearts
 
 			}
 
+			// set the correct turn
+			int index;
+			int.TryParse(tInfo[5], out index);
+			turn = players[index];
+
 
 			// find the player's hands
 			for (int i = 0; i < 4; ++i)
