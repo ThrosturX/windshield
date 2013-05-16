@@ -15,12 +15,66 @@
 		var playerTwo = '@(Model.players[1].user.UserName)';
 		var playerThree = '@(Model.players[2].user.UserName)';
 		var playerFour = '@(Model.players[3].user.UserName)';
+		var card_left = [];
+		var card_top = [];
 
 		$("#GameRestart").hide();
 		$("#winner-dialog-popup").hide();
 
+		function setCard(card, pos) {
+			var suit;
+			var rank = "Rank_" + card[1];
+
+			if (card[0] === "H") {
+				suit = "Heart";
+			}
+			else if (card[0] === "S") {
+				suit = "Spade";
+			}
+			else if (card[0] === "D") {
+				suit = "Diamond";
+			}
+			else if (card[0] === "C") {
+				suit = "Club";
+			}
+			else {
+				$("#" + pos).hide();
+			}
+
+			$("#" + pos).addClass(suit + rank + "Card");
+
+		}
+
 		hub.client.Broadcast = function (status) {
 			var statusArray = status.split("|");
+			var handArray = statusArray[1].split("/");
+			var index;
+
+			// find which player's cards should be picked
+			if (currentUser === playerOne) {
+				index = 0;
+			}
+			else if (currentUser === playerTwo) {
+				index = 1;
+			}
+			else if (currentUser === playerThree) {
+				index = 2;
+			}
+			else if (currentUser === playerFour) {
+				index = 3;
+			}
+
+			var cardArray = handArray[i].split(",");
+
+			// display the player's cards
+			for (var i = 1; i <= 13; i++) {
+				// extract card from string
+				var cardstring = cardArray[i - 1];
+
+				setCard(cardstring, i);
+
+			}
+
 		};
 
 		hub.client.GameOver = function (winner) {
