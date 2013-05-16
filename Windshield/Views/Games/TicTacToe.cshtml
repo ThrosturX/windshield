@@ -1,8 +1,8 @@
-﻿@model Windshield.Models.Games.TicTacToe.TicTacToe
+﻿@model Windshield.ViewModels.BoardViewModel
 
 <div class="text-center">
 	<small>
-		Players: @Model.player1.user.UserName and @Model.player2.user.UserName
+		Players: @Model.GetPlayers(1)[0] and @Model.GetPlayers(2)[1]
 	</small>
 </div>
 
@@ -48,13 +48,10 @@
 		var group = '@(Model.id)';
 		var hub = $.connection.gameHub;
 		var currentUser = '@(Context.User.Identity.Name)';
-		var playerOne = '@(Model.player1.user.UserName)';
-		var playerTwo = '@(Model.player2.user.UserName)';
+		var players = '@Model.GetPlayers(2)';
+		var playerOne = players[0].UserName;
+		var playerTwo = players[1].UserName;
 
-	//	hub.client.cellClicked = function (cellId) {
-			//$("#" + cellId).text(currentUser.symbol);
-	//		$("#" + cellId).text('@(Model.player1.symbol)');
-//		};
 
 		$("#GameRestart").hide();
 		$("#winner-dialog-popup").hide();
@@ -103,9 +100,9 @@
 			$("#GameRestart").show();
 		}
 
-		$.connection.hub.start().done(function() {
+		$.connection.hub.start().done(function () {
 			hub.server.join(group);
-			hub.server.gameStarted(group);
+			hub.server.startGame(group);
 			hub.server.tryAction(group, "checkAI", currentUser);
 
 			$("#tic-tac-toe tr td").click(function () {

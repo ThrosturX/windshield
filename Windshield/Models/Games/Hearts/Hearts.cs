@@ -11,7 +11,7 @@ using Windshield.Models.Games.Hearts;
 
 namespace Windshield.Models.Games.Hearts
 {
-	public class Hearts : AGame
+	public class Hearts : IGame
 	{
 		public static string name = "Hearts";
 		public static string description =   "Hearts is an \"evasion-type\" trick-taking card game for four players. "
@@ -284,7 +284,7 @@ namespace Windshield.Models.Games.Hearts
 			return -1;
 		}
 
-		internal void SetStatus(string status)
+		public void SetStatus(string status)
 		{
 			// split the string
 			string[] splitStatus  = status.Split('|');
@@ -632,7 +632,34 @@ namespace Windshield.Models.Games.Hearts
 
 			// no success
 			return 0;
+		}  //public bool PlayCard(HPlayer player, Card card)
+
+
+
+
+
+
+
+
+		// TODO: Implement dummy interface functions!!!
+
+
+		public void AddPlayers(List<User> players)
+		{
+			;  //  TODO: IMPLEMENT
 		}
-		//public bool PlayCard(HPlayer player, Card card)
+
+		public List<User> GetPlayers()
+		{
+			return new List<User>{new User{ UserName = "DERP" }};
+		}
+
+		
+		public string GetGameOver()
+		{
+			return "DERP";
+		}
+
+
 	}
 }

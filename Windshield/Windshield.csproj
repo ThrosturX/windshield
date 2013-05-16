@@ -185,9 +185,10 @@
     <Compile Include="Models\Games\Common\PlayingCards\Card.cs" />
     <Compile Include="Models\Games\Common\PlayingCards\CardDeck.cs" />
     <Compile Include="Models\Games\Common\Ratings\Elo.cs" />
+    <Compile Include="Models\Games\GameBinder.cs" />
     <Compile Include="Models\Games\Hearts\Hand.cs" />
     <Compile Include="Models\Games\Hearts\HPlayer.cs" />
-    <Compile Include="Models\Games\AGame.cs" />
+    <Compile Include="Models\Games\IGame.cs" />
     <Compile Include="Models\Games\Hearts\Trick.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -202,7 +203,7 @@
     <Compile Include="Models\Repositories\BoardRepo.cs" />
     <Compile Include="Models\Repositories\LiveInstanceRepo.cs" />
     <Compile Include="ViewModels\BoardTableViewModel.cs" />
-    <Compile Include="ViewModels\GameInstance.cs" />
+    <Compile Include="ViewModels\BoardViewModel.cs" />
     <Compile Include="Models\Repositories\GameRepo.cs" />
     <Compile Include="Models\Games\TicTacToe\TPlayer.cs" />
     <Compile Include="Models\Repositories\IBoardRepo.cs" />

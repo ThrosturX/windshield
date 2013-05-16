@@ -1,26 +1,20 @@
-﻿@model Windshield.Models.GameInstance
+﻿@model Windshield.ViewModels.BoardViewModel
 
 
 <div class="row-fluid">
-	@if(Model != null)
-	{
+	
 	
 	<div id="game-wrapper" class="container-fluid span8">
 		<div class="row">
-			<h2>@Model.theName</h2>
+			<h2>@Model.gameName</h2>
 		</div>
 		<div class="row-fluid">
-			@Html.Partial(Model.theView, Model.theGame)
+			@Html.Partial(Model.viewName, Model)
 		</div>
 	</div>
 	<div id="chat-wrapper" class="container-fluid span4 visible-desktop">
 		@Html.Partial("Chat", Model.id)
 	</div>
 	 
-	}
-	else
-	{
-	<h2>Can't render a game without a game!</h2>
-	}
 </div>
 

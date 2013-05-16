@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Reflection;
 using Windshield.Models;
+using Windshield.Models.Games;
 using Windshield.Models.Games.TicTacToe;
 using Windshield.Models.Games.Hearts;
 using Windshield.ViewModels;
@@ -26,190 +27,251 @@ namespace Windshield.Controllers
 			liveRepo = new LiveInstanceRepo();
 		}
 
-		public GamesController(IBoardRepo bRep, IGameRepo gRep, IUserRepo uRep)
+		public GamesController(IBoardRepo bRepo, IGameRepo gRepo, IUserRepo uRepo)
 		{
-			boardRepo = bRep;
-			gameRepo = gRep;
-			userRepo = uRep;
+			boardRepo = bRepo;
+			gameRepo = gRepo;
+			userRepo = uRepo;
 			liveRepo = new LiveInstanceRepo();
 		}
 
-        public ActionResult Index()
+        public ActionResult Index(int idBoard)
         {
-			return View();
+			Board board = boardRepo.GetBoardById(idBoard);
+
+			if (board == null)
+			{
+				return View("Error");
+			}
+
+			BoardViewModel viewModel = new BoardViewModel(board);
+			viewModel.AddPlayers(boardRepo.GetBoardUsers(board).ToList());
+			return View("Index", viewModel);
         }
 
-/*
-		// play against computer
 		[Authorize]
-		public ActionResult TicTacToes()
-		{
-			List<User> players = new List<User>();
-			User playerOne = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
-			players.Add(playerOne);
-			TicTacToe gameBoard = new TicTacToe(players);
-			Board board = new Board();
-			board.status = gameBoard.GetStatus();
-			board.idGame = 2; // TODO: FIX
-			board.startDate = DateTime.Now;
-			boardRepo.AddBoard(board);
-			boardRepo.Save();
-			gameBoard.id = board.id;
-
-			GameInstance theGame = new GameInstance(gameBoard, board);
-
-			return View("Index", theGame);
-		}
-*/
-
-		// Creates a tictactoe game
-		[Authorize]
-		public ActionResult TicTacToe(int? targetId)
-		{
-			if (targetId == null)
-			{
-				List<User> players = new List<User>();
-				User playerOne = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
-				players.Add(playerOne);
-				TicTacToe gameBoard = new TicTacToe(players);
-				Board board = new Board();
-				board.status = gameBoard.GetStatus();
-				board.idGame = 2; // TODO: FIX
-				board.startDate = DateTime.Now;
-				boardRepo.AddBoard(board);
-				boardRepo.Save();
-				gameBoard.id = board.id;
-
-				GameInstance theGame = new GameInstance(gameBoard, board);
-
-				return View("Index", theGame);
-			}
-			else
-			{
-
-				Board board = boardRepo.GetBoardById((int)targetId);
-
-				IQueryable<User> userlist = boardRepo.GetBoardUsers(board);
-
-				List<User> players = userlist.ToList();
-				TicTacToe gameBoard = new TicTacToe(players);
-				gameBoard.id = (int)targetId;
-				board.status = gameBoard.GetStatus();
-
-				GameInstance theGame = new GameInstance(gameBoard, board);
-
-				liveRepo.Add(theGame);
-
-				return View("Index", theGame);
-			}
-		}
-
-		[Authorize]
-		public ActionResult JoinGame(int targetId)
-		{
-			GameInstance theGame = liveRepo.GetInstanceByID(targetId);
-			return View("Index", theGame);
-		}
-
-		[Authorize]
-		public ActionResult JoinLobby(int targetId)
-		{
-			Board board = boardRepo.GetBoardById(targetId);
-			User user = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
-			IQueryable<User> currentPlayers = boardRepo.GetBoardUsers(board);
-			bool gameIsFull = board.Players.Count() >= board.Game.maxPlayers;
-
-			// Check if the player is already in the selected game instance
-			if (!currentPlayers.Contains(user))
-			{
-				// Ensure the game is not full before trying to insert the player
-				if (!gameIsFull)
-				{
-					// The player is not in the game instance, therefore he has to be added to it
-					Player player = new Player();
-					player.idBoard = board.id;
-					player.UserName = user.UserName;
-					boardRepo.AddPlayer(player);
-					boardRepo.Save();
-				}
-				else
-				{
-					// TODO The player is not a part of the players and the game is full
-					return RedirectToAction("Index", "Home");
-				}
-			}
-
-			// Send the player to the game lobby
-			LobbyViewModel vm = new LobbyViewModel();
-			vm.boardId = targetId;
-			vm.Image = board.Game.image;
-			vm.theName = board.Game.name;
-			vm.guests = new List<User>();
-			vm.guests.Add(user);
-
-			return View("GameLobby", vm);
-		}
-
-		[Authorize]
-		//[HttpPost]
+		// [HttpPost]
 		public ActionResult NewBoard(string gameName)
 		{
-			User owner = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
-
+			// get game
 			Game game = gameRepo.GetGameByName(gameName);
+
+			// check if game exists
 			if (game == null)
 			{
 				return View("Error");
 			}
 			else
 			{
-				// Create a new board and save it in the database
-				Board board = new Board();
-				board.idGame = game.id;
-				board.ownerName = owner.UserName;
-				boardRepo.AddBoard(board);
-				boardRepo.Save();
-
-				// Create a Player that associates the 'owner' with the board
-				Player player = new Player();
-				player.dateJoined = DateTime.Now;
-				player.UserName = owner.UserName;
-				player.idBoard = board.id;
-				player.playerNumber = 0; //owner is player0
-				boardRepo.AddPlayer(player);
-				boardRepo.Save();
-
-				return RedirectToAction("GameLobby", new { targetId = board.id });
-			}
-		}
-
-		public ActionResult GameLobby(int targetId)
-		{
-			Board board = boardRepo.GetBoardById(targetId);
-			IQueryable<User> lobbyGuests = boardRepo.GetBoardUsers(board);
-			List<User> users = lobbyGuests.ToList();
-		
-
-			foreach (var user in users)
-			{
-				if (userRepo.GetGameRatingByGame(user, board.Game) == null)
+				// gets the current User
+				User user = userRepo.GetUserByName(User.Identity.Name);
+				// rates the user if he isn't rated
+				if (userRepo.GetGameRatingByGame(user, game) == null)
 				{
 					GameRating rating = new GameRating();
-					rating.idGame = board.Game.id;
+					rating.idGame = game.id;
 					rating.userName = user.UserName;
-					rating.rating = 1200;
+					rating.rating = 1200;  // supposed to be redundant, but seemed to be necessary
 					gameRepo.AddRating(rating);
 					gameRepo.Save();
 				}
+
+				// create a new board and save it in the database
+				Board board = new Board();
+				board.idGame = game.id;
+				board.ownerName = user.UserName;
+				boardRepo.AddBoard(board);
+				boardRepo.Save();
+
+				// create a Player that associates the 'owner' with the board
+				Player player = new Player();
+				player.dateJoined = DateTime.Now;
+				player.UserName = user.UserName;
+				player.idBoard = board.id;
+				boardRepo.AddPlayer(player);
+				boardRepo.Save();
+
+				// redirect to a new game lobby
+				return RedirectToAction("GameLobby", new { idBoard = board.id });
 			}
-			LobbyViewModel vm = new LobbyViewModel();
-			vm.boardId = targetId;
-			vm.guests = users;
+		}
+
+		public ActionResult GameLobby(int idBoard)
+		{
+			// get board and check if it exists
+			Board board = boardRepo.GetBoardById(idBoard);
+			if (board == null)
+			{
+				return View("Error");
+			}
+
+			// gets all users associated with the board
+			List<User> users = boardRepo.GetBoardUsers(board).ToList();
+			if (users == null)
+			{
+				// this should never happen
+				return View("Error");
+			}
+			LobbyViewModel viewModel = new LobbyViewModel();
+			viewModel.boardId = idBoard;
+			viewModel.guests = users;
+			viewModel.Image = board.Game.image;
+			viewModel.theName = board.Game.name;
+
+			return View("GameLobby", viewModel);
+		}
+
+
+		[Authorize]
+		public ActionResult JoinLobby(int idBoard)
+		{
+			Board board = boardRepo.GetBoardById(idBoard);
+			if (board == null)
+			{
+				return View("Error");
+			}
+
+			bool gameIsFull = board.Players.Count() >= board.Game.maxPlayers;
+			if (gameIsFull)
+			{
+				return View("Error");
+			}
+
+			User user = userRepo.GetUserByName(User.Identity.Name);
+			IQueryable<User> currentPlayers = boardRepo.GetBoardUsers(board);
+
+			// rates the user if he isn't rated
+			if (userRepo.GetGameRatingByGame(user, board.Game) == null)
+			{
+				GameRating rating = new GameRating();
+				rating.idGame = board.Game.id;
+				rating.userName = user.UserName;
+				rating.rating = 1200;  // supposed to be redundant, but seemed to be necessary
+				gameRepo.AddRating(rating);
+				gameRepo.Save();
+			}
+
+			// Check if the player is already in the selected game instance
+			if (!currentPlayers.Contains(user))
+			{
+				// TODO: Make a seperate POST method
+				// Ensure the game is not full before trying to insert the player
+				// The player is not in the game instance, therefore he has to be added to it
+					Player player = new Player();
+					player.idBoard = board.id;
+					player.UserName = user.UserName;
+					boardRepo.AddPlayer(player);
+					boardRepo.Save();
+					
+			}
+			// Send the player to the game lobby
+			/*LobbyViewModel vm = new LobbyViewModel();
+			vm.boardId = idBoard;
 			vm.Image = board.Game.image;
 			vm.theName = board.Game.name;
-			vm.modelName = board.Game.model;
+			vm.guests = new List<User>();
+			vm.guests.Add(user); */
 
-			return View("GameLobby", vm);
+			return RedirectToAction("GameLobby", new { idBoard = board.id });
+		}
+
+		public JsonResult GetPlayersInGameLobby(Board board)
+		{
+
+			List<GameLobbyViewModel> model = new List<GameLobbyViewModel>();
+			// note that the only property board has is id, but that should be sufficient
+			var users = boardRepo.GetBoardUsers(board);
+			foreach (var user in users)
+			{
+				GameLobbyViewModel m = new GameLobbyViewModel();
+				m.UserName = user.UserName;
+				model.Add(m);
+			}
+			return Json(model, JsonRequestBehavior.AllowGet);
+		}
+
+		public ActionResult StartGame(int idBoard)
+		{
+			Board board = boardRepo.GetBoardById(idBoard);
+
+			if (board == null)
+			{
+				return View("Error");
+			}
+
+			if (board.ownerName != User.Identity.Name)
+			{
+				// make this more gentle
+				return View("Error");
+			}
+
+			// TODO: late binding
+			IGame iGame;
+			switch (board.Game.model)
+			{
+				case "TicTacToe":
+					iGame = new TicTacToe();
+					break;
+				// TODO: Case Hearts	
+				//case "Hearts":
+					//iGame = new Hearts();
+
+				default:
+					return View("Error");
+			}
+			BoardViewModel viewModel = new BoardViewModel(board);
+			viewModel.AddPlayers(boardRepo.GetBoardUsers(board).ToList());
+
+			iGame.AddPlayers(viewModel.GetPlayers(board.Game.maxPlayers));
+			board.status = iGame.GetStatus();
+			board.startDate = DateTime.Now;
+			boardRepo.Save();
+
+			return RedirectToAction("Index", new { idBoard = board.id });
+
+
+		}
+
+
+		/// <summary>
+		/// Returns a view for the specified board if it is an ongoing board that the user has access to
+		/// </summary>
+		[Authorize]
+		public ActionResult JoinGame(int idBoard)
+		{
+			// Ragnar and Oli
+
+			// check if board exists
+			Board board = boardRepo.GetBoardById(idBoard);
+			bool boardExists = (board != null);
+			if (!boardExists)
+			{
+				return View("Error");
+			}
+
+			// check if user is a player in board
+			bool isPlayer = false;
+			var players = boardRepo.GetBoardUsers(board);
+			foreach (User player in players)
+			{
+				if (player.UserName == User.Identity.Name)
+				{
+					isPlayer = true;
+					break;
+				}
+			}
+
+			// return view if user is a player on board and game is ongoing
+			if (isPlayer && (board.startDate != null) && (board.endDate == null))
+			{
+				var viewModel = new BoardViewModel(board);
+				viewModel.AddPlayers(players.ToList());
+				return RedirectToAction("Index", viewModel);
+			}
+			else
+			{
+				return View("Error");
+			}
 		}
 
 		/// <summary>
@@ -218,6 +280,7 @@ namespace Windshield.Controllers
 		public ActionResult Boards(Game game)
 		{
 			// EDIT: 15 - 11:00 - Ragnar and Bjorn
+			
 			var viewModel = new BoardTableViewModel(game.name);
 			foreach (Board board in boardRepo.GetBoards(gameRepo.GetGameByName(game.name)))
 			{
@@ -241,22 +304,6 @@ namespace Windshield.Controllers
 			}
 			return View("MyGames", viewModel);
 		}
-
-		public JsonResult GetPlayersInGameLobby(Board board)
-		{
-
-			List<GameLobbyViewModel> model = new List<GameLobbyViewModel>();
-			// note that the only property board has is id, but that should be sufficient
-			var users = boardRepo.GetBoardUsers(board);
-			foreach (var user in users)
-			{
-				GameLobbyViewModel m = new GameLobbyViewModel();
-				m.UserName = user.UserName;
-				model.Add(m);
-			}
-			return Json(model, JsonRequestBehavior.AllowGet);
-		}
-
     }
 }
 

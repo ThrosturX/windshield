@@ -115,6 +115,7 @@ namespace Windshield.Models
 		{
 			return from player in db.Players
 				   where player.idBoard == board.id
+				   orderby player.playerNumber
 				   select player.User;
 		}
 

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="verk2013_hopur09" Class="BoardGamesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=hrnem.ru.is;Initial Catalog=verk2013_hopur09;Persist Security Info=True;User ID=hopur09_user" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DefaultConnection" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=hrnem.ru.is;Initial Catalog=verk2013_hopur09;Persist Security Info=True;User ID=hopur09_user;MultipleActiveResultSets=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DefaultConnection" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Boards" Member="Boards">
     <Type Name="Board">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -94,18 +94,8 @@
       <Association Name="User_UserDetail" Member="UserDetail" ThisKey="UserName" OtherKey="userName" Type="UserDetail" Cardinality="One" />
       <Association Name="User_UserRating" Member="UserRatings" ThisKey="UserName" OtherKey="userNameRater" Type="UserRating" />
       <Association Name="User_UserRating1" Member="UserRatings1" ThisKey="UserName" OtherKey="userNameRated" Type="UserRating" />
-      <Association Name="User_Player" Member="Players" ThisKey="UserName" OtherKey="UserName" Type="Player" />
       <Association Name="User_GameRating" Member="GameRatings" ThisKey="UserName" OtherKey="userName" Type="GameRating" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Players" Member="Players">
-    <Type Name="Player">
-      <Column Name="UserName" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="idBoard" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="playerNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="dateJoined" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Board_Player" Member="Board" ThisKey="idBoard" OtherKey="id" Type="Board" IsForeignKey="true" />
-      <Association Name="User_Player" Member="User" ThisKey="UserName" OtherKey="UserName" Type="User" IsForeignKey="true" />
+      <Association Name="User_Player" Member="Players" ThisKey="UserName" OtherKey="UserName" Type="Player" />
     </Type>
   </Table>
   <Table Name="dbo.GameRatings" Member="GameRatings">
@@ -116,6 +106,16 @@
       <Column Name="timesPlayed" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Game_GameRating" Member="Game" ThisKey="idGame" OtherKey="id" Type="Game" IsForeignKey="true" />
       <Association Name="User_GameRating" Member="User" ThisKey="userName" OtherKey="UserName" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Players" Member="Players">
+    <Type Name="Player">
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idBoard" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="playerNumber" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="dateJoined" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Board_Player" Member="Board" ThisKey="idBoard" OtherKey="id" Type="Board" IsForeignKey="true" />
+      <Association Name="User_Player" Member="User" ThisKey="UserName" OtherKey="UserName" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

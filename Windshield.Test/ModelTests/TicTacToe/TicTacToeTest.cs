@@ -31,7 +31,8 @@ namespace Windshield.Test
 			players.Add(sally);
 			players.Add(jonas);
 
-			game = new TicTacToe(players);
+			game = new TicTacToe();
+			game.AddPlayers(players);
 
 			//brd.AddBoard(game.board);
 		}
@@ -428,7 +429,8 @@ namespace Windshield.Test
 			users.Add(sally);
 			users.Add(jonas);
 
-			TicTacToe newGame = new TicTacToe(users);
+			TicTacToe newGame = new TicTacToe();
+			newGame.AddPlayers(users);
 
 			newGame.SetStatus(status);
 
