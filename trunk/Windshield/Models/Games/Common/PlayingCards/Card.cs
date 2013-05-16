@@ -92,6 +92,20 @@ namespace Windshield.Common
 			return false;
 		}
 
+		public int CardValue()
+		{
+			// Used to sort by suits
+			int theSuit = 500 - (int)suit*100;
+			int theFace = face;
+			// Hotfix to ensure that aces are higher than kings
+			if (theFace == 1)
+			{
+				theFace = 14;
+			}
+
+			return theSuit + theFace;
+		}
+
 		public static Card SpawnCardFromString(String str)
 		{
 			Card card = new Card();

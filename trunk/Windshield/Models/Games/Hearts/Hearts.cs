@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.UI;
 using Windshield.Common;
 using Windshield.Models;
 using Windshield.Models.Common.Exceptions;
@@ -78,6 +79,7 @@ namespace Windshield.Models.Games.Hearts
 			AssignPlayerSlots(users);
 			deck.Shuffle();
 			DealTheCards();
+			SortTheCardsOnTheHands();
 			// Find the player with 2 of Clubs card
 			turn = GetStartingPlayer(null);
 		}
@@ -118,6 +120,34 @@ namespace Windshield.Models.Games.Hearts
 		}
 
 		/// <summary>
+		/// Sorts the cards on the hands after the cards have been dealt to the players
+		/// Returns sorted hands for all the players
+		/// </summary>
+		public void SortTheCardsOnTheHands()
+		{
+			foreach (var player in players)
+			{
+				// cardValuePair holds a pair ([card index in hand], [card value])
+				List<Pair> cardValuePair = new List<Pair>();
+				// Get card value for each card and place the pair in the list
+				foreach (var card in player.hand)
+				{
+					cardValuePair.Add(new Pair(card.CardValue(),card));
+				}
+				// Sort
+				cardValuePair = cardValuePair.OrderBy(x => x.First).ToList();
+				// Add the cards in the correct order from the sorted list
+				List<Card> newCardList = new List<Card>();
+				foreach (Pair cardValue in cardValuePair)
+				{
+					newCardList.Add((Card)cardValue.Second);
+				}
+				// Create the new sorted hand
+				player.hand = new Hand(newCardList);
+			}
+		}
+
+		/// <summary>
 		/// Makes it the next player's turn
 		/// </summary>
 		public void IncrementTurn()
@@ -142,7 +172,9 @@ namespace Windshield.Models.Games.Hearts
 				foreach (var card in players[i].hand)
 				{
 					if (card.suit == Suit.Club && card.face == 2)
+					{
 						return players[i];
+					}
 				}
 			}
 
@@ -167,7 +199,9 @@ namespace Windshield.Models.Games.Hearts
 		public bool PlayCard(HPlayer player, Card card)
 		{
 			if (player != turn)
+			{
 				return false;
+			}
 
 			if (trickOngoing)
 			{
