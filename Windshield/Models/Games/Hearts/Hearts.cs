@@ -73,7 +73,20 @@ namespace Windshield.Models.Games.Hearts
 		/// Awesome constructor.
 		/// </summary>
 		/// <param name="users">List of users</param>
-		public Hearts(List<User> users, bool testing) : this()
+		public Hearts(List<User> users) : this()
+		{
+			AssignPlayerSlots(users);
+			deck.Shuffle();
+			DealTheCards();
+			// Find the player with 2 of Clubs card
+			turn = GetStartingPlayer(null);
+		}
+
+		/// <summary>
+		/// Helper function for Hearts constructor. Assigns player slots to human players first, then computer players.
+		/// </summary>
+		/// <param name="users"></param>
+		public void AssignPlayerSlots(List<User> users)
 		{
 			if (users.Count <= 4)
 			{
@@ -81,7 +94,7 @@ namespace Windshield.Models.Games.Hearts
 				{
 					players[i].user = users[i];
 				}
-				for (int i = users.Count ; i < 4; ++i)
+				for (int i = users.Count; i < 4; ++i)
 				{
 					players[i].user = new User();
 					players[i].user.UserName = "Computer";
@@ -91,22 +104,13 @@ namespace Windshield.Models.Games.Hearts
 			{
 				throw new TooManyPlayersException("There are too many players attempting to play Hearts.");
 			}
-
-			// Deal cards to the players
-			Deal(testing);
-			turn = GetStartingPlayer(null);
 		}
 
 		/// <summary>
 		/// Gives each player a freshly dealt hand of 13 cards.
 		/// </summary>
-		public void Deal(bool? testing)
+		public void DealTheCards()
 		{
-			// Ensures that the class is testable due to Shuffle() randomization
-			if (!(testing ?? false))
-			{
-				deck.Shuffle();
-			}
 			for (int i = 0; i < 4; ++i)
 			{
 				players[i].hand = new Hand(deck.GetCards(13));
