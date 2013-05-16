@@ -10,18 +10,22 @@ namespace Windshield.Controllers
 {
 	public class HomeController : Controller
 	{
-		private IGameRepo gameRepo = new GameRepo();
-		private IBoardRepo boardRepo = new BoardRepo();
-		private IUserRepo userRepo = new UserRepo();
+		private IGameRepo gameRepo = null;
+		private IBoardRepo boardRepo = null;
+		private IUserRepo userRepo = null;
 
 		public HomeController()
 		{
-			//repository = new GameRepo();
+			gameRepo = new GameRepo();
+			boardRepo = new BoardRepo();
+			userRepo = new UserRepo();
 		}
 
-		public HomeController(IGameRepo repo)
+		public HomeController(IGameRepo gRepo, IBoardRepo bRepo, IUserRepo uRepo)
 		{
-			gameRepo = repo;
+			gameRepo = gRepo;
+			boardRepo = bRepo;
+			userRepo = uRepo;
 		}
 
 		public ActionResult Index()

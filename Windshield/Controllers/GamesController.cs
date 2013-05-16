@@ -26,7 +26,7 @@ namespace Windshield.Controllers
 			liveRepo = new LiveInstanceRepo();
 		}
 
-		public GamesController(BoardRepo bRep, IGameRepo gRep, IUserRepo uRep)
+		public GamesController(IBoardRepo bRep, IGameRepo gRep, IUserRepo uRep)
 		{
 			boardRepo = bRep;
 			gameRepo = gRep;

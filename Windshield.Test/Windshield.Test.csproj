@@ -51,6 +51,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ControllersTest\HomeControllerTest.cs" />
+    <Compile Include="ControllersTest\GamesControllerTest.cs" />
     <Compile Include="MockObjects\MockBoardRepo.cs" />
     <Compile Include="MockObjects\MockGameRepo.cs" />
     <Compile Include="MockObjects\MockUserRepo.cs" />
