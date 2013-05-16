@@ -380,6 +380,7 @@
     <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
     <Content Include="Views\Account\ChangeInformationSuccess.cshtml" />
     <Content Include="Views\Home\_StatisticsPartial.cshtml" />
+    <Content Include="Views\Games\Hearts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
