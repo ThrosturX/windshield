@@ -53,6 +53,8 @@
 				</div> 
 		</div>
 
+<input type="button" id="pressMe" />
+
 <script type="text/javascript">
 	$(document).ready(function () {
 		var group = '@(Model.id)';
@@ -186,6 +188,10 @@
 
 			$("#tic-tac-toe tr td").click(function () {
 				hub.server.tryAction(group, "insert" + this.id, currentUser);
+			});
+
+			$("#pressMe").click(function () {
+				hub.server.tryAction(group, "refresh", currentUser);
 			});
 
 		});

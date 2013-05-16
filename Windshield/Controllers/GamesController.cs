@@ -32,6 +32,7 @@ namespace Windshield.Controllers
 			userRepo = uRepo;
 		}
 
+		[Authorize]
         public ActionResult Index(int idBoard)
         {
 			Board board = boardRepo.GetBoardById(idBoard);
