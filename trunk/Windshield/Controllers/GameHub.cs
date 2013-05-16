@@ -5,6 +5,7 @@ using Microsoft.AspNet.SignalR;
 using Windshield.Models;
 using Windshield.Models.Games;
 using Windshield.Models.Games.Common.Ratings;
+using Windshield.Models.Games.Hearts;
 using Windshield.Models.Games.TicTacToe;
 
 
@@ -71,6 +72,10 @@ namespace Windshield.Controllers
 			{
 				case "TicTacToe":
 					iGame = new TicTacToe();
+					break;
+
+				case "Hearts":
+					iGame = new Hearts();
 					break;
 
 				default:
