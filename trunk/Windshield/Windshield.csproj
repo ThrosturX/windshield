@@ -201,7 +201,6 @@
       <DependentUpon>BoardGames.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\Repositories\BoardRepo.cs" />
-    <Compile Include="Models\Repositories\LiveInstanceRepo.cs" />
     <Compile Include="ViewModels\BoardTableViewModel.cs" />
     <Compile Include="ViewModels\BoardViewModel.cs" />
     <Compile Include="Models\Repositories\GameRepo.cs" />
@@ -210,6 +209,7 @@
     <Compile Include="Models\Repositories\IGameRepo.cs" />
     <Compile Include="Models\Repositories\IUserRepo.cs" />
     <Compile Include="Models\Games\TicTacToe\TicTacToe.cs" />
+    <Compile Include="ViewModels\GameDescriptionViewModel.cs" />
     <Compile Include="ViewModels\GameLobbyViewModel.cs" />
     <Compile Include="ViewModels\PopularViewModel.cs" />
     <Compile Include="ViewModels\StatisticsViewModel.cs" />

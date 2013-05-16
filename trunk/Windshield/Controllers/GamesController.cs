@@ -17,14 +17,12 @@ namespace Windshield.Controllers
         private IBoardRepo boardRepo = null;
 		private IGameRepo gameRepo = null;
 		private IUserRepo userRepo = null;
-		private LiveInstanceRepo liveRepo = null;
 
 		public GamesController()
 		{
 			boardRepo = new BoardRepo();
 			gameRepo = new GameRepo();
 			userRepo = new UserRepo();
-			liveRepo = new LiveInstanceRepo();
 		}
 
 		public GamesController(IBoardRepo bRepo, IGameRepo gRepo, IUserRepo uRepo)
@@ -32,7 +30,6 @@ namespace Windshield.Controllers
 			boardRepo = bRepo;
 			gameRepo = gRepo;
 			userRepo = uRepo;
-			liveRepo = new LiveInstanceRepo();
 		}
 
         public ActionResult Index(int idBoard)
