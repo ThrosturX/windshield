@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-	$(".btn").click(function () {
+	$(".game-images-radio-button").click(function () {
 		var item = $(this).html();
 		$.ajax({
 			type: "GET",
@@ -9,12 +9,12 @@
 			data: { 'name': item },
 			dataType: "json",
 			success: function (popularGames) {
-				$(".popularlink").remove();
-				$("#popularity-template").tmpl(popularGames).appendTo("#gamelist");
+				$("#game-images").empty();
+				$("#popularity-template").tmpl(popularGames).appendTo("#game-images");
 
 			},
 			error: function () {
-				$(".popularlink").remove();
+				$("#game-images").empty();
 			}
 
 		});

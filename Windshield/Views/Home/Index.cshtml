@@ -4,9 +4,9 @@
 <div id="index-button-group" class="row-fluid">
 	<div class="span4 offset4">
 		<div class="btn-group pagination-centered row-fluid" data-toggle="buttons-radio">
-			<button type="button" class="btn active">All</button>
-			<button type="button" class="btn">Popular</button>
-			<button type="button" class="btn">New</button>
+			<button type="button" class="btn active game-images-radio-button">All</button>
+			<button type="button" class="btn game-images-radio-button">Popular</button>
+			<button type="button" class="btn game-images-radio-button">New</button>
 		</div>
 	</div>
 </div>
@@ -14,7 +14,7 @@
 <hr> <!-- horzontal divider -->
 
 <div class="row-fluid">
-	<ul id="picturelinks" class="thumbnails popularlink">
+	<ul id="game-images" class="thumbnails">
 		@foreach (Windshield.Models.Game game in Model)
 		{
 		<li class="span4">
@@ -24,16 +24,12 @@
 		</li>
 		}
 	</ul>
-	<ul id="gamelist" class="thumbnails">
-
-
-	</ul>
 </div>
 
 
 <script id ="popularity-template" type ="text/html">
       
-		<li class="span4 popularlink">
+		<li class="span4">
 				<a href ="${Url}" >
 				<img src ="/Images/${Image}" alt="${Name}" title="${Name}" />
 			</a> 

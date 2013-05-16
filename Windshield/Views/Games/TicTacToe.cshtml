@@ -7,38 +7,37 @@
 </div>
 
 <div>
-<table id="tic-tac-toe" class="table-bordered">
-	<tbody>
-		<tr>
-			<td id="cell0"></td>
-			<td id="cell1"></td>
-			<td id="cell2"></td>
-		</tr>
-		<tr>
-			<td id="cell3"></td>
-			<td id="cell4"></td>
-			<td id="cell5"></td>
-		</tr>
-		<tr>
-			<td id="cell6"></td>
-			<td id="cell7"></td>
-			<td id="cell8"></td>
-		</tr>
-	</tbody>
-</table>
+	<table id="tic-tac-toe" class="table-bordered">
+		<tbody>
+			<tr>
+				<td id="cell0"></td>
+				<td id="cell1"></td>
+				<td id="cell2"></td>
+			</tr>
+			<tr>
+				<td id="cell3"></td>
+				<td id="cell4"></td>
+				<td id="cell5"></td>
+			</tr>
+			<tr>
+				<td id="cell6"></td>
+				<td id="cell7"></td>
+				<td id="cell8"></td>
+			</tr>
+		</tbody>
+	</table>
 
-
-<div class="ttt-game-score">
-	<div id="GameScore">
-		Wins: <span id="GameWins">0</span>
-		Draws: <span id="GameDraws">0</span>
-		Losses: <span id="GameLoss">0</span>
-	</div>
-	<div id="winner-dialog-popup">
+	<div id="winner-dialog-popup alert alert-info">
 
 	</div>
-	<input type="button" id="GameRestart" class="btn" value="Restart" />
-</div>
+	<div class="ttt-game-score">
+		<div id="GameScore">
+			Wins: <span id="GameWins">0</span>
+			Draws: <span id="GameDraws">0</span>
+			Losses: <span id="GameLoss">0</span>
+		</div>
+		<input type="button" id="GameRestart" class="btn" value="Restart" />
+	</div>
 </div>
 
 
@@ -89,9 +88,11 @@
 				$("#GameDraws").html(parseInt($("#GameDraws").html(), 10) + 1);
 			}
 
+			$("#tic-tac-toe").hide();
 			$("#winner-dialog-popup").show(2);
 
 			setTimeout(function () {
+				$("#tic-tac-toe").show();
 				$("#winner-dialog-popup").hide();
 			}, 3000);
 
