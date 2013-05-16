@@ -22,10 +22,23 @@
 	</div>
 	<hr class="visible-phone">
 	<div class="span3 text-center">
+		@if (User.Identity.IsAuthenticated)
+		{
 		<h3>Your Statistics</h3>
 		<div>
-			@Html.Partial("_StatisticsPartial", Model.gameRating)
+			@Html.Partial("_StatisticsPartial", Model)
 		</div>
+		}
+		else
+		{
+		<h3>Hey, you!</h3>
+		<p>Why not log in or register to play this fantastic game!</p>
+		<div class="container-fluid">
+			@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-success btn-large padding-tb" })
+			<br>
+			@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-warning btn-large padding-tb" })
+		</div>
+		}
 	</div>
 </div>
 
