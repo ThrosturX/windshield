@@ -250,6 +250,23 @@ namespace Windshield.Models.Games.Hearts
 			return -1;
 		}
 
+		/// <summary>
+		/// Creates a status string describing the game's state.
+		/// </summary>
+		/// <returns>The game's state in string format</returns>
+		/// <remarks>
+		/// Format:
+		/// [Trick Info]|[Players' Cards]|[Players' stats]
+		/// Trick info example:
+		/// [card-playername,card-playername,card-playername,card-playername,turn]
+		/// where turn is the playername of the player whose turn it is. 
+		/// 
+		/// Players' cards format:
+		/// [card,card,card,...]
+		/// 
+		/// Players' stats example:
+		/// [13,20,john/0,0,steven/3,5,banana/7,40,alex42]
+		/// </remarks>
 		public string GetStatus()
 		{
 			StringBuilder builder = new StringBuilder();
@@ -262,12 +279,14 @@ namespace Windshield.Models.Games.Hearts
 
 					if (card.IsJoker())
 					{
-						builder.Append("  ");
+						builder.Append("  - ");
 					}
 					else
 					{
 						builder.Append(Card.CreateCardString(card));
 					}
+					builder.Append("-");
+					builder.Append(trick.GetPlayerNameAtIndex(i));
 					builder.Append(",");
 				}
 

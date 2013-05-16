@@ -170,5 +170,15 @@ namespace Windshield.Common
 			return str;
 		}
 
+		public bool IsEqual(Card that)
+		{
+			if (this.suit == that.suit && this.face == that.face)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 	}
 }
