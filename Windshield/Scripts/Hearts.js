@@ -14,19 +14,19 @@ $(document).ready(function () {
 function dealCards() {
 	//CardPosition
 	for (k = 1; k <= 13; k++) {
-		card_left[k] = 27 + 2.5 * k;
+		card_left[k] = 23 + 3 * k;
 		card_top[k] = 75;
 	}
 	for (k = 14; k <= 26; k++) {
-		card_top[k] = -12 + 2.5 * k;
+		card_top[k] = -20 + 3 * k;
 		card_left[k] = 10;
 	}
 	for (k = 27; k <= 39 ; k++) {
-		card_left[k] = 27 + 2.5 * (k - 26);
+		card_left[k] = 23 + 3 * (k - 26);
 		card_top[k] = 5;
 	}
 	for (k = 40; k <= 52 ; k++) {
-		card_top[k] = -12 + 2.5 * (k - 26);
+		card_top[k] = -20 + 3 * (k - 26);
 		card_left[k] = 80;
 	}
 
@@ -44,4 +44,12 @@ function moveToPlace(id) {
 
 	if ((id > 13 && id < 27) || (id > 39 && id <= 52))
 		el.style["WebkitTransform"] = "rotate(90deg)";
+}
+
+function showPlayer1Cards() {
+	for (i = 1 ; i <= 13 ; i++) {
+		var c = $("#" + i);
+		
+		
+	}
 }

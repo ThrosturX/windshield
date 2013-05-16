@@ -10,9 +10,9 @@
 			<div id="felt">
 
 			@{
-				for(int i = 1 ; i < 52 ; i++)
+				for(int i = 1 ; i <= 52 ; i++)
 				{
-					<div id="@i" class="cardback"> </div>	
+					<div id="@i" class="cardback"> <span class="spanDisplay_@i spanDisplay" style="display:inline;"> </span> </div>	
 				}
 			}
 			
@@ -75,16 +75,16 @@
 			var rank = "rank_" + card[0];
 
 			if (card[1] === "H") {
-				suit = "Heart ";
+				suit = "heart";
 			}
 			else if (card[1] === "S") {
-				suit = "Spade ";
+				suit = "spade";
 			}
 			else if (card[1] === "D") {
-				suit = "Diamond ";
+				suit = "diam";
 			}
 			else if (card[1] === "C") {
-				suit = "Club ";
+				suit = "club";
 			}
 			else {
 				alert("hiding " + card);
@@ -92,7 +92,16 @@
 			}
 
 			$("#" + pos).removeClass("cardback");
-			$("#" + pos).addClass(suit + rank + " card");
+			$("#" + pos).addClass(rank +" " + suit + " card");
+
+			if (card[0] == 'T') {
+				$(".spanDisplay_" + pos).html("10");
+				$("#" + pos).append("&" + suit + "s;");
+			}
+			else {
+				$(".spanDisplay_" + pos).html(card[0]);
+				$("#" + pos).append("&" + suit + "s;");
+			}
 		}
 
 		hub.client.Broadcast = function (status) {
