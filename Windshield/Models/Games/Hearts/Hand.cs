@@ -37,7 +37,16 @@ namespace Windshield.Models.Games.Hearts
 				}
 			}
 
-			return null;
+			return null; // card not found
+		}
+
+		public Card RandomCard()
+		{
+			Random rnd = new Random();
+
+			int r = rnd.Next(Count);
+
+			return this[r];
 		}
 
 		public Card FindAnyInSuit(Suit suit)
