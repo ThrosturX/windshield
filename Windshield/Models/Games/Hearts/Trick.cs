@@ -39,7 +39,7 @@ namespace Windshield.Models.Games.Hearts
 				{
 					points += 1;
 				}
-				else if (card.Value.Equals(QofSpades))
+				else if (card.Value.IsEqual(QofSpades))
 				{
 					points += 13;
 				}
@@ -50,7 +50,8 @@ namespace Windshield.Models.Games.Hearts
 		{
 			foreach (var pair in this)
 			{
-				if (pair.Value.Equals(card))
+				Card cmp = pair.Value;
+				if (cmp.face == card.face && cmp.suit == card.suit)
 				{
 					return pair.Key;
 				}
@@ -69,6 +70,12 @@ namespace Windshield.Models.Games.Hearts
 			// find the player who should claim the trick
 			foreach (var card in this)
 			{
+				if ((card.Value.suit == leader) && (card.Value.face == (int)Rank.Ace))
+				{
+					highest = card.Value;
+					break;
+				}
+
 				if ((card.Value.suit == leader) && (card.Value.face > highest.face))
 				{
 					highest = card.Value;
@@ -94,6 +101,20 @@ namespace Windshield.Models.Games.Hearts
 			}
 
 			return pair.Value;
+		}
+
+		public string GetPlayerNameAtIndex(int index)
+		{
+			KeyValuePair<HPlayer, Card> pair;
+
+			pair = this.ElementAt(index);
+
+			if (pair.Value == null)
+			{
+				return " ";
+			}
+
+			return pair.Key.user.UserName;
 		}
 
 	}
