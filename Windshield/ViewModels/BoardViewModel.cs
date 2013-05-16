@@ -44,5 +44,36 @@ namespace Windshield.ViewModels
 			return playerList;
 		}
 
+		public string[] GetPlayerNames(int n)
+		{
+			int c = players.Count;
+			int b = 0;
+
+			string playerString = "";
+
+			foreach (var p in players)
+			{
+				playerString += p.UserName + ",";
+				b++;
+			}
+
+			for (int i = b; i <= n; i++)
+			{
+				playerString += "Computer" + (i - b + 1).ToString() + ","; 
+			}
+
+			return playerString.Split(',');
+		}
+
+		public string GetPlayerName(int n)
+		{
+			if (n < players.Count)
+			{
+				return players.ElementAt(n).UserName;
+			}
+
+			return "Computer" + (n + 1).ToString();
+		}
+
 	}
 }

@@ -313,10 +313,10 @@ table#tic-tac-toe td:hover
         background-position-y: 0%;
         color: black;
 }
-.rank_13 { background-position-x: 100%;}
-.rank_12 { background-position-x: 91.7%;}
-.rank_11 { background-position-x: 83.3%;}
-.rank_10 { background-position-x: 75%;}
+.rank_K { background-position-x: 100%;}
+.rank_Q { background-position-x: 91.7%;}
+.rank_J { background-position-x: 83.3%;}
+.rank_T { background-position-x: 75%;}
 .rank_9 {background-position-x: 66.5%;}
 .rank_8 {background-position-x: 58.2%;}
 .rank_7 {background-position-x: 49.8%;}
@@ -326,6 +326,7 @@ table#tic-tac-toe td:hover
 .rank_3 {background-position-x: 17%;}
 .rank_2 {background-position-x: 8.5%;}
 .rank_1 {background-position-x: 0%;}
+.rank_A {background-position-x: 0%;}
 
 
 #felt 

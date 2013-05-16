@@ -53,51 +53,52 @@
 				</div> 
 		</div>
 
-<!--<input type="button" id="pressMe" /> -->
+<input type="button" id="pressMe" value="HELLO MOTO" />
 
 <script type="text/javascript">
 	$(document).ready(function () {
 		var group = '@(Model.id)';
 		var hub = $.connection.gameHub;
 		var currentUser = '@(Context.User.Identity.Name)';
-		var players = '@Model.GetPlayers(2)';
-		var playerOne = players[0].UserName;
-		var playerTwo = players[1].UserName;
-		var playerThree = players[3].UserName;
-		var playerFour = players[4].UserName;
+		var playerOne = '@(Model.GetPlayerName(0))';
+		var playerTwo = '@(Model.GetPlayerName(1))';
+		var playerThree = '@(Model.GetPlayerName(2))';
+		var playerFour = '@(Model.GetPlayerName(3))';
 		var card_left = [];
 		var card_top = [];
 
 		$("#GameRestart").hide();
 		$("#winner-dialog-popup").hide();
-		/*
+		
 		function setCard(card, pos) {
 			var suit;
-			var rank = "Rank_" + card[1];
+			var rank = "rank_" + card[0];
 
-			if (card[0] === "H") {
-				suit = "Heart";
+			if (card[1] === "H") {
+				suit = "Heart ";
 			}
-			else if (card[0] === "S") {
-				suit = "Spade";
+			else if (card[1] === "S") {
+				suit = "Spade ";
 			}
-			else if (card[0] === "D") {
-				suit = "Diamond";
+			else if (card[1] === "D") {
+				suit = "Diamond ";
 			}
-			else if (card[0] === "C") {
-				suit = "Club";
+			else if (card[1] === "C") {
+				suit = "Club ";
 			}
 			else {
+				alert("hiding " + card);
 				$("#" + pos).hide();
 			}
 
-			$("#" + pos).addClass(suit + rank + "Card");
-
+			$("#" + pos).removeClass("cardback");
+			$("#" + pos).addClass(suit + rank + " card");
 		}
 
 		hub.client.Broadcast = function (status) {
-			var statusArray = status.split("|");
-			var handArray = statusArray[1].split("/");
+			var statusArray = status.split('|');
+			var hArray = statusArray[1];
+			var handArray = hArray.split('/');
 			var index;
 
 			// find which player's cards should be picked
@@ -113,8 +114,17 @@
 			else if (currentUser === playerFour) {
 				index = 3;
 			}
+			else {
+				console.log("There was an error parsing the user.");
+				console.log("CurrentUser: " + currentUser);
+				console.log("Players:");
+				console.log(playerOne);
+				console.log(playerTwo);
+				console.log(playerThree);
+				console.log(playerFour);
+			}
 
-			var cardArray = handArray[i].split(",");
+			var cardArray = handArray[index].split(",");
 
 			// display the player's cards
 			for (var i = 1; i <= 13; i++) {
@@ -122,7 +132,6 @@
 				var cardstring = cardArray[i - 1];
 
 				setCard(cardstring, i);
-
 			}
 
 		};
@@ -159,6 +168,6 @@
 				hub.server.tryAction(group, "refresh", currentUser);
 			});
 
-		}); */
+		}); 
 	}); 
 </script>
