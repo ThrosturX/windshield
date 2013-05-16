@@ -38,8 +38,6 @@ namespace Windshield.Test.ControllersTest
 			Players.Add(p1);			
 			
 			games = new GamesController(boardRepoMock, gameRepoMock, userRepoMock);
-
-			LiveInstanceRepo liverepo = new LiveInstanceRepo();
 		}
 
 /*

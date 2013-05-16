@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Windshield.Common;
 using Windshield.Models;
+using Windshield.ViewModels;
 
 namespace Windshield.Controllers
 {
@@ -59,9 +60,10 @@ namespace Windshield.Controllers
 
 		public ActionResult GameDescription(Game gameName)
 		{
-			Game game = gameRepo.GetGameByName(gameName.name);
-
-			return View("GameDescription", game);
+			var viewModel = new GameDescriptionViewModel();
+			viewModel.game = gameRepo.GetGameByName(gameName.name);
+			viewModel.gameRating = userRepo.GetGameRatingByGame(userRepo.GetUserByName(User.Identity.Name), viewModel.game);
+			return View("GameDescription", viewModel);
 		}
 
 		public JsonResult GetStatistics(Game gameName)

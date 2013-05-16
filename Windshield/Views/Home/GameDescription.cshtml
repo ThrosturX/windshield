@@ -1,25 +1,25 @@
-﻿@model Windshield.Models.Game
+﻿@model Windshield.ViewModels.GameDescriptionViewModel
 
-<h2>@Model.name</h2>
+<h2>@Model.game.name</h2>
 <hr>
 <div class="container-fluid">
 	<div class="span4">
 		<div class="row-fluid text-center">
-			@Html.Partial("_GameImagePartial", Model)
+			@Html.Partial("_GameImagePartial", Model.game)
 		</div>
 		<div class="row-fluid text-center" id="game-description-buttons">
-			@Html.ActionLink("Create Game", "NewBoard", "Games", new { gameName = Model.name }, new{ @class="btn" })
-			@Html.ActionLink("Find Game", "Boards", "Games", new {name = Model.name }, new{ @class="btn" })
+			@Html.ActionLink("Create Game", "NewBoard", "Games", new { gameName = Model.game.name }, new{ @class="btn" })
+			@Html.ActionLink("Find Game", "Boards", "Games", new {name = Model.game.name }, new{ @class="btn" })
 		</div>
 	</div>
 	<div class="span5">
 		<h3>Game Description</h3>
-		<p>@Model.description</p>
+		<p>@Model.game.description</p>
 	</div>
 	<div class="span3">
 		<h3>Your Statistics</h3>
 		<div>
-			@Html.Partial("_StatisticsPartial", Model)
+			@Html.Partial("_StatisticsPartial", Model.gameRating)
 		</div>
 	</div>
 </div>
