@@ -1,4 +1,4 @@
-﻿@model Windshield.Models.Games.Hearts.Hearts
+﻿@model Windshield.ViewModels.BoardViewModel
 
 @{
     ViewBag.Title = "Hearts";
@@ -6,15 +6,63 @@
 
 <h2>Hearts</h2>
 
+<div class="span8">
+			<div id="felt">
+
+			@{
+				for(int i = 1 ; i < 52 ; i++)
+				{
+					<div id="i" class="cardback"> </div>	
+				}
+			}
+			
+		<!--	{
+				int i = 1;
+					foreach(var card in Model.deck)
+					{
+						if(card.face > 1 && card.face <= 10)
+						{
+						//gice each card in our deck a unique identity
+						<div id="card_i" class="cardback rank_card.face card.suit"> <span class="spanDisplay" style="display:none;"> @card.face   </span> </div>
+						}
+						
+						else
+						{
+							switch (card.face)
+							{
+								case (1):
+									<div id="card_i" class="cardback rank_card.face card.suit"> <span class="spanDisplay" style="display:none;"> A  </span> </div>
+									break;
+								case (11):
+									<div id="card_i" class="cardback rank_card.face card.suit"> <span class="spanDisplay" style="display:none;"> J  </span> </div>	
+									break;
+								case (12):
+									<div id="card_i" class="cardback rank_card.face card.suit"> <span class="spanDisplay" style="display:none;"> Q  </span> </div>	
+									break;
+								case (13):
+									<div id="card_i" class="cardback rank_card.face card.suit"> <span class="spanDisplay" style="display:none;"> K  </span> </div>
+									break;
+								default:
+									break;
+							}
+						}
+
+						i++;
+					}
+			 } -->
+				</div> 
+		</div>
+
 <script type="text/javascript">
 	$(document).ready(function () {
 		var group = '@(Model.id)';
 		var hub = $.connection.gameHub;
 		var currentUser = '@(Context.User.Identity.Name)';
-		var playerOne = '@(Model.players[0].user.UserName)';
-		var playerTwo = '@(Model.players[1].user.UserName)';
-		var playerThree = '@(Model.players[2].user.UserName)';
-		var playerFour = '@(Model.players[3].user.UserName)';
+		var players = '@Model.GetPlayers(2)';
+		var playerOne = players[0].UserName;
+		var playerTwo = players[1].UserName;
+		var playerThree = players[3].UserName;
+		var playerFour = players[4].UserName;
 		var card_left = [];
 		var card_top = [];
 
@@ -76,6 +124,41 @@
 			}
 
 		};
+
+		function dealCards() {
+			//CardPosition
+			for (k = 1; k <= 13; k++) {
+				card_left[k] = 27 + 2.5 * k;
+				card_top[k] = 75;
+			}
+			for (k = 14; k <= 26; k++) {
+				card_top[k] = -12 + 2.5 * k;
+				card_left[k] = 10;
+			}
+			for (k = 27; k <= 39 ; k++) {
+				card_left[k] = 27 + 2.5 * (k - 26);
+				card_top[k] = 5;
+			}
+			for (k = 40; k <= 52 ; k++) {
+				card_top[k] = -12 + 2.5 * (k - 26);
+				card_left[k] = 80;
+			}
+
+			for (i = 1; i <= 52; i++) setTimeout("moveToPlace(" + i + ")", i * 100);
+		}
+	
+		function moveToPlace(id) {
+			el = document.getElementById("card_" + id);
+			//var el = $("#card_"+ id);
+			el.style["zIndex"] = 10;
+			el.style["left"] = card_left[id] + "%";
+			el.style["top"] = card_top[id] + "%";
+			//el.style["WebkitTransform"] = "rotate(180deg)";
+			el.style["zIndex"] = 0;
+
+			if ((id > 13 && id < 27) || (id > 39 && id <= 52))
+				el.style["WebkitTransform"] = "rotate(90deg)";
+		}
 
 		hub.client.GameOver = function (winner) {
 			if (winner != "") {
