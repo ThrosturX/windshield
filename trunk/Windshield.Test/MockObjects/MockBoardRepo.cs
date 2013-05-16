@@ -10,16 +10,18 @@ namespace Windshield.Test.MockObjects
 
 	internal class MockBoardRepo : IBoardRepo
 	{
-		public List<Board> rep = new List<Board>();
+		public List<Board> boardTable = new List<Board>();
+		public List<Player> playerTable = new List<Player>();
+		public List<User> userTable = new List<User>();
 	
 		public void AddBoard(Board board)
 		{
-			rep.Add(board);
+			boardTable.Add(board);
 		}
 
 		public void AddPlayer(Player player)
 		{
-			// dummy
+			playerTable.Add(player);
 		}
 
 		public void Save()
@@ -29,24 +31,24 @@ namespace Windshield.Test.MockObjects
 
 		public void DeleteBoard(Board board)
 		{
-			rep.Remove(board);
+			boardTable.Remove(board);
 		}
 
 		public Board GetBoardById(int id)
 		{
-			return (from board in rep
+			return (from board in boardTable
 					where board.id == id
 					select board).SingleOrDefault();
 		}
 
 		public IQueryable<Board> GetBoards()
 		{
-			return rep.AsQueryable();
+			return boardTable.AsQueryable();
 		}
 
 		public IQueryable<Board> GetBoards(Game type)
 		{
-			var result = from n in rep
+			var result = from n in boardTable
 						 where n.Game == type
 						 select n;
 			return result.AsQueryable();
@@ -54,26 +56,39 @@ namespace Windshield.Test.MockObjects
 
 		public IQueryable<User> GetBoardUsers(Board board)
 		{
-			// dummy
-			return null;
+			var result = from player in playerTable
+						 where player.idBoard == board.id
+						 select player.User;
+			return result.AsQueryable();
 		}
 
 		public IQueryable<Board> GetBoards(User user)
 		{
-			// dummy
-			return null;
+			var data = from players in playerTable
+				       where players.UserName == user.UserName
+					   select players;
+
+			var result = from players in data
+						 select players.Board;
+
+			return result.AsQueryable();
 		}
 
 		public IQueryable<Board> GetBoards(Game game, User user)
 		{
-			// dummy
-			return null;
+			var result = from boards in GetBoards(user)
+						 where boards.idGame == game.id
+						 select boards;
+			return result;
 		}
 
 		public User GetBoardOwner(Board board)
 		{
-			// dummy
-			return null;
+			var result = from user in userTable
+						 where user.UserName == board.ownerName
+						 select user;
+
+			return result.SingleOrDefault();
 		}
 	}
 }
