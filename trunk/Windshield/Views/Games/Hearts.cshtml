@@ -99,14 +99,16 @@
 
 			$("#" + pos).removeClass("cardback");
 			$("#" + pos).addClass(rank +" " + suit + " card");
+			if (($(".spanDisplay_" + pos).is(':empty'))) {
 
-			if (card[0] == 'T') {
-				$(".spanDisplay_" + pos).html("10");
-				$("#" + pos).append("&" + suit + "s;");
-			}
-			else {
-				$(".spanDisplay_" + pos).html(card[0]);
-				$("#" + pos).append("&" + suit + "s;");
+				if (card[0] == 'T') {
+					$(".spanDisplay_" + pos).html("10");
+					$("#" + pos).append("&" + suit + "s;");
+				}
+				else {
+					$(".spanDisplay_" + pos).html(card[0]);
+					$("#" + pos).append("&" + suit + "s;");
+				}
 			}
 		}
 
