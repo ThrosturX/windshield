@@ -4,15 +4,15 @@
     ViewBag.Title = "Hearts";
 }
 
-<h2>Hearts</h2>
+<script src="@Url.Content("~/Scripts/Hearts.js")" type="text/javascript"></script>
 
-<div class="span8">
+<div class="span12">
 			<div id="felt">
 
 			@{
 				for(int i = 1 ; i < 52 ; i++)
 				{
-					<div id="i" class="cardback"> </div>	
+					<div id="@i" class="cardback"> </div>	
 				}
 			}
 			
@@ -23,7 +23,7 @@
 						if(card.face > 1 && card.face <= 10)
 						{
 						//gice each card in our deck a unique identity
-						<div id="card_i" class="cardback rank_card.face card.suit"> <span class="spanDisplay" style="display:none;"> /at/card.face   </span> </div>
+						<div id="card_i" class="cardback rank_card.face card.suit"> <span class="spanDisplay" style="display:none;"> card.face   </span> </div>
 						}
 						
 						else
@@ -53,7 +53,7 @@
 				</div> 
 		</div>
 
-<input type="button" id="pressMe" />
+<!--<input type="button" id="pressMe" /> -->
 
 <script type="text/javascript">
 	$(document).ready(function () {
@@ -70,7 +70,7 @@
 
 		$("#GameRestart").hide();
 		$("#winner-dialog-popup").hide();
-
+		/*
 		function setCard(card, pos) {
 			var suit;
 			var rank = "Rank_" + card[1];
@@ -127,41 +127,6 @@
 
 		};
 
-		function dealCards() {
-			//CardPosition
-			for (k = 1; k <= 13; k++) {
-				card_left[k] = 27 + 2.5 * k;
-				card_top[k] = 75;
-			}
-			for (k = 14; k <= 26; k++) {
-				card_top[k] = -12 + 2.5 * k;
-				card_left[k] = 10;
-			}
-			for (k = 27; k <= 39 ; k++) {
-				card_left[k] = 27 + 2.5 * (k - 26);
-				card_top[k] = 5;
-			}
-			for (k = 40; k <= 52 ; k++) {
-				card_top[k] = -12 + 2.5 * (k - 26);
-				card_left[k] = 80;
-			}
-
-			for (i = 1; i <= 52; i++) setTimeout("moveToPlace(" + i + ")", i * 100);
-		}
-	
-		function moveToPlace(id) {
-			el = document.getElementById("card_" + id);
-			//var el = $("#card_"+ id);
-			el.style["zIndex"] = 10;
-			el.style["left"] = card_left[id] + "%";
-			el.style["top"] = card_top[id] + "%";
-			//el.style["WebkitTransform"] = "rotate(180deg)";
-			el.style["zIndex"] = 0;
-
-			if ((id > 13 && id < 27) || (id > 39 && id <= 52))
-				el.style["WebkitTransform"] = "rotate(90deg)";
-		}
-
 		hub.client.GameOver = function (winner) {
 			if (winner != "") {
 				$("#winner-dialog-popup").text(winner + " wins!");
@@ -180,10 +145,10 @@
 			$("#winner-dialog-popup").show(2);
 
 		}
-
+		
 		$.connection.hub.start().done(function() {
 			hub.server.join(group);
-			hub.server.gameStarted(group);
+			hub.server.startGame(group);
 			hub.server.tryAction(group, "checkAI", currentUser);
 
 			$("#tic-tac-toe tr td").click(function () {
@@ -194,6 +159,6 @@
 				hub.server.tryAction(group, "refresh", currentUser);
 			});
 
-		});
-	});
+		}); */
+	}); 
 </script>

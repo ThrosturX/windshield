@@ -220,7 +220,8 @@ namespace Windshield.Controllers
 			}
 			BoardViewModel viewModel = new BoardViewModel(board);
 			viewModel.AddPlayers(boardRepo.GetBoardUsers(board).ToList());
-
+			
+			// adds the correct number of players to the game
 			iGame.AddPlayers(viewModel.GetPlayers(board.Game.maxPlayers));
 			board.status = iGame.GetStatus();
 			board.startDate = DateTime.Now;
