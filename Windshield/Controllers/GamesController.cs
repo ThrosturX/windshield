@@ -213,8 +213,9 @@ namespace Windshield.Controllers
 					iGame = new TicTacToe();
 					break;
 				// TODO: Case Hearts	
-				//case "Hearts":
-					//iGame = new Hearts();
+				case "Hearts":
+					iGame = new Hearts();
+					break;
 
 				default:
 					return View("Error");
