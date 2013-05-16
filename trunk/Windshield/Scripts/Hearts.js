@@ -1,15 +1,33 @@
 ﻿var card_left = [];
 var card_top = [];
+var trick_left = [];
+var trick_top = [];
 
 $(document).ready(function () {
 
 	$(".cardback").click(function () {
 		dealCards();
+
+		setTimeout("setTrickPosition()", 5700);
+		setTimeout("displayTrick()", 5700);
+		//displayTrick();
 	});
+
+
 
 });
 
+function displayTrick() {
+	for (i = 1; i <= 4 ; i++) {
+		var el = document.getElementById("trick_" + i);
+		el.style["zIndex"] = 10;
+		el.style["left"] = trick_left[i];
+		el.style["top"] = trick_top[i];
+		// for some reason, I cant get the element with jquery :(
+		$("#trick_" + i).css({ "display": "inline" });
 
+	}
+}
 
 function dealCards() {
 	//CardPosition
@@ -52,4 +70,17 @@ function showPlayer1Cards() {
 		
 		
 	}
+}
+
+function setTrickPosition() {
+
+	trick_left[1] = "44%";
+	trick_top[1] = "50%";
+	trick_left[2] = "32%";
+	trick_top[2] = "41%";
+	trick_left[3] = "44%";
+	trick_top[3] = "29%";
+	trick_left[4] = "57%";
+	trick_top[4] = "41%";
+
 }

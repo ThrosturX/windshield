@@ -16,6 +16,12 @@
 				}
 			}
 			
+			@{  // hidden DOM for the trick cards.
+				for(int i = 1; i <= 4 ; i++)
+				{
+					<div id ="trick_@i"	class="cardback" style="display:none;"> <span class="spanDisplay"> </span> </div>
+				}
+			}
 		<!--	{
 				int i = 1;
 					foreach(var card in Model.deck)
