@@ -58,7 +58,7 @@ namespace Windshield.Models.Games.Common.Ratings
 
 			if (count == 0)
 			{
-				otherPoints = 100; // computer
+				otherPoints = 800; // computer
 			}
 			else
 			{

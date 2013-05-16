@@ -203,6 +203,12 @@ namespace Windshield.Models.Games.Hearts
 				return false;
 			}
 
+			// basic sanity check: make sure the player actually has this card
+			if (player.hand.FindCard(card.face, card.suit) == null)
+			{
+				return false;
+			}
+
 			if (trickOngoing)
 			{
 				// check if the card he's playing is valid
@@ -233,6 +239,14 @@ namespace Windshield.Models.Games.Hearts
 								}
 							}
 						}
+					}
+				}
+				else if (mustPlayTwoOfClubs)
+				{
+					// only allow two of culbs to be played
+					if (card.face != 2 || card.suit != Suit.Club)
+					{
+						return false;
 					}
 				}
 
@@ -386,7 +400,13 @@ namespace Windshield.Models.Games.Hearts
 				players[i].matchPoints = thePoints;
 				int.TryParse(playerStats[1], out thePoints);
 				players[i].gamePoints = thePoints;
+				// finally, check if two of clubs must be played...
+				if (players[i].gamePoints > 0 || players[i].matchPoints > 0)
+				{
+					mustPlayTwoOfClubs = false;
+				}
 			}
+
 		}
 
 		private HPlayer GetPlayerByName(string name)
@@ -633,12 +653,130 @@ namespace Windshield.Models.Games.Hearts
 			{
 				return 1; // do nothing, but refresh
 			}
+			else if (action.Contains("CheckAI"))
+			{
+				return ActionCompleted();
+			}
 
 			// no success
 			return 0;
 		}  //public bool PlayCard(HPlayer player, Card card)
 
+		public int ActionCompleted()
+		{
+			// check if the match is over
+			HPlayer winner = CheckWinner();
 
+			// if the match is over
+			if (winner != null)
+			{
+				return FinishMatch(winner);
+			}
+			
+			// it's not over, let the computer play!
+			while (turn.user.UserName.StartsWith("Computer"))
+			{
+				return PlayAI();
+			}
+
+			return 0;
+		}
+
+		private int PlayAI()
+		{
+			Card card;
+
+			// Just try playing a random card until a valid card is played
+			while (true)
+			{
+				card = turn.hand.RandomCard();
+				if (PlayCard(turn, card))
+				{
+					return 1;
+				}
+			}
+		}
+
+		private int FinishMatch(HPlayer winner)
+		{
+			// assign points to everyone
+			if (winner.matchPoints == 26)
+			{
+				foreach (var p in players)
+				{
+					if (p != winner)
+					{
+						p.gamePoints += 26;
+					}
+				}
+			}
+			else
+			{
+				foreach (var p in players)
+				{
+					p.gamePoints += p.matchPoints;
+				}
+			}
+
+			// make the winner start the next round
+			turn = winner;
+			
+			// other cleanup
+			trickOngoing = false;
+
+			foreach (var p in players)
+			{
+				p.matchPoints = 0;
+				if (p.gamePoints >= 100)
+				{
+					return FinishGame(winner);
+				}
+			}
+
+			return 1;
+		}
+
+		private int FinishGame(HPlayer winner)
+		{
+			throw new NotImplementedException();
+			return 2;
+		}
+
+		private HPlayer CheckWinner()
+		{
+			foreach (var p in players)
+			{
+				if (p.hand.Count != 0)
+				{
+					return null; // the game is not over!
+				}
+			}
+
+			// find who wins the match
+
+			HPlayer winner = new HPlayer();
+			winner.gamePoints = 27;
+
+			foreach (var p in players)
+			{
+				// make sure he's not winning completely!
+				if (p.gamePoints == 26)
+				{
+					return p;
+				}
+
+				if (winner == null)
+				{
+					winner = p;
+				}
+				else if (p.gamePoints < winner.gamePoints)
+				{
+					winner = p;
+				}
+			}
+
+			return winner;
+		}
 
 
 
@@ -660,7 +798,14 @@ namespace Windshield.Models.Games.Hearts
 
 		public List<User> GetPlayers()
 		{
-			return new List<User>{new User{ UserName = "DERP" }};
+			List<User> pList = new List<User>();
+
+			for (int i=0; i<4; ++i)
+			{
+				pList.Add(players[i].user);
+			}
+
+			return pList;
 		}
 
 		

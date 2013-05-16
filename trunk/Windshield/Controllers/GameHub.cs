@@ -120,14 +120,14 @@ namespace Windshield.Controllers
 						if (winner != "" && !winner.StartsWith("Computer"))  // don't let the computer win and take elo :)
 						{
 							outlier = userRepository.GetUserByName(winner);
-							rating = userRepository.GetGameRatingByGame(outlier, gameRepository.GetGameByID(2)); // TODO: late binding (2 = tictactoe id)
+							rating = userRepository.GetGameRatingByGame(outlier, gameRepository.GetGameByID(board.idGame));
 							if (rating == null)
 							{
 								rating.rating = 0;
 							}
 
 							outlierScore = rating.rating;
-							elo = new Elo(2, outlier); // TODO: late binding (2 = tictactoe id)
+							elo = new Elo(board.idGame, outlier); 
 							if (outlierScore != 0)
 							{
 								elo.points = outlierScore;
@@ -136,8 +136,8 @@ namespace Windshield.Controllers
 							{
 								if (user != outlier)
 								{
-									Elo tempElo = new Elo(2, user); // TODO LATE BINDING
-									GameRating trating = userRepository.GetGameRatingByGame(user, gameRepository.GetGameByID(2)); // TODO LATE BINDING
+									Elo tempElo = new Elo(board.idGame, user); 
+									GameRating trating = userRepository.GetGameRatingByGame(user, gameRepository.GetGameByID(board.idGame));
 									if (rating.rating != 0)
 									{
 										tempElo.points = trating.rating;
