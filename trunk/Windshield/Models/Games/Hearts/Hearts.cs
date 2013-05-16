@@ -629,6 +629,10 @@ namespace Windshield.Models.Games.Hearts
 					return 1;	// success!
 				}
 			}
+			else if (action.Contains("refresh"))
+			{
+				return 1; // do nothing, but refresh
+			}
 
 			// no success
 			return 0;
@@ -646,7 +650,12 @@ namespace Windshield.Models.Games.Hearts
 
 		public void AddPlayers(List<User> players)
 		{
-			;  //  TODO: IMPLEMENT
+			AssignPlayerSlots(players);
+			deck.Shuffle();
+			DealTheCards();
+			SortTheCardsOnTheHands();
+			// Find the player with 2 of Clubs card
+			turn = GetStartingPlayer(null);
 		}
 
 		public List<User> GetPlayers()
