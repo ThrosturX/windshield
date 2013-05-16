@@ -331,5 +331,31 @@ namespace Windshield.Test
 			Assert.AreEqual(testString, game.GetStatus());
 		}
 
+		[TestMethod]
+		public void HeartsCheckingThatSaveStringsAreIdempotent()
+		{
+			string status = game.GetStatus();
+
+			User n = usr.GetUserByName("North");
+			User s = usr.GetUserByName("South");
+			User e = usr.GetUserByName("East");
+			User w = usr.GetUserByName("West");
+
+			List<User> users = new List<User>();
+
+			users.Add(n);
+			users.Add(s);
+			users.Add(e);
+			users.Add(w);
+
+			Hearts newGame = new Hearts(users);
+
+			newGame.SetStatus(status);
+
+			string status2 = newGame.GetStatus();
+
+			Assert.AreEqual(status, status2);
+		}
+
 	}
 }
