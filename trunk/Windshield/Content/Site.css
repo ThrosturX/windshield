@@ -292,23 +292,23 @@ table#tic-tac-toe td:hover
 	background-size: 100% 100%;
 }
 
-.Heart      
+.heart      
 { 
         background-position-y: 100%; 
         color: #890000;
 
 }
-.Spade
+.spade
 {
         background-position-y: 66.6%;
         color: black;
 }
-.Diamond
+.diam
 {
         background-position-y: 33.3%;
         color: #890000;
 }
-.Club
+.club
 {
         background-position-y: 0%;
         color: black;
