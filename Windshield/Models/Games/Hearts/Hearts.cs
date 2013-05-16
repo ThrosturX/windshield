@@ -273,6 +273,37 @@ namespace Windshield.Models.Games.Hearts
 			// Cards in trick
 			if (trickOngoing)
 			{
+				// leading suit
+				switch (trick.leader)
+				{
+					case Suit.Heart:
+						{
+							builder.Append("H,");
+							break;
+						}
+					case Suit.Spade:
+						{
+							builder.Append("S,");
+							break;
+						}
+					case Suit.Diamond:
+						{
+							builder.Append("D,");
+							break;
+						}
+					case Suit.Club:
+						{
+							builder.Append("C,");
+							break;
+						}
+					default:
+						{
+							builder.Append(" ,");
+						}
+
+				}
+
+				// cards-username in trick
 				for (int i = 0; i < 4; ++i)
 				{
 					Card card = trick.GetCardAtIndex(i);
@@ -293,7 +324,7 @@ namespace Windshield.Models.Games.Hearts
 			}
 			else
 			{
-				builder.Append("  ,  ,  ,  ,");
+				builder.Append(" ,  - ,  - ,  - ,  - ,");
 			}
 			
 			// Player whose turn it is (number)
