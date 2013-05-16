@@ -299,6 +299,7 @@ namespace Windshield.Models.Games.Hearts
 					default:
 						{
 							builder.Append(" ,");
+							break;
 						}
 
 				}
