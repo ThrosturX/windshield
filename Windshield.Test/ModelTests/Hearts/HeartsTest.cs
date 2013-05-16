@@ -255,14 +255,20 @@ namespace Windshield.Test
 		[TestMethod]
 		public void HeartsGetStatusString()
 		{
+			Setup();
+			// Create a new deck
 			game.deck = new CardDeck();
 			game.DealTheCards();
 
+			game.turn = game.players[3];
+
 			StringBuilder builder = new StringBuilder();
+			// Leader
+			builder.Append(" ,");
 			// Jokers
-			builder.Append("  ,  ,  ,  ,");
+			builder.Append("  - ,  - ,  - ,  - ,");
 			// Player whose turn it is
-			builder.Append("1");
+			builder.Append("3");
 			// Seperator
 			builder.Append("|");
 			// Hearts, Spades, Diamonds, Clubs
@@ -285,6 +291,45 @@ namespace Windshield.Test
 			Assert.AreEqual(testString, game.GetStatus());
 		}
 
+		[TestMethod]
+		public void HeartsGetSortedStatusString()
+		{
+			Setup();
+			// Get new set of cards
+			game.deck = new CardDeck();
+			game.DealTheCards();
+			game.SortTheCardsOnTheHands();
+
+			game.turn = game.players[3];
+
+			StringBuilder builder = new StringBuilder();
+			// Leader
+			builder.Append(" ,");
+			// Jokers
+			builder.Append("  - ,  - ,  - ,  - ,");
+			// Player whose turn it is
+			builder.Append("3");
+			// Seperator
+			builder.Append("|");
+			// Hearts, Spades, Diamonds, Clubs
+			builder.Append("2H,3H,4H,5H,6H,7H,8H,9H,TH,JH,QH,KH,AH/");
+			builder.Append("2S,3S,4S,5S,6S,7S,8S,9S,TS,JS,QS,KS,AS/");
+			builder.Append("2D,3D,4D,5D,6D,7D,8D,9D,TD,JD,QD,KD,AD/");
+			builder.Append("2C,3C,4C,5C,6C,7C,8C,9C,TC,JC,QC,KC,AC");
+			// Seperator
+			builder.Append("|");
+			// Match points, Game points, Username [User1]
+			builder.Append("0,0,North/");
+			// Match points, Game points, Username [User2]
+			builder.Append("0,0,South/");
+			// Match points, Game points, Username [User3]
+			builder.Append("0,0,East/");
+			// Match points, Game points, Username [User4]
+			builder.Append("0,0,West");
+
+			string testString = builder.ToString();
+			Assert.AreEqual(testString, game.GetStatus());
+		}
 
 	}
 }
