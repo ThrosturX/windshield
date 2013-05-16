@@ -95,8 +95,38 @@ namespace Windshield.Controllers
 		[HttpPost]
 		public ActionResult Register(RegisterModel model)
 		{
+		
 			if (ModelState.IsValid)
 			{
+				if (model.UserName.StartsWith("Computer"))
+				{
+					return View(model);
+				}
+
+				if (model.UserName.Contains(","))
+				{
+					return View(model);
+				}
+
+				if (model.UserName.Contains("|"))
+				{
+					return View(model);
+				}
+
+				if (model.UserName.Contains("-"))
+				{
+					return View(model);
+				}
+
+				if (model.UserName.Contains("/"))
+				{
+					return View(model);	
+				}
+
+				if (model.UserName.Contains("."))
+				{
+ 					return View(model);
+				}
 				// Attempt to register the user
 				MembershipCreateStatus createStatus;
 				Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
