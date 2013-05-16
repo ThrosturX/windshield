@@ -46,7 +46,7 @@ namespace Windshield.Test
 			players.Add(c);
 			players.Add(d);
 
-			game = new Hearts(players, true);
+			game = new Hearts(players);
 
 			brd.AddBoard(game.board);
 		}
@@ -57,7 +57,7 @@ namespace Windshield.Test
 			User p = new User();
 			List<User> users = new List<User>();
 			users.Add(p);
-			game = new Hearts(users, true);
+			game = new Hearts(users);
 
 			Assert.AreEqual("Computer", game.players[1].user.UserName);
 		}
@@ -138,6 +138,7 @@ namespace Windshield.Test
 
 		}
 
+		// Redundant test, the controller ensures that only 4 players can be placed in a certain game instance.
 		[TestMethod]
 		public void HeartsCreatingALargeHeartsGroupThrowsTooManyPlayersException()
 		{
@@ -167,7 +168,7 @@ namespace Windshield.Test
 
 				brd.AddBoard(game.board);
 
-				game = new Hearts(players, true);
+				game = new Hearts(players);
 				Assert.Fail();
 			}
 			catch (TooManyPlayersException) 
@@ -254,11 +255,14 @@ namespace Windshield.Test
 		[TestMethod]
 		public void HeartsGetStatusString()
 		{
+			game.deck = new CardDeck();
+			game.DealTheCards();
+
 			StringBuilder builder = new StringBuilder();
 			// Jokers
 			builder.Append("  ,  ,  ,  ,");
 			// Player whose turn it is
-			builder.Append("3");
+			builder.Append("1");
 			// Seperator
 			builder.Append("|");
 			// Hearts, Spades, Diamonds, Clubs
