@@ -29,7 +29,7 @@ function dealCards() {
 
 function dealCards()
 {
-	
+	//CardPosition
 		for (k = 1; k <= 13; k++) {
 			card_left[k] = 27 + 2.5 * k;
 			card_top[k] = 75;
