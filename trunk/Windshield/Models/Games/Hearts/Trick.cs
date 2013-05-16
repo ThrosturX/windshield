@@ -13,6 +13,16 @@ namespace Windshield.Models.Games.Hearts
 		public int points { get; set; }
 
 		/// <summary>
+		/// Shouldn't be used except with SetStatus! Creates a goofy trick
+		/// </summary>
+		public Trick()
+		{
+			leader = Suit.Joker;
+			claimer = null;
+			points = 0;
+		}
+
+		/// <summary>
 		/// Creates a new trick with a leading suit specified by card
 		/// </summary>
 		/// <param name="card">The card played to start the trick</param>

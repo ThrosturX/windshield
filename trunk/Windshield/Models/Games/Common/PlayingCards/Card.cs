@@ -92,6 +92,78 @@ namespace Windshield.Common
 			return false;
 		}
 
+		public static Card SpawnCardFromString(String str)
+		{
+			Card card = new Card();
+
+			switch (str[0])
+			{
+				case 'A':
+					{
+						card.face = (int)Rank.Ace;
+						break;
+					}
+				case 'T':
+					{
+						card.face = (int)Rank.Ten;
+						break;
+					}
+				case 'J':
+					{
+						card.face = (int)Rank.Jack;
+						break;
+					}
+				case 'Q':
+					{
+						card.face = (int)Rank.Queen;
+						break;
+					}
+				case 'K':
+					{
+						card.face = (int)Rank.King;
+						break;
+					}
+				default:
+					{
+						int a = 0;
+						int.TryParse(str[0].ToString(), out a);
+						card.face = a;
+						break;
+					}
+			}
+
+			switch (str[1])
+			{
+				case 'H':
+					{
+						card.suit = Suit.Heart;
+						break;
+					}
+				case 'S':
+					{
+						card.suit = Suit.Spade;
+						break;
+					}
+				case 'D':
+					{
+						card.suit = Suit.Diamond;
+						break;
+					}
+				case 'C':
+					{
+						card.suit = Suit.Club;
+						break;
+					}
+				default:
+					{
+						card.suit = Suit.Joker; // shouldn't happen
+						break;
+					}
+			}
+
+			return card;
+		}
+
 		/// <summary>
 		/// Creates a two-character string representing a card
 		/// </summary>
