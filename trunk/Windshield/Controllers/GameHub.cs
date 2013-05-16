@@ -3,7 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 using Windshield.Models;
+using Windshield.Models.Games;
 using Windshield.Models.Games.Common.Ratings;
+using Windshield.Models.Games.TicTacToe;
 
 
 namespace Windshield.Controllers
@@ -42,13 +44,7 @@ namespace Windshield.Controllers
 
 		}
 
-		public void ClickCell(string groupName, string cellId)
-		{
-			Clients.OthersInGroup(groupName).cellClicked(cellId);
-			//			Clients.Others.cellClicked(cellId);
-		}
-
-		public void GameStarted(string boardID)
+		public void StartGame(string boardID)
 		{
 			Clients.OthersInGroup(boardID).start(boardID);
 		}
@@ -70,26 +66,38 @@ namespace Windshield.Controllers
 			int.TryParse(boardID, out id);
 			Board board = boardRepository.GetBoardById(id);
 
+			IGame iGame;
+			switch (board.Game.model)
+			{
+				case "TicTacToe":
+					iGame = new TicTacToe();
+					break;
+
+				default:
+					iGame = null;  // TODO: return error or nothing
+					break;
+			}
+
 			string status = board.status;
+			// TODO: Generalize
+			iGame.AddPlayers(ExtractUsers((int)GamesTypeIDs.TicTacToe, status));
+			iGame.SetStatus(board.status);
 
-			var ttt = new Windshield.Models.Games.TicTacToe.TicTacToe(ExtractUsers((int)GamesTypeIDs.TicTacToe, status));
-			ttt.SetStatus(board.status);
-
-			int response = ttt.TryAction(action, sender);
+			int response = iGame.TryAction(action, sender);
 
 			switch(response)
 			{
 				case 1:
 					{
-						string message = ttt.GetStatus();
+						string message = iGame.GetStatus();
 						Clients.Group(id.ToString()).Broadcast(message);
 						board.status = message;
 						boardRepository.Save();
 						break;
 					}
-				case 2:
+				case 2:  // Game win, calculate Elo
 					{
-						Clients.Group(id.ToString()).Broadcast(ttt.GetStatus());
+						Clients.Group(id.ToString()).Broadcast(iGame.GetStatus());
 
 						// Begin update ratings
 
@@ -102,8 +110,8 @@ namespace Windshield.Controllers
 						string winner;
 						players = boardRepository.GetBoardUsers(board);
 
-						winner = ttt.GetGameOver();
-						if (winner != "" && winner != "Computer") // don't let the computer win and take elo :)
+						winner = iGame.GetGameOver();
+						if (winner != "" && !winner.StartsWith("Computer"))  // don't let the computer win and take elo :)
 						{
 							outlier = userRepository.GetUserByName(winner);
 							rating = userRepository.GetGameRatingByGame(outlier, gameRepository.GetGameByID(2)); // TODO: late binding (2 = tictactoe id)
@@ -148,7 +156,7 @@ namespace Windshield.Controllers
 						// End update ratings
 
 						Clients.Group(id.ToString()).GameOver(winner);
-						string message = ttt.GetStatus();
+						string message = iGame.GetStatus();
 						//Clients.Group(id.ToString()).Broadcast(message);
 						board.status = message;
 						boardRepository.Save();
@@ -178,7 +186,7 @@ namespace Windshield.Controllers
 						User p1 = userRepository.GetUserByName(info[6]);
 						users.Add(p1);
 
-						if (info[7] != "Computer")
+						if(!info[7].StartsWith("Computer"))
 						{
 							User p2 = userRepository.GetUserByName(info[7]);
 							users.Add(p2);

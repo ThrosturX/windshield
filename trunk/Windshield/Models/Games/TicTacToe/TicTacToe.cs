@@ -9,31 +9,8 @@ using System.Runtime.CompilerServices;
 
 namespace Windshield.Models.Games.TicTacToe
 {
-	/// <summary>
-	/// A Tic Tac Toe logic and view model class
-	/// </summary>
-	/// <remarks>
-	/// When creating a new board
-	///   List<User> players = ...;  // some list of one to two users
-	///   var ttt = new TicTacToe(players);
-	///   Board board = new Board();
-	///   board.status = ttt.GetStatus();
-	///   board.idGame = ...;  // get id of the game from the repo
-	///   boardRepo.AddBoard(board);
-	///   boardRepo.Save()
-	/// When getting the board from database
-	///   Board board = ...;  // get board from repo
-	///   var ttt = new TicTacToe();
-	///   ttt.SetStatus(board.status);
-	///   if (ttt.TryAction(...))
-	///   {
-	///	      board.status = ttt.GetStatus();
-	///	      boardRepo.Save();
-	///	      // broadcast with SignalR
-	///	  }
-	///   
-	/// </remarks>
-	public class TicTacToe : AGame
+
+	public class TicTacToe : IGame
 	{
 		/// <summary>
 		/// Converts a cell number to a coordinate struct.
@@ -64,6 +41,7 @@ namespace Windshield.Models.Games.TicTacToe
 		internal int freeSquares;
 		internal TPlayer turn;
 
+
 		public TPlayer player1 { get; set; }	// The owner is Player One
 		public TPlayer player2 { get; set; }
 
@@ -74,8 +52,23 @@ namespace Windshield.Models.Games.TicTacToe
 			InitializePlayers();
 		}
 
-		public TicTacToe(List<User> players)
-			: this()
+	/*	public bool MakeAI(User user)
+		{
+			if (player1.user == user)
+			{
+				player1.isAI = true;
+				return player1.isAI;
+			}
+			else if (player2.user == user)
+			{
+				player2.isAI = true;
+				return player2.isAI;
+			}
+
+			return false;
+		}
+*/
+		public void AddPlayers(List<User> players)
 		{
 			// TODO try catch á player1.user
 			player1.user = players[0];
@@ -87,15 +80,19 @@ namespace Windshield.Models.Games.TicTacToe
 			{
 				player2.user = new User();
 				player2.user.UserName = "Computer";
-				player2.isAI = true;
+				// player2.isAI = true;
 			}
-			//TODO: Þarf þetta nokkuð ?   board.idOwner = player1.user.UserId;
+		}
+
+		public List<User> GetPlayers()
+		{
+			return new List<User>{ player1.user, player2.user };
 		}
 
 		/// <summary>
 		/// Clears the board from all symbols.
 		/// </summary>
-		internal void ClearBoard()
+		public void ClearBoard()
 		{
 			for (int i = 0; i < 3; ++i)
 			{
@@ -111,7 +108,7 @@ namespace Windshield.Models.Games.TicTacToe
 		/// <summary>
 		/// Gives the game's players initial values for symbols, wins, losses and draws.
 		/// </summary>
-		internal void InitializePlayers()
+		public void InitializePlayers()
 		{
 			player1 = new TPlayer();
 			player2 = new TPlayer();
@@ -133,7 +130,7 @@ namespace Windshield.Models.Games.TicTacToe
 		/// <summary>
 		/// Inserts a symbol into a cell in the game grid.
 		/// </summary>
-		internal bool InsertSymbol(char symbol, int cell)
+		public bool InsertSymbol(char symbol, int cell)
 		{
 			Coord location = CellToCoord(cell);
 			if (turn.symbol != symbol)
@@ -166,7 +163,7 @@ namespace Windshield.Models.Games.TicTacToe
 		/// <summary>
 		/// Switches whose turn it is
 		/// </summary>
-		internal void SwitchTurns()
+		public void SwitchTurns()
 		{
 			if (turn == player1)
 			{
@@ -183,7 +180,7 @@ namespace Windshield.Models.Games.TicTacToe
 		/// </summary>
 		/// <param name="symbol"></param>
 		/// <returns></returns>
-		internal TPlayer GetPlayerBySymbol(char symbol)
+		public TPlayer GetPlayerBySymbol(char symbol)
 		{
 			if (player1.symbol == symbol)
 			{
@@ -201,7 +198,7 @@ namespace Windshield.Models.Games.TicTacToe
 		/// Checks if there is a winner.
 		/// </summary>
 		/// <returns>Tic Tac Toe Player that has won the game.</returns>
-		internal TPlayer CheckWinner()
+		public TPlayer CheckWinner()
 		{
 			char center;
 			int i;
@@ -250,7 +247,7 @@ namespace Windshield.Models.Games.TicTacToe
 		/// swaps the player's symbols if they should elect to play a new game and adjusts their scores
 		/// </summary>
 		/// <param name="winner">should be null if there is a draw</param>
-		internal void EndGame(TPlayer winner)
+		public void EndGame(TPlayer winner)
 		{
 			// swap symbols
 			char temp = player1.symbol;
@@ -286,7 +283,7 @@ namespace Windshield.Models.Games.TicTacToe
 		/// Selects a cell to be picked by the AI.
 		/// </summary>
 		/// <returns>A cell number to insert the symbol.</returns>
-		internal int AISelectCell()
+		public int AISelectCell()
 		{
 			Coord selected = new Coord();
 			Random rnd = new Random();
@@ -314,7 +311,7 @@ namespace Windshield.Models.Games.TicTacToe
 		/// <summary>
 		/// Execute any necessary actions when an action has been completed by a client
 		/// </summary>
-		internal int ActionCompleted()
+		public int ActionCompleted()
 		{
 			TPlayer winner = CheckWinner();
 			if (freeSquares == 0)
@@ -322,7 +319,7 @@ namespace Windshield.Models.Games.TicTacToe
 				return 2;
 			}
 
-			if (player2.isAI && winner == null && player2 == turn)
+			if (player2.isAI() && winner == null && player2 == turn)
 			{
 				InsertSymbol(player2.symbol, AISelectCell());
 				winner = CheckWinner();
@@ -355,7 +352,7 @@ namespace Windshield.Models.Games.TicTacToe
 		///			XO OXXO X|1|X|3|2|1|john|banana
 		/// </remarks>
 		/// <returns>A database-friendly string that can be converted into the game's state.</returns>
-		internal string GetStatus()
+		public string GetStatus()
 		{
 			StringBuilder builder = new StringBuilder();
 			//grid
@@ -389,7 +386,7 @@ namespace Windshield.Models.Games.TicTacToe
 			return builder.ToString();
 		}
 
-		internal string GetGameOver()
+		public string GetGameOver()
 		{
 			TPlayer winner = CheckWinner();
 			EndGame(winner);
@@ -403,7 +400,7 @@ namespace Windshield.Models.Games.TicTacToe
 		/// <summary>
 		/// Initiates the board
 		/// </summary>
-		internal void SetStatus(string status)
+		public void SetStatus(string status)
 		{
 			string[] strings = status.Split('|');
 
@@ -471,7 +468,7 @@ namespace Windshield.Models.Games.TicTacToe
 		/// <param name="action">string: "insert cell#" where # is a number between 0 and 8</param>
 		/// <param name="sender">The username of the player attempting the action.</param>
 		/// <returns>returns 0 for failure, 1 for OK and 2 for Game Over</returns>
-		public override int TryAction(string action, string sender)
+		public int TryAction(string action, string sender)
 		{
 			// check who sent it
 			TPlayer player;
@@ -534,7 +531,7 @@ namespace Windshield.Models.Games.TicTacToe
 			return 0;
 		}
 
-		internal struct Coord
+		public struct Coord
 		{
 			public int x;
 			public int y;

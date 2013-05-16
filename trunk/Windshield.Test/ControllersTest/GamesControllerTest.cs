@@ -209,6 +209,6 @@ namespace Windshield.Test.ControllersTest
 			player.idBoard = id;
 			player.UserName = playername;
 			return player;
-		}*/
+		}
 	}
 }

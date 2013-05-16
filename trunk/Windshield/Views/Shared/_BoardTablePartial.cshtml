@@ -35,7 +35,7 @@ else
 		{
 		<tr>
 			<td>
-				@Html.ActionLink(Model.GameName, "JoinLobby", "Games", new {targetId = @row.ID}, null)
+				@Html.ActionLink(Model.GameName, "JoinLobby", "Games", new {idBoard = @row.ID}, null)
 			</td>
 			<td>
 				@row.OwnerName

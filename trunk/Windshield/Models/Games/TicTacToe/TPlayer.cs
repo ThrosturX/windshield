@@ -12,6 +12,14 @@ namespace Windshield.Models.Games.TicTacToe
 		public int wins;
 		public int losses;
 		public int draws;
-		public bool isAI;
+
+		internal bool isAI()
+		{
+			if (user == null)
+			{
+				return true;
+			}
+			return (user.UserName.StartsWith("Computer"));
+		}
 	}
 }

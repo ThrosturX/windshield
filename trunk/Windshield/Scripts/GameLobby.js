@@ -4,7 +4,7 @@
 	var hub = $.connection.gameHub;
 
 	hub.client.Start = function (id) {
-		self.location = "JoinGame?targetId=" + id;
+		self.location = "JoinGame?idBoard=" + id;
 	}
 
 	hub.client.UpdateList = function () {
@@ -19,7 +19,7 @@
 				$("#lobby-template").tmpl(users).insertAfter("#userlist");
 			},
 			error: function () {
-				$(".statistics-table-row").remove();
+				alert("Developer error!");
 			}
 
 		});
@@ -28,5 +28,5 @@
 	$.connection.hub.start().done(function () {
 		hub.server.join(group);
 		hub.server.refreshLobby(group);
-	});
+	}); 
 });
