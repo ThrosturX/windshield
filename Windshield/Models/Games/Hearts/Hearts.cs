@@ -250,6 +250,119 @@ namespace Windshield.Models.Games.Hearts
 			return -1;
 		}
 
+		internal void SetStatus(string status)
+		{
+			// split the string
+			string[] splitStatus  = status.Split('|');
+			// trick
+			string[] tInfo = splitStatus[0].Split(',');
+			// hands
+			string[] hInfo = splitStatus[1].Split('/');
+			// stats
+			string[] sInfo = splitStatus[2].Split('/');
+
+			// is there an ongoing trick?
+			if (tInfo[0] == " ")
+			{
+				trickOngoing = false;
+			}
+			else
+			{
+				trickOngoing = true;
+			}
+			
+			// find cards in trick
+			if (trickOngoing)
+			{
+				trick = new Trick();
+
+				// get the leading suit
+				switch (tInfo[0][0])
+				{
+					case 'H':
+						{
+							trick.leader = Suit.Heart;
+							break;
+						}
+					case 'S':
+						{
+							trick.leader = Suit.Spade;
+							break;
+						}
+					case 'D':
+						{
+							trick.leader = Suit.Diamond;
+							break;
+						}
+					case 'C':
+						{
+							trick.leader = Suit.Club;
+							break;
+						}
+					default:
+						{
+							trick.leader = Suit.Joker; // shouldn't happen
+							break;
+						}
+				}
+
+				// get all the cards
+				for (int i = 1; i <= 4; ++i)
+				{
+					string[] tCards = tInfo[i].Split('-');
+
+					Card card = Card.SpawnCardFromString(tCards[0]);
+					HPlayer player = GetPlayerByName(tCards[1]);
+
+					if (card.suit != Suit.Joker && player != null)
+					{
+						trick.AddCard(player, card);
+					}
+				}
+
+			}
+
+
+			// find the player's hands
+			for (int i = 0; i < 4; ++i)
+			{
+				players[i].hand.Clear();
+				string[] handCards = hInfo[i].Split(',');
+				for (int j = 0; j < 13; ++j)
+				{
+					Card card = Card.SpawnCardFromString(handCards[j]);
+
+					if (!card.IsJoker())
+					{
+						players[i].hand.Add(card);
+					}
+				}
+			}
+
+			for (int i=0; i<4; ++i)
+			{
+				string[] playerStats = sInfo[i].Split(',');
+				int thePoints = 0;
+				int.TryParse(playerStats[0], out thePoints);
+				players[i].matchPoints = thePoints;
+				int.TryParse(playerStats[1], out thePoints);
+				players[i].gamePoints = thePoints;
+			}
+		}
+
+		private HPlayer GetPlayerByName(string name)
+		{
+			for (int i = 0; i < 4; ++i)
+			{
+				if (players[i].user.UserName == name)
+				{
+					return players[i];
+				}
+			}
+
+			return null;
+		}
+
 		/// <summary>
 		/// Creates a status string describing the game's state.
 		/// </summary>
@@ -258,11 +371,11 @@ namespace Windshield.Models.Games.Hearts
 		/// Format:
 		/// [Trick Info]|[Players' Cards]|[Players' stats]
 		/// Trick info example:
-		/// [card-playername,card-playername,card-playername,card-playername,turn]
+		/// [leader,card-playername,card-playername,card-playername,card-playername,turn]
 		/// where turn is the playername of the player whose turn it is. 
 		/// 
 		/// Players' cards format:
-		/// [card,card,card,...]
+		/// [card,card,card,.../...]
 		/// 
 		/// Players' stats example:
 		/// [13,20,john/0,0,steven/3,5,banana/7,40,alex42]
