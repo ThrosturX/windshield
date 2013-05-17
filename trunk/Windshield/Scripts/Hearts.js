@@ -71,14 +71,14 @@ function cardToShort(id) {
 	
 }
 
-	function displayTrick() {
+	function moveTricktoPosition() {
 		for (i = 1; i <= 4 ; i++) {
 			var el = document.getElementById("trick_" + i);
 			el.style["zIndex"] = 10;
 			el.style["left"] = trick_left[i];
 			el.style["top"] = trick_top[i];
 			// for some reason, I cant get the element with jquery :(
-			$("#trick_" + i).css({ "display": "inline" });
+			//$("#trick_" + i).css({ "display": "inline" });
 
 		}
 	}
@@ -285,6 +285,7 @@ function cardToShort(id) {
 		setTimeout(function () {
 			dealCards();
 			setTrickPosition();
+			moveTricktoPosition();
 			//setTimeout("displayTrick()", 5700);
 			//displayTrick();
 		}, 700);
