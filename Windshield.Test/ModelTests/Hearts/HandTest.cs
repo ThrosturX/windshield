@@ -4,18 +4,18 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Windshield.Common;
 using Windshield.Models;
 using Windshield.Models.Games;
-using Windshield.Models.Games.Hearts;
+using Windshield.Test.ModelTests;
 
-namespace Windshield.Test.ModelTests.Hearts
+namespace Windshield.Test.ModelTests
 {
 	[TestClass]
 	public class HandTest
 	{
-		Windshield.Models.Games.Hearts.Hearts game;
+		Hearts game;
 		[TestInitialize]
 		public void Setup()
 		{
-			game = new Windshield.Models.Games.Hearts.Hearts();
+			game = new Hearts();
 			List<User> users = new List<User>();
 			User a = new User();
 			a.UserName = "banana";

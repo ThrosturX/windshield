@@ -1302,7 +1302,9 @@ ko.exportSymbol('isComputed', ko.isComputed);
         visitPropertiesOrArrayEntries(rootObject, function(indexer) {
             var propertyValue = mapInputCallback(rootObject[indexer]);
 
-            switch (typeof propertyValue) {
+            
+
+ (typeof propertyValue) {
                 case "boolean":
                 case "number":
                 case "string":

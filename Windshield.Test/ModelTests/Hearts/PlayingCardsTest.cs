@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Windshield.Common;
 
-namespace Windshield.Test
+namespace Windshield.Test.ModelTests
 {
 	[TestClass]
 	public class PlayingCardsTest

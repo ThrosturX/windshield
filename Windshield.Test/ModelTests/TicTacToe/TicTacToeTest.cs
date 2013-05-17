@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Windshield.Models;
-using Windshield.Models.Games.TicTacToe;
+using Windshield.Models.Games;
 using Windshield.Test.MockObjects;
 
-namespace Windshield.Test
+namespace Windshield.Test.ModelTests
 {
 	[TestClass]
 	public class TicTacToeTest

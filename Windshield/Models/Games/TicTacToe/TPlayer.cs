@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Windshield.Models.Games.TicTacToe
+namespace Windshield.Models.Games
 {
 	public class TPlayer
 	{

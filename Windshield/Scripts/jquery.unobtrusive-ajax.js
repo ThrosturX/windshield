@@ -43,7 +43,11 @@
         $(element.getAttribute("data-ajax-update")).each(function (i, update) {
             var top;
 
-            switch (mode) {
+            
+
+
+
+ (mode) {
             case "BEFORE":
                 top = update.firstChild;
                 $("<div />").html(data).contents().each(function () {

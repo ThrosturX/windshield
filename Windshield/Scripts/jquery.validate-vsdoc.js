@@ -164,7 +164,10 @@ $.extend($.fn, {
 			var settings = $.data(element.form, 'validator').settings;
 			var staticRules = settings.rules;
 			var existingRules = $.validator.staticRules(element);
-			switch(command) {
+			
+
+
+(command) {
 			case "add":
 				$.extend(existingRules, $.validator.normalizeRule(argument));
 				staticRules[element.name] = existingRules;

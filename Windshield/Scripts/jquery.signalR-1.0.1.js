@@ -323,7 +323,11 @@
 
                 // Determine if jsonp is the only choice for negotiation, ajaxSend and ajaxAbort.
                 // i.e. if the browser doesn't supports CORS
-                // If it is, ignore any preference to the contrary, and switch to jsonp.
+                // If it is, ignore any preference to the contrary, and 
+
+
+
+ to jsonp.
                 if (!config.jsonp) {
                     config.jsonp = !$.support.cors;
 
