@@ -95,7 +95,7 @@ namespace Windshield.Controllers
 		[HttpPost]
 		public ActionResult Register(RegisterModel model)
 		{
-		
+
 			if (ModelState.IsValid)
 			{
 				if (model.UserName.StartsWith("Computer"))

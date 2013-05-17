@@ -42,6 +42,7 @@
 		var currentUser = '@(Context.User.Identity.Name)';
 		var players = '@Model.GetPlayers(2)';
 		var playerOne = '@Model.GetPlayers(1)[0].UserName';
+		var playerTwo = '@Model.GetPlayers(2)[1].UserName';
 		
 		$("#GameRestart").hide();
 		$("#winner-dialog-popup").hide();

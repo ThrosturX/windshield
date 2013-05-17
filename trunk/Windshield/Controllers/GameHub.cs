@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
@@ -86,70 +85,38 @@ namespace Windshield.Controllers
 					}
 				case 2:  // Game win, calculate Elo
 					{
+						//Send status string to all clients
 						Clients.Group(id.ToString()).Broadcast(iGame.GetStatus());
-						// Begin update ratings
-						List<Elo> ratings = new List<Elo>();
-						User outlier;
-						Elo elo;
-						GameRating rating;
-						int outlierScore;
 
-						IQueryable<User> players = boardRepository.GetBoardUsers(board);
-						string winner = iGame.GetGameOver();
-
-						// If there is a player winner
-						if (winner != "" && !winner.StartsWith("Computer"))  // don't let the computer win and take elo :)
+						var winner = iGame.GetGameOver();
+						/*Change elo points for all players on the board. -10 for loosers +10 for winner. */
+						
+						//Gets all users from board.
+						List<User> listUser = new List<User>();
+						listUser = boardRepository.GetBoardUsers(board).ToList();
+						
+						foreach (var player in listUser)
 						{
-							// Winner
-							outlier = userRepository.GetUserByName(winner);
-							// Winner rating
-							rating = userRepository.GetGameRatingByGame(outlier, board.Game);
-							// Places winner rating score into this variable
-							outlierScore = rating.rating;
-							// Creates new elo with the winner and Game
-							elo = new Elo(board.idGame, outlier);
-
-							if (outlierScore != 0)
+							//Fetching GameRating from database for player.
+							GameRating rating;
+							rating = gameRepository.GetGameRatingByNameAndGameID(player.UserName, board.idGame);
+							
+							if (player.UserName == winner)
 							{
-								elo.points = outlierScore;
+								rating.rating = rating.rating + 10;
 							}
-							// Check Every user
-							foreach (var user in players)
+							else 
 							{
-								// The Loser
-								if (user != outlier)
-								{
-									// New Elo for the Loser
-									Elo tempElo = new Elo(board.idGame, user);
-									// New Loser rating
-									GameRating trating = userRepository.GetGameRatingByGame(user, board.Game);
-									// A Guard
-									if (rating.rating != 0)
-									{
-										tempElo.points = trating.rating;
-									}
-									ratings.Add(tempElo);
-								}
-							}
-							// Update elo for the Winner
-							elo.UpdateAll(1, ratings);
-							// New rating for the winner
-							rating.rating = elo.points;
-							// Check the List<Elo> ratings (everyone except the winner)
-							/*foreach (var r in ratings)
-							{
-								// Get rating for Loser r
-								GameRating gr = userRepository.GetGameRatingByGame(r.user, board.Game);
-								// Assign new rating to the Loser
-								gr.rating = r.points;
-							}*/
-
-							// Commit to SQL
-							userRepository.Save();
+								rating.rating = rating.rating - 10;					
+							} 
+							
+							gameRepository.Save();
 						}
 
-						// End update ratings
-
+						//Save in Database.
+						
+						userRepository.Save();
+						//Restartbutton
 						Clients.Group(id.ToString()).GameOver(winner);
 						string message = iGame.GetStatus();
 						//Clients.Group(id.ToString()).Broadcast(message);
@@ -157,6 +124,7 @@ namespace Windshield.Controllers
 						boardRepository.Save();
 						break;
 					}
+
 				case 0:
 				default:
 					{
