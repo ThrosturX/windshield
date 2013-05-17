@@ -1,8 +1,10 @@
-﻿var card_left = [];
+﻿/* variables for card positioning */
+var card_left = [];
 var card_top = [];
 var trick_left = [];
 var trick_top = [];
 
+/* function that parses the card's classes to determine a string that is passed to the server */
 function cardToShort(id) {
 	var element = $("#" + id);
 	var toString = "";
@@ -70,19 +72,18 @@ function cardToShort(id) {
 	return toString;
 	
 }
-
+	/* a function that moves the trick cards to their position, and they are initially hidden */
 	function moveTricktoPosition() {
 		for (i = 1; i <= 4 ; i++) {
 			var el = document.getElementById("trick_" + i);
 			el.style["zIndex"] = 10;
 			el.style["left"] = trick_left[i];
 			el.style["top"] = trick_top[i];
-			// for some reason, I cant get the element with jquery :(
-			//$("#trick_" + i).css({ "display": "inline" });
 
 		}
 	}
 
+	/* deal the cards */
 	function dealCards() {
 		//CardPosition
 		for (k = 1; k <= 13; k++) {
@@ -104,20 +105,19 @@ function cardToShort(id) {
 
 		for (i = 1; i <= 52; i++) setTimeout("moveToPlace(" + i + ")", i * 100);
 	}
-
+	/* moves the card to it's correct place and rotates it if needed */
 	function moveToPlace(id) {
 		el = document.getElementById(id);
-		//var el = $("#card_"+ id);
 		el.style["zIndex"] = 10;
 		el.style["left"] = card_left[id] + "%";
 		el.style["top"] = card_top[id] + "%";
-		//el.style["WebkitTransform"] = "rotate(180deg)";
 		el.style["zIndex"] = 0;
 
 		if ((id > 13 && id < 27) || (id > 39 && id <= 52))
 			el.style["WebkitTransform"] = "rotate(90deg)";
 	}
 
+	/* displays the card for player1 */
 	function showPlayer1Cards() {
 		for (i = 1 ; i <= 13 ; i++) {
 			var c = $("#" + i);
@@ -125,7 +125,7 @@ function cardToShort(id) {
 		
 		}
 	}
-
+	/* sets the position of the trick cards */
 	function setTrickPosition() {
 
 		trick_left[1] = "44%";
@@ -140,6 +140,7 @@ function cardToShort(id) {
 	}
 
 	$(document).ready(function () {
+		/* retrieves neccesary information from the DOM */
 		var group = $("#group-span").html();
 		var hub = $.connection.gameHub;
 		var currentUser = $("#currentUser-span").html();
@@ -150,9 +151,11 @@ function cardToShort(id) {
 		var card_left = [];
 		var card_top = [];
 
+		/* hides the restart button until the game has been finished */
 		$("#GameRestart").hide();
 		$("#winner-dialog-popup").hide();
 
+		/* a function that reads the answer from the server and sets the right classes */
 		function setCard(card, pos) {
 			var suit;
 			var rank = "rank_" + card[0];
@@ -176,11 +179,12 @@ function cardToShort(id) {
 			}
 			$("#" + pos).removeClass();
 			$("#" + pos).addClass(rank + " " + suit + " card");
-			//if (($(".spanDisplay_" + pos).is(':empty'))) {
-			//alert($(".spanDisplay_" + pos).text());
 		}
 
+		/* the function that intercepts the answer from the server */
 		hub.client.Broadcast = function (status) {
+
+			/* split the status string */
 			var statusArray = status.split('|');
 			var hArray = statusArray[1];
 			var handArray = hArray.split('/');
@@ -216,7 +220,7 @@ function cardToShort(id) {
 				// extract card from string
 				var cardstring = cardArray[i - 1];
 				$("#" + i).removeClass('card');
-
+				// set the correct classes for the DOM
 				setCard(cardstring, i);
 			}
 
@@ -226,12 +230,14 @@ function cardToShort(id) {
 
 			console.log(tArray);
 
+			// Retrieve the trick cards
 			for (var i = 1; i <= 4; i++) {
 				console.log(i);
 				var cString = tArray[i].split('-');
 				console.log(cString);
 				var cardstring = cString[0];
 
+				// set the correct classes for the trick cards
 				setCard(cardstring, "trick_" + i);
 				console.log(i);
 			}
@@ -239,7 +245,7 @@ function cardToShort(id) {
 			// check how many cards the opponents should have
 			// TODO
 			
-
+			// calculate the points
 			var pArray = statusArray[2].split('/');
 
 			$("#playerPoints").text(pArray[0].split(',')[0]);
@@ -249,6 +255,7 @@ function cardToShort(id) {
 			console.log(status);
 		};
 
+		// a function that is called when the server determines that the game is over
 		hub.client.GameOver = function (winner) {
 			if (winner != "") {
 				$("#winner-dialog-popup").text(winner + " wins!");
