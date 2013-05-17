@@ -18,7 +18,7 @@ namespace Windshield.Test.MockObjects
 		}
 		public void AddRating(GameRating rating)
 		{
-			//dummy
+			throw new NotImplementedException();
 		}
 		public void DeleteGame(Game type)
 		{
@@ -26,7 +26,7 @@ namespace Windshield.Test.MockObjects
 		}
 		public void Save()
 		{
-			// dummy
+			throw new NotImplementedException();
 		}
 		public Game GetGameByName(string name)
 		{
@@ -50,36 +50,30 @@ namespace Windshield.Test.MockObjects
 
 		public IQueryable<GameRating> GetTopRatings()
 		{
-			// dummy
-			return null;
+			throw new NotImplementedException();
 		}
 
 		public IQueryable<GameRating> GetTopRatings(Game game)
 		{
-			// dummy
-			return null;
+			throw new NotImplementedException();
 		}
 
 		public IQueryable<User> GetTopPlayersByGame(Game game)
 		{
-			// dummy
-			return null;
+			throw new NotImplementedException();
 		}
 		public List<StatisticsViewModel> GetTopRatingsForViewModel(Game game)
 		{
-			// dummy
-			return null;
+			throw new NotImplementedException();
 		}
 		public List<PopularViewModel> GetTopGamesPlayedForViewModel(int? id)
 		{
-			// dummy
-			return null;
+			throw new NotImplementedException();
 		}
 
 		public List<PopularViewModel> GetNewGamesPlayedForViewModel()
 		{
-			// dummy
-			return null;
+			throw new NotImplementedException();
 		}
 	}
 }

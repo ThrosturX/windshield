@@ -21,6 +21,5 @@ namespace Windshield.Models
 		IQueryable<Game> GetAllGames();
 		IQueryable<GameRating> GetTopRatings();
 		IQueryable<GameRating> GetTopRatings(Game game);
-		GameRating GetGameRatingByNameAndGameID(string name, int id);
 	}
 }
