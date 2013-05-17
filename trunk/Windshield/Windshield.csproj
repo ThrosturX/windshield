@@ -279,6 +279,7 @@
     <Content Include="Images\2cool4skool.png" />
     <Content Include="Images\board.gif" />
     <Content Include="Images\boo.jpeg" />
+    <Content Include="Images\card-set.png" />
     <Content Include="Images\catan.jpg" />
     <Content Include="Images\Chess.jpg" />
     <Content Include="Images\cluedo.gif" />
