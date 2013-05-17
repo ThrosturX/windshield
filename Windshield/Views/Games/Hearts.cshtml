@@ -26,12 +26,28 @@
 				</div> 
 		</div>
 
-<div class="hearts-game-score">
-	<div id="GameScore">
-		@Model.GetPlayerName(0) Points: <span id="playerPoints">0</span>
-		@Model.GetPlayerName(1) Points: <span id="leftPoints">0</span>
-		@Model.GetPlayerName(2) Points: <span id="topPoints">0</span>
-		@Model.GetPlayerName(3) Points: <span id="rightPoints">0</span>
+<div class="hearts-game-score span12 margin-tb text-center alert alert-info">
+	<div class="row-fluid"><strong>Points:</strong></div>
+	<div class="row-fluid">
+		<div class="span2"></div>
+		<div class="span2">@Model.GetPlayerName(0)</div>
+		<div class="span2">@Model.GetPlayerName(1)</div>
+		<div class="span2">@Model.GetPlayerName(2)</div>
+		<div class="span2">@Model.GetPlayerName(3)</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span2"><strong>Match:</strong></div>
+		<div id="playerPoints" class="span2">0</div>
+		<div id="leftPoints" class="span2">0</div>
+		<div id="topPoints" class="span2">0</div>
+		<div id="rightPoints" class="span2">0</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span2"><strong>Total:</strong></div>
+		<div id="gPlayerPoints" class="span2">0</div>
+		<div id="gLeftPoints" class="span2">0</div>
+		<div id="gTopPoints" class="span2">0</div>
+		<div id="gRightPoints" class="span2">0</div>
 	</div>
 	<input type="button" id="GameRestart" class="btn" value="Restart" />
 </div>
