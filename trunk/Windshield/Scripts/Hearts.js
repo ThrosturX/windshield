@@ -289,6 +289,17 @@ function cardToShort(id) {
 			}, 2000);
 
 		});
+		function countHandCards(hand) {
+			var cards = hand.split(",");
+			var count = 0;
+			for (var i = 0; i < cards.length ; i++) {
+				if (cards[i] != "  ") {
+					count++;
+				}
+			}
+			return count;
+		}
+
 
 		setTimeout(function () {
 			dealCards();
