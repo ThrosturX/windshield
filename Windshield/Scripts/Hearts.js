@@ -46,7 +46,7 @@ function cardToShort(id) {
 	else if (element.hasClass("rank_J")) {
 		toString += "J|";
 	}
-	else if (element.hasClass("rank_D")) {
+	else if (element.hasClass("rank_Q")) {
 		toString += "D|";
 	}
 	else if (element.hasClass("rank_K")) {
@@ -54,16 +54,16 @@ function cardToShort(id) {
 	}
 
 
-	if(element.hasClass("heart")) {
+	if(element.hasClass("Heart")) {
 		toString += "H";
 	}
-	else if (element.hasClass("spade")) {
+	else if (element.hasClass("Spade")) {
 		toString += "S";
 	}
-	else if (element.hasClass("diam")) {
+	else if (element.hasClass("Diamond")) {
 		toString += "D";
 	}
-	else if (element.hasClass("club")) {
+	else if (element.hasClass("Club")) {
 		toString += "C";
 	}
 
@@ -160,16 +160,16 @@ function cardToShort(id) {
 			$("#" + pos).show();
 
 			if (card[1] === "H") {
-				suit = "heart";
+				suit = "Heart";
 			}
 			else if (card[1] === "S") {
-				suit = "spade";
+				suit = "Spade";
 			}
 			else if (card[1] === "D") {
-				suit = "diam";
+				suit = "Diamond";
 			}
 			else if (card[1] === "C") {
-				suit = "club";
+				suit = "Club";
 			}
 			else {
 				$("#" + pos).hide();
@@ -178,16 +178,6 @@ function cardToShort(id) {
 			$("#" + pos).addClass(rank + " " + suit + " card");
 			//if (($(".spanDisplay_" + pos).is(':empty'))) {
 			//alert($(".spanDisplay_" + pos).text());
-			if ($(".spanDisplay_" + pos).text().trim() == "") {
-				if (card[0] == 'T') {
-					$(".spanDisplay_" + pos).html("10");
-					$("#" + pos).append("&" + suit + "s;");
-				}
-				else {
-					$(".spanDisplay_" + pos).html(card[0]);
-					$("#" + pos).append("&" + suit + "s;");
-				}
-			}
 		}
 
 		hub.client.Broadcast = function (status) {
