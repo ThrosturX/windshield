@@ -95,6 +95,11 @@ namespace Windshield.Models.Games
 				cardList.Add(Card.CreateCardString(card));
 			}
 
+			for (int i = cardList.Count; i < 13; i++)
+			{
+				cardList.Add("  ");
+			}
+
 			string str = String.Join(",", cardList);
 
 			return str;
