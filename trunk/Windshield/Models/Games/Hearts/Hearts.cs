@@ -841,7 +841,18 @@ namespace Windshield.Models.Games
 
 			try
 			{
-				return players[rnd.Next(4)].user.UserName;
+				int lowestScoreIndex = 0;
+				int lowestScore = 0;
+				for (int i = 0; i < 4; i++)
+				{
+					if (players[i].gamePoints <= lowestScore)
+					{
+						lowestScore = players[i].gamePoints;
+						lowestScoreIndex = i;
+					}
+				}
+
+				return players[lowestScoreIndex].user.UserName;
 			}
 			catch (Exception)
 			{
