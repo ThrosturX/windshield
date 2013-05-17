@@ -139,6 +139,17 @@ function cardToShort(id) {
 
 	}
 
+	function countHandCards(hand) {
+		var cards = hand.split(",");
+		var count = 0;
+		for (var i = 0; i < cards.length ; i++) {
+			if (cards[i] != "  ") {
+				count++;
+			}
+		}
+		return count;
+	}
+
 	$(document).ready(function () {
 		/* retrieves neccesary information from the DOM */
 		var group = $("#group-span").html();
@@ -242,8 +253,15 @@ function cardToShort(id) {
 				console.log(i);
 			}
 
+			$(".cardback").hide();
 			// check how many cards the opponents should have
-			// TODO
+			for (var i = 1; i < 4; i++) {
+				var numCards = countHandCards(handArray[i]);
+
+				for (var j = 0; j < numCards; j++) {
+					$("#" + (i * 13 + j + 1)).show();
+				}
+			}
 			
 			// calculate the points
 			var pArray = statusArray[2].split('/');
@@ -289,17 +307,6 @@ function cardToShort(id) {
 			}, 2000);
 
 		});
-		function countHandCards(hand) {
-			var cards = hand.split(",");
-			var count = 0;
-			for (var i = 0; i < cards.length ; i++) {
-				if (cards[i] != "  ") {
-					count++;
-				}
-			}
-			return count;
-		}
-
 
 		setTimeout(function () {
 			dealCards();
