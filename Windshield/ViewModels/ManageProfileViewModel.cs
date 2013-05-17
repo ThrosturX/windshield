@@ -6,7 +6,7 @@ using Windshield.Models;
 
 namespace Windshield.ViewModels
 {
-	public class AccountChangeUserDetailsViewModel
+	public class ManageProfileViewModel
 	{
 		public User currentUserModel { get; set; }
 		public UserDetail changeUserDetailsModel { get; set; }

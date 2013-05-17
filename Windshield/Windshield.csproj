@@ -212,11 +212,11 @@
     <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\GameDescriptionViewModel.cs" />
     <Compile Include="ViewModels\GameLobbyViewModel.cs" />
+    <Compile Include="ViewModels\ManageProfileViewModel.cs" />
     <Compile Include="ViewModels\PopularViewModel.cs" />
     <Compile Include="ViewModels\StatisticsViewModel.cs" />
     <Compile Include="Models\Repositories\UserRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\AccountChangeUserDetailsViewModel.cs" />
     <Compile Include="ViewModels\LobbyViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -376,7 +376,7 @@
     <Content Include="Views\Games\GameLobby.cshtml" />
     <Content Include="Views\Games\TicTacToe.cshtml" />
     <Content Include="Views\Games\Index.cshtml" />
-    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ManageProfile.cshtml" />
     <Content Include="Views\Games\Boards.cshtml" />
     <Content Include="Views\Games\Chat.cshtml" />
     <Content Include="Views\Shared\_GameImagePartial.cshtml" />

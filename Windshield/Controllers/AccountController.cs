@@ -147,25 +147,30 @@ namespace Windshield.Controllers
 		}
 
 		//
-		// GET: /Account/ChangePassword
+		// GET: /Account/ManageProfile
 
-		public ActionResult ChangePassword(ChangePasswordModel pwModel)
+		public ActionResult Manage()
+		{
+			return RedirectToAction("ManageProfile", new ChangePasswordModel());
+		}
+
+		public ActionResult ManageProfile(ChangePasswordModel pwModel)
 		{
 			User user = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString());
-			AccountChangeUserDetailsViewModel model = new AccountChangeUserDetailsViewModel();
+			ManageProfileViewModel model = new ManageProfileViewModel();
 			model.currentUserModel = user;
 			model.changeUserDetailsModel = user.UserDetail;
 			model.changePasswordModel = pwModel;
-			return View("ChangePassword", model);
+			return View("ManageProfile", model);
 		}
 
 		//
-		// POST: /Account/ChangePassword
+		// POST: /Account/ManageProfile
 
+		
 		[HttpPost]
-		public ActionResult ChangePassword(AccountChangeUserDetailsViewModel inModel)
+		public ActionResult ChangeUserPassword(ChangePasswordModel model)
 		{
-			var model = inModel.changePasswordModel;
 			if (ModelState.IsValid)
 			{
 				// ChangePassword will throw an exception rather
@@ -191,16 +196,16 @@ namespace Windshield.Controllers
 				}
 			}
 			// If we got this far, something failed, redisplay form
-			return RedirectToAction("ChangePassword", model);
+			return RedirectToAction("ManageProfile");
 		}
-
+		
 		//
 		// POST: /Account/ChangeUserDetails
 
 		[HttpPost]
-		public ActionResult ChangeUserDetail(AccountChangeUserDetailsViewModel model)
+		public ActionResult ChangeUserDetail(ManageProfileViewModel model)
 		{
-			UserDetail userDetail = userRepo.GetUserByName(System.Web.HttpContext.Current.User.Identity.Name.ToString()).UserDetail;
+			UserDetail userDetail = userRepo.GetUserByName(User.Identity.Name).UserDetail;
 			// Age
 			string inputAge = model.changeUserDetailsModel.age.ToString();
 			int outputAge;
@@ -237,6 +242,9 @@ namespace Windshield.Controllers
 			userRepo.Save();
 			return RedirectToAction("ChangeInformationSuccess", "Account");
 		}
+
+		//
+		// GET: /Account/ChangeInformationSuccess
 
 		public ActionResult ChangeInformationSuccess()
 		{

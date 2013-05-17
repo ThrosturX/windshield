@@ -66,7 +66,6 @@
 									@if (User.Identity.IsAuthenticated)
 									{
 									<li>@Html.ActionLink("My Boards", "MyBoards", "Games")</li>
-									<li>@Html.ActionLink("CARDS", "DisplayCard", "Home")</li>
 									}
 								</ul>
 								<ul class="nav pull-right">
@@ -74,7 +73,7 @@
 									@if (Request.IsAuthenticated)
 									{
 									<li>
-										@Html.ActionLink(User.Identity.Name, "ChangePassword", "Account", routeValues: null, htmlAttributes: new { @class = "username" })
+										@Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username" })
 									</li>
 									<li>
 										<a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
@@ -121,7 +120,7 @@
 
 		<!-- SCRIPTS -->
 
-		<!-- COMING SOON -->
+		<!-- scripts should somehow be moved to the bottom of the html; need to check if there is a neat way to do this with ASPNET MVC -->
 
 </body>
 </html>
