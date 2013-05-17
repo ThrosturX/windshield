@@ -279,13 +279,13 @@ namespace Windshield.Controllers
 		/// </summary>
 		public ActionResult Boards(Game game)
 		{
-			// EDIT: 15 - 11:00 - Ragnar and Bjorn
+			// EDIT: 17 - 00:30 - Ragnar and Elin
 			
 			var viewModel = new BoardTableViewModel(game.name);
-			foreach (Board board in boardRepo.GetBoards(gameRepo.GetGameByName(game.name)))
-			{
-				viewModel.Add(board);
-			}
+			var result = from boards in boardRepo.GetBoards(gameRepo.GetGameByName(game.name))
+						 where boards.startDate == null
+						 select boards;
+			viewModel.Add(result);
 			return View("Boards", viewModel);
 		}
 
