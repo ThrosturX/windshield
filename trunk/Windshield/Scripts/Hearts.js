@@ -208,9 +208,9 @@ function cardToShort(id) {
 				console.log(playerThree);
 				console.log(playerFour);
 			}
-
+		
+		
 			var cardArray = handArray[index].split(",");
-
 			// display the player's cards
 			for (var i = 1; i <= 13; i++) {
 				// extract card from string
@@ -219,6 +219,7 @@ function cardToShort(id) {
 
 				setCard(cardstring, i);
 			}
+
 
 			// place any trick cards into their positions
 			var tArray = statusArray[0].split(',');
@@ -237,7 +238,14 @@ function cardToShort(id) {
 
 			// check how many cards the opponents should have
 			// TODO
+			
 
+			var pArray = statusArray[2].split('/');
+
+			$("#playerPoints").text(pArray[0].split(',')[0]);
+			$("#leftPoints").text(pArray[1].split(',')[0]);
+			$("#topPoints").text(pArray[2].split(',')[0]);
+			$("#rightPoints").text(pArray[3].split(',')[0]);
 			console.log(status);
 		};
 
