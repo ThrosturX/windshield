@@ -81,5 +81,10 @@ namespace Windshield.Test.MockObjects
 		{
 			throw new NotImplementedException();
 		}
+
+		public GameRating GetGameRatingByNameAndGameID(string name, int id)
+		{
+			return null;
+		}
 	}
 }
