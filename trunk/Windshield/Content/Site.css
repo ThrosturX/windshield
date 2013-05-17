@@ -326,8 +326,9 @@ table#tic-tac-toe td:hover
   padding-left: .1em;
   letter-spacing: -.2em;
   position: absolute;
-  background: #fff url('http://d37rcl8t6g8sj5.cloudfront.net/wp-content/uploads/card-set.png') no-repeat;
-  background-size: 1300% 400%;
+  /*background: #fff url('http://d37rcl8t6g8sj5.cloudfront.net/wp-content/uploads/card-set.png') no-repeat;*/
+  background: #fff url("../Images/playingcards.png");
+  background-size: 1450% 600%;
 }
 .spanDisplay
 {
@@ -341,41 +342,41 @@ table#tic-tac-toe td:hover
 	background-size: 100% 100%;
 }
 
-.heart      
+.Heart      
 { 
-        background-position-y: 100%; 
+        background-position-y: 46.7%; 
         color: #890000;
 
 }
-.spade
+.Spade
 {
-        background-position-y: 66.6%;
+        background-position-y: 25%;
         color: black;
 }
-.diam
+.Diamond
 {
-        background-position-y: 33.3%;
+        background-position-y: 69.3%;
         color: #890000;
 }
-.club
+.Club
 {
-        background-position-y: 0%;
+        background-position-y: 2.6%;
         color: black;
 }
-.rank_K { background-position-x: 100%;}
-.rank_Q { background-position-x: 91.7%;}
-.rank_J { background-position-x: 83.3%;}
-.rank_T { background-position-x: 75%;}
-.rank_9 {background-position-x: 66.5%;}
-.rank_8 {background-position-x: 58.2%;}
-.rank_7 {background-position-x: 49.8%;}
-.rank_6 {background-position-x: 41.7%;}
-.rank_5 {background-position-x: 33.1%;}
-.rank_4 {background-position-x: 24.6%;}
-.rank_3 {background-position-x: 17%;}
-.rank_2 {background-position-x: 8.5%;}
-.rank_1 {background-position-x: 0%;}
-.rank_A {background-position-x: 0%;}
+.rank_K { background-position-x: 96.5%;}
+.rank_Q { background-position-x: 88.8%;}
+.rank_J { background-position-x: 81.1%;}
+.rank_T { background-position-x: 73.4%;}
+.rank_9 {background-position-x: 65.7%;}
+.rank_8 {background-position-x: 58%;}
+.rank_7 {background-position-x: 50.3%;}
+.rank_6 {background-position-x: 42.6%;}
+.rank_5 {background-position-x: 34.9%;}
+.rank_4 {background-position-x: 27.2%;}
+.rank_3 {background-position-x: 19.5%;}
+.rank_2 {background-position-x: 11.8%;}
+.rank_1 {background-position-x: 4.1%;}
+.rank_A {background-position-x: 4.1%;}
 
 
 #felt 
