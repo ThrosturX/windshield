@@ -26,6 +26,16 @@
 				</div> 
 		</div>
 
+<div class="hearts-game-score">
+	<div id="GameScore">
+		@Model.GetPlayerName(0) Points: <span id="playerPoints">0</span>
+		@Model.GetPlayerName(1) Points: <span id="leftPoints">0</span>
+		@Model.GetPlayerName(2) Points: <span id="topPoints">0</span>
+		@Model.GetPlayerName(3) Points: <span id="rightPoints">0</span>
+	</div>
+	<input type="button" id="GameRestart" class="btn" value="Restart" />
+</div>
+
 <span id="group-span" style="display:none">@Model.id</span>
 <span id="currentUser-span" style="display:none">@(Context.User.Identity.Name)</span>
 <span id="playerOne-span" style="display:none">@Model.GetPlayerName(0)</span>
