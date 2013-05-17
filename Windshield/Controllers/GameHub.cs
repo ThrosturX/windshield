@@ -92,13 +92,14 @@ namespace Windshield.Controllers
 						/*Change elo points for all players on the board. -10 for loosers +10 for winner. */
 						
 						//Gets all users from board.
-						var listUser = boardRepository.GetBoardUsers(board);
+						List<User> listUser = new List<User>();
+						listUser = boardRepository.GetBoardUsers(board).ToList();
 						
 						foreach (var player in listUser)
 						{
 							//Fetching GameRating from database for player.
 							GameRating rating;
-							rating = userRepository.GetGameRatingByGame(player, board.Game);
+							rating = gameRepository.GetGameRatingByNameAndGameID(player.UserName, board.idGame);
 							//Checking if player is the winner, if so, he gets 10 elo, otherwise he looses 10 elo
 							if (player.UserName == winner)
 							{
@@ -107,8 +108,7 @@ namespace Windshield.Controllers
 							else 
 							{
 								rating.rating = rating.rating - 10;					
-							} 
-							
+							}
 							gameRepository.Save();
 						}
 

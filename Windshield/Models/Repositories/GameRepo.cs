@@ -173,5 +173,15 @@ namespace Windshield.Models
 
 			return model;
 		}
+
+		public GameRating GetGameRatingByNameAndGameID(string name, int id)
+		{
+
+			var result = (from g in GameRepo.db.GameRatings
+						  where g.userName == name && g.idGame == id
+						  select g).SingleOrDefault();
+
+			return result;
+		}
 	}
 }
