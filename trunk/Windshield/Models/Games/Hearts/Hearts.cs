@@ -772,7 +772,7 @@ namespace Windshield.Models.Games
 
 		private int FinishGame(HPlayer winner)
 		{
-			throw new NotImplementedException();
+			return 2;
 		}
 
 		private HPlayer CheckWinner()
