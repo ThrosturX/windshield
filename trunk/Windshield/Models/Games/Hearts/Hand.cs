@@ -99,5 +99,11 @@ namespace Windshield.Models.Games.Hearts
 
 			return str;
 		}
+		
+		// slightly unnecessary but more descriptive
+		internal void RemoveCard(Card card)
+		{
+			this.Remove(card);
+		}
 	}
 }

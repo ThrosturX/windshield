@@ -103,8 +103,14 @@ namespace Windshield.Models.Games.Hearts
 		{
 			KeyValuePair<HPlayer, Card> pair;
 
-			pair = this.ElementAt(index);
-
+			try
+			{
+				pair = this.ElementAt(index);
+			}
+			catch (Exception)
+			{
+				return new Card();
+			}
 			if (pair.Value == null)
 			{
 				return new Card(Rank.Joker, Suit.Joker);
@@ -117,9 +123,12 @@ namespace Windshield.Models.Games.Hearts
 		{
 			KeyValuePair<HPlayer, Card> pair;
 
-			pair = this.ElementAt(index);
+			try
+			{
+				pair = this.ElementAt(index);
+			}
 
-			if (pair.Value == null)
+			catch(Exception)
 			{
 				return " ";
 			}
