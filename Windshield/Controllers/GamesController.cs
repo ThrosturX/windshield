@@ -36,6 +36,20 @@ namespace Windshield.Controllers
 
 			if (board == null)
 			{
+				// the board does not exist
+				return View("Error");
+			}
+
+			if (board.endDate != null)
+			{
+				// board has ended
+				return View("Error");
+			}
+
+			User user = userRepo.GetUserByName(User.Identity.Name);
+			if (!boardRepo.GetBoardUsers(board).Contains(user))
+			{
+				// user is not a player on this board
 				return View("Error");
 			}
 
@@ -118,11 +132,12 @@ namespace Windshield.Controllers
 
 
 		[Authorize]
-		public ActionResult JoinLobby(int idBoard)
+		public ActionResult JoinBoard(int idBoard)
 		{
 			Board board = boardRepo.GetBoardById(idBoard);
 			if (board == null)
 			{
+				// board does not exist
 				return View("Error");
 			}
 
@@ -167,7 +182,15 @@ namespace Windshield.Controllers
 			vm.guests = new List<User>();
 			vm.guests.Add(user); */
 
-			return RedirectToAction("GameLobby", new { idBoard = board.id });
+			if (board.startDate == null)
+			{
+				return RedirectToAction("GameLobby", new { idBoard = board.id });
+			}
+			else
+			{
+				return RedirectToAction("Index", new { idBoard = board.id });
+			}
+
 		}
 
 		public JsonResult GetPlayersInGameLobby(Board board)
