@@ -119,13 +119,19 @@
 			// place any trick cards into their positions
 			var tArray = statusArray[0].split(',');
 
+			console.log(tArray);
+
 			for (var i = 1; i <= 4; i++) {
+				console.log(i);
 				var cString = tArray[i].split('-');
-				var cardstring = cString[i];
+				console.log(cString);
+				var cardstring = cString[0];
 
 				setCard(cardstring, "trick_" + i);
+				console.log(i);
 			}
 
+			console.log(status);
 		};
 
 		hub.client.GameOver = function (winner) {
