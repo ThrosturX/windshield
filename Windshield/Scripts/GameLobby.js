@@ -4,7 +4,7 @@
 	var hub = $.connection.gameHub;
 
 	hub.client.Start = function (id) {
-		self.location = "JoinGame?idBoard=" + id;
+		self.location = "/../Games?idBoard=" + id;
 	}
 
 	hub.client.UpdateList = function () {
@@ -25,9 +25,15 @@
 		});
 	};
 
+	$("#start-game-button").click(function (event) {
+		event.preventDefault();
+		self.location = "/../StartGame?idBoard=" + id;
+		hub.server.startGame(group);
+	})
+
 	$.connection.hub.start().done(function () {
 		hub.server.join(group);
 		hub.server.refreshLobby(group);
-	});
 
+	});
 });
