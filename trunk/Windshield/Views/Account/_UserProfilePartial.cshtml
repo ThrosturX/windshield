@@ -1,4 +1,4 @@
-﻿@model Windshield.ViewModels.AccountChangeUserDetailsViewModel
+﻿@model Windshield.ViewModels.ManageProfileViewModel
 
 
 @using (Html.BeginForm("ChangeUserDetail", "Account")) 
@@ -60,7 +60,7 @@
         </div>
 		<div class="control-group">
 			<input type="submit" class="btn" value="Change user details" />
-			<button class="btn"><a href="@Html.ActionLink("Home", "About", "Home")"></a>Cancel</button>
+			@Html.ActionLink("Cancel", "Index", new { controller = "Home" }, new { @class = "btn" })
 		</div>
     </fieldset>
 	</form>

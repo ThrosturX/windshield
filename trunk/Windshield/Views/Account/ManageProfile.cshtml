@@ -1,4 +1,4 @@
-﻿@model Windshield.ViewModels.AccountChangeUserDetailsViewModel
+﻿@model Windshield.ViewModels.ManageProfileViewModel
 
 
 
@@ -8,7 +8,7 @@
 
 <div class="row-fluid">
 	<div class="span6">
-		@Html.Partial("_UserProfilePartial")
+		@Html.Partial("_UserProfilePartial", Model)
 	</div>
 	<div class="span6">
 		<div>

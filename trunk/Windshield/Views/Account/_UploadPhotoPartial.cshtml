@@ -1,7 +1,6 @@
 ﻿
 <form class="form-horizontal">
 @Html.AntiForgeryToken()
-@Html.Partial("_ValidationSummaryPartial", ViewData.ModelState)
 
 <fieldset>
 	<legend>Upload Photo</legend>
@@ -11,7 +10,8 @@
 			<div>
 				<span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
 				<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-				<button type="submit" class="btn fileupload-exists">Add</button>
+				@Html.ActionLink("Cancel", "Index", new { controller = "Home" }, new { @class = "btn" })
+				<!-- <button class="derp btn fileupload-exists">Add</button>  TODO: type="submit" -->
 			</div>
 		</div>
 	</div>
