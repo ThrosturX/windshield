@@ -48,6 +48,17 @@ namespace Windshield.Models
 			db.SubmitChanges();
 		}
 
+		//Getting game ratings by name and id to update rating.
+		public GameRating GetGameRatingByNameAndGameID(string name, int id)
+		{
+
+			var result = (from g in GameRepo.db.GameRatings
+						  where g.userName == name && g.idGame == id
+						  select g).SingleOrDefault();
+
+			return result;
+		}
+
 		//
 		// query methods
 

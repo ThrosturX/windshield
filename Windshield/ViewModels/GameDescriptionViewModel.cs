@@ -6,6 +6,7 @@ using Windshield.Models;
 
 namespace Windshield.ViewModels
 {
+	//Getting necessary data for GameDescription Site.
 	public class GameDescriptionViewModel
 	{
 		public Game game;

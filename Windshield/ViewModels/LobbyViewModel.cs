@@ -6,6 +6,7 @@ using Windshield.Models;
 
 namespace Windshield.ViewModels
 {
+	//Getting Information for the lobby view.
 	public class LobbyViewModel
 	{
 		public int boardId { get; set; }

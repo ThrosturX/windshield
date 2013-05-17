@@ -28,6 +28,7 @@ namespace Windshield.Models
 		{
 			db.Boards.InsertOnSubmit(board);
 		}
+		//adds player to the table
 
 		public void AddPlayer(Player player)
 		{
@@ -36,7 +37,6 @@ namespace Windshield.Models
 
 		//
 		// delete methods
-
 		/// <summary>
 		/// Deletes the board from the table
 		/// </summary>
@@ -47,7 +47,6 @@ namespace Windshield.Models
 
 		//
 		// commit methods
-
 		/// <summary>
 		/// Submits all changes done to the database
 		/// </summary>

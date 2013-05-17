@@ -322,8 +322,10 @@ table#tic-tac-toe td:hover
   padding-left: .1em;
   letter-spacing: -.2em;
   position: absolute;
-  background: #fff url("../Images/playingcards.png");
+  background-image: url("../Images/playingcards.png");
+  background-color: #fff;
   background-size: 1450% 600%;
+
 }
 .spanDisplay
 {
