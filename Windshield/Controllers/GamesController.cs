@@ -127,6 +127,7 @@ namespace Windshield.Controllers
 			viewModel.guests = users;
 			viewModel.Image = board.Game.image;
 			viewModel.theName = board.Game.name;
+			viewModel.ownerName = board.ownerName;
 
 			return View("GameLobby", viewModel);
 		}

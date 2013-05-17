@@ -14,7 +14,7 @@
 		<option value="" selected="selected"> ... </option>
 		@foreach (var game in Model)
 		{
-		<option value=@game.id>@game.name</option>
+		<option value="@game.id">@game.name</option>
 		}
 	</select>
 </div>
@@ -22,11 +22,9 @@
 <table id="statistics" class="table table-hover">
 		<thead>
 			<tr>
-				<th>Username</th>
-				<th>Elo Rating</th>
-				<th>Games Played</th>
-				<th>Wins</th>
-				<th>Losses</th>
+				<th class="span6">Username</th>
+				<th class="span3">Elo Rating</th>
+				<th class="span3">Games Played</th>
 			</tr>
 		</thead>
 	<tbody id="statistics-table-body">
@@ -41,8 +39,6 @@
 				<td> ${Name}</td>
 				<td> ${Rating} </td>
 				<td> ${TimesPlayed} </td>
-				<td>1337</td>
-				<td>42</td>
 			</tr>
 
 </script>

@@ -13,5 +13,6 @@ namespace Windshield.ViewModels
 		public string Image { get; set; }
 		public string theName { get; set; }
 		public string modelName { get; set; }
+		public string ownerName { get; set; }
 	}
 }

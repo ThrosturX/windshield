@@ -1,39 +1,40 @@
 ﻿@model Windshield.ViewModels.BoardViewModel
 
-<table id="tic-tac-toe" class="table-bordered">
-	<tbody>
-		<tr>
-			<td id="cell0"></td>
-			<td id="cell1"></td>
-			<td id="cell2"></td>
-		</tr>
-		<tr>
-			<td id="cell3"></td>
-			<td id="cell4"></td>
-			<td id="cell5"></td>
-		</tr>
-		<tr>
-			<td id="cell6"></td>
-			<td id="cell7"></td>
-			<td id="cell8"></td>
-		</tr>
-	</tbody>
-</table>
-
-<div id="winner-dialog-popup alert alert-info">
-
+<div class ="row-fluid">
+	<table id="tic-tac-toe" class="table-bordered cursor-pointer">
+		<tbody>
+			<tr>
+				<td id="cell0"></td>
+				<td id="cell1"></td>
+				<td id="cell2"></td>
+			</tr>
+			<tr>
+				<td id="cell3"></td>
+				<td id="cell4"></td>
+				<td id="cell5"></td>
+			</tr>
+			<tr>
+				<td id="cell6"></td>
+				<td id="cell7"></td>
+				<td id="cell8"></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
-<div class="ttt-game-score">
-	<div id="GameScore">
-		Wins: <span id="GameWins">0</span>
-		Draws: <span id="GameDraws">0</span>
-		Losses: <span id="GameLoss">0</span>
+<hr>
+<div class="row-fluid">
+	<div id="game-win" class="alert alert-success span2 offset3 text-center">0</div>
+	<div id="game-draw" class="alert alert-warning span2 text-center">0</div>
+	<div id="game-loss" class="alert alert-error span2 text-center">0</div>
+</div>
+<div class="row-fluid">
+	<div id="popup" class="span6 offset3 alert alert-info text-center">
+
 	</div>
-	<input type="button" id="GameRestart" class="btn" value="Restart" />
 </div>
-
-
-
+<div class="row-fluid text-center">
+	<input type="button" id="game-restart" class="btn" value="Restart" />
+</div>
 
 <script>
 	$(document).ready(function () {
@@ -44,8 +45,7 @@
 		var playerOne = '@Model.GetPlayers(1)[0].UserName';
 		var playerTwo = '@Model.GetPlayers(2)[1].UserName';
 		
-		$("#GameRestart").hide();
-		$("#winner-dialog-popup").hide();
+		$("#game-restart").hide();
 
 		hub.client.Broadcast = function (status) {
 			for (var i=0; i<9; i++)
@@ -56,41 +56,33 @@
 			var statusArray = status.split("|");
 
 			if (currentUser == playerOne) {
-				$("#GameWins").text(statusArray[3]);
-				$("#GameDraws").text(statusArray[4]);
-				$("#GameLoss").text(statusArray[5]);
+				$("#game-win").text(statusArray[3]);
+				$("#game-draw").text(statusArray[4]);
+				$("#game-loss").text(statusArray[5]);
 			}
 			else {
-				$("#GameWins").text(statusArray[5]);
-				$("#GameDraws").text(statusArray[4]);
-				$("#GameLoss").text(statusArray[3]);
+				$("#game-win").text(statusArray[5]);
+				$("#game-draw").text(statusArray[4]);
+				$("#game-loss").text(statusArray[3]);
 			}
 		};
 
 		hub.client.GameOver = function (winner) {
 			if (winner != "") {
-				$("#winner-dialog-popup").text(winner + " wins!");
+				$("#popup").text(winner + " wins!");
 				if (winner == currentUser) {
-					$("#GameWins").html(parseInt($("#GameWins").html(), 10) + 1);
+					$("#game-win").html(parseInt($("#game-win").html(), 10) + 1);
 				}
 				else {
-					$("#GameLoss").html(parseInt($("#GameLoss").html(), 10) + 1);
+					$("#game-loss").html(parseInt($("#game-loss").html(), 10) + 1);
 				}
 			}
 			else {
-				$("#winner-dialog-popup").text("It's a draw!");
-				$("#GameDraws").html(parseInt($("#GameDraws").html(), 10) + 1);
+				$("#popup").text("It's a draw!");
+				$("#game-draw").html(parseInt($("#game-draw").html(), 10) + 1);
 			}
 
-			$("#tic-tac-toe").hide();
-			$("#winner-dialog-popup").show(2);
-
-			setTimeout(function () {
-				$("#tic-tac-toe").show();
-				$("#winner-dialog-popup").hide();
-			}, 3000);
-
-			$("#GameRestart").show();
+			$("#game-restart").show();
 		}
 
 		$.connection.hub.start().done(function () {
@@ -102,10 +94,10 @@
 				hub.server.tryAction(group, "insert" + this.id, currentUser);
 			});
 
-			$("#GameRestart").click(function () {
+			$("#game-restart").click(function () {
 				hub.server.tryAction(group, "checkAI", currentUser);
-	//			setTimeout(function () { hub.server.refresh(group); }, 1250);
-				$("#GameRestart").hide();
+				//setTimeout(function () { hub.server.refresh(group); }, 1250);
+				$("#game-restart").hide();
 			});
 		});
 	});

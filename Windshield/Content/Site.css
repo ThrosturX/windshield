@@ -106,7 +106,10 @@ h2
 	padding-left: 32px;
 }
 
-
+.cursor-pointer
+{
+	cursor: pointer;
+}
 
 
 
@@ -291,13 +294,6 @@ table#tic-tac-toe td
 table#tic-tac-toe td:hover
 { 
 	background-color: #e6e6e6;
-	cursor: pointer;
-} 
-
-.ttt-game-score
-{
-	text-align: center;
-	padding: 12px 0;
 }
 
 
