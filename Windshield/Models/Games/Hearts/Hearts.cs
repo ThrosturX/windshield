@@ -253,6 +253,9 @@ namespace Windshield.Models.Games.Hearts
 				// add the card to the trick
 				trick.Add(new KeyValuePair<HPlayer, Card>(player, card));
 
+				// remove the card from the hand
+				player.hand.RemoveCard(card);
+
 				// check if this is the last card for this trick
 				if (trick.Count == 4)
 				{
@@ -383,7 +386,15 @@ namespace Windshield.Models.Games.Hearts
 				string[] handCards = hInfo[i].Split(',');
 				for (int j = 0; j < 13; ++j)
 				{
-					Card card = Card.SpawnCardFromString(handCards[j]);
+					Card card;
+					try
+					{
+						card = Card.SpawnCardFromString(handCards[j]);
+					}
+					catch (Exception)
+					{
+						continue;
+					}
 
 					if (!card.IsJoker())
 					{
@@ -538,7 +549,10 @@ namespace Windshield.Models.Games.Hearts
 			foreach (var p in players)
 			{
 				if (p.user.UserName == sender)
+				{
 					player = p;
+					break;
+				}
 			}
 			
 			// not a valid sender
@@ -565,24 +579,24 @@ namespace Windshield.Models.Games.Hearts
 				try
 				{
 					// get suit
-					switch (cardString[1][0])
+					switch (cardString[2])
 					{
-						case 'H':
+						case "H":
 							{
 								card.suit = Suit.Heart;
 								break;
 							}
-						case 'S':
+						case "S":
 							{
 								card.suit = Suit.Spade;
 								break;
 							}
-						case 'D':
+						case "D":
 							{
 								card.suit = Suit.Diamond;
 								break;
 							}
-						case 'C':
+						case "C":
 							{
 								card.suit = Suit.Club;
 								break;
@@ -593,7 +607,7 @@ namespace Windshield.Models.Games.Hearts
 					
 					// get rank
 					int rank;
-					if (int.TryParse(cardString[2], out rank))
+					if (int.TryParse(cardString[1], out rank))
 					{
 						if (rank > 0 && rank < 13)
 						{
@@ -606,7 +620,7 @@ namespace Windshield.Models.Games.Hearts
 					}
 					else
 					{
-						switch (cardString[2][0])
+						switch (cardString[1][0])
 						{
 							case 'A':
 								{
@@ -653,7 +667,7 @@ namespace Windshield.Models.Games.Hearts
 			{
 				return 1; // do nothing, but refresh
 			}
-			else if (action.Contains("CheckAI"))
+			else if (action.Contains("checkAI"))
 			{
 				return ActionCompleted();
 			}
@@ -666,6 +680,7 @@ namespace Windshield.Models.Games.Hearts
 		{
 			// check if the match is over
 			HPlayer winner = CheckWinner();
+			int played = 0;
 
 			// if the match is over
 			if (winner != null)
@@ -676,10 +691,11 @@ namespace Windshield.Models.Games.Hearts
 			// it's not over, let the computer play!
 			while (turn.user.UserName.StartsWith("Computer"))
 			{
-				return PlayAI();
+				PlayAI();
+				played = 1;
 			}
 
-			return 0;
+			return played;
 		}
 
 		private int PlayAI()

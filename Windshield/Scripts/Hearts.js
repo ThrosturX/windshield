@@ -5,12 +5,12 @@ var trick_top = [];
 
 $(document).ready(function () {
 
-	$(".cardback").click(function () {
+	setTimeout(function () {
 		dealCards();
 		setTrickPosition();
-		setTimeout("displayTrick()", 5700);
+		//setTimeout("displayTrick()", 5700);
 		//displayTrick();
-	});
+	}, 700);
 
 
 

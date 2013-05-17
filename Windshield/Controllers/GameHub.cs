@@ -80,8 +80,7 @@ namespace Windshield.Controllers
 					break;
 
 				default:
-					iGame = null;  // TODO: Frá Ragnari Til Þrastar - "return error or nothing?"
-					break;
+					return;
 			}
 
 			string status = board.status;
