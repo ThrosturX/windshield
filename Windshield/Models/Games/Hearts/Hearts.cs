@@ -241,20 +241,9 @@ namespace Windshield.Models.Games.Hearts
 						}
 					}
 				}
-				else if (mustPlayTwoOfClubs)
-				{
-					// only allow two of culbs to be played
-					if (card.face != 2 || card.suit != Suit.Club)
-					{
-						return false;
-					}
-				}
 
 				// add the card to the trick
 				trick.Add(new KeyValuePair<HPlayer, Card>(player, card));
-
-				// remove the card from the hand
-				player.hand.RemoveCard(card);
 
 				// check if this is the last card for this trick
 				if (trick.Count == 4)
@@ -283,6 +272,10 @@ namespace Windshield.Models.Games.Hearts
 				trick = new Trick(player, card);
 				trickOngoing = true;
 			}
+
+			// remove the card from the hand
+			player.hand.RemoveCard(card);
+
 
 			IncrementTurn();
 			return true;
@@ -413,6 +406,10 @@ namespace Windshield.Models.Games.Hearts
 				players[i].gamePoints = thePoints;
 				// finally, check if two of clubs must be played...
 				if (players[i].gamePoints > 0 || players[i].matchPoints > 0)
+				{
+					mustPlayTwoOfClubs = false;
+				}
+				if (players[i].hand.Count < 13)
 				{
 					mustPlayTwoOfClubs = false;
 				}
@@ -660,6 +657,7 @@ namespace Windshield.Models.Games.Hearts
 				// try playing the card
 				if (PlayCard(player, card))
 				{
+					ActionCompleted();
 					return 1;	// success!
 				}
 			}
@@ -673,7 +671,7 @@ namespace Windshield.Models.Games.Hearts
 			}
 
 			// no success
-			return 0;
+			return 1; // refresh
 		}  //public bool PlayCard(HPlayer player, Card card)
 
 		public int ActionCompleted()

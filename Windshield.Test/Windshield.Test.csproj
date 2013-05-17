@@ -57,6 +57,7 @@
     <Compile Include="MockObjects\MockGameRepo.cs" />
     <Compile Include="MockObjects\MockUserRepo.cs" />
     <Compile Include="ModelTests\Hearts\TrickTest.cs" />
+    <Compile Include="ModelTests\Hearts\HandTest.cs" />
     <Compile Include="ModelTests\TicTacToe\TicTacToeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ModelTests\Hearts\HeartsTest.cs" />

@@ -103,7 +103,7 @@ namespace Windshield.Models.Games.Hearts
 		// slightly unnecessary but more descriptive
 		internal void RemoveCard(Card card)
 		{
-			this.Remove(card);
+			this.Remove(FindCard(card.face, card.suit));
 		}
 	}
 }
