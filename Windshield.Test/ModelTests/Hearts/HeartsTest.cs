@@ -18,6 +18,7 @@ namespace Windshield.Test.ModelTests
 		private MockBoardRepo brd;
 		private Hearts game;
 
+		//Used in most of the tests
 		[TestInitialize]
 		public void Setup()
 		{
@@ -51,6 +52,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void HeartsCheckIfComputerPlayerIsAdded()
 		{
+			Setup();
 			User p = new User();
 			List<User> users = new List<User>();
 			users.Add(p);
@@ -62,18 +64,22 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void HeartsCheckingWhetherPlayersAreDealtRandomCards()
 		{
+			Setup();
 			CardDeck deck = new CardDeck();
 
 			for (int i = 0; i<4; ++i)
 			{
 				if (deck.GetCards(13).Equals(game.players[i].hand.ToList()))
+				{
 					Assert.Fail();
+				}
 			}
 		}
 
 		[TestMethod]
 		public void HeartsCheckStartingPlayerHasTwoOfClubs()
 		{
+			Setup();
 			HPlayer starter = new HPlayer();
 			bool failMe = true;
 
@@ -82,25 +88,30 @@ namespace Windshield.Test.ModelTests
 			foreach (var card in starter.hand)
 			{
 				if (card.suit == Suit.Club && card.face == 2)
+				{
 					failMe = false;
+				}
 			}
 
 			if (failMe)
+			{
 				Assert.Fail();
+			}
 
 		}
 
 		[TestMethod]
 		public void HeartsCheckIfFirstTurnIsCorrect()
 		{
+			Setup();
 			Assert.AreEqual(game.GetStartingPlayer(null), game.turn);
 		}
 
 		[TestMethod]
 		public void HeartsCheckIncrement()
 		{
+			Setup();
 			HPlayer first = game.turn;
-
 			game.IncrementTurn();
 
 			Assert.AreNotEqual(first, game.turn);
@@ -109,8 +120,8 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void HeartsnsureTurnsCoverAllPlayersInSomeOrder()
 		{
+			Setup();
 			HPlayer [] playerReference = new HPlayer[4];
-
 			HPlayer first = game.turn;
 
 			for (int i = 0; i < 4; ++i)
@@ -135,7 +146,7 @@ namespace Windshield.Test.ModelTests
 
 		}
 
-		// Redundant test, the controller ensures that only 4 players can be placed in a certain game instance.
+		// The controller should ensure that only 4 players can be placed in a certain game instance.
 		[TestMethod]
 		public void HeartsCreatingALargeHeartsGroupThrowsTooManyPlayersException()
 		{
@@ -181,6 +192,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void HeartsCheckIfTrickIsCreated()
 		{
+			Setup();
 			HPlayer p = game.GetStartingPlayer(null);
 			Card r = null;
 			foreach (var card in p.hand)
@@ -200,6 +212,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void HeartsTryPlayingWrongCardAtStart()
 		{
+			Setup();
 			HPlayer p = game.GetStartingPlayer(null);
 			foreach (var card in p.hand)
 			{
@@ -213,6 +226,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void HeartsTryPlayingTwoOfClubsAtStart()
 		{
+			Setup();
 			HPlayer p = game.GetStartingPlayer(null);
 
 			Assert.IsTrue(game.PlayCard(p, p.hand.FindCard(2, Suit.Club)));
@@ -221,6 +235,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void HeartsPlaySecondCardInTrick()
 		{
+			Setup();
 			HPlayer p = game.GetStartingPlayer(null);
 			bool pass = false;
 
@@ -243,9 +258,11 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void HeartsPlayFullTrick()
 		{
+			Setup();
 			game.PlayCard(game.turn, game.turn.hand.FindCard(2, Suit.Club));
 			game.PlayCard(game.turn, game.turn.hand.FindPreferablyInSuit(Suit.Club));
 			game.PlayCard(game.turn, game.turn.hand.FindPreferablyInSuit(Suit.Club));
+
 			Assert.IsTrue(game.PlayCard(game.turn, game.turn.hand.FindPreferablyInSuit(Suit.Club)));
 		}
 
@@ -285,6 +302,7 @@ namespace Windshield.Test.ModelTests
 			builder.Append("0,0,West");
 
 			string testString = builder.ToString();
+
 			Assert.AreEqual(testString, game.GetStatus());
 		}
 
@@ -325,12 +343,14 @@ namespace Windshield.Test.ModelTests
 			builder.Append("0,0,West");
 
 			string testString = builder.ToString();
+
 			Assert.AreEqual(testString, game.GetStatus());
 		}
 
 		[TestMethod]
 		public void HeartsCheckingThatSaveStringsAreIdempotent()
 		{
+			Setup();
 			string status = game.GetStatus();
 
 			User n = usr.GetUserByName("North");
@@ -346,9 +366,7 @@ namespace Windshield.Test.ModelTests
 			users.Add(w);
 
 			Hearts newGame = new Hearts(users);
-
 			newGame.SetStatus(status);
-
 			string status2 = newGame.GetStatus();
 
 			Assert.AreEqual(status, status2);

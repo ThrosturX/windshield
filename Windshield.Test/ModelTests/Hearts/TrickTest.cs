@@ -11,6 +11,7 @@ namespace Windshield.Test.ModelTests
 	{
 		public Trick trick;
 		public HPlayer n, w, s, e;
+
 		[TestInitialize]
 		public void Setup()
 		{
@@ -27,18 +28,21 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void TrickSeeIfNorthClaimsTrick()
 		{
+			Setup();
 			Assert.AreEqual(trick.GetPlayerByCard(new Card(Rank.Ten, Suit.Club)), trick.GetClaimer().Key);
 		}
 
 		[TestMethod]
 		public void TrickSeeIfClaimerGets13Points()
 		{
+			Setup();
 			Assert.AreEqual(13, trick.GetClaimer().Value);
 		}
 
 		[TestMethod]
 		public void TrickClaimTwoHeartsForTwoPoints()
 		{
+			Setup();
 			Trick twoHearts = new Trick(n, new Card(Rank.Ace, Suit.Spade));
 			twoHearts.AddCard(w, new Card(Rank.Jack, Suit.Heart));
 			twoHearts.AddCard(s, new Card(5, Suit.Spade));

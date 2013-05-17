@@ -16,18 +16,22 @@ namespace Windshield.Test.MockObjects
 		{
 			rep.Add(type);
 		}
+
 		public void AddRating(GameRating rating)
 		{
 			throw new NotImplementedException();
 		}
+
 		public void DeleteGame(Game type)
 		{
 			rep.Remove(type);
 		}
+
 		public void Save()
 		{
 			throw new NotImplementedException();
 		}
+
 		public Game GetGameByName(string name)
 		{
 			var result = from game in rep 
@@ -62,10 +66,12 @@ namespace Windshield.Test.MockObjects
 		{
 			throw new NotImplementedException();
 		}
+
 		public List<StatisticsViewModel> GetTopRatingsForViewModel(Game game)
 		{
 			throw new NotImplementedException();
 		}
+
 		public List<PopularViewModel> GetTopGamesPlayedForViewModel(int? id)
 		{
 			throw new NotImplementedException();

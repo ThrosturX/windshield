@@ -24,7 +24,6 @@ namespace Windshield.Test.ModelTests
 			CardDeck deck = new CardDeck();
 
 			game.players[0].hand = new Hand(deck.GetCards(13));
-
 		}
 
 		[TestMethod]
@@ -37,7 +36,9 @@ namespace Windshield.Test.ModelTests
 		public void HandCheckForTwoOfHearts()
 		{
 			if (!game.players[0].hand.FindCard(2, Suit.Heart).IsEqual(new Card(2, Suit.Heart)))
+			{
 				Assert.Fail();
+			}
 		}
 
 		[TestMethod]
