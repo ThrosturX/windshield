@@ -1,5 +1,6 @@
 ﻿@model Windshield.ViewModels.BoardTableViewModel
 
+
 <!-- TODO: make it so the whole row is clickable -->
 
 @if (Model.IsEmpty)
@@ -13,17 +14,17 @@
 }
 else
 {
-<table class="table table-hover">
+<table class="table table-hover" data-provides="rowlink">
 
 	<thead>
 		<tr>
-			<th>
+			<th class="span5">
 				Game
 			</th>
-			<th>
+			<th class="span5">
 				Owner
 			</th>
-			<th>
+			<th class="span2">
 				Players
 			</th>
 			
@@ -34,13 +35,13 @@ else
 		@foreach (var row in Model.Rows)
 		{
 		<tr>
-			<td>
+			<td class="span5">
 				@Html.ActionLink(row.GameName, "JoinBoard", "Games", new {idBoard = @row.ID}, null)
 			</td>
-			<td>
+			<td class="span5">
 				@row.OwnerName
 			</td>
-			<td>
+			<td class="span2">
 				@row.Players / @row.MaxPlayers
 			</td>
 		</tr>

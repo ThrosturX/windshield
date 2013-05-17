@@ -209,6 +209,7 @@
     <Compile Include="Models\Repositories\IGameRepo.cs" />
     <Compile Include="Models\Repositories\IUserRepo.cs" />
     <Compile Include="Models\Games\TicTacToe\TicTacToe.cs" />
+    <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\GameDescriptionViewModel.cs" />
     <Compile Include="ViewModels\GameLobbyViewModel.cs" />
     <Compile Include="ViewModels\PopularViewModel.cs" />
@@ -307,6 +308,8 @@
     </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\bootstrap-fileupload.js" />
+    <Content Include="Scripts\bootstrap-rowlink.js" />
+    <Content Include="Scripts\bootstrap-rowlink.min.js" />
     <Content Include="Scripts\Card.js" />
     <Content Include="Scripts\GameLobby.js" />
     <Content Include="Scripts\GetPopularity.js" />
@@ -366,7 +369,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Statistics.cshtml" />
-    <Content Include="Views\Games\MyGames.cshtml" />
+    <Content Include="Views\Games\MyBoards.cshtml" />
     <Content Include="Views\Home\GameDescription.cshtml" />
     <Content Include="Views\Games\GameLobby.cshtml" />
     <Content Include="Views\Games\TicTacToe.cshtml" />

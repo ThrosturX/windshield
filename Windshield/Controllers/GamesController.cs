@@ -9,6 +9,7 @@ using Windshield.ViewModels;
 
 namespace Windshield.Controllers
 {
+	[Authorize]
     public class GamesController : Controller
     {
         private IBoardRepo boardRepo = null;
@@ -37,20 +38,20 @@ namespace Windshield.Controllers
 			if (board == null)
 			{
 				// the board does not exist
-				return View("Error");
+				return View("Error", new ErrorViewModel("Board", "Board does not exist."));
 			}
 
 			if (board.endDate != null)
 			{
 				// board has ended
-				return View("Error");
+				return View("Error", new ErrorViewModel("Board", "The board is no longer active."));
 			}
 
 			User user = userRepo.GetUserByName(User.Identity.Name);
 			if (!boardRepo.GetBoardUsers(board).Contains(user))
 			{
 				// user is not a player on this board
-				return View("Error");
+				return View("Error", new ErrorViewModel("Board", "You are not a player on this board."));
 			}
 
 			BoardViewModel viewModel = new BoardViewModel(board);
@@ -68,7 +69,7 @@ namespace Windshield.Controllers
 			// check if game exists
 			if (game == null)
 			{
-				return View("Error");
+				return View("Error", new ErrorViewModel("Game", "No game exists with this name."));
 			}
 			else
 			{
@@ -111,7 +112,7 @@ namespace Windshield.Controllers
 			Board board = boardRepo.GetBoardById(idBoard);
 			if (board == null)
 			{
-				return View("Error");
+				return View("Error", new ErrorViewModel("Board", "Board does not exist."));
 			}
 
 			// gets all users associated with the board
@@ -119,7 +120,7 @@ namespace Windshield.Controllers
 			if (users == null)
 			{
 				// this should never happen
-				return View("Error");
+				return View("Error", new ErrorViewModel("Board", "There are no players associated with this board."));
 			}
 			LobbyViewModel viewModel = new LobbyViewModel();
 			viewModel.boardId = idBoard;
@@ -138,13 +139,13 @@ namespace Windshield.Controllers
 			if (board == null)
 			{
 				// board does not exist
-				return View("Error");
+				return View("Error", new ErrorViewModel("Board", "Board does not exist."));
 			}
 
 			bool gameIsFull = board.Players.Count() >= board.Game.maxPlayers;
 			if (gameIsFull)
 			{
-				return View("Error");
+				return View("Error", new ErrorViewModel("Board", "There is no room for more players on this board."));
 			}
 
 			User user = userRepo.GetUserByName(User.Identity.Name);
@@ -214,13 +215,14 @@ namespace Windshield.Controllers
 
 			if (board == null)
 			{
-				return View("Error");
+				// board does not exist
+				return View("Error", new ErrorViewModel("Board", "Board does not exist."));
 			}
 
 			if (board.ownerName != User.Identity.Name)
 			{
-				// TODO: make this more gentle
-				return View("Error");
+				// the user tried to start a game he does not own
+				return View("Error", new ErrorViewModel("Board", "You are not the owner of this board."));
 			}
 
 			IGame iGame = IGameBinder.GetGameObjectFor(board.Game.model);
@@ -252,7 +254,8 @@ namespace Windshield.Controllers
 			bool boardExists = (board != null);
 			if (!boardExists)
 			{
-				return View("Error");
+				// board does not exist
+				return View("Error", new ErrorViewModel("Board", "Board does not exist."));
 			}
 
 			// check if user is a player in board
@@ -266,18 +269,29 @@ namespace Windshield.Controllers
 					break;
 				}
 			}
+			if (!isPlayer)
+			{
+				return View("Error", new ErrorViewModel("Board", "You are not a player on this board."));
+			}
 
-			// return view if user is a player on board and game is ongoing
-			if (isPlayer && (board.startDate != null) && (board.endDate == null))
+			
+			
+			
+			if (board.endDate != null)
 			{
-				var viewModel = new BoardViewModel(board);
-				viewModel.AddPlayers(players.ToList());
-				return RedirectToAction("Index", viewModel);
+				return View("Error", new ErrorViewModel("Board", "This board is no longer active."));
+				// board is no longer active
 			}
-			else
+
+
+			if (board.startDate == null)
 			{
-				return View("Error");
+				return RedirectToAction("GameLobby", idBoard);
 			}
+
+
+
+			return RedirectToAction("Index", idBoard);
 		}
 
 		/// <summary>
@@ -296,19 +310,22 @@ namespace Windshield.Controllers
 		}
 
 		/// <summary>
-		/// Controller that returns the view that displays all the boards that user is playing in
+		/// Controller that returns the view that displays all the boards that user is associated with
 		/// </summary>
-		public ActionResult MyGames()
+		public ActionResult MyBoards()
 		{
-			// EDIT: 15 - 11:00 - Ragnar and Bjorn
-
 			User user = userRepo.GetUserByName(User.Identity.Name);
-			var viewModel = new BoardTableViewModel();
-			foreach (Board board in boardRepo.GetBoards(user))
-			{
-				viewModel.Add(board);
-			}
-			return View("MyGames", viewModel);
+			var viewModel = new List<BoardTableViewModel>();
+			var userBoards = boardRepo.GetBoards(user);
+			var ongoing = from boards in userBoards
+						  where (boards.startDate != null) && (boards.endDate == null)
+						  select boards;
+			var inLobby = from boards in userBoards
+						  where boards.startDate == null
+						  select boards;
+			viewModel.Add(new BoardTableViewModel(ongoing));
+			viewModel.Add(new BoardTableViewModel(inLobby));
+			return View("MyBoards", viewModel);
 		}
     }
 }
