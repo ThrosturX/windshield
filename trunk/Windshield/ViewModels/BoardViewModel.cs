@@ -10,14 +10,17 @@ namespace Windshield.ViewModels
 	public class BoardViewModel
 	{
 		public int id;  // board id
+		public int maxNumberOfPlayers;  // the required number of players (e.g., 2 for TicTacToe and Hearts)
 		public string viewName;  // the View name
 		public string gameName;  // the Game name
 		public string status;
 		private List<User> players = new List<User>();
 
+
 		public BoardViewModel(Board board)
 		{
 			id = board.id;
+			maxNumberOfPlayers = board.Game.maxPlayers;
 			viewName = board.Game.model;
 			gameName = board.Game.name;
 			status = board.status;
@@ -57,9 +60,9 @@ namespace Windshield.ViewModels
 				b++;
 			}
 
-			for (int i = b; i <= n; i++)
+			for (int i = 1; i <= n - b; i++)
 			{
-				playerString += "Computer" + (i - b + 1).ToString() + ","; 
+				playerString += "Computer" + i + ","; 
 			}
 
 			return playerString.Split(',');
@@ -74,6 +77,5 @@ namespace Windshield.ViewModels
 
 			return "Computer" + (n + 1).ToString();
 		}
-
 	}
 }

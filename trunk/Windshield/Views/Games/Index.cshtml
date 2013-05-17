@@ -2,19 +2,19 @@
 
 
 <div class="row-fluid">
-	
-	
+	<h2>@Model.gameName</h2>
+</div>
+
+<div class="row-fluid">
 	<div id="game-wrapper" class="container-fluid span8">
-		<div class="row">
-			<h2>@Model.gameName</h2>
-		</div>
 		<div class="row-fluid">
-			@Html.Partial(Model.viewName, Model)
+			<strong>with</strong><p>@foreach(var name in Model.GetPlayerNames(Model.maxNumberOfPlayers)){ @Html.Raw(name + " ") }</p>
 		</div>
+		<hr>
+		@Html.Partial(Model.viewName, Model)
 	</div>
 	<div id="chat-wrapper" class="container-fluid span4 visible-desktop">
 		@Html.Partial("Chat", Model.id)
 	</div>
-	 
 </div>
 

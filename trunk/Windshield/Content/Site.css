@@ -69,12 +69,36 @@ html, body
 
 .padding-lr
 {
-	padding: 0 32px;
+	padding-left: 32px;
+	padding-right: 32px;
 }
 
 .padding-tb
 {
-	padding: 32px 0;
+	padding-top: 32px;
+	padding-bottom: 32px;
+}
+
+.margin-lr
+{
+	margin-left: 32px;
+	margin-right: 32px;
+}
+
+.margin-tb
+{
+	margin-top: 32px;
+	margin-bottom: 32px;
+}
+
+.padding-0
+{
+	padding: 0;
+}
+
+.margin-0
+{
+	margin: 0;
 }
 
 h2
@@ -196,10 +220,15 @@ h1 > a:hover
 	/* probably used later */
 }
 
+#user-bait > a
 {
-	margin: 0;
 	width: 100%;
-	display: b
+}
+
+#user-bait > a ~ a
+{
+	margin-left: 0;
+	text-align: center;
 }
 
 
@@ -208,13 +237,13 @@ h1 > a:hover
 
 .invited-players-wrapper
 {
-	margin: 0;
-	height: 442px;
 }
 
 #player-list
 {
-	height: 306px;
+	overflow-wrap: break-word;
+	overflow-y: scroll;
+	height: 248px;
 }
 
 .lobby-buttons
