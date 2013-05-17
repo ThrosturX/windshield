@@ -7,9 +7,8 @@ using System.Web.UI;
 using Windshield.Common;
 using Windshield.Models;
 using Windshield.Models.Common.Exceptions;
-using Windshield.Models.Games.Hearts;
 
-namespace Windshield.Models.Games.Hearts
+namespace Windshield.Models.Games
 {
 	public class Hearts : IGame
 	{
@@ -753,7 +752,6 @@ namespace Windshield.Models.Games.Hearts
 		private int FinishGame(HPlayer winner)
 		{
 			throw new NotImplementedException();
-			return 2;
 		}
 
 		private HPlayer CheckWinner()

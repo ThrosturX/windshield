@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Windshield.Test")]
 
-namespace Windshield.Models.Games.TicTacToe
+namespace Windshield.Models.Games
 {
 
 	public class TicTacToe : IGame

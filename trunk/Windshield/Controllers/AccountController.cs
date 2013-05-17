@@ -258,6 +258,7 @@ namespace Windshield.Controllers
 			// a full list of status codes.
 			switch (createStatus)
 			{
+					//TODO: Ragnar og elín
 				case MembershipCreateStatus.DuplicateUserName:
 					return "User name already exists. Please enter a different user name.";
 

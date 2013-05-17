@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Reflection;
 using Windshield.Models;
 using Windshield.Models.Games;
-using Windshield.Models.Games.TicTacToe;
-using Windshield.Models.Games.Hearts;
 using Windshield.ViewModels;
 
 namespace Windshield.Controllers
@@ -199,25 +196,11 @@ namespace Windshield.Controllers
 
 			if (board.ownerName != User.Identity.Name)
 			{
-				// make this more gentle
+				// TODO: make this more gentle
 				return View("Error");
 			}
 
-			// TODO: late binding
-			IGame iGame;
-			switch (board.Game.model)
-			{
-				case "TicTacToe":
-					iGame = new TicTacToe();
-					break;
-				// TODO: Case Hearts	
-				case "Hearts":
-					iGame = new Hearts();
-					break;
-
-				default:
-					return View("Error");
-			}
+			IGame iGame = IGameBinder.GetGameObjectFor(board.Game.model);
 			BoardViewModel viewModel = new BoardViewModel(board);
 			viewModel.AddPlayers(boardRepo.GetBoardUsers(board).ToList());
 			
@@ -306,37 +289,3 @@ namespace Windshield.Controllers
 		}
     }
 }
-
-				// RedirectToAction
-				// TODO: Latebindinglol
-				/*	owner.Players.Clear();
-					Player player = new Player();
-					player.dateJoined = DateTime.Now;
-					player.playerNumber = 0;
-
-					game.Boards.Add(board);
-					board.Players.Add(player);
-
-					owner.Players.Add(player);
-
-					boardRepo.Save();
-					foreach (var f in owner.Players)
-					{
-						//if(f.idUser == owner.UserId && f.Board.Game.id == game.id)
-						System.Diagnostics.Debug.WriteLine(f.dateJoined);
-					}
-					return View("GameLobby");
-					// RedirectToAction
-				}
-
-				/*
-				 * Assembly executingAssembly = Assembly.GetExecutingAssembly();
-					Type gameType = executingAssembly.GetType("Windshield.Models.Games." + game.model);
-
-					//object gameInstance = Activator.CreateInstance(gameType); <-- óþarfi
-					MethodInfo getFullNameMethod = gameType.GetMethod("GetFullName");
-
-
-					ConstructorInfo ctor = gameType.GetConstructor(new[] { typeof(List<User>) });
-					object gameInstance = ctor.Invoke(new object[] { players });
-				*/

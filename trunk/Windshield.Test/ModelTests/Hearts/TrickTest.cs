@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Windshield.Models.Games.Hearts;
+using Windshield.Models.Games;
 using Windshield.Common;
 using System.Collections.Generic;
 
-namespace Windshield.Test.ModelTests.Hearts
+namespace Windshield.Test.ModelTests
 {
 	[TestClass]
 	public class TrickTest

@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Windshield.Common;
-using Windshield.Models.Games.Hearts;
 using Windshield.Models.Common.Exceptions;
 using Windshield.Models.Games;
 using Windshield.Test.MockObjects;
 using Windshield.Models;
 
-using HPlayer = Windshield.Models.Games.Hearts.HPlayer;
-
-namespace Windshield.Test
+namespace Windshield.Test.ModelTests
 {
 
 	[TestClass]

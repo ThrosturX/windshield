@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Windshield.Models;
 
-namespace Windshield.Models.Games.Hearts
+namespace Windshield.Models.Games
 {
 	public class HPlayer
 	{

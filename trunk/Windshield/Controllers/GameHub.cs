@@ -5,8 +5,6 @@ using Microsoft.AspNet.SignalR;
 using Windshield.Models;
 using Windshield.Models.Games;
 using Windshield.Models.Games.Common.Ratings;
-using Windshield.Models.Games.Hearts;
-using Windshield.Models.Games.TicTacToe;
 
 
 namespace Windshield.Controllers
@@ -67,21 +65,7 @@ namespace Windshield.Controllers
 			int.TryParse(boardID, out id);
 			Board board = boardRepository.GetBoardById(id);
 
-			//TODO: Late binding with our class
-			IGame iGame;
-			switch (board.Game.model)
-			{
-				case "TicTacToe":
-					iGame = new TicTacToe();
-					break;
-
-				case "Hearts":
-					iGame = new Hearts();
-					break;
-
-				default:
-					return;
-			}
+			IGame iGame = IGameBinder.GetGameObjectFor(board.Game.model);
 
 			string status = board.status;
 			iGame.AddPlayers(boardRepository.GetBoardUsers(board).ToList());
