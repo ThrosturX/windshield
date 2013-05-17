@@ -45,6 +45,10 @@ namespace Windshield.Models.Games
 			Random rnd = new Random();
 
 			int r = rnd.Next(Count);
+			if (Count == 0)
+			{
+				return null;
+			}
 
 			return this[r];
 		}

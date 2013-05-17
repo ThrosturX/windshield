@@ -688,6 +688,11 @@ namespace Windshield.Models.Games
 			// it's not over, let the computer play!
 			while (turn.user.UserName.StartsWith("Computer"))
 			{
+				// if the match is over
+				if (winner != null)
+				{
+					return FinishMatch(winner);
+				}
 				PlayAI();
 				played = 1;
 			}
@@ -703,8 +708,16 @@ namespace Windshield.Models.Games
 			while (true)
 			{
 				card = turn.hand.RandomCard();
-				if (PlayCard(turn, card))
+				if (card != null)
 				{
+					if (PlayCard(turn, card))
+					{
+						return 1;
+					}
+				}
+				else
+				{
+					IncrementTurn();
 					return 1;
 				}
 			}
@@ -745,6 +758,11 @@ namespace Windshield.Models.Games
 					return FinishGame(winner);
 				}
 			}
+
+			deck.Shuffle();
+			DealTheCards();
+			
+			ActionCompleted();
 
 			return 1;
 		}

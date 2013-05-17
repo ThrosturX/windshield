@@ -326,7 +326,6 @@ table#tic-tac-toe td:hover
   padding-left: .1em;
   letter-spacing: -.2em;
   position: absolute;
-  /*background: #fff url('http://d37rcl8t6g8sj5.cloudfront.net/wp-content/uploads/card-set.png') no-repeat;*/
   background: #fff url("../Images/playingcards.png");
   background-size: 1450% 600%;
 }
