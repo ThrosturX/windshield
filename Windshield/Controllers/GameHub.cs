@@ -102,40 +102,43 @@ namespace Windshield.Controllers
 				case 2:  // Game win, calculate Elo
 					{
 						Clients.Group(id.ToString()).Broadcast(iGame.GetStatus());
-
 						// Begin update ratings
-
-						IQueryable<User> players;
 						List<Elo> ratings = new List<Elo>();
 						User outlier;
 						Elo elo;
 						GameRating rating;
 						int outlierScore;
-						string winner;
-						players = boardRepository.GetBoardUsers(board);
 
-						winner = iGame.GetGameOver();
+						IQueryable<User> players = boardRepository.GetBoardUsers(board);
+						string winner = iGame.GetGameOver();
+
+						// If there is a player winner
 						if (winner != "" && !winner.StartsWith("Computer"))  // don't let the computer win and take elo :)
 						{
+							// Winner
 							outlier = userRepository.GetUserByName(winner);
+							// Winner rating
 							rating = userRepository.GetGameRatingByGame(outlier, board.Game);
-							if (rating == null)
-							{
-								rating.rating = 0;
-							}
-
+							// Places winner rating score into this variable
 							outlierScore = rating.rating;
-							elo = new Elo(board.idGame, outlier); 
+							// Creates new elo with the winner and Game
+							elo = new Elo(board.idGame, outlier);
+
 							if (outlierScore != 0)
 							{
 								elo.points = outlierScore;
 							}
+							// Check Every user
 							foreach (var user in players)
 							{
+								// The Loser
 								if (user != outlier)
 								{
-									Elo tempElo = new Elo(board.idGame, user); 
+									// New Elo for the Loser
+									Elo tempElo = new Elo(board.idGame, user);
+									// New Loser rating
 									GameRating trating = userRepository.GetGameRatingByGame(user, board.Game);
+									// A Guard
 									if (rating.rating != 0)
 									{
 										tempElo.points = trating.rating;
@@ -143,17 +146,20 @@ namespace Windshield.Controllers
 									ratings.Add(tempElo);
 								}
 							}
-
+							// Update elo for the Winner
 							elo.UpdateAll(1, ratings);
-
+							// New rating for the winner
 							rating.rating = elo.points;
-
+							// Check the List<Elo> ratings (everyone except the winner)
 							foreach (var r in ratings)
 							{
+								// Get rating for Loser r
 								GameRating gr = userRepository.GetGameRatingByGame(r.user, board.Game);
+								// Assign new rating to the Loser
 								gr.rating = r.points;
 							}
 
+							// Commit to SQL
 							userRepository.Save();
 						}
 
@@ -166,7 +172,6 @@ namespace Windshield.Controllers
 						boardRepository.Save();
 						break;
 					}
-
 				case 0:
 				default:
 					{
