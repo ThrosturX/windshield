@@ -45,7 +45,7 @@ namespace Windshield.Controllers
 
 		public void StartGame(string boardID)
 		{
-			Clients.OthersInGroup(boardID).start(boardID);
+			Clients.OthersInGroup(boardID).Start(boardID);
 		}
 
 		public void Refresh(string boardID)

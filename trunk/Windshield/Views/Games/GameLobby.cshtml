@@ -18,7 +18,7 @@
 		<div id="game-on-players" class="row-fluid">
 			<h3>Players</h3>
 			<hr>
-			<span id="board-id" style="display:none;"> @Model.boardId </span>
+			<span id="board-id" style="display:none;">@Model.boardId</span>
 			<!-- "Container" for the javascript -->
 			<ul id="player-list">
 				<!-- users in lobby will be loaded here -->
@@ -31,7 +31,7 @@
 		<div class="row-fluid btn-group lobby-buttons text-center">
 			@if (Model.ownerName == User.Identity.Name)
 			{
-			@Html.ActionLink("Start", "StartGame", "Games", new { idBoard = @Model.boardId }, new { @class = "btn" })
+			@Html.ActionLink("Start", "StartGame", "Games", new { idBoard = @Model.boardId }, new { @class = "btn", id = "start-game-button1" })
 			}
 			@Html.ActionLink("Cancel", "Index", new { controller = "Home" }, new { @class = "btn" })
 			<!--Html.ActionLink("Start","Index","Games")-->
@@ -47,17 +47,3 @@
 		</div>
 	</div>
 </div>
-
-
-<!-- TODO: Remove? his was a bit up there in the html -->
-	<script>
-		$(document).ready(function () {
-			var group = 'Model.boardId';
-			var hub = $.connection.gameHub;
-		
-			hub.client.Start = function (id) {
-				self.location = "JoinGame?targetId=" + id;
-			}
-		});
-
-	</script> 
