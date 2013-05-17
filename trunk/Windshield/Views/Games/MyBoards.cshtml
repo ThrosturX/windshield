@@ -1,0 +1,17 @@
+﻿@model List<Windshield.ViewModels.BoardTableViewModel>
+
+<div class="row-fluid">
+	<h2>My Boards</h2>
+</div>
+
+<hr>
+
+<div class="row-fluid">
+	<h3>Ongoing</h3>
+	@Html.Partial("_BoardTablePartial", Model[0])
+</div>
+
+<div class="row-fluid">
+	<h3>In lobby</h3>
+	@Html.Partial("_BoardTablePartial", Model[1])
+</div>

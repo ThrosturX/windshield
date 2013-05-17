@@ -136,13 +136,13 @@ namespace Windshield.Controllers
 							// New rating for the winner
 							rating.rating = elo.points;
 							// Check the List<Elo> ratings (everyone except the winner)
-							foreach (var r in ratings)
+							/*foreach (var r in ratings)
 							{
 								// Get rating for Loser r
 								GameRating gr = userRepository.GetGameRatingByGame(r.user, board.Game);
 								// Assign new rating to the Loser
 								gr.rating = r.points;
-							}
+							}*/
 
 							// Commit to SQL
 							userRepository.Save();

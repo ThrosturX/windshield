@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Windshield.Models;
 
 namespace Windshield.ViewModels
 {
@@ -23,14 +24,19 @@ namespace Windshield.ViewModels
 			Rows = new List<Row>();
 		}
 
-		public BoardTableViewModel(string gameName) : this()
+		public BoardTableViewModel(string gameName)
+			: this()
 		{
 			GameName = gameName;
-			IsEmpty = true;
-			Rows = new List<Row>();
 		}
 
-		public void Add(Windshield.Models.Board board)
+		public BoardTableViewModel(IQueryable<Board> boards)
+			: this()
+		{
+			Add(boards);
+		}
+
+		public void Add(Board board)
 		{
 			Rows.Add(new Row(board));
 			if (IsEmpty)
@@ -39,9 +45,9 @@ namespace Windshield.ViewModels
 			}
 		}
 
-		public void Add(IQueryable<Windshield.Models.Board> boards)
+		public void Add(IQueryable<Board> boards)
 		{
-			foreach (Windshield.Models.Board board in boards)
+			foreach (Board board in boards)
 			{
 				Rows.Add(new Row(board));
 			}
@@ -59,7 +65,7 @@ namespace Windshield.ViewModels
 			public string GameName { get; set; }
 			public string OwnerName { get; set; }
 			
-			public Row(Windshield.Models.Board board)
+			public Row(Board board)
 			{
 				ID = board.id;
 				Players = board.Players.Count();
