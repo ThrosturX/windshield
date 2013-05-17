@@ -47,7 +47,7 @@ function cardToShort(id) {
 		toString += "J|";
 	}
 	else if (element.hasClass("rank_Q")) {
-		toString += "D|";
+		toString += "Q|";
 	}
 	else if (element.hasClass("rank_K")) {
 		toString += "K|";
@@ -234,6 +234,9 @@ function cardToShort(id) {
 				setCard(cardstring, "trick_" + i);
 				console.log(i);
 			}
+
+			// check how many cards the opponents should have
+			// TODO
 
 			console.log(status);
 		};
