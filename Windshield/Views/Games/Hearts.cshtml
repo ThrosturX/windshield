@@ -52,6 +52,11 @@
 	<input type="button" id="GameRestart" class="btn" value="Restart" />
 </div>
 
+<div>
+	<strong id="winner-dialog-popup"></strong>
+
+</div>
+
 <span id="group-span" style="display:none">@Model.id</span>
 <span id="currentUser-span" style="display:none">@(Context.User.Identity.Name)</span>
 <span id="playerOne-span" style="display:none">@Model.GetPlayerName(0)</span>
