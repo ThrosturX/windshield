@@ -21,7 +21,6 @@ namespace Windshield.Test.ControllersTest
 		[TestInitialize]
 		public void Setup()
 		{
-			// Arrange
 			userRepo = new MockUserRepo();
 			boardRepo = new MockBoardRepo();
 			gameRepo = new MockGameRepo();
@@ -43,44 +42,17 @@ namespace Windshield.Test.ControllersTest
 			gameRepo.AddGame(g5);
 			gameRepo.AddGame(g6);
 
-			
-
-		
 			home = new HomeController(gameRepo, boardRepo, userRepo);
 		}
 
 		[TestMethod]
 		public void CountGettingAllForIndex()
 		{
-
 			ViewResult Result = home.Index() as ViewResult;
 
 			var games = Result.Model as IEnumerable<Game>;
 
 			Assert.AreEqual(6, games.Count(), "GameCountisNotEqual");
 		}
-
-		/*
-		// this test is outdated because the controller authenticates the user
-		[TestMethod]
-		public void CheckGameDescription()
-		{
-			Game theGame = new Game();
-			theGame.name = "TheGame";
-			theGame.id = 2;
-			theGame.maxPlayers = 4;
-			theGame.timesPlayed = 9;
-			theGame.description = "asdf";
-
-			gameRepo.AddGame(theGame);
-
-			ViewResult Result = home.GameDescription(theGame) as ViewResult;
-
-			var gamename = Result.Model as Game;
-	
-			Assert.AreEqual("TheGame",gamename.name , "GameNameisNotEqual");
-		
-		}
-		*/
 	}
 }

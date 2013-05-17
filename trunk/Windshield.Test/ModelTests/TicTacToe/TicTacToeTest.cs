@@ -40,6 +40,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void TicTacToeTryAction()
 		{
+			Setup();
 			game.turn = game.player1;
 			game.TryAction("insert cell0", "Sally");
 			game.TryAction("insert cell1", "Jonas");
@@ -54,6 +55,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void TicTacToeInsertSymbolToGrid()
 		{
+			Setup();
 			game.turn = game.player1;
 			// Act
 			for (int i = 0; i < 9; i++)
@@ -86,6 +88,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void TicTacToeCoordToCell()
 		{
+			Setup();
 			// Arrange
 			TicTacToe.Coord middleLeft;
 			middleLeft.x = 0;
@@ -103,13 +106,13 @@ namespace Windshield.Test.ModelTests
 			Assert.AreEqual(3, TicTacToe.CoordToCell(middleLeft));
 			Assert.AreEqual(0, TicTacToe.CoordToCell(first));
 			Assert.AreEqual(8, TicTacToe.CoordToCell(last));
-
 		}
 
 		// Test method to test CellToCoord()
 		[TestMethod]
 		public void TicTacToeCellToCoord()
 		{
+			Setup();
 			// Arrange
 			TicTacToe.Coord middleGot;
 			TicTacToe.Coord middleExpected;
@@ -147,6 +150,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void TicTacToeClearBoard1()
 		{
+			Setup();
 			// Act
 			game.ClearBoard();
 			for (int i = 0; i < 3; i++)
@@ -161,6 +165,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void TicTacToeClearBoard2()
 		{
+			Setup();
 			// fill the board
 			for (int i = 0; i < 9; i++)
 			{
@@ -197,6 +202,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void TicTacToeGetPlayerBySymbol()
 		{
+			Setup();
 			Assert.AreEqual(game.GetPlayerBySymbol('X'), game.player1);
 			Assert.AreEqual(game.GetPlayerBySymbol('O'), game.player2);
 		}
@@ -206,6 +212,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void TicTacToeCheckWinner1()
 		{
+			Setup();
 			game.ClearBoard();
 			game.turn = game.player1;
 			Assert.AreEqual(game.CheckWinner(), null);
@@ -214,6 +221,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void TicTacToeCheckWinner2()
 		{
+			Setup();
 			game.ClearBoard();
 			game.turn = game.player1;
 			Assert.AreEqual(game.grid[1, 1], ' ');
@@ -246,10 +254,12 @@ namespace Windshield.Test.ModelTests
 			Assert.AreEqual(game.grid[0, 1], 'O');
 			Assert.AreEqual(game.CheckWinner(), game.player2);
 		}		
+
 		// tests a game in progress and should find playerOne winning diagonally from upper left to lower right
 		[TestMethod]
 		public void TicTacToeCheckWinner3()
 		{
+			Setup();
 			game.ClearBoard();
 			game.turn = game.player1;
 			Assert.AreEqual(game.CheckWinner(), null);
@@ -268,6 +278,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void TicTacToeCheckWinner4()
 		{
+			Setup();
 			game.ClearBoard();
 			game.turn = game.player1;
 
@@ -293,6 +304,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void TicTacToeInitializePlayers()
 		{
+			Setup();
 			// InitializePlayers() is automatically called in the constructor
 			Assert.AreEqual('X', game.player1.symbol);
 			Assert.AreEqual('O', game.player2.symbol);
@@ -304,11 +316,14 @@ namespace Windshield.Test.ModelTests
 			Assert.AreEqual(0, game.player2.draws);
 		}
 
+		// Tests three games in a row
 		[TestMethod]
 		public void TicTacToeEndGame1()
 		{
-			game.turn = game.player1;
+			Setup();
+			// Game 1
 			// Arrange
+			game.turn = game.player1;
 			game.InsertSymbol('O', 5);
 			game.InsertSymbol('X', 0);
 			game.InsertSymbol('O', 7);
@@ -330,8 +345,8 @@ namespace Windshield.Test.ModelTests
 			Assert.AreEqual(1, game.player2.losses);
 			Assert.AreEqual(0, game.player2.draws);
 
+			// Game 2
 			// Arrange
-
 			game.ClearBoard();
 			game.turn = game.player1;
 
@@ -359,6 +374,7 @@ namespace Windshield.Test.ModelTests
 			Assert.AreEqual(1, game.player2.losses);
 			Assert.AreEqual(1, game.player2.draws);
 
+			// Game 3
 			// Arrange
 			game.ClearBoard();
 			game.turn = game.player1;
@@ -388,6 +404,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void TicTacToeEndGameVsAI()
 		{
+			Setup();
 			game = new TicTacToe();
 			TicTacToeEndGame1();
 		}
@@ -395,6 +412,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void TicTacToeAISelectCell()
 		{
+			Setup();
 			game.turn = game.player1;
 			for (int i = 0; i < 9; ++i)
 			{
@@ -412,6 +430,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void TicTacToeGettingStatusString()
 		{
+			Setup();
 			game.turn = game.player1;
 
 			Assert.AreEqual("         |1|X|0|0|0|Sally|Jonas",game.GetStatus());
@@ -420,6 +439,7 @@ namespace Windshield.Test.ModelTests
 		[TestMethod]
 		public void TicTacToeCheckingThatSaveStringsAreIdempotent()
 		{
+			Setup();
 			string status = game.GetStatus();
 
 			User sally = usr.GetUserByName("Sally");
