@@ -28,11 +28,12 @@ namespace Windshield.Models
 		// query methods
 
 		Board GetBoardById(int id);
+		User GetBoardOwner(Board board);
+
 		IQueryable<Board> GetBoards();
 		IQueryable<Board> GetBoards(Game game);
 		IQueryable<Board> GetBoards(User user);
 		IQueryable<Board> GetBoards(Game game, User user);
-		IQueryable<User> GetBoardUsers(Board board);
-		User GetBoardOwner(Board board);
+		IQueryable<User> GetBoardUsers(Board board);	
 	}
 }

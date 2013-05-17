@@ -5,6 +5,7 @@ using System.Web;
 
 namespace Windshield.Models
 {
+	//Getting data for Statistics view.
 	public class StatisticsViewModel
 	{
 		public string Name { get; set; }

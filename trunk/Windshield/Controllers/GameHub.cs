@@ -99,7 +99,7 @@ namespace Windshield.Controllers
 							//Fetching GameRating from database for player.
 							GameRating rating;
 							rating = userRepository.GetGameRatingByGame(player, board.Game);
-							
+							//Checking if player is the winner, if so, he gets 10 elo, otherwise he looses 10 elo
 							if (player.UserName == winner)
 							{
 								rating.rating = rating.rating + 10;
