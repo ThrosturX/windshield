@@ -60,11 +60,11 @@
 			else {
 				$("#" + pos).hide();
 			}
-
 			$("#" + pos).removeClass("cardback");
 			$("#" + pos).addClass(rank +" " + suit + " card");
-			if (($(".spanDisplay_" + pos).is(':empty'))) {
-
+			//if (($(".spanDisplay_" + pos).is(':empty'))) {
+			//alert($(".spanDisplay_" + pos).text());
+			if ($(".spanDisplay_" + pos).text().trim() == "") {
 				if (card[0] == 'T') {
 					$(".spanDisplay_" + pos).html("10");
 					$("#" + pos).append("&" + suit + "s;");
