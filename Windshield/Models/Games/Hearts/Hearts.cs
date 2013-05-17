@@ -251,6 +251,7 @@ namespace Windshield.Models.Games
 					KeyValuePair<HPlayer, int> allocation = trick.GetClaimer();
 
 					allocation.Key.matchPoints += allocation.Value;
+					turn = allocation.Key;
 
 					trickOngoing = false;
 					trick.RemoveAll(x => true);
@@ -679,17 +680,11 @@ namespace Windshield.Models.Games
 			HPlayer winner = CheckWinner();
 			int played = 0;
 
-			// if the match is over
-			if (winner != null)
-			{
-				return FinishMatch(winner);
-			}
-			
 			// it's not over, let the computer play!
 			while (turn.user.UserName.StartsWith("Computer"))
 			{
 				// if the match is over
-				if (winner != null)
+				if ((winner = CheckWinner()) != null)
 				{
 					return FinishMatch(winner);
 				}
@@ -697,6 +692,12 @@ namespace Windshield.Models.Games
 				played = 1;
 			}
 
+			// if the match is over
+			if ((winner = CheckWinner()) != null)
+			{
+				return FinishMatch(winner);
+			}
+			
 			return played;
 		}
 
@@ -759,8 +760,10 @@ namespace Windshield.Models.Games
 				}
 			}
 
+			deck = new CardDeck();
 			deck.Shuffle();
 			DealTheCards();
+			SortTheCardsOnTheHands();
 			
 			ActionCompleted();
 
@@ -785,12 +788,12 @@ namespace Windshield.Models.Games
 			// find who wins the match
 
 			HPlayer winner = new HPlayer();
-			winner.gamePoints = 27;
+			winner.matchPoints = 27;
 
 			foreach (var p in players)
 			{
 				// make sure he's not winning completely!
-				if (p.gamePoints == 26)
+				if (p.matchPoints == 26)
 				{
 					return p;
 				}
@@ -799,7 +802,7 @@ namespace Windshield.Models.Games
 				{
 					winner = p;
 				}
-				else if (p.gamePoints < winner.gamePoints)
+				else if (p.matchPoints < winner.matchPoints)
 				{
 					winner = p;
 				}
@@ -807,14 +810,6 @@ namespace Windshield.Models.Games
 
 			return winner;
 		}
-
-
-
-
-
-
-		// TODO: Implement dummy interface functions!!!
-
 
 		public void AddPlayers(List<User> players)
 		{
@@ -841,7 +836,17 @@ namespace Windshield.Models.Games
 		
 		public string GetGameOver()
 		{
-			return "DERP";
+			// Dummy
+			Random rnd = new Random();
+
+			try
+			{
+				return players[rnd.Next(4)].user.UserName;
+			}
+			catch (Exception)
+			{
+				return "Megatron";
+			}
 		}
 
 

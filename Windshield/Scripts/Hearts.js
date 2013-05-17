@@ -270,6 +270,10 @@ function cardToShort(id) {
 			$("#leftPoints").text(pArray[1].split(',')[0]);
 			$("#topPoints").text(pArray[2].split(',')[0]);
 			$("#rightPoints").text(pArray[3].split(',')[0]);
+			$("#gPlayerPoints").text(pArray[0].split(',')[1]);
+			$("#gLeftPoints").text(pArray[1].split(',')[1]);
+			$("#gTopPoints").text(pArray[2].split(',')[1]);
+			$("#gRightPoints").text(pArray[3].split(',')[1]);
 			console.log(status);
 		};
 
