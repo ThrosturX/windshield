@@ -1,0 +1,42 @@
+﻿@model Windshield.ViewModels.BoardViewModel
+
+@{
+    ViewBag.Title = "Guess the Number";
+}
+
+<script src="@Url.Content("~/Scripts/GuessTheNumber.js")"></script>
+<div class="row">
+	<div id="guess-the-number-prompt" class="span12 text-center alert alert-warning">Hellrr</div>
+</div>
+<div class="row">
+	<div id="guess-the-number-from" class="span2 text-center">0</div>
+	<div class="span8 input-append text-center">
+		<input type="text" id="guess-the-number-guess">
+		<input type="button" class="btn" id="guess-the-number-send" value="Guess!">
+	</div>
+	<div id="guess-the-number-to" class="span2 text-center">100</div>
+</div>
+<div class="row margin-tb text-center alert alert-info">
+	@{var players = Model.GetPlayers(4);}
+	<!-- TODO: roll up into a loop -->
+	<div class="span3">
+		<div id="player-one" class="row-fluid">@players[0].UserName</div>
+		<div id="player-one-points" class="row-fluid">0</div>
+	</div>
+	<div class="span3">
+		<div id="player-two" class="row-fluid">@players[1].UserName</div>
+		<div id="player-two-points" class="row-fluid">0</div>
+	</div>
+	<div class="span3">
+		<div id="player-three" class="row-fluid">@players[2].UserName</div>
+		<div id="player-three-points" class="row-fluid">0</div>
+	</div>
+	<div class="span3">
+		<div id="player-four" class="row-fluid">@players[3].UserName</div>
+		<div id="player-four-points" class="row-fluid">0</div>
+	</div>
+	<input type="button" id="game-restart" class="btn" value="Restart" />
+</div>
+
+<span id="group-span" style="display:none">@Model.id</span>
+<span id="current-user-span" style="display:none">@(Context.User.Identity.Name)</span>
